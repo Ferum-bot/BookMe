@@ -2,7 +2,7 @@ package dependencies
 
 object Versions {
     // Kotlin
-    const val KOTLIN = "1.4.21"
+    const val KOTLIN = "1.4.30"
     const val COROUTINES = "1.4.2"
 
     // Core

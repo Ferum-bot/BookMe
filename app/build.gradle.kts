@@ -8,6 +8,7 @@ plugins{
     id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
     id(Plugins.KOTLIN_KAPT)
     id(Plugins.KOTLIN_ALLOPEN)
+    id(Plugins.GOOGLE_SERVICES)
 }
 
 android {

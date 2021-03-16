@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "911942026157",
+    "firebase_url": "https://bookme-decfd-default-rtdb.firebaseio.com",
+    "project_id": "bookme-decfd",
+    "storage_bucket": "bookme-decfd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911942026157:android:f2dc395d64f15c402e9724",
+        "android_client_info": {
+          "package_name": "com.levit.book_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911942026157-qglnl3f0ir9em3edvcqoriqusi5rgbor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY0iDjH836sZ1rYGTgqEu_YFc92J_JYBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911942026157-qglnl3f0ir9em3edvcqoriqusi5rgbor.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "911942026157-re9q654hka9fen0odtii4k6huh55te91.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ssk.bookMe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911942026157:android:c8e8b2633aa690a22e9724",
+        "android_client_info": {
+          "package_name": "com.levit.book_me.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911942026157-qglnl3f0ir9em3edvcqoriqusi5rgbor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY0iDjH836sZ1rYGTgqEu_YFc92J_JYBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911942026157-qglnl3f0ir9em3edvcqoriqusi5rgbor.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "911942026157-re9q654hka9fen0odtii4k6huh55te91.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ssk.bookMe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:911942026157:android:32e021cb77bdf9c02e9724",
+        "android_client_info": {
+          "package_name": "com.levit.book_me.prerelease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "911942026157-qglnl3f0ir9em3edvcqoriqusi5rgbor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY0iDjH836sZ1rYGTgqEu_YFc92J_JYBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "911942026157-qglnl3f0ir9em3edvcqoriqusi5rgbor.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "911942026157-re9q654hka9fen0odtii4k6huh55te91.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ssk.bookMe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
