@@ -1,6 +1,6 @@
 package com.levit.book_me.core.di.components
 
-import com.levit.book_me.BookMeApplication
+import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.core.di.modules.AppModule
 import com.levit.book_me.core.di.modules.DatabaseModule
 import com.levit.book_me.core.di.modules.NetworkModule

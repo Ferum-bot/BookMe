@@ -1,4 +1,4 @@
-package com.levit.book_me
+package com.levit.book_me.application
 
 import android.app.Application
 import com.levit.book_me.core.di.components.AppComponent

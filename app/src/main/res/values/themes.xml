@@ -1,2 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="DefaultAppTheme" parent="Theme.AppCompat">
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>
