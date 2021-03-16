@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">BookMe</string>
-    <string name="welcome_back_to_the_bookme">Welcome to <br/> the BookMe</string>
+    <string name="welcome_back_to_the_bookme">Welcome to \nthe BookMe</string>
     <string name="how_would_you_like_to_log_in">How would you like to log in?</string>
-    <string name="by_continuing_you_agree_to_the_bookme_s_terms_of_use_and_privacy_policy">By continuing, you agree to the BookMe\'s <br/>Terms of Use and Privacy Policy</string>
+    <string name="by_continuing_you_agree_to_the_bookme_s_terms_of_use_and_privacy_policy">By continuing, you agree to the BookMe\'s \nTerms of Use and Privacy Policy</string>
     <string name="join_with_google">Join with Google</string>
     <string name="join_with_facebook">Join with Facebook</string>
     <string name="join_with_phone_email">Join with Phone/Email</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    
+    <!--  Google Play Services  -->
+    <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
 </resources>

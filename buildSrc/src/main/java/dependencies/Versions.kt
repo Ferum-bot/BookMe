@@ -39,4 +39,10 @@ object Versions {
     const val JUNIT = "4.12"
     const val MOCKITO_KOTLIN = "2.1.0"
     const val POWERMOCK = "2.0.0"
+
+    // Firebase
+    const val FIREBASE = "20.0.3"
+
+    // Google Play Services
+    const val GOOGLE_PLAY_SERVICES = "19.0.0"
 }

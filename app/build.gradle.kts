@@ -32,6 +32,10 @@ android {
 
     flavorDimensions(flavor.FlavorDimensions.ENVIRONMENT)
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     productFlavors {
         flavor.EnvironmentFlavor.Master.createOrConfigForApp(this)
         flavor.EnvironmentFlavor.Dev.createOrConfigForApp(this)
@@ -116,6 +120,12 @@ dependencies {
 
     // Logging
     implementation(Dependencies.TIMBER)
+
+    // Firebase
+    implementation(Dependencies.FIREBASE_AUTH)
+
+    // Google Play Services
+    implementation(Dependencies.GOOGLE_PLAY_SERVICES_AUTH)
 
     // Test dependencies
     addTestDependencies()

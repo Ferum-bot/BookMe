@@ -65,6 +65,7 @@
         android:id="@+id/sign_in_with_google_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clickable="false"
 
         app:layout_constraintVertical_bias="0.15"
         app:layout_constraintTop_toBottomOf="@id/authorization_hint"
@@ -73,6 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
+            android:id="@+id/google_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_google"
@@ -93,6 +95,7 @@
         android:id="@+id/sign_in_with_facebook_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clickable="false"
 
         android:layout_marginTop="8dp"
 
@@ -101,6 +104,7 @@
         app:layout_constraintTop_toBottomOf="@id/sign_in_with_google_container">
 
         <ImageView
+            android:id="@+id/facebook_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_facebook"
@@ -121,6 +125,7 @@
         android:id="@+id/sign_in_with_email_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clickable="false"
 
         android:layout_marginTop="8dp"
 
@@ -129,6 +134,7 @@
         app:layout_constraintTop_toBottomOf="@id/sign_in_with_facebook_container">
 
         <ImageView
+            android:id="@+id/email_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_user"
