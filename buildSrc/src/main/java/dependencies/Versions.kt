@@ -41,7 +41,7 @@ object Versions {
     const val POWERMOCK = "2.0.0"
 
     // Firebase
-    const val FIREBASE = "20.0.3"
+    const val FIREBASE = "26.7.0"
 
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES = "19.0.0"

@@ -7,29 +7,41 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Status
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
+import com.levit.book_me.application.BookMeApplication
+import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.isDataAvailable
+import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
 
 class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_type_authorization) {
 
-    private val binding by lazy { FragmentChooseTypeAuthorizationBinding.inflate(layoutInflater) }
-
-    private lateinit var googleSignInClient: GoogleSignInClient
+    private val binding by viewBinding { FragmentChooseTypeAuthorizationBinding.bind(it) }
+    private val viewModel by viewModels<ChooseTypeAuthorizationViewModel> { appComponent.viewModelFactory() }
 
     private val firebaseAuth by lazy { Firebase.auth }
 
+    private lateinit var googleSignInClient: GoogleSignInClient
 
-    private val googleSignInLauncher: ActivityResultLauncher<Intent> by lazy {
+    private val appComponent: AppComponent
+    get() {
+        val application = requireActivity().application as BookMeApplication
+        return application.appComponent
+    }
+
+    private val googleSignInLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
             if (result == null) {
                 showError(R.string.something_went_wrong)
@@ -42,7 +54,6 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
                 showError(R.string.something_went_wrong)
             }
         }
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,13 +70,13 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
 
     private fun getGoogleSignInOptions() =
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.web_client_id))
             .requestEmail()
             .build()
 
     private fun setAllClickListeners() {
         binding.signInWithGoogleButton.setOnClickListener {
-            googleSignInLauncher.launch(null)
+            val googleSignIntent = googleSignInClient.signInIntent
+            googleSignInLauncher.launch(googleSignIntent)
         }
 
         binding.signInWithFacebookButton.setOnClickListener {
@@ -97,6 +108,7 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
         }
         catch (ex: ApiException) {
             val defaultErrorMessage = getString(R.string.something_went_wrong)
+
             showError(ex.message ?: defaultErrorMessage)
         }
         catch (ex: NullPointerException) {

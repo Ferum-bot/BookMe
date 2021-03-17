@@ -30,6 +30,11 @@ android {
         BuildTypeDebug.createOrConfig(this)
     }
 
+    signingConfigs {
+        SigningConfigRelease.createOrConfig(this)
+        SigningConfigDebug.createOrConfig(this)
+    }
+
     flavorDimensions(flavor.FlavorDimensions.ENVIRONMENT)
 
     buildFeatures {
@@ -122,6 +127,7 @@ dependencies {
     implementation(Dependencies.TIMBER)
 
     // Firebase
+    implementation(platform(Dependencies.FIREBASE_BOM))
     implementation(Dependencies.FIREBASE_AUTH)
 
     // Google Play Services

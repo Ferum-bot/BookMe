@@ -80,6 +80,8 @@
             android:src="@drawable/ic_google"
             android:elevation="7dp"
             android:layout_gravity="start|center"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginStart="8dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -87,6 +89,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/join_with_google"
+            android:clickable="true"
+            android:focusable="true"
 
             style="@style/DefaultButtonStyle" />
     </FrameLayout>
@@ -109,14 +113,18 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_facebook"
             android:elevation="7dp"
+            android:clickable="true"
             android:layout_gravity="start|center"
-            android:layout_marginStart="8dp"/>
+            android:layout_marginStart="8dp"
+            android:focusable="true" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sign_in_with_facebook_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/join_with_facebook"
+            android:clickable="true"
+            android:focusable="true"
 
             style="@style/DefaultButtonStyle" />
     </FrameLayout>

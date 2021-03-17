@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.dsl.BuildType
+import com.google.crypto.tink.signature.SignatureConfig
 import org.gradle.api.Action
 import org.gradle.api.NamedDomainObjectContainer
 
