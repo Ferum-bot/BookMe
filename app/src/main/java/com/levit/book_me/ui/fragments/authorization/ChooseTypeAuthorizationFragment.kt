@@ -70,6 +70,7 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
 
     private fun getGoogleSignInOptions() =
         GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
             .requestEmail()
             .build()
 

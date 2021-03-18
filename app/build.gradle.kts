@@ -30,10 +30,10 @@ android {
         BuildTypeDebug.createOrConfig(this)
     }
 
-    signingConfigs {
-        SigningConfigRelease.createOrConfig(this)
-        SigningConfigDebug.createOrConfig(this)
-    }
+//    signingConfigs {
+//        SigningConfigRelease.createOrConfig(this)
+//        SigningConfigDebug.createOrConfig(this)
+//    }
 
     flavorDimensions(flavor.FlavorDimensions.ENVIRONMENT)
 
