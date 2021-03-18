@@ -3,25 +3,25 @@ package com.levit.book_me.ui.fragments.authorization
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.Status
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.core.di.components.AppComponent
-import com.levit.book_me.core.extensions.isDataAvailable
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
@@ -43,24 +43,19 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
 
     private val googleSignInLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
-            if (result == null) {
-                showError(R.string.something_went_wrong)
-                return@registerForActivityResult
-            }
-            if (result.isDataAvailable()) {
-                tryToAuthWithGoogle(result.data!!)
-            }
-            else {
-                showError(R.string.something_went_wrong)
-            }
+            viewModel.googleSignInActivityResultCallback(result)
         }
 
+
+    private lateinit var facebookCallbackManager: CallbackManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         configureGoogleServices()
+        configureFacebookSdk()
         setAllClickListeners()
+        setAllObservers()
     }
 
     private fun configureGoogleServices() {
@@ -74,6 +69,42 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
             .requestEmail()
             .build()
 
+    private fun configureFacebookSdk() {
+        facebookCallbackManager = CallbackManager.Factory.create()
+        configureFacebookSdkButton()
+        registerFacebookButtonCallback()
+    }
+
+    private fun registerFacebookButtonCallback() {
+        binding.facebookSdkButton.registerCallback(facebookCallbackManager, object: FacebookCallback<LoginResult> {
+
+            override fun onSuccess(result: LoginResult) {
+                val token = result.accessToken
+                viewModel.firebaseAuthWithFacebook(token)
+            }
+
+            override fun onCancel() {
+                showMessage(R.string.registration_was_canceled)
+            }
+
+            override fun onError(error: FacebookException?) {
+                val defaultErrorMessage = getString(R.string.something_went_wrong)
+                showError(error?.message ?: defaultErrorMessage)
+            }
+
+        })
+    }
+
+    /**
+     * Deprecated but needed to correct work with Facebook sdk.
+     * Can't use Activity Result API, because Facebook SDK
+     * does't provide intent for launch
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        facebookCallbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     private fun setAllClickListeners() {
         binding.signInWithGoogleButton.setOnClickListener {
             val googleSignIntent = googleSignInClient.signInIntent
@@ -81,7 +112,7 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
         }
 
         binding.signInWithFacebookButton.setOnClickListener {
-            Toast.makeText(requireContext(), "fffff", Toast.LENGTH_LONG).show()
+            binding.facebookSdkButton.performClick()
         }
 
         binding.signInWithEmailOrTelephoneButton.setOnClickListener {
@@ -101,27 +132,26 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
         }
     }
 
-    private fun tryToAuthWithGoogle(intent: Intent) {
-        val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
-        try {
-            val account = task.getResult(ApiException::class.java)
-            firebaseAuthWithGoogle(account!!.idToken!!)
-        }
-        catch (ex: ApiException) {
-            val defaultErrorMessage = getString(R.string.something_went_wrong)
+    private fun setAllObservers() {
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
+            if (message != null) {
+                showError(message)
+                viewModel.errorMessageHasShown()
+            }
+        })
 
-            showError(ex.message ?: defaultErrorMessage)
-        }
-        catch (ex: NullPointerException) {
-            showError(R.string.something_went_wrong)
-        }
+        viewModel.credential.observe(viewLifecycleOwner, Observer { credential ->
+            if (credential != null) {
+                tryToSignUserWithCredential(credential)
+            }
+        })
     }
 
-    private fun firebaseAuthWithGoogle(token: String) {
-        val credential = GoogleAuthProvider.getCredential(token, null)
+    private fun tryToSignUserWithCredential(credential: AuthCredential) {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
-                userIsSignedIn(firebaseAuth.currentUser!!)
+                val user = firebaseAuth.currentUser!!
+                userIsSignedIn(user)
             }
             else {
                 val errorMessage = task.exception?.message
@@ -129,6 +159,12 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
                 showError(errorMessage ?: defaultErrorMessage)
             }
         }
+    }
+
+    private fun configureFacebookSdkButton() {
+        val facebookSdkButton = binding.facebookSdkButton
+        facebookSdkButton.setReadPermissions("email", "public_profile")
+        facebookSdkButton.fragment = this
     }
 
     private fun userIsSignedIn(user: FirebaseUser) {

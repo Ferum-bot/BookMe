@@ -49,4 +49,8 @@ object Dependencies {
 
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES_AUTH = "com.google.android.gms:play-services-auth:${Versions.GOOGLE_PLAY_SERVICES}"
+
+    // Facebook SDK
+    const val FACEBOOK_ANDROID_SDK = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_SDK}"
+
 }

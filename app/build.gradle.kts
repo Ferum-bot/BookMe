@@ -133,6 +133,9 @@ dependencies {
     // Google Play Services
     implementation(Dependencies.GOOGLE_PLAY_SERVICES_AUTH)
 
+    // Facebook
+    implementation(Dependencies.FACEBOOK_ANDROID_SDK)
+
     // Test dependencies
     addTestDependencies()
 }

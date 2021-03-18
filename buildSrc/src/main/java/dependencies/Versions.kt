@@ -45,4 +45,7 @@ object Versions {
 
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES = "19.0.0"
+
+    // Facebook
+    const val FACEBOOK_SDK = "[4,5)"
 }

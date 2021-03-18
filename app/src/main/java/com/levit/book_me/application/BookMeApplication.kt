@@ -1,6 +1,9 @@
 package com.levit.book_me.application
 
 import android.app.Application
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
+import com.levit.book_me.R
 import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
@@ -24,5 +27,18 @@ class BookMeApplication : Application(), HasAndroidInjector {
             .application(this)
             .build()
         appComponent.inject(this)
+
+        configureFacebookSdk()
+    }
+
+    /**
+     * Marked deprecated but without it
+     * app crashes
+     */
+    private fun configureFacebookSdk() {
+        val facebookAppId = getString(R.string.facebook_app_id)
+        FacebookSdk.setApplicationId(facebookAppId)
+        FacebookSdk.sdkInitialize(this)
+        AppEventsLogger.activateApp(this)
     }
 }
