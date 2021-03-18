@@ -46,8 +46,8 @@ object SigningConfigDebug: SigningConfigCreator {
 
     override fun configureAction(): Action<in SigningConfig> {
         return Action {
-            this.storeFile = File("keystore/debug.jks")
-            this.keyAlias = "androidDebugKey"
+            this.storeFile = File("keystore/debug.keystore")
+            this.keyAlias = "AndroidDebugKey"
             this.keyPassword = "android"
             this.storePassword = "android"
         }
