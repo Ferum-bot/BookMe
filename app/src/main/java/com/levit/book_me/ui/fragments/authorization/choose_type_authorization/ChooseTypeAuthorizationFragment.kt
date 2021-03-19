@@ -1,4 +1,4 @@
-package com.levit.book_me.ui.fragments.authorization
+package com.levit.book_me.ui.fragments.authorization.choose_type_authorization
 
 import android.content.Intent
 import android.os.Bundle
@@ -25,6 +25,7 @@ import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
+import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneAuthorizationContainerFragment
 
 class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_type_authorization) {
 
@@ -116,7 +117,7 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
         }
 
         binding.signInWithEmailOrTelephoneButton.setOnClickListener {
-
+            navigateToPhoneEmailAuthorization()
         }
 
         binding.googleIcon.setOnClickListener {
@@ -145,6 +146,10 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
                 tryToSignUserWithCredential(credential)
             }
         })
+    }
+
+    private fun navigateToPhoneEmailAuthorization() {
+
     }
 
     private fun tryToSignUserWithCredential(credential: AuthCredential) {

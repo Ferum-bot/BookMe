@@ -8,6 +8,8 @@
     <string name="join_with_phone_email">Join with Phone/Email</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="registration_was_canceled">Registration was canceled</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
     
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
@@ -15,6 +17,9 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="authorization">Authorization</string>
+    <string name="next">Next</string>
+    <string name="email_address">Email address</string>
 
 
 </resources>

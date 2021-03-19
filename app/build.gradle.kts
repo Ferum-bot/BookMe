@@ -116,6 +116,9 @@ dependencies {
     implementation(Dependencies.GLIDE_TRANSFORMATIONS)
     kapt(KaptDependencies.GLIDE_COMPILER)
 
+    // UI: ViewPager2
+    implementation(Dependencies.VIEW_PAGER2)
+
     // DI
     implementation(Dependencies.DAGGER)
     implementation(Dependencies.DAGGER_ANDROID)

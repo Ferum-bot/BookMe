@@ -35,6 +35,9 @@ object Dependencies {
     const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
     const val GLIDE_TRANSFORMATIONS = "jp.wasabeef:glide-transformations:${Versions.GLIDE_TRANSFORMATIONS}"
 
+    // UI: ViewPager2
+    const val VIEW_PAGER2 = "androidx.viewpager2:viewpager2:${Versions.VIEW_PAGER2}"
+
     // DI
     const val DAGGER = "com.google.dagger:dagger:${Versions.DAGGER}"
     const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"

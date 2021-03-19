@@ -1,9 +1,7 @@
-package com.levit.book_me.ui.fragments.authorization
+package com.levit.book_me.ui.fragments.authorization.choose_type_authorization
 
 import android.content.Intent
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

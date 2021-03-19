@@ -2,12 +2,9 @@ package com.levit.book_me.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentContainerView
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.levit.book_me.R
-import com.levit.book_me.ui.fragments.authorization.ChooseTypeAuthorizationFragment
+import com.levit.book_me.ui.fragments.authorization.choose_type_authorization.ChooseTypeAuthorizationFragment
+import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneAuthorizationContainerFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, ChooseTypeAuthorizationFragment())
+            .add(R.id.fragment_container,
+                EmailPhoneAuthorizationContainerFragment()
+            )
+            .addToBackStack(null)
             .commitAllowingStateLoss()
     }
 }
