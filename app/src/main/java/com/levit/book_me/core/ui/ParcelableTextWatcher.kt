@@ -1,4 +1,4 @@
-package com.levit.book_me.core.utill
+package com.levit.book_me.core.ui
 
 import android.os.Parcelable
 import android.text.Editable

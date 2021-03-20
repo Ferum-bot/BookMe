@@ -9,6 +9,7 @@ plugins{
     id(Plugins.KOTLIN_KAPT)
     id(Plugins.KOTLIN_ALLOPEN)
     id(Plugins.GOOGLE_SERVICES)
+    id(Plugins.NAVIGATION_SAFE_ARGS)
 }
 
 android {
@@ -18,7 +19,7 @@ android {
         applicationId  = Config.APPLICATION_ID
         minSdkVersion(Config.MIN_SDK_VERSION)
         targetSdkVersion(Config.TARGET_SDK_VERSION)
-        versionCode = 2
+        versionCode = 1
         versionName = "1.0"
         multiDexEnabled = Config.MULTIDEX_ENABLED
 
@@ -118,6 +119,10 @@ dependencies {
 
     // UI: ViewPager2
     implementation(Dependencies.VIEW_PAGER2)
+
+    // Navigation Component
+    implementation(Dependencies.NAVIGATION_FRAGMENT)
+    implementation(Dependencies.NAVIGATION_UI)
 
     // DI
     implementation(Dependencies.DAGGER)

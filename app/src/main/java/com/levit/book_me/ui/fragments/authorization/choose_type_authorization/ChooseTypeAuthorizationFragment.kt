@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -25,7 +26,6 @@ import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
-import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneAuthorizationContainerFragment
 
 class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_type_authorization) {
 
@@ -149,7 +149,9 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
     }
 
     private fun navigateToPhoneEmailAuthorization() {
-
+        val action = ChooseTypeAuthorizationFragmentDirections
+            .actionChooseTypeAuthorizationFragmentToEmailPhoneAuthorizationContainerFragment()
+        findNavController().navigate(action)
     }
 
     private fun tryToSignUserWithCredential(credential: AuthCredential) {

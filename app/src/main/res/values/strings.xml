@@ -20,6 +20,10 @@
     <string name="authorization">Authorization</string>
     <string name="next">Next</string>
     <string name="email_address">Email address</string>
+    <string name="phone_number">Phone number</string>
+    
 
-
+    <string-array name="countries_phone_codes">
+        <item>RU +7</item>
+    </string-array>
 </resources>

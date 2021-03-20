@@ -10,4 +10,6 @@ object Plugins {
     const val KOTLIN_KAPT = "kotlin-kapt"
     const val KOTLIN_ALLOPEN = "kotlin-allopen"
     const val JUNIT5 = "de.mannodermaus.android-junit5"
+
+    const val NAVIGATION_SAFE_ARGS = "androidx.navigation.safeargs.kotlin"
 }

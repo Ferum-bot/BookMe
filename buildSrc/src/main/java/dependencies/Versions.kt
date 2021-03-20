@@ -32,6 +32,9 @@ object Versions {
     // UI: ViewPager2
     const val VIEW_PAGER2 = "1.0.0"
 
+    // Navigation Component
+    const val NAVIGATION = "2.2.2"
+
     // DI
     const val DAGGER = "2.28.1"
 

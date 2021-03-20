@@ -2,9 +2,12 @@ package com.levit.book_me.ui.fragments.authorization.email_phone_authorization.p
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.SpinnerAdapter
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.utill.ParcelableTextWatcher
+import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentPhoneAuthorizationBinding
 
@@ -18,10 +21,11 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setPhoneWatcher()
+        configurePhoneInput()
     }
 
-    private fun setPhoneWatcher() {
+    private fun configurePhoneInput() {
+        binding.phoneEditText.addTextChangedListener(phoneTextWatcher)
 
     }
 

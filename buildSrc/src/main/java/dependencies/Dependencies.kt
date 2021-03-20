@@ -38,6 +38,10 @@ object Dependencies {
     // UI: ViewPager2
     const val VIEW_PAGER2 = "androidx.viewpager2:viewpager2:${Versions.VIEW_PAGER2}"
 
+    // Navigation Component
+    const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
+    const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
+
     // DI
     const val DAGGER = "com.google.dagger:dagger:${Versions.DAGGER}"
     const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"

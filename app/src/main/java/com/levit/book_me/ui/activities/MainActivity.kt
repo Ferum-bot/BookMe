@@ -12,15 +12,4 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
-
-    override fun onStart() {
-        super.onStart()
-
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container,
-                EmailPhoneAuthorizationContainerFragment()
-            )
-            .addToBackStack(null)
-            .commitAllowingStateLoss()
-    }
 }

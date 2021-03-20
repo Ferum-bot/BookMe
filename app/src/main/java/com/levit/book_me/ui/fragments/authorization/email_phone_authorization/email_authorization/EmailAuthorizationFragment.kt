@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.utill.ParcelableTextWatcher
+import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentEmailAuthorizationBinding
 
