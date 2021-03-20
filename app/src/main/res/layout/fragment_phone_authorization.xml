@@ -15,6 +15,7 @@
 
         style="@style/AuthorizationEditTextStyle"
 
+        app:layout_constraintVertical_bias="0.25"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/countries_code_spinner"
@@ -24,10 +25,11 @@
         android:id="@+id/countries_code_spinner"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:entries="@array/countries_phone_codes"
 
-        app:layout_constraintTop_toTopOf="@id/phone_edit_text"
+        style="@style/AuthorizationSpinnerStyle"
+
         app:layout_constraintBottom_toBottomOf="@id/phone_edit_text"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/phone_edit_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,8 +29,9 @@ import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
 
 class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_type_authorization) {
 
-    private val binding by viewBinding { FragmentChooseTypeAuthorizationBinding.bind(it) }
     private val viewModel by viewModels<ChooseTypeAuthorizationViewModel> { appComponent.viewModelFactory() }
+
+    private val binding by viewBinding { FragmentChooseTypeAuthorizationBinding.bind(it) }
 
     private val firebaseAuth by lazy { Firebase.auth }
 

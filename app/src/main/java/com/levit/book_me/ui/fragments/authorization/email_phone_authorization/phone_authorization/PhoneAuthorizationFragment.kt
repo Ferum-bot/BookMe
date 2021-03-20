@@ -8,6 +8,7 @@ import android.widget.SpinnerAdapter
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.ui.ParcelableTextWatcher
+import com.levit.book_me.core.utill.PhoneRegionCodes
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentPhoneAuthorizationBinding
 
@@ -18,6 +19,19 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
     private val phoneTextWatcher: ParcelableTextWatcher?
     get() = arguments?.getParcelable(TEXT_WATCHER_KEY)
 
+    private val spinnerAdapter by lazy {
+        val codes = PhoneRegionCodes.getAll()
+        val adapter = ArrayAdapter<String>(
+            requireContext(),
+            R.layout.authorization_spinner_item,
+            codes
+        )
+        adapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        return@lazy adapter
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -26,7 +40,7 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
 
     private fun configurePhoneInput() {
         binding.phoneEditText.addTextChangedListener(phoneTextWatcher)
-
+        binding.countriesCodeSpinner.adapter = spinnerAdapter
     }
 
     companion object {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
@@ -33,13 +34,13 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         return application.appComponent
     }
 
-    private val emailTextChangeListener = ParcelableTextWatcher().apply {
+    private val emailTextChangeListener by lazy { ParcelableTextWatcher().apply {
         onTextChangeListener = viewModel::onEmailTextChanged
-    }
+    } }
 
-    private val phoneTextChangeListener = ParcelableTextWatcher().apply {
+    private val phoneTextChangeListener by lazy {ParcelableTextWatcher().apply {
         onTextChangeListener = viewModel::onPhoneTextChanged
-    }
+    }}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,6 +58,10 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
 
+        }
+
+        binding.backButton.setOnClickListener {
+            popBackStack()
         }
     }
 
@@ -100,6 +105,10 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         val viewPager = binding.viewPager
         viewPager.adapter = viewPagerAdapter
         viewPager.isUserInputEnabled = false
+    }
+
+    private fun popBackStack() {
+        findNavController().popBackStack()
     }
 
     enum class AuthorizationType(val position: Int) {
