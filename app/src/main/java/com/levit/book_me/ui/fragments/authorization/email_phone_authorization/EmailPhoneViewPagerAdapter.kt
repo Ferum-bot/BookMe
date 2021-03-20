@@ -4,10 +4,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.levit.book_me.core.utill.ParcelableTextWatcher
+import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.email_authorization.EmailAuthorizationFragment
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.phone_authorization.PhoneAuthorizationFragment
 
 class EmailPhoneViewPagerAdapter(
-    fragment: EmailPhoneAuthorizationContainerFragment
+    fragment: EmailPhoneAuthorizationContainerFragment,
+    private val emailTextWatcher: ParcelableTextWatcher,
+    private val phoneTextWatcher: ParcelableTextWatcher
 ): FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int =
@@ -15,8 +19,8 @@ class EmailPhoneViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
-            FIRST_POSITION -> PhoneAuthorizationFragment()
-            SECOND_POSITION -> PhoneAuthorizationFragment()
+            FIRST_POSITION -> PhoneAuthorizationFragment.newInstance(phoneTextWatcher)
+            SECOND_POSITION -> EmailAuthorizationFragment.newInstance(emailTextWatcher)
             else ->
                 throw IllegalArgumentException("Unexpected position to create fragment: $position")
         }

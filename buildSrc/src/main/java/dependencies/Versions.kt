@@ -22,7 +22,7 @@ object Versions {
     const val RETROFIT = "2.9.0" // do not change without checking Russian characters in the header
 
     // UI: Androidx presentation views
-    const val MATERIAL = "1.1.0-alpha07"
+    const val MATERIAL = "1.1.0"
     const val CONSTRAIN_LAYOUT = "1.1.3"
 
     // UI: Images
@@ -30,7 +30,7 @@ object Versions {
     const val GLIDE_TRANSFORMATIONS = "4.0.0"
 
     // UI: ViewPager2
-    const val VIEW_PAGER2 = "1.0.0-alpha05"
+    const val VIEW_PAGER2 = "1.0.0"
 
     // DI
     const val DAGGER = "2.28.1"

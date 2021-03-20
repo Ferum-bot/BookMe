@@ -4,4 +4,12 @@ import androidx.lifecycle.ViewModel
 
 class EmailPhoneAuthorizationViewModel: ViewModel() {
 
+    fun onEmailTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
+
+    }
+
+    fun onPhoneTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
+
+    }
+
 }
