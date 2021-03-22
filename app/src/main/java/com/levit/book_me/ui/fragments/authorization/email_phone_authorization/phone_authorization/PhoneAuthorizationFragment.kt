@@ -32,7 +32,7 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
             codes
         )
         adapter.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item
+            R.layout.authorization_spinner_dropdown_item,
         )
         return@lazy adapter
     }

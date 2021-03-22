@@ -10,6 +10,13 @@
     <string name="registration_was_canceled">Registration was canceled</string>
     <string name="phone">Phone</string>
     <string name="email">Email</string>
+    <string name="authorization">Authorization</string>
+    <string name="next">Next</string>
+    <string name="email_address">Email address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="time_out">Time out!</string>
+    <string name="invalid_request">Invalid request</string>
+    <string name="too_many_request">Too many requests</string>
     
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
@@ -17,9 +24,5 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
-    <string name="authorization">Authorization</string>
-    <string name="next">Next</string>
-    <string name="email_address">Email address</string>
-    <string name="phone_number">Phone number</string>
 
 </resources>

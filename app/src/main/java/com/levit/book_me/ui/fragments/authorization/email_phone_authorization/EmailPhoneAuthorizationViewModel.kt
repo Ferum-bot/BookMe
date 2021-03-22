@@ -3,6 +3,7 @@ package com.levit.book_me.ui.fragments.authorization.email_phone_authorization
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.levit.book_me.core.extensions.isValidEmailAddress
 import com.levit.book_me.core.extensions.isValidTelephoneNumber
 import com.levit.book_me.core.interfaces.ResourceProvider
 import javax.inject.Inject
@@ -30,7 +31,15 @@ class EmailPhoneAuthorizationViewModel @Inject constructor(
     private set
     
     fun onEmailTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
-        
+        val email = text.toString()
+        emailAddress = if (email.isValidEmailAddress()) {
+            _isEmailValid.value = true
+            email
+        }
+        else {
+            _isEmailValid.value = false
+            null
+        }
     }
 
     fun onPhoneTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {

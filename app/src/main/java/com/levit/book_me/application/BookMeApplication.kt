@@ -3,6 +3,8 @@ package com.levit.book_me.application
 import android.app.Application
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.di.components.DaggerAppComponent
@@ -29,6 +31,7 @@ class BookMeApplication : Application(), HasAndroidInjector {
         appComponent.inject(this)
 
         configureFacebookSdk()
+        configureFirebase()
     }
 
     /**
@@ -40,5 +43,9 @@ class BookMeApplication : Application(), HasAndroidInjector {
         FacebookSdk.setApplicationId(facebookAppId)
         FacebookSdk.sdkInitialize(this)
         AppEventsLogger.activateApp(this)
+    }
+
+    private fun configureFirebase() {
+        Firebase.auth.useAppLanguage()
     }
 }
