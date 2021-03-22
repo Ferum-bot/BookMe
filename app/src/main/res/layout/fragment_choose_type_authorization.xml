@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:text="@string/welcome_back_to_the_bookme"
 
-        style="@style/WelcomeBackTextViewStyle"
+        style="@style/BigAuthorizationLabelsStyle"
 
         android:layout_marginTop="16dp"
 

@@ -21,5 +21,20 @@
     <fragment
         android:id="@+id/emailPhoneAuthorizationContainerFragment"
         android:name="com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneAuthorizationContainerFragment"
-        android:label="EmailPhoneAuthorizationContainerFragment" />
+        android:label="EmailPhoneAuthorizationContainerFragment" >
+        <action
+            android:id="@+id/action_emailPhoneAuthorizationContainerFragment_to_confirmPhoneCodeFragment"
+            app:destination="@id/confirmPhoneCodeFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/emailPhoneAuthorizationContainerFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/confirmPhoneCodeFragment"
+        android:name="com.levit.book_me.ui.fragments.authorization.confirm_phone_code.ConfirmPhoneCodeFragment"
+        android:label="ConfirmPhoneCodeFragment" />
 </navigation>

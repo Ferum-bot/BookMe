@@ -72,7 +72,7 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
             super.onCodeSent(verificationId, token)
 
             showProgressBar()
-            navigateToAccessPhoneCodeFragment(verificationId, token)
+            navigateToConfirmPhoneCodeFragment(verificationId, token)
         }
 
         override fun onVerificationCompleted(credentional: PhoneAuthCredential) {
@@ -218,8 +218,10 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         binding.progressBar.visibility = View.GONE
     }
 
-    private fun navigateToAccessPhoneCodeFragment(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
-
+    private fun navigateToConfirmPhoneCodeFragment(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+        val action = EmailPhoneAuthorizationContainerFragmentDirections
+            .actionEmailPhoneAuthorizationContainerFragmentToConfirmPhoneCodeFragment()
+        findNavController().navigate(action)
     }
 
     private fun handlePhoneAuthorizationError(exception: FirebaseException) {
