@@ -42,12 +42,15 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         onTextChangeListener = viewModel::onPhoneTextChanged
     }}
 
+    private var currentAuthorizationType = AuthorizationType.PHONE
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         configureTabLayoutWithViewPager()
         setAllClickListeners()
         setAllObservers()
+        addPhoneNumberObserver()
     }
 
     private fun configureTabLayoutWithViewPager() {
@@ -90,15 +93,40 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
 
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager.currentItem = tab.position
-                if (tab.position == FIRST_POSITION) {
-                    viewModel.currentAuthorizationType = AuthorizationType.PHONE
-                }
-                else {
-                    viewModel.currentAuthorizationType = AuthorizationType.EMAIL
+                currentAuthorizationType = if (tab.position == FIRST_POSITION) {
+                    removeEmailAddressObserver()
+                    addPhoneNumberObserver()
+                    AuthorizationType.PHONE
+                } else {
+                    removePhoneNumberObserver()
+                    addEmailAddressObserver()
+                    AuthorizationType.EMAIL
                 }
             }
 
         })
+    }
+
+    private fun addPhoneNumberObserver() {
+        viewModel.isPhoneValid.observe(viewLifecycleOwner, Observer { isPhoneValid ->
+            binding.nextButton.isEnabled = isPhoneValid
+        })
+    }
+
+    private fun removePhoneNumberObserver() {
+        binding.nextButton.isEnabled = false
+        viewModel.isPhoneValid.removeObservers(viewLifecycleOwner)
+    }
+
+    private fun addEmailAddressObserver() {
+        viewModel.isEmailValid.observe(viewLifecycleOwner, Observer { isEmailValid ->
+            binding.nextButton.isEnabled = isEmailValid
+        })
+    }
+
+    private fun removeEmailAddressObserver() {
+        binding.nextButton.isEnabled = false
+        viewModel.isEmailValid.removeObservers(viewLifecycleOwner)
     }
 
     private fun configureViewPager() {

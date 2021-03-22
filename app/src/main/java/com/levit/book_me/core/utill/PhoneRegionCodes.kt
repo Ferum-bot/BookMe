@@ -15,5 +15,10 @@ enum class PhoneRegionCodes(val designation: String, val code: String) {
             )
         }
 
+        fun getAllCodes(): List<String> {
+            return listOf(
+                RUSSIA.code,
+            )
+        }
     }
 }
