@@ -4,24 +4,33 @@ enum class PhoneRegionCodes(val designation: String, val code: String) {
     RUSSIA("RU", "+7"),
     GERMAN("DE", "+49");
 
-    fun getString(): String {
+    override fun toString(): String {
         return "$designation $code"
     }
 
     companion object {
 
-        fun getAll(): List<String> {
-            return listOf(
-                RUSSIA.getString(),
-                GERMAN.getString(),
+        fun getAll(): List<PhoneRegionCodes>
+            = listOf(
+                RUSSIA,
+                GERMAN,
             )
-        }
 
-        fun getAllCodes(): List<String> {
-            return listOf(
-                RUSSIA.code,
-                GERMAN.code,
-            )
+        fun getAllStrings(): List<String>
+            = getAll().map { it.toString() }
+
+
+        fun getAllCodes(): List<String>
+            = getAll().map { it.code }
+
+        fun getFromCode(code: String): PhoneRegionCodes {
+            val allCodes = PhoneRegionCodes.getAll()
+            allCodes.forEach {
+                if (it.code == code) {
+                    return it
+                }
+            }
+            return RUSSIA
         }
     }
 }

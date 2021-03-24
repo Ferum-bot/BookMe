@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.extensions.isValidEmailAddress
-import com.levit.book_me.core.extensions.isValidTelephoneNumber
 import com.levit.book_me.core.interfaces.ResourceProvider
+import com.levit.book_me.core.models.MobileTelephone
 import javax.inject.Inject
 
 class EmailPhoneAuthorizationViewModel @Inject constructor(
@@ -24,7 +24,7 @@ class EmailPhoneAuthorizationViewModel @Inject constructor(
     val isEmailValid: LiveData<Boolean>
     get() = _isEmailValid
 
-    var phoneNumber: String? = null
+    var phoneNumber: MobileTelephone? = null
     private set
 
     var emailAddress: String? = null
@@ -43,8 +43,8 @@ class EmailPhoneAuthorizationViewModel @Inject constructor(
     }
 
     fun onPhoneTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
-        val phone = text.toString()
-        phoneNumber = if (phone.isValidTelephoneNumber()) {
+        val phone = MobileTelephone.fromString(text.toString())
+        phoneNumber = if (phone.isValidNumber()) {
             _isPhoneValid.value = true
             phone
         }

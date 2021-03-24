@@ -36,5 +36,15 @@
     <fragment
         android:id="@+id/confirmPhoneCodeFragment"
         android:name="com.levit.book_me.ui.fragments.authorization.confirm_phone_code.ConfirmPhoneCodeFragment"
-        android:label="ConfirmPhoneCodeFragment" />
+        android:label="ConfirmPhoneCodeFragment" >
+        <argument
+            android:name="phone_number"
+            app:argType="com.levit.book_me.core.models.MobileTelephone" />
+        <argument
+            android:name="verification_id"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="com.google.firebase.auth.PhoneAuthProvider$ForceResendingToken" />
+    </fragment>
 </navigation>

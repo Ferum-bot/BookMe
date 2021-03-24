@@ -3,4 +3,5 @@
     <dimen name="email_phone_fragment_height">200dp</dimen>
     <dimen name="bottom_line_edit_text_width">-2dp</dimen>
     <dimen name="authorization_spinner_drop_down_item_width">150dp</dimen>
+    <dimen name="pin_view_item_size">40dp</dimen>
 </resources>

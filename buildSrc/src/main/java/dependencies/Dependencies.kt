@@ -60,4 +60,7 @@ object Dependencies {
     // Facebook SDK
     const val FACEBOOK_ANDROID_SDK = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_SDK}"
 
+    // Pin View
+    const val PIN_VIEW = "io.github.chaosleung:pinview:${Versions.PIN_VIEW}"
+
 }

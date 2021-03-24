@@ -50,4 +50,20 @@
     <style name="DefaultProgressBarStyle">
         <item name="android:indeterminateTint">@color/black</item>
     </style>
+
+    <style name="DefaultPinViewStyle" parent="PinWidget.PinView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:inputType">number</item>
+        <item name="viewType">line</item>
+        <item name="itemCount">6</item>
+        <item name="cursorWidth">1dp</item>
+        <item name="cursorColor">@color/grey</item>
+        <item name="lineWidth">2dp</item>
+        <item name="lineColor">@color/light_grey</item>
+        <item name="itemSpacing">8dp</item>
+        <item name="itemWidth">@dimen/pin_view_item_size</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

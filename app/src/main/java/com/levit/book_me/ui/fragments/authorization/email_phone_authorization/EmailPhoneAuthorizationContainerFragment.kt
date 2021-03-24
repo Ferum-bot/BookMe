@@ -57,7 +57,7 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
 
     private val phoneAuthOptions: PhoneAuthOptions
     get() {
-        val phoneNumber: String = viewModel.phoneNumber!!
+        val phoneNumber: String = viewModel.phoneNumber!!.toStringWithOutSeparator()
         return PhoneAuthOptions.newBuilder(firebaseAuth)
             .setPhoneNumber(phoneNumber)
             .setTimeout(PHONE_REQUEST_TIMEOUT, TimeUnit.SECONDS)
@@ -104,6 +104,7 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
             hideKeyboard()
+            showProgressBar()
             if (currentAuthorizationType == AuthorizationType.PHONE) {
                 sendCodeToPhoneNumber()
             }
@@ -219,8 +220,13 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
     }
 
     private fun navigateToConfirmPhoneCodeFragment(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+        val telephoneNumber = viewModel.phoneNumber!!
         val action = EmailPhoneAuthorizationContainerFragmentDirections
-            .actionEmailPhoneAuthorizationContainerFragmentToConfirmPhoneCodeFragment()
+            .actionEmailPhoneAuthorizationContainerFragmentToConfirmPhoneCodeFragment(
+                telephoneNumber,
+                verificationId,
+                token
+            )
         findNavController().navigate(action)
     }
 

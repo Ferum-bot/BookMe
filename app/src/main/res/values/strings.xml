@@ -18,8 +18,8 @@
     <string name="invalid_request">Invalid request</string>
     <string name="too_many_request">Too many requests</string>
     <string name="enter_6_digit_code">Enter 6-digit \ncode</string>
-
     <string name="your_code_was_send_to">Your code was sent to %s</string>
+    <string name="entered_code_was_invalid">The code entered was Invalid!</string>
     
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>

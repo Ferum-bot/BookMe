@@ -54,4 +54,7 @@ object Versions {
 
     // Facebook
     const val FACEBOOK_SDK = "[4,5)"
+
+    // Pin View
+    const val PIN_VIEW = "1.4.4"
 }

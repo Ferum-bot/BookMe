@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
+import com.levit.book_me.core.models.MobileTelephone
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core.utill.PhoneRegionCodes
 import com.levit.book_me.core_presentation.base.BaseFragment
@@ -22,10 +21,10 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
     private val phoneTextWatcher: ParcelableTextWatcher?
     get() = arguments?.getParcelable(TEXT_WATCHER_KEY)
 
-    private var countryCode: String = "+7"
+    private var countryCode: PhoneRegionCodes = PhoneRegionCodes.RUSSIA
 
     private val spinnerAdapter by lazy {
-        val codes = PhoneRegionCodes.getAll()
+        val codes = PhoneRegionCodes.getAllStrings()
         val adapter = ArrayAdapter<String>(
             requireContext(),
             R.layout.authorization_spinner_item,
@@ -57,8 +56,8 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val rowNumber = s.toString()
-                val telephoneNumber = "$countryCode $rowNumber"
-                phoneTextWatcher?.onTextChanged(telephoneNumber, start, before, count)
+                val telephoneNumber = MobileTelephone(countryCode, rowNumber)
+                phoneTextWatcher?.onTextChanged(telephoneNumber.toString(), start, before, count)
             }
 
         })
@@ -69,7 +68,7 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
         binding.countriesCodeSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val countryCodes = PhoneRegionCodes.getAllCodes()
+                val countryCodes = PhoneRegionCodes.getAll()
                 countryCode = countryCodes[position]
             }
 

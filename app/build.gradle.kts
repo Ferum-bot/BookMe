@@ -144,6 +144,9 @@ dependencies {
     // Facebook
     implementation(Dependencies.FACEBOOK_ANDROID_SDK)
 
+    // Pin View
+    implementation(Dependencies.PIN_VIEW)
+
     // Test dependencies
     addTestDependencies()
 }
