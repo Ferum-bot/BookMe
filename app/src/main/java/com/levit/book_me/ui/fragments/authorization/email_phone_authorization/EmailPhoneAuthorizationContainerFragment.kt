@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
@@ -105,12 +106,7 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         binding.nextButton.setOnClickListener {
             hideKeyboard()
             showProgressBar()
-            if (currentAuthorizationType == AuthorizationType.PHONE) {
-                sendCodeToPhoneNumber()
-            }
-            else {
-                sendCodeToEmailAddress()
-            }
+            sendCode()
         }
 
         binding.backButton.setOnClickListener {
@@ -157,6 +153,15 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         })
     }
 
+    private fun sendCode() {
+        if (currentAuthorizationType == AuthorizationType.PHONE) {
+            sendCodeToPhoneNumber()
+        }
+        else {
+            sendCodeToEmailAddress()
+        }
+    }
+
     private fun sendCodeToPhoneNumber() {
         PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions)
     }
@@ -198,16 +203,19 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
     }
 
     private fun hideKeyboard() {
-        val currentEditText = if (currentAuthorizationType == AuthorizationType.PHONE) {
+        val currentEditText = getCurrentEditText()
+        val windowToken = currentEditText.windowToken
+        val inputService = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputService.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    private fun getCurrentEditText(): TextInputEditText =
+        if (currentAuthorizationType == AuthorizationType.PHONE) {
             requireActivity().findViewById<TextInputEditText>(R.id.phone_edit_text)
         }
         else {
             requireActivity().findViewById(R.id.email_edit_text)
         }
-        val windowToken = currentEditText.windowToken
-        val inputService = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputService.hideSoftInputFromWindow(windowToken, 0)
-    }
 
     private fun showProgressBar() {
         binding.nextButton.visibility = View.GONE

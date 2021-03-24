@@ -1,6 +1,9 @@
 package com.levit.book_me.ui.fragments.authorization.email_phone_authorization
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.email_authorization.EmailAuthorizationFragment

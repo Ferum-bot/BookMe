@@ -31,7 +31,7 @@
             app:popEnterAnim="@anim/slide_right_enter_anim"
             app:popExitAnim="@anim/slide_right_exit_anim"
             app:popUpTo="@id/emailPhoneAuthorizationContainerFragment"
-            app:popUpToInclusive="false"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/confirmPhoneCodeFragment"

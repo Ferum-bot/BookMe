@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.extensions.isValidEmailAddress
 import com.levit.book_me.core.interfaces.ResourceProvider
 import com.levit.book_me.core.models.MobileTelephone
+import com.levit.book_me.core.ui.ParcelableTextWatcher
 import javax.inject.Inject
 
 class EmailPhoneAuthorizationViewModel @Inject constructor(
@@ -29,7 +30,7 @@ class EmailPhoneAuthorizationViewModel @Inject constructor(
 
     var emailAddress: String? = null
     private set
-    
+
     fun onEmailTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
         val email = text.toString()
         emailAddress = if (email.isValidEmailAddress()) {
