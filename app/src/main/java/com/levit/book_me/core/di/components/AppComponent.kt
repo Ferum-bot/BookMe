@@ -1,10 +1,7 @@
 package com.levit.book_me.core.di.components
 
 import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.di.modules.AppModule
-import com.levit.book_me.core.di.modules.DatabaseModule
-import com.levit.book_me.core.di.modules.NetworkModule
-import com.levit.book_me.core.di.modules.ViewModelsModule
+import com.levit.book_me.core.di.modules.*
 import com.levit.book_me.core_presentation.utils.ViewModelFactory
 import dagger.BindsInstance
 import dagger.Component
@@ -18,7 +15,9 @@ import javax.inject.Singleton
         AppModule::class,
         NetworkModule::class,
         DatabaseModule::class,
-        ViewModelsModule::class
+        ViewModelsModule::class,
+        RepositoryModule::class,
+        InteractorsModule::class
     ]
 )
 interface AppComponent {

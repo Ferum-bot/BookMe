@@ -4,4 +4,6 @@
     <dimen name="bottom_line_edit_text_width">-2dp</dimen>
     <dimen name="authorization_spinner_drop_down_item_width">150dp</dimen>
     <dimen name="pin_view_item_size">40dp</dimen>
+    <dimen name="onboarding_image_height">280dp</dimen>
+    <dimen name="big_label_text_size">38sp</dimen>
 </resources>

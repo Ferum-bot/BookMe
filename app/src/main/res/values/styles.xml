@@ -15,7 +15,7 @@
     
     <style name="BigAuthorizationLabelsStyle" parent="DefaultTextViewStyle">
         <item name="android:fontFamily">@font/yrsa</item>
-        <item name="android:textSize">38sp</item>
+        <item name="android:textSize">@dimen/big_label_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -65,5 +65,19 @@
         <item name="itemSpacing">8dp</item>
         <item name="itemWidth">@dimen/pin_view_item_size</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="OnBoardingLabelStyle" parent="DefaultTextViewStyle">
+        <item name="android:fontFamily">@font/yrsa</item>
+        <item name="android:textSize">@dimen/big_label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OnBoardingDescriptionStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
+    
+    <style name="OnBoardingImageViewStyle">
+        <item name="android:scaleType">centerCrop</item>
     </style>
 </resources>

@@ -20,6 +20,14 @@
     <string name="enter_6_digit_code">Enter 6-digit \ncode</string>
     <string name="your_code_was_send_to">Your code was sent to %s</string>
     <string name="entered_code_was_invalid">The code entered was Invalid!</string>
+
+    <!--  OnBoarding  -->
+    <string name="onboarding_first_label">You are what \nyou read</string>
+    <string name="onboarding_first_description">We are convinced that you are deeply shaped by the books you read. That is why we carefully select a person for you by your book preferences</string>
+    <string name="onboarding_second_label">Each chance \nis a new story</string>
+    <string name="onboarding_second_description">Everyday you have only onc chance to meet your bookish friend. Each chance is a new story, so do not miss it</string>
+    <string name="onboarding_third_label">Let us start \nyour own story</string>
+    <string name="onboarding_third_description">Every story has a beginning. That is why we ask everyone to start with profile creation</string>
     
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>

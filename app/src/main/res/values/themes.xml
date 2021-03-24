@@ -4,4 +4,9 @@
         <item name="android:colorBackground">@color/white</item>
     </style>
 
+    <style name="DefaultAppTheme.Launcher">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+        <item name="colorPrimaryDark">@color/white</item>
+    </style>
 </resources>
