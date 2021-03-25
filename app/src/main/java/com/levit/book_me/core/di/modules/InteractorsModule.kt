@@ -1,8 +1,7 @@
 package com.levit.book_me.core.di.modules
 
-import android.content.Context
-import com.levit.book_me.core.interactors.implementations.SplashAndOnBoardingInteractorImpl
-import com.levit.book_me.core.interactors.interfaces.SplashAndOnBoardingInteractor
+import com.levit.book_me.core.interactors.implementations.OnBoardingInteractorImpl
+import com.levit.book_me.core.interactors.interfaces.OnBoardingInteractor
 import com.levit.book_me.core.repositories.FirstLaunchRepository
 import dagger.Module
 import dagger.Provides
@@ -11,7 +10,7 @@ import dagger.Provides
 open class InteractorsModule {
 
     @Provides
-    fun provideSplashAndOnBoardingInteractor(firstLaunchRepository: FirstLaunchRepository): SplashAndOnBoardingInteractor {
-        return SplashAndOnBoardingInteractorImpl(firstLaunchRepository)
+    fun provideSplashAndOnBoardingInteractor(firstLaunchRepository: FirstLaunchRepository): OnBoardingInteractor {
+        return OnBoardingInteractorImpl(firstLaunchRepository)
     }
 }

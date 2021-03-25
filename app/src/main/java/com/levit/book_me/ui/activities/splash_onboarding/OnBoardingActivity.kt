@@ -2,10 +2,9 @@ package com.levit.book_me.ui.activities.splash_onboarding
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
@@ -13,9 +12,9 @@ import com.levit.book_me.databinding.ActivitySplashOnboardingBinding
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 
-class SplashAndOnBoardingActivity: AppCompatActivity() {
+class OnBoardingActivity: AppCompatActivity() {
 
-    private val viewModel by viewModels<SplashAndOnBoardingViewModel> { appComponent.viewModelFactory() }
+    private val viewModel by viewModels<OnBoardingViewModel> { appComponent.viewModelFactory() }
 
     private lateinit var binding: ActivitySplashOnboardingBinding
 
@@ -30,6 +29,8 @@ class SplashAndOnBoardingActivity: AppCompatActivity() {
         binding = ActivitySplashOnboardingBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        setAllClickListeners()
     }
 
     override fun onStart() {
@@ -43,9 +44,48 @@ class SplashAndOnBoardingActivity: AppCompatActivity() {
         }
     }
 
+    private fun setAllClickListeners() {
+        binding.nextButton.setOnClickListener {
+            val viewPager = binding.viewPager
+            when(viewPager.currentItem) {
+                FIRST -> {
+                    viewPager.currentItem = SECOND
+                }
+                SECOND -> {
+                    viewPager.currentItem = THIRD
+                }
+                THIRD -> {
+                    navigateToAuthorization()
+                    finish()
+                }
+            }
+        }
+    }
+
     private fun showOnBoarding() {
-        binding.bookMeIcon.visibility = View.GONE
-        binding.nextButton.visibility = View.VISIBLE
+        configureViewPager()
+        configurePageIndicator()
+    }
+
+    private fun configureViewPager() {
+        val viewPager = binding.viewPager
+        val adapter = OnBoardingViewPagerAdapter()
+        viewPager.adapter = adapter
+    }
+
+    private fun configurePageIndicator() {
+        val viewPager = binding.viewPager
+        val pageIndicator = binding.pageIndicator
+        pageIndicator.count = 3
+        pageIndicator.setSelected(0)
+
+        viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                pageIndicator.setSelected(position)
+            }
+        })
     }
 
     private fun handleAuthorization() {
@@ -54,8 +94,8 @@ class SplashAndOnBoardingActivity: AppCompatActivity() {
         }
         else {
             navigateToAuthorization()
-            finish()
         }
+        finish()
     }
 
     private fun isUserSignIn(): Boolean =
@@ -68,6 +108,11 @@ class SplashAndOnBoardingActivity: AppCompatActivity() {
 
     private fun navigateToMainScreen() {
         navigateToAuthorization()
-        finish()
+    }
+
+    companion object {
+        private const val FIRST = 0
+        private const val SECOND = 1
+        private const val THIRD = 2
     }
 }

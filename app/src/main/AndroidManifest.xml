@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/DefaultAppTheme">
         <activity
-            android:name=".ui.activities.splash_onboarding.SplashAndOnBoardingActivity"
+            android:name=".ui.activities.splash_onboarding.OnBoardingActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultAppTheme.Launcher">

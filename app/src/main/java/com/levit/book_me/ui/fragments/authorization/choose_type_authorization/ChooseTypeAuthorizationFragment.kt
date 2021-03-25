@@ -26,6 +26,7 @@ import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
+import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingActivity
 
 class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_type_authorization) {
 
@@ -132,6 +133,11 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
         binding.emailIcon.setOnClickListener {
             binding.signInWithEmailOrTelephoneButton.performClick()
         }
+
+        binding.backButton.setOnClickListener {
+            navigateToOnBoarding()
+            finishActivity()
+        }
     }
 
     private fun setAllObservers() {
@@ -153,6 +159,15 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
         val action = ChooseTypeAuthorizationFragmentDirections
             .actionChooseTypeAuthorizationFragmentToEmailPhoneAuthorizationContainerFragment()
         findNavController().navigate(action)
+    }
+
+    private fun navigateToOnBoarding() {
+        val intent = Intent(requireContext(), OnBoardingActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun finishActivity() {
+        requireActivity().finish()
     }
 
     private fun tryToSignUserWithCredential(credential: AuthCredential) {

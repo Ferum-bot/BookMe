@@ -32,6 +32,12 @@ object Versions {
     // UI: ViewPager2
     const val VIEW_PAGER2 = "1.0.0"
 
+    // UI: Pin View
+    const val PIN_VIEW = "1.4.4"
+
+    // UI: Page indicator for view pager
+    const val PAGE_INDICATOR = "1.0.3"
+
     // Navigation Component
     const val NAVIGATION = "2.2.2"
 
@@ -40,10 +46,10 @@ object Versions {
 
     // Logging
     const val TIMBER = "4.7.1"
-
     // Test dependencies
     const val JUNIT = "4.12"
     const val MOCKITO_KOTLIN = "2.1.0"
+
     const val POWERMOCK = "2.0.0"
 
     // Firebase
@@ -54,7 +60,4 @@ object Versions {
 
     // Facebook
     const val FACEBOOK_SDK = "[4,5)"
-
-    // Pin View
-    const val PIN_VIEW = "1.4.4"
 }

@@ -147,6 +147,9 @@ dependencies {
     // Pin View
     implementation(Dependencies.PIN_VIEW)
 
+    // Page Indicator
+    implementation(Dependencies.PAGE_INDICATOR)
+
     // Test dependencies
     addTestDependencies()
 }

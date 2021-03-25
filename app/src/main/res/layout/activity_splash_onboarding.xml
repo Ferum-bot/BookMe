@@ -20,16 +20,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp"/>
 
-    <ImageView
-        android:id="@+id/book_me_icon"
+    <com.rd.PageIndicatorView
+        android:id="@+id/page_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_book_me_icon"
 
-        app:layout_constraintTop_toTopOf="parent"
+        style="@style/DefaultIndicatorViewStyle"
+
+        android:layout_marginTop="8dp"
+
         app:layout_constraintStart_toStartOf="@id/start_guidline"
-        app:layout_constraintEnd_toEndOf="@id/end_guidline"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -38,6 +39,7 @@
 
         app:layout_constraintBottom_toTopOf="@id/next_button"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/page_indicator"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -45,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/next"
-        android:visibility="gone"
+        android:visibility="visible"
 
         style="@style/DefaultButtonStyle"
 
@@ -53,6 +55,5 @@
 
         app:layout_constraintStart_toStartOf="@id/start_guidline"
         app:layout_constraintEnd_toEndOf="@id/end_guidline"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:visibility="visible"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

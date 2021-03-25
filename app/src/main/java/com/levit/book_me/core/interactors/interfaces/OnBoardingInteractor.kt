@@ -1,6 +1,6 @@
 package com.levit.book_me.core.interactors.interfaces
 
-interface SplashAndOnBoardingInteractor {
+interface OnBoardingInteractor {
 
     fun isFirstLaunch(): Boolean
 

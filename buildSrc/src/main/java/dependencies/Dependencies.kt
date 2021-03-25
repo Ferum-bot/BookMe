@@ -38,20 +38,27 @@ object Dependencies {
     // UI: ViewPager2
     const val VIEW_PAGER2 = "androidx.viewpager2:viewpager2:${Versions.VIEW_PAGER2}"
 
+    // UI: Pin View
+    const val PIN_VIEW = "io.github.chaosleung:pinview:${Versions.PIN_VIEW}"
+
+    // UI: Page indicator for view pager
+    const val PAGE_INDICATOR = "com.romandanylyk:pageindicatorview:${Versions.PAGE_INDICATOR}"
+
     // Navigation Component
     const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
-    const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
 
+    const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
     // DI
     const val DAGGER = "com.google.dagger:dagger:${Versions.DAGGER}"
     const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${Versions.DAGGER}"
+
     const val DAGGER_ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:${Versions.DAGGER}"
 
     // Logging
     const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
-
     // Firebase
     const val FIREBASE_BOM = "com.google.firebase:firebase-bom:${Versions.FIREBASE}"
+
     const val FIREBASE_AUTH = "com.google.firebase:firebase-auth-ktx"
 
     // Google Play Services
@@ -59,8 +66,4 @@ object Dependencies {
 
     // Facebook SDK
     const val FACEBOOK_ANDROID_SDK = "com.facebook.android:facebook-android-sdk:${Versions.FACEBOOK_SDK}"
-
-    // Pin View
-    const val PIN_VIEW = "io.github.chaosleung:pinview:${Versions.PIN_VIEW}"
-
 }
