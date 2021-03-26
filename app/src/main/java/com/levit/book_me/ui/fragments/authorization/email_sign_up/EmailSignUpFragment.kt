@@ -2,12 +2,8 @@ package com.levit.book_me.ui.fragments.authorization.email_sign_up
 
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.view.WindowInsets
 import android.view.WindowManager
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController

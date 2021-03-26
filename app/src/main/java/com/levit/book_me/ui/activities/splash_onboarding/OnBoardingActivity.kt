@@ -36,7 +36,7 @@ class OnBoardingActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if (viewModel.isFirstLaunch()) {
+        if (isFirstLaunch()) {
             showOnBoarding()
         }
         else {
@@ -60,6 +60,13 @@ class OnBoardingActivity: AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun isFirstLaunch(): Boolean {
+        if (intent.getBooleanExtra(LAUNCH_FROM_AUTHORIZATION_KEY, false)) {
+            return true
+        }
+        return viewModel.isFirstLaunch()
     }
 
     private fun showOnBoarding() {
@@ -114,5 +121,7 @@ class OnBoardingActivity: AppCompatActivity() {
         private const val FIRST = 0
         private const val SECOND = 1
         private const val THIRD = 2
+
+        const val LAUNCH_FROM_AUTHORIZATION_KEY = "launch_from_authorization"
     }
 }

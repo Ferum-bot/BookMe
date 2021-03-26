@@ -27,6 +27,7 @@ import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
 import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingActivity
+import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingActivity.Companion.LAUNCH_FROM_AUTHORIZATION_KEY
 
 class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_type_authorization) {
 
@@ -162,7 +163,9 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
     }
 
     private fun navigateToOnBoarding() {
-        val intent = Intent(requireContext(), OnBoardingActivity::class.java)
+        val intent = Intent(requireContext(), OnBoardingActivity::class.java).apply {
+            putExtra(LAUNCH_FROM_AUTHORIZATION_KEY, true)
+        }
         startActivity(intent)
     }
 
