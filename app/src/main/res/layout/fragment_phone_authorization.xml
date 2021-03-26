@@ -9,9 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/phone_number"
-        android:focusableInTouchMode="true"
         android:inputType="phone"
-        android:textSize="20sp"
 
         style="@style/AuthorizationEditTextStyle"
 

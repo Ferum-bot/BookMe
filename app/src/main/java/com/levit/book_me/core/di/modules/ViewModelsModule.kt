@@ -6,6 +6,7 @@ import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingViewModel
 import com.levit.book_me.ui.fragments.authorization.choose_type_authorization.ChooseTypeAuthorizationViewModel
 import com.levit.book_me.ui.fragments.authorization.confirm_phone_code.ConfirmPhoneCodeViewModel
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneAuthorizationViewModel
+import com.levit.book_me.ui.fragments.authorization.email_sign_up.EmailSignUpViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -32,4 +33,9 @@ abstract class ViewModelsModule {
     @IntoMap
     @ViewModelKey(OnBoardingViewModel::class)
     abstract fun bindSplashAndOnBoardingViewModel(viewModel: OnBoardingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EmailSignUpViewModel::class)
+    abstract fun bindEmailSignUpViewModel(viewModel: EmailSignUpViewModel): ViewModel
 }

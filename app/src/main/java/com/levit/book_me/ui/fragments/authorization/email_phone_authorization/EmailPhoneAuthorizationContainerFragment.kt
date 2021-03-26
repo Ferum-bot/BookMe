@@ -1,12 +1,14 @@
 package com.levit.book_me.ui.fragments.authorization.email_phone_authorization
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputEditText
@@ -19,6 +21,7 @@ import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.viewBinding
+import com.levit.book_me.core.ui.ParcelableClickableSpan
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentEmailPhoneAuthorizationContainerBinding
@@ -35,7 +38,12 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
     }
 
     private val viewPagerAdapter by lazy {
-        EmailPhoneViewPagerAdapter(this, emailTextChangeListener, phoneTextChangeListener)
+        EmailPhoneViewPagerAdapter(
+            this,
+            emailTextChangeListener,
+            phoneTextChangeListener,
+            emailSignUpClickableSpan
+        )
     }
 
     private val appComponent: AppComponent
@@ -51,6 +59,10 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
     private val phoneTextChangeListener by lazy {ParcelableTextWatcher().apply {
         onTextChangeListener = viewModel::onPhoneTextChanged
     }}
+
+    private val emailSignUpClickableSpan by lazy { ParcelableClickableSpan().apply {
+        onTextClicked = this@EmailPhoneAuthorizationContainerFragment::navigateToEmailSignUpScreen
+    } }
 
     private var currentAuthorizationType = AuthorizationType.PHONE
 
@@ -91,10 +103,27 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        configureSoftKeyBoard()
         configureTabLayoutWithViewPager()
         setAllClickListeners()
         setAllObservers()
         addPhoneNumberObserver()
+    }
+
+    private fun configureSoftKeyBoard() {
+        val window = requireActivity().window
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            binding.root.setOnApplyWindowInsetsListener { view: View, windowInsets: WindowInsets ->
+                val ime = windowInsets.getInsets(WindowInsets.Type.ime())
+                windowInsets.inset(ime)
+                return@setOnApplyWindowInsetsListener windowInsets
+            }
+        }
+        else {
+            val mode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+            window.setSoftInputMode(mode)
+        }
     }
 
     private fun configureTabLayoutWithViewPager() {
@@ -267,6 +296,12 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
 
     private fun navigateToProfileScreen() {
         showMessage("Everything is good!")
+    }
+
+    private fun navigateToEmailSignUpScreen(widget: View) {
+        val action = EmailPhoneAuthorizationContainerFragmentDirections
+            .actionEmailPhoneAuthorizationContainerFragmentToEmailSignUpFragment()
+        findNavController().navigate(action)
     }
 
     enum class AuthorizationType(val position: Int) {

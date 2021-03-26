@@ -20,6 +20,8 @@
     <string name="enter_6_digit_code">Enter 6-digit \ncode</string>
     <string name="your_code_was_send_to">Your code was sent to %s</string>
     <string name="entered_code_was_invalid">The code entered was Invalid!</string>
+    <string name="dont_have_an_account_yet">Do not have an account yet?\nSign Up!</string>
+    <string name="password_rules">\u25CF Password length must be from 8 to 14 characters \n\u25CF Password must contains at least 2 digits \n\u25CF Password must contains at least 2 letters \n\u25CF Must be one uppercase letter and one lowercase</string>
 
     <!--  OnBoarding  -->
     <string name="onboarding_first_label">You are what \nyou read</string>
@@ -35,5 +37,11 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="invalid_address">Invalid address</string>
+    <string name="password_must_meet_all_conditions">Password must meet all conditions</string>
+    <string name="password_mismatch">Password mismatch</string>
 
 </resources>
