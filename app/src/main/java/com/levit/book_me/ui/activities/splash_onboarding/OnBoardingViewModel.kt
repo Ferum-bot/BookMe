@@ -11,7 +11,7 @@ class OnBoardingViewModel @Inject constructor(
     fun isFirstLaunch(): Boolean {
         val result = interator.isFirstLaunch()
         interator.firstLaunchHappened()
-        return true
+        return result
     }
 
 }
