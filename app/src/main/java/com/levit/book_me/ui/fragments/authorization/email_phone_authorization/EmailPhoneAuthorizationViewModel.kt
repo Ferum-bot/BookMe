@@ -31,6 +31,9 @@ class EmailPhoneAuthorizationViewModel @Inject constructor(
     var emailAddress: String? = null
     private set
 
+    var emailPassword: String? = null
+    private set
+
     fun onEmailTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
         val email = text.toString()
         emailAddress = if (email.isValidEmailAddress()) {
@@ -41,6 +44,11 @@ class EmailPhoneAuthorizationViewModel @Inject constructor(
             _isEmailValid.value = false
             null
         }
+    }
+
+    fun onPasswordTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {
+        val password = text.toString()
+        emailPassword = password
     }
 
     fun onPhoneTextChanged(text: CharSequence, start: Int, before: Int, count: Int) {

@@ -14,7 +14,8 @@ class EmailPhoneViewPagerAdapter(
     fragment: EmailPhoneAuthorizationContainerFragment,
     private val emailTextWatcher: ParcelableTextWatcher,
     private val phoneTextWatcher: ParcelableTextWatcher,
-    private val emailSignUpClickableSpan: ParcelableClickableSpan
+    private val passwordTextWatcher: ParcelableTextWatcher,
+    private val emailSignUpClickableSpan: ParcelableClickableSpan,
 ): FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int =
@@ -23,7 +24,7 @@ class EmailPhoneViewPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return when(position) {
             FIRST_POSITION -> PhoneAuthorizationFragment.newInstance(phoneTextWatcher)
-            SECOND_POSITION -> EmailAuthorizationFragment.newInstance(emailTextWatcher, emailSignUpClickableSpan)
+            SECOND_POSITION -> EmailAuthorizationFragment.newInstance(emailTextWatcher, passwordTextWatcher, emailSignUpClickableSpan)
             else ->
                 throw IllegalArgumentException("Unexpected position to create fragment: $position")
         }

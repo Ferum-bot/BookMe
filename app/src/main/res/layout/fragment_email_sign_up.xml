@@ -156,4 +156,18 @@
         app:layout_constraintStart_toStartOf="@id/start_guidline"
         app:layout_constraintEnd_toEndOf="@id/end_guidline"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+
+        style="@style/DefaultProgressBarStyle"
+
+        android:layout_marginBottom="16dp"
+
+        app:layout_constraintStart_toStartOf="@id/start_guidline"
+        app:layout_constraintEnd_toEndOf="@id/end_guidline"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

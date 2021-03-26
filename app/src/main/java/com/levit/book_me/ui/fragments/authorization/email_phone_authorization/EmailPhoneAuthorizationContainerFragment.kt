@@ -42,7 +42,8 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
             this,
             emailTextChangeListener,
             phoneTextChangeListener,
-            emailSignUpClickableSpan
+            passwordTextChangeListener,
+            emailSignUpClickableSpan,
         )
     }
 
@@ -54,6 +55,10 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
 
     private val emailTextChangeListener by lazy { ParcelableTextWatcher().apply {
         onTextChangeListener = viewModel::onEmailTextChanged
+    } }
+
+    private val passwordTextChangeListener by lazy { ParcelableTextWatcher().apply {
+        onTextChangeListener = viewModel::onPasswordTextChanged
     } }
 
     private val phoneTextChangeListener by lazy {ParcelableTextWatcher().apply {
@@ -135,7 +140,13 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         binding.nextButton.setOnClickListener {
             hideKeyboard()
             showProgressBar()
-            sendCode()
+
+            if (currentAuthorizationType == AuthorizationType.PHONE) {
+                sendCodeToPhoneNumber()
+            }
+            else {
+                handleEmailSignIn()
+            }
         }
 
         binding.backButton.setOnClickListener {
@@ -182,21 +193,17 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
         })
     }
 
-    private fun sendCode() {
-        if (currentAuthorizationType == AuthorizationType.PHONE) {
-            sendCodeToPhoneNumber()
-        }
-        else {
-            sendCodeToEmailAddress()
-        }
-    }
-
     private fun sendCodeToPhoneNumber() {
         PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions)
     }
 
-    private fun sendCodeToEmailAddress() {
-
+    private fun handleEmailSignIn() {
+        if (viewModel.emailPassword == null) {
+            showNextButton()
+            showError(R.string.enter_password)
+            return
+        }
+        signInWithEmail()
     }
 
     private fun addPhoneNumberObserver() {
@@ -292,6 +299,20 @@ class EmailPhoneAuthorizationContainerFragment: BaseFragment(R.layout.fragment_e
                     handlePhoneAuthorizationError(exception)
                 }
             }
+    }
+
+    private fun signInWithEmail() {
+        val email = viewModel.emailAddress!!
+        val password = viewModel.emailPassword!!
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity()) { task ->
+            if (task.isSuccessful) {
+                navigateToProfileScreen()
+            }
+            else {
+                showError(R.string.wrong_email_or_password)
+                showNextButton()
+            }
+        }
     }
 
     private fun navigateToProfileScreen() {

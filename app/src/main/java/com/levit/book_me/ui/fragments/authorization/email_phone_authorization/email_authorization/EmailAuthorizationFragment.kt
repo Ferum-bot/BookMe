@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.view.View
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
@@ -19,7 +18,10 @@ class EmailAuthorizationFragment: BaseFragment(R.layout.fragment_email_authoriza
     private val binding by viewBinding { FragmentEmailAuthorizationBinding.bind(it) }
 
     private val emailTextWatcher: ParcelableTextWatcher?
-    get() = arguments?.getParcelable(TEXT_WATCHER_KEY)
+    get() = arguments?.getParcelable(EMAIL_TEXT_WATCHER_KEY)
+
+    private val passwordTextWatcher: ParcelableTextWatcher?
+    get() = arguments?.getParcelable(PASSWORD_TEXT_WATCHER_KEY)
 
     private val clickableSpan: ParcelableClickableSpan?
     get() = arguments?.getParcelable(CLICKABLE_SPAN_KEY)
@@ -27,12 +29,13 @@ class EmailAuthorizationFragment: BaseFragment(R.layout.fragment_email_authoriza
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setEmailWatcher()
+        setTextWatchers()
         initSignUpTextView()
     }
 
-    private fun setEmailWatcher() {
+    private fun setTextWatchers() {
         binding.emailEditText.addTextChangedListener(emailTextWatcher)
+        binding.paswwordEditText.addTextChangedListener(passwordTextWatcher)
     }
 
     private fun initSignUpTextView() {
@@ -60,19 +63,22 @@ class EmailAuthorizationFragment: BaseFragment(R.layout.fragment_email_authoriza
 
     companion object {
 
-        private const val TEXT_WATCHER_KEY = "email_text_watcher"
+        private const val EMAIL_TEXT_WATCHER_KEY = "email_text_watcher"
+        private const val PASSWORD_TEXT_WATCHER_KEY = "password_text_watcher"
         private const val CLICKABLE_SPAN_KEY = "email_sign_up_clickable_span"
 
         private const val START_CLICKABLE_SPAN_POSITION = 28
         private const val END_CLICKABLE_SPAN_POSITION = 36
 
         fun newInstance(
-                emailTextWatcher: ParcelableTextWatcher,
-                emailSignUpClickableSpan: ParcelableClickableSpan
+            emailTextWatcher: ParcelableTextWatcher,
+            passwordTextWatcher: ParcelableTextWatcher,
+            emailSignUpClickableSpan: ParcelableClickableSpan,
         ): EmailAuthorizationFragment {
             val fragment = EmailAuthorizationFragment()
             val bundle = Bundle()
-            bundle.putParcelable(TEXT_WATCHER_KEY, emailTextWatcher)
+            bundle.putParcelable(EMAIL_TEXT_WATCHER_KEY, emailTextWatcher)
+            bundle.putParcelable(PASSWORD_TEXT_WATCHER_KEY, passwordTextWatcher)
             bundle.putParcelable(CLICKABLE_SPAN_KEY, emailSignUpClickableSpan)
             fragment.arguments = bundle
             return fragment
