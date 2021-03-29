@@ -24,6 +24,13 @@
     <string name="password_rules">\u25CF Password length must be from 8 to 14 characters \n\u25CF Password must contains at least 2 digits \n\u25CF Password must contains at least 2 letters \n\u25CF Must be one uppercase letter and one lowercase</string>
     <string name="enter_password">Enter password</string>
     <string name="wrong_email_or_password">Wrong email or password</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="invalid_address">Invalid address</string>
+    <string name="password_must_meet_all_conditions">Password must meet all conditions</string>
+    <string name="password_mismatch">Password mismatch</string>
+    <string name="network_not_available">Network connection is not available</string>
 
     <!--  OnBoarding  -->
     <string name="onboarding_first_label">You are what \nyou read</string>
@@ -32,18 +39,12 @@
     <string name="onboarding_second_description">Everyday you have only onc chance to meet your bookish friend. Each chance is a new story, so do not miss it</string>
     <string name="onboarding_third_label">Let us start \nyour own story</string>
     <string name="onboarding_third_description">Every story has a beginning. That is why we ask everyone to start with profile creation</string>
-    
+
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
 
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
-    <string name="password">Password</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="repeat_password">Repeat Password</string>
-    <string name="invalid_address">Invalid address</string>
-    <string name="password_must_meet_all_conditions">Password must meet all conditions</string>
-    <string name="password_mismatch">Password mismatch</string>
 
 </resources>

@@ -24,12 +24,12 @@ import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
 import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingActivity
 import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingActivity.Companion.LAUNCH_FROM_AUTHORIZATION_KEY
+import com.levit.book_me.ui.base.BaseAuthorizationFragment
 
-class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_type_authorization) {
+class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragment_choose_type_authorization) {
 
     private val viewModel by viewModels<ChooseTypeAuthorizationViewModel> { appComponent.viewModelFactory() }
 
@@ -111,15 +111,24 @@ class ChooseTypeAuthorizationFragment: BaseFragment(R.layout.fragment_choose_typ
 
     private fun setAllClickListeners() {
         binding.signInWithGoogleButton.setOnClickListener {
+            if (networkNotAvailableAndShowError()) {
+                return@setOnClickListener
+            }
             val googleSignIntent = googleSignInClient.signInIntent
             googleSignInLauncher.launch(googleSignIntent)
         }
 
         binding.signInWithFacebookButton.setOnClickListener {
+            if (networkNotAvailableAndShowError()) {
+                return@setOnClickListener
+            }
             binding.facebookSdkButton.performClick()
         }
 
         binding.signInWithEmailOrTelephoneButton.setOnClickListener {
+            if (networkNotAvailableAndShowError()) {
+                return@setOnClickListener
+            }
             navigateToPhoneEmailAuthorization()
         }
 

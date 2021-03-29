@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.di.components.DaggerAppComponent
+import com.levit.book_me.core_network.model.NetworkMonitor
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -32,6 +33,13 @@ class BookMeApplication : Application(), HasAndroidInjector {
 
         configureFacebookSdk()
         configureFirebase()
+        registerNetworkMonitor()
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+
+        removeNetworkMonitor()
     }
 
     /**
@@ -47,5 +55,13 @@ class BookMeApplication : Application(), HasAndroidInjector {
 
     private fun configureFirebase() {
         Firebase.auth.useAppLanguage()
+    }
+
+    private fun registerNetworkMonitor() {
+        NetworkMonitor.setNetworkMonitor(this)
+    }
+
+    private fun removeNetworkMonitor() {
+        NetworkMonitor.removeNetworkMonitor(this)
     }
 }
