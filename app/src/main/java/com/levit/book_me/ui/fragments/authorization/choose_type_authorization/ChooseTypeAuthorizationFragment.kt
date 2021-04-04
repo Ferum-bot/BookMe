@@ -166,6 +166,13 @@ class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragme
                 tryToSignUserWithCredential(credential)
             }
         })
+
+        viewModel.errorMessageResId.observe(viewLifecycleOwner, Observer { messageId ->
+            if (messageId != null) {
+                showError(messageId)
+                viewModel.errorMessageHasShown()
+            }
+        })
     }
 
     private fun navigateToPhoneEmailAuthorization() {

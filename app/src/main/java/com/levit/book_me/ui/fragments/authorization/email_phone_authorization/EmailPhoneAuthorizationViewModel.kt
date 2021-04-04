@@ -4,16 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.extensions.isValidEmailAddress
-import com.levit.book_me.core.interfaces.ResourceProvider
 import com.levit.book_me.core.models.MobileTelephone
-import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core_base.di.AuthorizationScope
 import javax.inject.Inject
 
 @AuthorizationScope
-class EmailPhoneAuthorizationViewModel @Inject constructor(
-    private val resources: ResourceProvider
-): ViewModel() {
+class EmailPhoneAuthorizationViewModel @Inject constructor(): ViewModel() {
 
     private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
     val errorMessage: LiveData<String?>

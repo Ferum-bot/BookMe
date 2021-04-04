@@ -13,35 +13,31 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.isDataAvailable
-import com.levit.book_me.core.interfaces.ResourceProvider
 import com.levit.book_me.core_base.di.AuthorizationScope
 import javax.inject.Inject
 
 @AuthorizationScope
-class ChooseTypeAuthorizationViewModel @Inject constructor(
-    private val resources: ResourceProvider
-): ViewModel() {
+class ChooseTypeAuthorizationViewModel @Inject constructor(): ViewModel() {
 
     private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
-    val errorMessage: LiveData<String?>
-    get() = _errorMessage
+    val errorMessage: LiveData<String?> = _errorMessage
+
+    private val _errorMessageResId: MutableLiveData<Int?> = MutableLiveData(null)
+    val errorMessageResId: LiveData<Int?> = _errorMessageResId
 
     private val _credential: MutableLiveData<AuthCredential?> = MutableLiveData(null)
-    val credential: LiveData<AuthCredential?>
-    get() = _credential
+    val credential: LiveData<AuthCredential?> = _credential
     
     fun googleSignInActivityResultCallback(result: ActivityResult?) {
         if (result == null) {
-            val errorMessage = resources.string(R.string.something_went_wrong)
-            _errorMessage.value = errorMessage
+            _errorMessageResId.value = R.string.something_went_wrong
             return
         }
         if (result.isDataAvailable()) {
             tryToAuthWithGoogle(result.data!!)
         }
         else {
-            val errorMessage = resources.string(R.string.something_went_wrong)
-            _errorMessage.value = errorMessage
+            _errorMessageResId.value = R.string.something_went_wrong
             return
         }
     }
@@ -53,6 +49,7 @@ class ChooseTypeAuthorizationViewModel @Inject constructor(
 
     fun errorMessageHasShown() {
         _errorMessage.value = null
+        _errorMessageResId.value = null
     }
 
     private fun tryToAuthWithGoogle(intent: Intent) {
@@ -62,12 +59,16 @@ class ChooseTypeAuthorizationViewModel @Inject constructor(
             firebaseAuthWithGoogle(account!!.idToken!!)
         }
         catch (ex: ApiException) {
-            val defaultErrorMessage = resources.string(R.string.something_went_wrong)
-            _errorMessage.value = ex.message ?: defaultErrorMessage
+            val defaultErrorMessage = R.string.something_went_wrong
+            if (ex.message.isNullOrBlank()) {
+                _errorMessageResId.value = defaultErrorMessage
+            }
+            else {
+                _errorMessage.value = ex.message
+            }
         }
         catch (ex: NullPointerException) {
-            val errorMessage = resources.string(R.string.something_went_wrong)
-            _errorMessage.value = errorMessage
+            _errorMessageResId.value = R.string.something_went_wrong
         }
     }
 
