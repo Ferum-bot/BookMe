@@ -6,10 +6,11 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class RepositoryModule {
+open class OnBoardingRepositoryModule {
 
     @Provides
     fun provideFirstLaunchRepository(context: Context): FirstLaunchRepository {
         return FirstLaunchRepository(context)
     }
+
 }

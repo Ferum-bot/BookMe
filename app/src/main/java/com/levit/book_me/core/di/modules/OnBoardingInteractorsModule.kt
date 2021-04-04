@@ -7,10 +7,11 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-open class InteractorsModule {
+open class OnBoardingInteractorsModule {
 
     @Provides
     fun provideSplashAndOnBoardingInteractor(firstLaunchRepository: FirstLaunchRepository): OnBoardingInteractor {
         return OnBoardingInteractorImpl(firstLaunchRepository)
     }
+
 }

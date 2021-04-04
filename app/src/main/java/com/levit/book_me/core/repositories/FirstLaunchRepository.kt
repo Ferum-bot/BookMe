@@ -1,8 +1,10 @@
 package com.levit.book_me.core.repositories
 
 import android.content.Context
+import com.levit.book_me.core_base.di.OnBoardingScope
 import javax.inject.Inject
 
+@OnBoardingScope
 class FirstLaunchRepository @Inject constructor(
     context: Context
 ) {
