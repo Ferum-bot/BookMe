@@ -14,11 +14,6 @@ import com.levit.book_me.core_presentation.R
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
-    /**
-     * Add lately custom Toasts to different
-     * types of messages
-     */
-
     private val errorColor
     get() = Color.rgb(255, 68, 68)
 
