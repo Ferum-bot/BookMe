@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.fragments.authorization.choose_type_authorization
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -23,27 +24,23 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.core.di.components.AppComponent
+import com.levit.book_me.core.di.components.AuthorizationComponent
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
-import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingActivity
-import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingActivity.Companion.LAUNCH_FROM_AUTHORIZATION_KEY
+import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
+import com.levit.book_me.ui.activities.onboarding.OnBoardingActivity
+import com.levit.book_me.ui.activities.onboarding.OnBoardingActivity.Companion.LAUNCH_FROM_AUTHORIZATION_KEY
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 
 class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragment_choose_type_authorization) {
 
-    private val viewModel by viewModels<ChooseTypeAuthorizationViewModel> { appComponent.viewModelFactory() }
+    private val viewModel by viewModels<ChooseTypeAuthorizationViewModel> { authorizationComponent.viewModelFactory() }
 
     private val binding by viewBinding { FragmentChooseTypeAuthorizationBinding.bind(it) }
 
     private val firebaseAuth by lazy { Firebase.auth }
 
     private lateinit var googleSignInClient: GoogleSignInClient
-
-    private val appComponent: AppComponent
-    get() {
-        val application = requireActivity().application as BookMeApplication
-        return application.appComponent
-    }
 
     private val googleSignInLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
@@ -52,6 +49,12 @@ class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragme
 
 
     private lateinit var facebookCallbackManager: CallbackManager
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        authorizationComponent.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

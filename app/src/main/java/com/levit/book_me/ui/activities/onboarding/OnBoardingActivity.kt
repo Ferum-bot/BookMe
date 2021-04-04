@@ -1,4 +1,4 @@
-package com.levit.book_me.ui.activities.splash_onboarding
+package com.levit.book_me.ui.activities.onboarding
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,11 +10,12 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.databinding.ActivitySplashOnboardingBinding
 import com.levit.book_me.application.BookMeApplication
+import com.levit.book_me.core.di.components.OnBoardingComponent
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 
 class OnBoardingActivity: AppCompatActivity() {
 
-    private val viewModel by viewModels<OnBoardingViewModel> { appComponent.viewModelFactory() }
+    private val viewModel by viewModels<OnBoardingViewModel> { onBoardingComponent.viewModelFactory() }
 
     private lateinit var binding: ActivitySplashOnboardingBinding
 
@@ -23,7 +24,10 @@ class OnBoardingActivity: AppCompatActivity() {
         return@lazy application.appComponent
     }
 
+    private lateinit var onBoardingComponent: OnBoardingComponent
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        initComponent()
         setTheme(R.style.DefaultAppTheme)
         super.onCreate(savedInstanceState)
         binding = ActivitySplashOnboardingBinding.inflate(layoutInflater)
@@ -42,6 +46,11 @@ class OnBoardingActivity: AppCompatActivity() {
         else {
             handleAuthorization()
         }
+    }
+
+    private fun initComponent() {
+        onBoardingComponent = appComponent.onBoardingComponent().build()
+        onBoardingComponent.inject(this)
     }
 
     private fun setAllClickListeners() {

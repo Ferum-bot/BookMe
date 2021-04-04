@@ -2,7 +2,6 @@ package com.levit.book_me.core.di.modules
 
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core_base.annotations.ViewModelKey
-import com.levit.book_me.ui.activities.splash_onboarding.OnBoardingViewModel
 import com.levit.book_me.ui.fragments.authorization.choose_type_authorization.ChooseTypeAuthorizationViewModel
 import com.levit.book_me.ui.fragments.authorization.confirm_phone_code.ConfirmPhoneCodeViewModel
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneAuthorizationViewModel
@@ -12,7 +11,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class ViewModelsModule {
+abstract class AuthorizationViewModelsModule {
 
     @Binds
     @IntoMap
@@ -31,11 +30,7 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(OnBoardingViewModel::class)
-    abstract fun bindSplashAndOnBoardingViewModel(viewModel: OnBoardingViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(EmailSignUpViewModel::class)
     abstract fun bindEmailSignUpViewModel(viewModel: EmailSignUpViewModel): ViewModel
+
 }

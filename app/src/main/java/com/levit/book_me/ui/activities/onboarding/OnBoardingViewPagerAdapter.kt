@@ -1,4 +1,4 @@
-package com.levit.book_me.ui.activities.splash_onboarding
+package com.levit.book_me.ui.activities.onboarding
 
 import android.content.Context
 import android.view.LayoutInflater

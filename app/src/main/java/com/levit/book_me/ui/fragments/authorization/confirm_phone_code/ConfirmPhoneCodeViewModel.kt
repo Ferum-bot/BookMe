@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.extensions.isValidPhoneAuthorizationCode
+import com.levit.book_me.core_base.di.AuthorizationScope
 import javax.inject.Inject
 
-class ConfirmPhoneCodeViewModel @Inject constructor(
-
-): ViewModel() {
+@AuthorizationScope
+class ConfirmPhoneCodeViewModel @Inject constructor(): ViewModel() {
 
     private val _sentCode: MutableLiveData<String?> = MutableLiveData(null)
     val sentCode: LiveData<String?>

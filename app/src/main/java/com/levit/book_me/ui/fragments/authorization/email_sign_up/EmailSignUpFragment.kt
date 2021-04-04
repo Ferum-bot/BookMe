@@ -17,18 +17,14 @@ import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentEmailSignUpBinding
+import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
+import com.levit.book_me.ui.base.BaseAuthorizationFragment
 
-class EmailSignUpFragment: BaseFragment(R.layout.fragment_email_sign_up) {
+class EmailSignUpFragment: BaseAuthorizationFragment(R.layout.fragment_email_sign_up) {
 
     private val binding by viewBinding { FragmentEmailSignUpBinding.bind(it) }
 
-    private val viewModel by viewModels<EmailSignUpViewModel> { appComponent.viewModelFactory() }
-
-    private val appComponent: AppComponent
-    get() {
-        val application = requireActivity().application as BookMeApplication
-        return application.appComponent
-    }
+    private val viewModel by viewModels<EmailSignUpViewModel> { authorizationComponent.viewModelFactory() }
 
     private val firebaseAuth: FirebaseAuth
     get() = Firebase.auth

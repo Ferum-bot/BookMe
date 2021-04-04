@@ -25,6 +25,7 @@ import com.levit.book_me.core.ui.ParcelableClickableSpan
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentEmailPhoneAuthorizationContainerBinding
+import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneViewPagerAdapter.Companion.FIRST_POSITION
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneViewPagerAdapter.Companion.SECOND_POSITION
@@ -32,7 +33,7 @@ import java.util.concurrent.TimeUnit
 
 class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layout.fragment_email_phone_authorization_container) {
 
-    private val viewModel by viewModels<EmailPhoneAuthorizationViewModel> { appComponent.viewModelFactory() }
+    private val viewModel by viewModels<EmailPhoneAuthorizationViewModel> { authorizationComponent.viewModelFactory() }
 
     private val binding by viewBinding {
         FragmentEmailPhoneAuthorizationContainerBinding.bind(it)
@@ -46,12 +47,6 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
             passwordTextChangeListener,
             emailSignUpClickableSpan,
         )
-    }
-
-    private val appComponent: AppComponent
-    get() {
-        val application = requireActivity().application as BookMeApplication
-        return application.appComponent
     }
 
     private val emailTextChangeListener by lazy { ParcelableTextWatcher().apply {

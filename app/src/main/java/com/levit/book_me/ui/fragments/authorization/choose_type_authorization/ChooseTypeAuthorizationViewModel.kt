@@ -14,8 +14,10 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.isDataAvailable
 import com.levit.book_me.core.interfaces.ResourceProvider
+import com.levit.book_me.core_base.di.AuthorizationScope
 import javax.inject.Inject
 
+@AuthorizationScope
 class ChooseTypeAuthorizationViewModel @Inject constructor(
     private val resources: ResourceProvider
 ): ViewModel() {

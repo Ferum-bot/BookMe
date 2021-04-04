@@ -22,19 +22,15 @@ import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core.utill.TelephoneNumberFormatter
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentConfirmPhoneCodeBinding
+import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
+import com.levit.book_me.ui.base.BaseAuthorizationFragment
 import java.lang.Exception
 
-class ConfirmPhoneCodeFragment: BaseFragment(R.layout.fragment_confirm_phone_code) {
+class ConfirmPhoneCodeFragment: BaseAuthorizationFragment(R.layout.fragment_confirm_phone_code) {
 
     private val binding by viewBinding { FragmentConfirmPhoneCodeBinding.bind(it) }
 
-    private val viewModel by viewModels<ConfirmPhoneCodeViewModel> { appComponent.viewModelFactory() }
-
-    private val appComponent: AppComponent
-    get() {
-        val application = requireActivity().application as BookMeApplication
-        return application.appComponent
-    }
+    private val viewModel by viewModels<ConfirmPhoneCodeViewModel> { authorizationComponent.viewModelFactory() }
 
     private val firebaseAuth: FirebaseAuth
     get() = Firebase.auth
@@ -47,6 +43,12 @@ class ConfirmPhoneCodeFragment: BaseFragment(R.layout.fragment_confirm_phone_cod
     private val phoneNumber: MobileTelephone by lazy {
         val args = ConfirmPhoneCodeFragmentArgs.fromBundle(requireArguments())
         return@lazy args.phoneNumber
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        authorizationComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

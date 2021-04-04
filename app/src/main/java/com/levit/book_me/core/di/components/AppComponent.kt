@@ -15,18 +15,18 @@ import javax.inject.Singleton
         AppModule::class,
         NetworkModule::class,
         DatabaseModule::class,
-        ViewModelsModule::class,
-        RepositoryModule::class,
-        InteractorsModule::class
+        AppSubComponents::class,
     ]
 )
 interface AppComponent {
     fun inject(app: BookMeApplication)
 
-    fun viewModelFactory(): ViewModelFactory
+    fun authorizationComponent(): AuthorizationComponent.Builder
+    fun onBoardingComponent(): OnBoardingComponent.Builder
 
     @Component.Builder
     interface Builder {
+
         @BindsInstance
         fun application(app: BookMeApplication): Builder
 
