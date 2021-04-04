@@ -213,6 +213,6 @@ class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragme
     }
 
     private fun userIsSignedIn(user: FirebaseUser) {
-        showMessage("Everything is good!")
+        showSuccessMessage("Every thing is good")
     }
 }
