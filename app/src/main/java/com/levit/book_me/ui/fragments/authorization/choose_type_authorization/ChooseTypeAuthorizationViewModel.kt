@@ -35,8 +35,7 @@ class ChooseTypeAuthorizationViewModel @Inject constructor(): ViewModel() {
         }
         if (result.isDataAvailable()) {
             tryToAuthWithGoogle(result.data!!)
-        }
-        else {
+        } else {
             _errorMessageResId.value = R.string.something_went_wrong
             return
         }
@@ -62,8 +61,7 @@ class ChooseTypeAuthorizationViewModel @Inject constructor(): ViewModel() {
             val defaultErrorMessage = R.string.something_went_wrong
             if (ex.message.isNullOrBlank()) {
                 _errorMessageResId.value = defaultErrorMessage
-            }
-            else {
+            } else {
                 _errorMessage.value = ex.message
             }
         }

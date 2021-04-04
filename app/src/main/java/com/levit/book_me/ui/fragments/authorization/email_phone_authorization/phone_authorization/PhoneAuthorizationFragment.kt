@@ -16,6 +16,18 @@ import com.levit.book_me.databinding.FragmentPhoneAuthorizationBinding
 
 class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authorization) {
 
+    companion object {
+        private const val TEXT_WATCHER_KEY = "phone_text_watcher"
+
+        fun newInstance(phoneTextWatcher: ParcelableTextWatcher): PhoneAuthorizationFragment {
+            val fragment = PhoneAuthorizationFragment()
+            val bundle = Bundle()
+            bundle.putParcelable(TEXT_WATCHER_KEY, phoneTextWatcher)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
+
     private val binding by viewBinding { FragmentPhoneAuthorizationBinding.bind(it) }
 
     private val phoneTextWatcher: ParcelableTextWatcher?
@@ -76,18 +88,6 @@ class PhoneAuthorizationFragment: BaseFragment(R.layout.fragment_phone_authoriza
 
             }
 
-        }
-    }
-
-    companion object {
-        private const val TEXT_WATCHER_KEY = "phone_text_watcher"
-
-        fun newInstance(phoneTextWatcher: ParcelableTextWatcher): PhoneAuthorizationFragment {
-            val fragment = PhoneAuthorizationFragment()
-            val bundle = Bundle()
-            bundle.putParcelable(TEXT_WATCHER_KEY, phoneTextWatcher)
-            fragment.arguments = bundle
-            return fragment
         }
     }
 }

@@ -31,8 +31,7 @@ class OnBoardingActivity: AppCompatActivity() {
         setTheme(R.style.DefaultAppTheme)
         super.onCreate(savedInstanceState)
         binding = ActivitySplashOnboardingBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         setAllClickListeners()
     }

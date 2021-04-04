@@ -11,8 +11,7 @@ import javax.inject.Inject
 class ConfirmPhoneCodeViewModel @Inject constructor(): ViewModel() {
 
     private val _sentCode: MutableLiveData<String?> = MutableLiveData(null)
-    val sentCode: LiveData<String?>
-    get() = _sentCode
+    val sentCode: LiveData<String?> = _sentCode
 
     fun onCodeChangeListener(text: CharSequence, start: Int, before: Int, count: Int) {
         val code = text.toString()

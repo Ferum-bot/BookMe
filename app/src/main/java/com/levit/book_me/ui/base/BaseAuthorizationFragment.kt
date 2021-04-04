@@ -21,9 +21,10 @@ abstract class BaseAuthorizationFragment(
     }
 
     protected fun networkNotAvailableAndShowError(): Boolean {
-        if (!NetworkMonitor.isNetworkAvailable) {
+        val networkIsNotAvailable = !NetworkMonitor.isNetworkAvailable
+        if (networkIsNotAvailable) {
             showError(R.string.network_not_available)
         }
-        return !isNetworkAvailable()
+        return networkIsNotAvailable
     }
 }

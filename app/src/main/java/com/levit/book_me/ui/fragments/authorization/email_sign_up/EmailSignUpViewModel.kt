@@ -12,16 +12,13 @@ import javax.inject.Inject
 class EmailSignUpViewModel @Inject constructor(): ViewModel() {
 
     private val _isEmailValid: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isEmailValid: LiveData<Boolean>
-    get() = _isEmailValid
+    val isEmailValid: LiveData<Boolean> = _isEmailValid
 
     private val _isPasswordValid: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isPasswordValid: LiveData<Boolean>
-    get() = _isPasswordValid
+    val isPasswordValid: LiveData<Boolean> = _isPasswordValid
 
     private val _isPasswordsMatch: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isPasswordsMatch: LiveData<Boolean>
-    get() = _isPasswordsMatch
+    val isPasswordsMatch: LiveData<Boolean> = _isPasswordsMatch
 
     private var repeatPassword: String? = null
 

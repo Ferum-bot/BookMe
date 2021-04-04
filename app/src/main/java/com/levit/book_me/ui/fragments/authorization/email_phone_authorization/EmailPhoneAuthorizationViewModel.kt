@@ -12,16 +12,13 @@ import javax.inject.Inject
 class EmailPhoneAuthorizationViewModel @Inject constructor(): ViewModel() {
 
     private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
-    val errorMessage: LiveData<String?>
-    get() = _errorMessage
+    val errorMessage: LiveData<String?> = _errorMessage
 
     private val _isPhoneValid: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isPhoneValid: LiveData<Boolean>
-    get() = _isPhoneValid
+    val isPhoneValid: LiveData<Boolean> = _isPhoneValid
     
     private val _isEmailValid: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isEmailValid: LiveData<Boolean>
-    get() = _isEmailValid
+    val isEmailValid: LiveData<Boolean> = _isEmailValid
 
     var phoneNumber: MobileTelephone? = null
     private set

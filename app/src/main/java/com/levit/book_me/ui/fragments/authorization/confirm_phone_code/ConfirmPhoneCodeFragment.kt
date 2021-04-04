@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
@@ -35,15 +36,11 @@ class ConfirmPhoneCodeFragment: BaseAuthorizationFragment(R.layout.fragment_conf
     private val firebaseAuth: FirebaseAuth
     get() = Firebase.auth
 
-    private val verificationId: String by lazy {
-        val args = ConfirmPhoneCodeFragmentArgs.fromBundle(requireArguments())
-        return@lazy args.verificationId
-    }
+    private val args by navArgs<ConfirmPhoneCodeFragmentArgs>()
 
-    private val phoneNumber: MobileTelephone by lazy {
-        val args = ConfirmPhoneCodeFragmentArgs.fromBundle(requireArguments())
-        return@lazy args.phoneNumber
-    }
+    private val verificationId: String by lazy { args.verificationId }
+
+    private val phoneNumber: MobileTelephone by lazy { args.phoneNumber }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

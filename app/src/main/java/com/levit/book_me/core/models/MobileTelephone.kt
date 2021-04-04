@@ -10,17 +10,6 @@ data class MobileTelephone(
     val telephoneNumber: String
 ): Parcelable {
 
-    override fun toString(): String {
-        return regionCode.code + SEPARATOR + telephoneNumber
-    }
-
-    fun toStringWithOutSeparator(): String {
-        return regionCode.code + telephoneNumber
-    }
-
-    fun isValidNumber(): Boolean =
-        telephoneNumber.length == 10
-
     companion object {
 
         fun fromString(string: String): MobileTelephone {
@@ -31,4 +20,15 @@ data class MobileTelephone(
 
         private const val SEPARATOR = " "
     }
+
+    override fun toString(): String {
+        return regionCode.code + SEPARATOR + telephoneNumber
+    }
+
+    fun toStringWithOutSeparator(): String {
+        return regionCode.code + telephoneNumber
+    }
+
+    fun isValidNumber(): Boolean =
+        telephoneNumber.length == 10
 }

@@ -33,6 +33,10 @@ import java.util.concurrent.TimeUnit
 
 class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layout.fragment_email_phone_authorization_container) {
 
+    companion object {
+        private const val PHONE_REQUEST_TIMEOUT = 60L
+    }
+
     private val viewModel by viewModels<EmailPhoneAuthorizationViewModel> { authorizationComponent.viewModelFactory() }
 
     private val binding by viewBinding {
@@ -274,22 +278,24 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
         findNavController().navigate(action)
     }
 
-    private fun handlePhoneAuthorizationError(exception: FirebaseException) {
-        if (exception is FirebaseAuthInvalidCredentialsException) {
-            showError(R.string.invalid_request)
-            return
+    private fun handlePhoneAuthorizationError(exception: FirebaseException?) =
+        when(exception) {
+            is FirebaseAuthInvalidCredentialsException -> {
+                showError(R.string.invalid_request)
+            }
+            is FirebaseTooManyRequestsException -> {
+                showError(R.string.too_many_request)
+            }
+            else -> {
+                val defaultErrorMessage = getString(R.string.something_went_wrong)
+                showError(exception?.message ?: defaultErrorMessage)
+            }
         }
-        if (exception is FirebaseTooManyRequestsException) {
-            showError(R.string.too_many_request)
-            return
-        }
-        val defaultErrorMessage = getString(R.string.something_went_wrong)
-        showError(exception.message ?: defaultErrorMessage)
-    }
+
 
     private fun signInWithCredentional(credentional: PhoneAuthCredential) {
         firebaseAuth.signInWithCredential(credentional)
-            .addOnCompleteListener(requireActivity()) { task ->  
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     navigateToProfileScreen()
                 }
@@ -302,8 +308,13 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
     }
 
     private fun signInWithEmail() {
-        val email = viewModel.emailAddress!!
-        val password = viewModel.emailPassword!!
+        val email = viewModel.emailAddress
+        val password = viewModel.emailPassword
+        if (email == null || password == null) {
+            handlePhoneAuthorizationError(null)
+            return
+        }
+
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
                 navigateToProfileScreen()
@@ -324,12 +335,8 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
             .actionEmailPhoneAuthorizationContainerFragmentToEmailSignUpFragment()
         findNavController().navigate(action)
     }
-
     enum class AuthorizationType(val position: Int) {
         PHONE(FIRST_POSITION), EMAIL(SECOND_POSITION)
-    }
 
-    companion object {
-        private const val PHONE_REQUEST_TIMEOUT = 60L
     }
 }

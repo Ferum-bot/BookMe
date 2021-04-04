@@ -7,6 +7,11 @@ class FirstLaunchRepository @Inject constructor(
     context: Context
 ) {
 
+    companion object {
+        private const val PREFERENCE_NAME = "first_launch_repository"
+        private const val FIRST_LAUNCH_KEY = "first_launch_key"
+    }
+
     private val storage = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
     fun getFirstLaunch(): Boolean =
@@ -16,10 +21,5 @@ class FirstLaunchRepository @Inject constructor(
         val editor = storage.edit()
         editor.putBoolean(FIRST_LAUNCH_KEY, isFirstLaunch)
         editor.apply()
-    }
-
-    companion object {
-        private const val PREFERENCE_NAME = "first_launch_repository"
-        private const val FIRST_LAUNCH_KEY = "first_launch_key"
     }
 }
