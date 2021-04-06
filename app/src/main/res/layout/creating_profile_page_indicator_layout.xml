@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <View
+        android:id="@+id/first_indicator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/creating_profile_indicator_height"
+        android:background="@color/light_grey"
+
+        android:layout_marginStart="@dimen/creating_profile_indicator_margin"
+        android:layout_marginEnd="@dimen/creating_profile_indicator_margin"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/second_indicator"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:layout_marginTop="16dp"/>
+
+    <View
+        android:id="@+id/second_indicator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/creating_profile_indicator_height"
+        android:background="@color/light_grey"
+
+        android:layout_marginEnd="@dimen/creating_profile_indicator_margin"
+
+        app:layout_constraintStart_toEndOf="@id/first_indicator"
+        app:layout_constraintTop_toTopOf="@id/first_indicator"
+        app:layout_constraintEnd_toStartOf="@id/third_indicator"
+        app:layout_constraintBottom_toBottomOf="@id/first_indicator"/>
+
+    <View
+        android:id="@+id/third_indicator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/creating_profile_indicator_height"
+        android:background="@color/light_grey"
+
+        android:layout_marginEnd="@dimen/creating_profile_indicator_margin"
+
+        app:layout_constraintStart_toEndOf="@id/second_indicator"
+        app:layout_constraintTop_toTopOf="@id/second_indicator"
+        app:layout_constraintEnd_toStartOf="@id/fours_indicator"
+        app:layout_constraintBottom_toBottomOf="@id/second_indicator"/>
+
+    <View
+        android:id="@+id/fours_indicator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/creating_profile_indicator_height"
+        android:background="@color/light_grey"
+
+        android:layout_marginEnd="@dimen/creating_profile_indicator_margin"
+
+        app:layout_constraintStart_toEndOf="@id/third_indicator"
+        app:layout_constraintTop_toTopOf="@id/third_indicator"
+        app:layout_constraintEnd_toStartOf="@id/fives_indicator"
+        app:layout_constraintBottom_toBottomOf="@id/third_indicator"/>
+
+    <View
+        android:id="@+id/fives_indicator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/creating_profile_indicator_height"
+        android:background="@color/light_grey"
+
+        android:layout_marginEnd="@dimen/creating_profile_indicator_margin"
+
+        app:layout_constraintStart_toEndOf="@id/fours_indicator"
+        app:layout_constraintTop_toTopOf="@id/fours_indicator"
+        app:layout_constraintEnd_toStartOf="@id/sixes_indicator"
+        app:layout_constraintBottom_toBottomOf="@id/fours_indicator"/>
+
+    <View
+        android:id="@+id/sixes_indicator"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/creating_profile_indicator_height"
+        android:background="@color/light_grey"
+
+        android:layout_marginEnd="@dimen/creating_profile_indicator_margin"
+
+        app:layout_constraintStart_toEndOf="@id/fives_indicator"
+        app:layout_constraintTop_toTopOf="@id/fives_indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/fives_indicator"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/creating_profile_nav_graph"
+    app:startDestination="@id/creatingNameSurnameFragment">
+
+    <fragment
+        android:id="@+id/creatingNameSurnameFragment"
+        android:name="com.levit.book_me.ui.fragments.creating_profile.creating_name_surname.CreatingNameSurnameFragment"
+        android:label="CreatingNameSurnameFragment" />
+</navigation>

@@ -24,6 +24,17 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="BigCreatingProfileLabelsStyle" parent="CreatingProfileLabelStyle">
+        <item name="android:fontFamily">@font/yrsa</item>
+        <item name="android:textSize">@dimen/big_label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CreatingProfileLabelStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="AuthorizationEmailPhoneTabStyle" parent="Widget.Design.TabLayout">
         <item name="tabTextAppearance">@style/DefaultTabTextAppearance</item>
         <item name="tabTextColor">@color/black</item>
@@ -37,14 +48,17 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="AuthorizationEditTextStyle" parent="DefaultTextViewStyle">
+    <style name="DefaultEditTextStyle" parent="DefaultTextViewStyle">
         <item name="android:textColorHint">@color/grey</item>
         <item name="background">@drawable/bg_for_authorization_edit_texts</item>
         <item name="android:background">@drawable/bg_for_authorization_edit_texts</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:paddingTop">4dp</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AuthorizationEditTextStyle" parent="DefaultEditTextStyle">
+        <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="android:focusableInTouchMode">true</item>
     </style>
 

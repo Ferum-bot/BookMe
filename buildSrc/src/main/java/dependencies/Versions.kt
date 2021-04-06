@@ -23,7 +23,7 @@ object Versions {
 
     // UI: Androidx presentation views
     const val MATERIAL = "1.1.0"
-    const val CONSTRAIN_LAYOUT = "1.1.3"
+    const val CONSTRAIN_LAYOUT = "2.0.0"
 
     // UI: Images
     const val GLIDE = "4.11.0"

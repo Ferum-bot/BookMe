@@ -6,4 +6,7 @@
     <dimen name="pin_view_item_size">40dp</dimen>
     <dimen name="onboarding_image_height">280dp</dimen>
     <dimen name="big_label_text_size">38sp</dimen>
+    <dimen name="label_text_size">20sp</dimen>
+    <dimen name="creating_profile_indicator_height">4dp</dimen>
+    <dimen name="creating_profile_indicator_margin">6dp</dimen>
 </resources>

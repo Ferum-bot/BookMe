@@ -1,4 +1,4 @@
-package com.levit.book_me.core.di.modules
+package com.levit.book_me.core.di.modules.onboarding
 
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core_base.annotations.ViewModelKey

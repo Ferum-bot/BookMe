@@ -46,5 +46,9 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="profile_creation">Profile creation</string>
+    <string name="name_surname">Name, surname</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
 
 </resources>

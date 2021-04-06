@@ -1,4 +1,4 @@
-package com.levit.book_me.core.di.modules
+package com.levit.book_me.core.di.modules.onboarding
 
 import com.levit.book_me.core.interactors.implementations.OnBoardingInteractorImpl
 import com.levit.book_me.core.interactors.interfaces.OnBoardingInteractor

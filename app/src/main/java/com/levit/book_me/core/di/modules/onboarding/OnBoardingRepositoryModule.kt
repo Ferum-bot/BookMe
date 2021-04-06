@@ -1,4 +1,4 @@
-package com.levit.book_me.core.di.modules
+package com.levit.book_me.core.di.modules.onboarding
 
 import android.content.Context
 import com.levit.book_me.core.repositories.FirstLaunchRepository

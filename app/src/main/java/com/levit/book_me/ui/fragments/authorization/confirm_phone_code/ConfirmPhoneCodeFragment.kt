@@ -1,6 +1,7 @@
 package com.levit.book_me.ui.fragments.authorization.confirm_phone_code
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -24,6 +25,7 @@ import com.levit.book_me.core.utill.TelephoneNumberFormatter
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentConfirmPhoneCodeBinding
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
+import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 import java.lang.Exception
 
@@ -139,6 +141,13 @@ class ConfirmPhoneCodeFragment: BaseAuthorizationFragment(R.layout.fragment_conf
 
     private fun navigateToProfileScreen() {
         showLoading(false)
-        Toast.makeText(requireContext(), "Everything is good", Toast.LENGTH_SHORT).show()
+        showSuccessMessage("Every Thing is good")
+        navigateToCreatingProfileScreen()
+    }
+
+    private fun navigateToCreatingProfileScreen() {
+        val intent = Intent(requireActivity(), CreatingProfileActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 }

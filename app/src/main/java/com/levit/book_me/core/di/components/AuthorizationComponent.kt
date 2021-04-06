@@ -1,6 +1,6 @@
 package com.levit.book_me.core.di.components
 
-import com.levit.book_me.core.di.modules.AuthorizationViewModelsModule
+import com.levit.book_me.core.di.modules.authorization.AuthorizationViewModelsModule
 import com.levit.book_me.core_base.di.AuthorizationScope
 import com.levit.book_me.core_presentation.utils.ViewModelFactory
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity

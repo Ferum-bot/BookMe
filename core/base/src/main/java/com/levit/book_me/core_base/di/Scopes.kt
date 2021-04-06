@@ -24,3 +24,7 @@ annotation class AuthorizationScope
 @Scope
 @Retention(value = AnnotationRetention.RUNTIME)
 annotation class OnBoardingScope
+
+@Scope
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class CreatingProfileScope
