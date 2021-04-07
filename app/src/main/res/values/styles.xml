@@ -111,4 +111,9 @@
         <item name="piv_radius">5dp</item>
         <item name="piv_padding">4dp</item>
     </style>
+
+    <style name="ChooseAuthorTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 </resources>

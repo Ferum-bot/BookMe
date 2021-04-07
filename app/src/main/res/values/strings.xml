@@ -54,6 +54,14 @@
     <string name="choose_your_favourite_authors">Choose your \nfavourite authors</string>
     <string name="choose_from_3_to_5_authors">Choose from 3 to 5 authors</string>
 
+    <!--  Choose Author Layout  -->
+    <string name="first_author">First Author</string>
+    <string name="second_author">Second Author</string>
+    <string name="third_author">Third Author</string>
+    <string name="fours_author">Fours Author</string>
+    <string name="fives_author">Fives Author</string>
+    <string name="author">Author</string>
+
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
 
