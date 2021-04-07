@@ -40,15 +40,25 @@
     <string name="onboarding_third_label">Let us start \nyour own story</string>
     <string name="onboarding_third_description">Every story has a beginning. That is why we ask everyone to start with profile creation</string>
 
+    <!--  Creating Profile  -->
+    <string name="profile_creation">Profile creation</string>
+    <string name="name_surname">Name, surname</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="now_your_photo">Now, your photo</string>
+    <string name="creating_profile_make_photo_description">Let\'s be honest, photo is important for several reasons, but mainly because it is the very first impression you are making to your matches</string>
+    <string name="take_a_photo_or_choose_from_your_library">Take a photo or choose \nfrom your library</string>
+    <string name="press_next_or_choose_another_photo">Press next or choose \nanother photo</string>
+    <string name="choose_genres_you_read">Choose genres \nyou read</string>
+    <string name="choose_up_to_three_genres">Choose up to three genres</string>
+    <string name="choose_your_favourite_authors">Choose your \nfavourite authors</string>
+    <string name="choose_from_3_to_5_authors">Choose from 3 to 5 authors</string>
+
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
 
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
-    <string name="profile_creation">Profile creation</string>
-    <string name="name_surname">Name, surname</string>
-    <string name="name">Name</string>
-    <string name="surname">Surname</string>
 
 </resources>

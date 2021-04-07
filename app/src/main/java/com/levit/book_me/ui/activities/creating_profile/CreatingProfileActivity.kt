@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
+import com.levit.book_me.core.custom_view.CreatingProfilePageIndicator
 import com.levit.book_me.core.di.components.CreatingProfileComponent
 
 class CreatingProfileActivity: AppCompatActivity() {
@@ -14,6 +15,15 @@ class CreatingProfileActivity: AppCompatActivity() {
     }
 
     lateinit var creatingProfileComponent: CreatingProfileComponent
+
+    val pageIndicatorController = object: CreatingProfilePageIndicator.OnActivePrefixNumberChangeListener {
+
+        override fun activePrefixChanged(activePrefixNumber: Int) {
+            val pageIndicator: CreatingProfilePageIndicator = findViewById(R.id.page_indicator)
+            pageIndicator.setActivePrefixNumber(activePrefixNumber)
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initComponent()

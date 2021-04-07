@@ -9,7 +9,7 @@ import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.levit.book_me.databinding.CreatingProfilePageIndicatorLayoutBinding
 
-internal class CreatingProfilePageIndicator @JvmOverloads constructor(
+class CreatingProfilePageIndicator @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -68,5 +68,5 @@ internal class CreatingProfilePageIndicator @JvmOverloads constructor(
     }
 
     private fun activePrefixNumberIsNotValid(activePrefixNumber: Int)
-    = activePrefixNumber in 0..listOfViews.size
+    = activePrefixNumber !in 0..listOfViews.size
 }

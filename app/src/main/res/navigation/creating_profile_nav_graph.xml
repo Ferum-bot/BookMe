@@ -7,5 +7,33 @@
     <fragment
         android:id="@+id/creatingNameSurnameFragment"
         android:name="com.levit.book_me.ui.fragments.creating_profile.creating_name_surname.CreatingNameSurnameFragment"
-        android:label="CreatingNameSurnameFragment" />
+        android:label="CreatingNameSurnameFragment" >
+        <action
+            android:id="@+id/action_creatingNameSurnameFragment_to_creatingProfileImageFragment"
+            app:destination="@id/creatingProfileImageFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/creatingNameSurnameFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/creatingProfileImageFragment"
+        android:name="com.levit.book_me.ui.fragments.creating_profile.creating_profile_image.CreatingProfileImageFragment"
+        android:label="CreatingProfileImageFragment" >
+        <action
+            android:id="@+id/action_creatingProfileImageFragment_to_creatingFavouriteGenresFragment"
+            app:destination="@id/creatingFavouriteGenresFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/creatingProfileImageFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/creatingFavouriteGenresFragment"
+        android:name="com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres.CreatingFavouriteGenresFragment"
+        android:label="CreatingFavouriteGenresFragment" />
 </navigation>

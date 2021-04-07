@@ -22,6 +22,9 @@ class AssetsImageLoader private constructor(
     private val assets: AssetManager
     get() = context.assets
 
+    /**
+     * Name of the asset image with out expansion
+     */
     fun loadImage(name: String) {
         try {
             tryToLoadImageToImageView(name)
