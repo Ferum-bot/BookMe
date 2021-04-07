@@ -2,6 +2,7 @@ package com.levit.book_me.core.di.modules.creating_profile
 
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core_base.annotations.ViewModelKey
+import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_authors.CreatingFavouriteAuthorsViewModel
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres.CreatingFavouriteGenresViewModel
 import com.levit.book_me.ui.fragments.creating_profile.creating_name_surname.CreatingNameSurnameFragment
 import com.levit.book_me.ui.fragments.creating_profile.creating_name_surname.CreatingNameSurnameViewModel
@@ -27,4 +28,9 @@ abstract class CreatingProfileViewModelsModule {
     @IntoMap
     @ViewModelKey(CreatingFavouriteGenresViewModel::class)
     abstract fun bindCreatingFavouriteGenresViewModel(viewModel: CreatingFavouriteGenresViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreatingFavouriteAuthorsViewModel::class)
+    abstract fun bindCreatingFavouriteAuthorsViewModel(viewModel: CreatingFavouriteAuthorsViewModel): ViewModel
 }

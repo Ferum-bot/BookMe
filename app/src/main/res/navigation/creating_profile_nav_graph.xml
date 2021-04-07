@@ -35,5 +35,19 @@
     <fragment
         android:id="@+id/creatingFavouriteGenresFragment"
         android:name="com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres.CreatingFavouriteGenresFragment"
-        android:label="CreatingFavouriteGenresFragment" />
+        android:label="CreatingFavouriteGenresFragment" >
+        <action
+            android:id="@+id/action_creatingFavouriteGenresFragment_to_creatingFavouriteAuthorsFragment"
+            app:destination="@id/creatingFavouriteAuthorsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/creatingFavouriteGenresFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/creatingFavouriteAuthorsFragment"
+        android:name="com.levit.book_me.ui.fragments.creating_profile.creating_favourite_authors.CreatingFavouriteAuthorsFragment"
+        android:label="CreatingFavouriteAuthorsFragment" />
 </navigation>

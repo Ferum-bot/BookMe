@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingFavouriteGenresBinding
@@ -29,7 +30,9 @@ class CreatingFavouriteGenresFragment: BaseCreatingProfileFragment(R.layout.frag
     }
 
     private fun setAllClickListeners() {
-
+        binding.nextButton.setOnClickListener {
+            navigateToChooseFavouriteAuthorsFragment()
+        }
     }
 
     private fun setAllObservers() {
@@ -39,5 +42,11 @@ class CreatingFavouriteGenresFragment: BaseCreatingProfileFragment(R.layout.frag
     private fun updatePageIndicator() {
         val activity = requireActivity() as CreatingProfileActivity
         activity.pageIndicatorController.activePrefixChanged(FRAGMENT_POSITION)
+    }
+
+    private fun navigateToChooseFavouriteAuthorsFragment() {
+        val action = CreatingFavouriteGenresFragmentDirections
+            .actionCreatingFavouriteGenresFragmentToCreatingFavouriteAuthorsFragment()
+        findNavController().navigate(action)
     }
 }
