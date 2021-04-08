@@ -6,9 +6,9 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
-import com.levit.book_me.core.di.components.AppComponent
-import com.levit.book_me.core.di.components.DaggerAppComponent
+import com.levit.book_me.di.components.AppComponent
 import com.levit.book_me.core_network.model.NetworkMonitor
+import com.levit.book_me.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector

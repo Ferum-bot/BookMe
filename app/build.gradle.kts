@@ -137,6 +137,9 @@ dependencies {
     // Firebase
     implementation(platform(Dependencies.FIREBASE_BOM))
     implementation(Dependencies.FIREBASE_AUTH)
+    implementation(Dependencies.FIREBASE_FIRESTORE)
+    implementation(Dependencies.FIREBASE_REALTIME_DATABASE)
+    implementation(Dependencies.FIREBASE_STORAGE)
 
     // Google Play Services
     implementation(Dependencies.GOOGLE_PLAY_SERVICES_AUTH)

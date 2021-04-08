@@ -22,12 +22,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
-import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.di.components.AppComponent
-import com.levit.book_me.core.di.components.AuthorizationComponent
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
-import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 import com.levit.book_me.ui.activities.onboarding.OnBoardingActivity
 import com.levit.book_me.ui.activities.onboarding.OnBoardingActivity.Companion.LAUNCH_FROM_AUTHORIZATION_KEY
 import com.levit.book_me.ui.base.BaseAuthorizationFragment

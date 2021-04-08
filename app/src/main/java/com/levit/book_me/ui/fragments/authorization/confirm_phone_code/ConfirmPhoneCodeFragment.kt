@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -16,15 +15,11 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
-import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.MobileTelephone
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core.utill.TelephoneNumberFormatter
-import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentConfirmPhoneCodeBinding
-import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 import java.lang.Exception

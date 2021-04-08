@@ -56,10 +56,14 @@ object Dependencies {
 
     // Logging
     const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
+
     // Firebase
     const val FIREBASE_BOM = "com.google.firebase:firebase-bom:${Versions.FIREBASE}"
-
     const val FIREBASE_AUTH = "com.google.firebase:firebase-auth-ktx"
+    const val FIREBASE_STORAGE = "com.google.firebase:firebase-storage-ktx"
+    const val FIREBASE_REALTIME_DATABASE = "com.google.firebase:firebase-database-ktx"
+    const val FIREBASE_FIRESTORE = "com.google.firebase:firebase-firestore-ktx"
+
 
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES_AUTH = "com.google.android.gms:play-services-auth:${Versions.GOOGLE_PLAY_SERVICES}"

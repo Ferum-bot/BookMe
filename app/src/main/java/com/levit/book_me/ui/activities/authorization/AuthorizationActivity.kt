@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.di.components.AuthorizationComponent
+import com.levit.book_me.di.components.AuthorizationComponent
 
 class AuthorizationActivity : AppCompatActivity() {
 

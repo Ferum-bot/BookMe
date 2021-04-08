@@ -1,7 +1,9 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_profile_image
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toFile
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -9,9 +11,13 @@ import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.utill.AssetsImageLoader
 import com.levit.book_me.core.utill.ImageFormats
+import com.levit.book_me.core.utill.ProfileImagePicker
 import com.levit.book_me.databinding.FragmentCreatingProfileImageBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
 
 class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_profile_image) {
 
@@ -26,18 +32,20 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
 
     private val viewModel by viewModels<CreatingProfileImageViewModel> { creatingProfileComponent.viewModelFactory() }
 
+    private val profileImagePicker by lazy { ProfileImagePicker(activityResultRegistry, this, this::loadProfileImage) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadPlaceHolderToProfilePhoto()
+        initProfileImagePicker()
         setAllClickListeners()
         setAllObservers()
         updatePageIndicator()
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        loadPlaceHolderToProfilePhoto()
+    private fun initProfileImagePicker() {
+        profileImagePicker
     }
 
     private fun setAllClickListeners() {
@@ -46,7 +54,7 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
         }
 
         binding.profilePhoto.setOnClickListener {
-
+            profileImagePicker.pickPicture()
         }
     }
 
@@ -58,6 +66,12 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
             }
             else {
                 binding.photoHint.text = getString(R.string.take_a_photo_or_choose_from_your_library)
+            }
+        })
+
+        viewModel.imageUri.observe(viewLifecycleOwner, Observer { imageUri ->
+            if (imageUri != null) {
+                binding.profilePhoto.setImageURI(imageUri)
             }
         })
     }
@@ -74,6 +88,11 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
         }.build()
 
         assetsLoader.loadImage(PROFILE_PLACEHOLDER_IMAGE_NAME)
+    }
+
+    private fun loadProfileImage(imageUri: Uri?) {
+        imageUri ?: return
+        viewModel.photoIsChosen(imageUri)
     }
 
     private fun navigateToCreatingFavouriteGenresFragment() {

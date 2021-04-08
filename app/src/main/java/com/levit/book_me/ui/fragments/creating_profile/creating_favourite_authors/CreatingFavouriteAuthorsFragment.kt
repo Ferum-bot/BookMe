@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.levit.book_me.R
-import com.levit.book_me.core.custom_view.CreatingProfileAuthorChooser
+import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.databinding.FragmentCreatingFavouriteAuthorsBinding

@@ -10,7 +10,7 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.databinding.ActivitySplashOnboardingBinding
 import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.di.components.OnBoardingComponent
+import com.levit.book_me.di.components.OnBoardingComponent
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 
 class OnBoardingActivity: AppCompatActivity() {

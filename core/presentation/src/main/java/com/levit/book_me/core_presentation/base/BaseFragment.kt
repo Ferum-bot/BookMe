@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultRegistry
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -22,6 +23,12 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
 
     private val defaultColor
     get() = Color.rgb(51, 181, 229)
+
+    protected val activityResultRegistry: ActivityResultRegistry
+    get() {
+        val activity = requireActivity()
+        return activity.activityResultRegistry
+    }
 
     protected fun showError(errorMessage: String) {
         Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_SHORT).apply {

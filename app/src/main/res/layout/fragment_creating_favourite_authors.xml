@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/label"
         app:layout_constraintStart_toStartOf="@id/start_guidline"/>
 
-    <com.levit.book_me.core.custom_view.CreatingProfileAuthorChooser
+    <com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
         android:id="@+id/author_chooser"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

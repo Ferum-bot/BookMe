@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.custom_view.CreatingProfilePageIndicator
-import com.levit.book_me.core.di.components.CreatingProfileComponent
+import com.levit.book_me.core.ui.custom_view.CreatingProfilePageIndicator
+import com.levit.book_me.di.components.CreatingProfileComponent
 
 class CreatingProfileActivity: AppCompatActivity() {
 

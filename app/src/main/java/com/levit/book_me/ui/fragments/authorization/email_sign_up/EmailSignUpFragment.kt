@@ -11,13 +11,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
-import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.di.components.AppComponent
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.ui.ParcelableTextWatcher
-import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentEmailSignUpBinding
-import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 
 class EmailSignUpFragment: BaseAuthorizationFragment(R.layout.fragment_email_sign_up) {
