@@ -95,6 +95,8 @@ dependencies {
     // Lifecycle
     implementation(Dependencies.LIFECYCLE_RUNTIME)
     implementation(Dependencies.LIFECYCLE_EXTENSIONS)
+    implementation(Dependencies.LIFECYCLE_LIVEDATA_KTX)
+    implementation(Dependencies.LIFECYCLE_VIEW_MODEL)
     kapt(KaptDependencies.LIFECYCLE_COMPILER)
 
     // Storage: database

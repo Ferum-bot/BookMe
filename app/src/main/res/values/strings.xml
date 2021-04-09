@@ -53,6 +53,7 @@
     <string name="choose_up_to_three_genres">Choose up to three genres</string>
     <string name="choose_your_favourite_authors">Choose your \nfavourite authors</string>
     <string name="choose_from_3_to_5_authors">Choose from 3 to 5 authors</string>
+    <string name="photo_uploaded">Photo uploaded!</string>
 
     <!--  Choose Author Layout  -->
     <string name="first_author">First Author</string>

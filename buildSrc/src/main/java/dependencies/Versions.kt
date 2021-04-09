@@ -12,7 +12,7 @@ object Versions {
     const val FRAGMENT_KTX = "1.3.0"
 
     // Lifecycle
-    const val LIFECYCLE = "2.1.0-alpha04"
+    const val LIFECYCLE = "2.2.0"
 
     // Storage: database
     const val ROOM = "2.1.0-alpha06"

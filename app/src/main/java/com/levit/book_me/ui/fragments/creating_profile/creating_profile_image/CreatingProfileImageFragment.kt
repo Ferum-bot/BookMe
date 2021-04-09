@@ -4,9 +4,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.net.toFile
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.utill.AssetsImageLoader
@@ -50,7 +53,8 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
 
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
-            navigateToCreatingFavouriteGenresFragment()
+            showLoading(true)
+            viewModel.upLoadProfilePhoto()
         }
 
         binding.profilePhoto.setOnClickListener {
@@ -74,6 +78,30 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
                 binding.profilePhoto.setImageURI(imageUri)
             }
         })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
+            if (message != null) {
+                showError(message)
+                viewModel.errorMessageHasShown()
+                showLoading(false)
+            }
+        })
+
+        viewModel.errorMessageId.observe(viewLifecycleOwner, Observer { messageId ->
+            if (messageId != null) {
+                showError(messageId)
+                viewModel.errorMessageHasShown()
+                showLoading(false)
+            }
+        })
+
+        viewModel.isPhotoUpLoaded.observe(viewLifecycleOwner, Observer { photoIsUpLoaded ->
+            if (photoIsUpLoaded) {
+                showLoading(false)
+                showSuccessMessage(R.string.photo_uploaded)
+                navigateToCreatingFavouriteGenresFragment()
+            }
+        })
     }
 
     private fun updatePageIndicator() {
@@ -93,6 +121,11 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
     private fun loadProfileImage(imageUri: Uri?) {
         imageUri ?: return
         viewModel.photoIsChosen(imageUri)
+    }
+
+    private fun showLoading(show: Boolean) {
+        binding.progressBar.isVisible = show
+        binding.nextButton.isVisible = !show
     }
 
     private fun navigateToCreatingFavouriteGenresFragment() {
