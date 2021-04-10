@@ -3,6 +3,7 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_autho
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.core.extensions.viewBinding

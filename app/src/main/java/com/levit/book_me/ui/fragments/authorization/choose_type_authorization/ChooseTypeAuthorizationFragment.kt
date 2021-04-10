@@ -24,6 +24,7 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentChooseTypeAuthorizationBinding
+import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.activities.onboarding.OnBoardingActivity
 import com.levit.book_me.ui.activities.onboarding.OnBoardingActivity.Companion.LAUNCH_FROM_AUTHORIZATION_KEY
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
@@ -184,6 +185,12 @@ class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragme
         startActivity(intent)
     }
 
+    private fun navigateToCreatingProfile() {
+        val intent = Intent(requireContext(), CreatingProfileActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
     private fun finishActivity() {
         requireActivity().finish()
     }
@@ -191,8 +198,7 @@ class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragme
     private fun tryToSignUserWithCredential(credential: AuthCredential) {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
-                val user = firebaseAuth.currentUser!!
-                userIsSignedIn(user)
+                navigateToCreatingProfile()
             }
             else {
                 val errorMessage = task.exception?.message

@@ -61,6 +61,10 @@ class CreatingProfileImageViewModel @Inject constructor(
         _errorMessageId.value = null
     }
 
+    fun photoUploadHasShown() {
+        _isPhotoUpLoaded.value = false
+    }
+
     private suspend fun handleUploadProfileResult(result: FirebaseStorageUploadResult) =
         when (result) {
             is FirebaseStorageUploadResult.Error ->

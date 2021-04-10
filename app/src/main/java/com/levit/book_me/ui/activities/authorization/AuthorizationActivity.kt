@@ -5,13 +5,9 @@ import android.os.Bundle
 import com.levit.book_me.R
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.di.components.AuthorizationComponent
+import com.levit.book_me.ui.base.BaseActivity
 
-class AuthorizationActivity : AppCompatActivity() {
-
-    private val appComponent by lazy {
-        val application = application as BookMeApplication
-        return@lazy application.appComponent
-    }
+class AuthorizationActivity : BaseActivity() {
 
     lateinit var authorizationComponent: AuthorizationComponent
 

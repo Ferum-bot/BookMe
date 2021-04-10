@@ -1,6 +1,7 @@
 package com.levit.book_me.ui.fragments.authorization.email_phone_authorization
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -22,6 +23,7 @@ import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.ui.ParcelableClickableSpan
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentEmailPhoneAuthorizationContainerBinding
+import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneViewPagerAdapter.Companion.FIRST_POSITION
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneViewPagerAdapter.Companion.SECOND_POSITION
@@ -31,6 +33,10 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
 
     companion object {
         private const val PHONE_REQUEST_TIMEOUT = 60L
+    }
+
+    enum class AuthorizationType(val position: Int) {
+        PHONE(FIRST_POSITION), EMAIL(SECOND_POSITION)
     }
 
     private val viewModel by viewModels<EmailPhoneAuthorizationViewModel> { authorizationComponent.viewModelFactory() }
@@ -274,6 +280,7 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
         findNavController().navigate(action)
     }
 
+
     private fun handlePhoneAuthorizationError(exception: FirebaseException?) =
         when(exception) {
             is FirebaseAuthInvalidCredentialsException -> {
@@ -288,12 +295,11 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
             }
         }
 
-
     private fun signInWithCredentional(credentional: PhoneAuthCredential) {
         firebaseAuth.signInWithCredential(credentional)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    navigateToProfileScreen()
+                    navigateToCreatingProfileScreen()
                 }
                 else {
                     showNextButton()
@@ -313,7 +319,7 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
 
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
-                navigateToProfileScreen()
+                navigateToCreatingProfileScreen()
             }
             else {
                 showError(R.string.wrong_email_or_password)
@@ -326,13 +332,14 @@ class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layo
         showMessage("Everything is good!")
     }
 
+    private fun navigateToCreatingProfileScreen() {
+        val intent = Intent(requireContext(), CreatingProfileActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
     private fun navigateToEmailSignUpScreen(widget: View) {
         val action = EmailPhoneAuthorizationContainerFragmentDirections
             .actionEmailPhoneAuthorizationContainerFragmentToEmailSignUpFragment()
         findNavController().navigate(action)
-    }
-    enum class AuthorizationType(val position: Int) {
-        PHONE(FIRST_POSITION), EMAIL(SECOND_POSITION)
-
     }
 }

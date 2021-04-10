@@ -12,24 +12,30 @@ import com.levit.book_me.databinding.ActivitySplashOnboardingBinding
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.di.components.OnBoardingComponent
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
+import com.levit.book_me.ui.base.BaseActivity
 
-class OnBoardingActivity: AppCompatActivity() {
+class OnBoardingActivity: BaseActivity() {
+
+    companion object {
+        private const val FIRST = 0
+        private const val SECOND = 1
+        private const val THIRD = 2
+
+        const val LAUNCH_FROM_AUTHORIZATION_KEY = "launch_from_authorization"
+    }
 
     private val viewModel by viewModels<OnBoardingViewModel> { onBoardingComponent.viewModelFactory() }
 
     private lateinit var binding: ActivitySplashOnboardingBinding
-
-    private val appComponent by lazy {
-        val application = application as BookMeApplication
-        return@lazy application.appComponent
-    }
 
     private lateinit var onBoardingComponent: OnBoardingComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initComponent()
         setTheme(R.style.DefaultAppTheme)
+
         super.onCreate(savedInstanceState)
+
         binding = ActivitySplashOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -123,13 +129,5 @@ class OnBoardingActivity: AppCompatActivity() {
 
     private fun navigateToMainScreen() {
         navigateToAuthorization()
-    }
-
-    companion object {
-        private const val FIRST = 0
-        private const val SECOND = 1
-        private const val THIRD = 2
-
-        const val LAUNCH_FROM_AUTHORIZATION_KEY = "launch_from_authorization"
     }
 }

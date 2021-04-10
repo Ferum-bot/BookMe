@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.fragments.authorization.email_sign_up
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,7 @@ import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentEmailSignUpBinding
+import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 
 class EmailSignUpFragment: BaseAuthorizationFragment(R.layout.fragment_email_sign_up) {
@@ -119,7 +121,7 @@ class EmailSignUpFragment: BaseAuthorizationFragment(R.layout.fragment_email_sig
 
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(requireActivity()) { task ->
             if (task.isSuccessful) {
-                navigateToProfileScreen()
+                navigateToCreatingProfileScreen()
             }
             else {
                 showSignUpButton()
@@ -140,6 +142,12 @@ class EmailSignUpFragment: BaseAuthorizationFragment(R.layout.fragment_email_sig
 
     private fun navigateToProfileScreen() {
         showMessage("Everything is good")
+    }
+
+    private fun navigateToCreatingProfileScreen() {
+        val intent = Intent(requireContext(), CreatingProfileActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun popBackStack() {

@@ -1,18 +1,16 @@
 package com.levit.book_me.ui.activities.creating_profile
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.levit.book_me.R
-import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.core.ui.custom_view.CreatingProfilePageIndicator
+import com.levit.book_me.databinding.ActivityCreatingProfileBinding
 import com.levit.book_me.di.components.CreatingProfileComponent
+import com.levit.book_me.ui.base.BaseActivity
 
-class CreatingProfileActivity: AppCompatActivity() {
+class CreatingProfileActivity: BaseActivity(), TitleViewController {
 
-    private val appComponent by lazy {
-        val application = application as BookMeApplication
-        return@lazy application.appComponent
-    }
+    private lateinit var binding: ActivityCreatingProfileBinding
 
     lateinit var creatingProfileComponent: CreatingProfileComponent
 
@@ -27,8 +25,16 @@ class CreatingProfileActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initComponent()
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_creating_profile)
+
+        binding = ActivityCreatingProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    override fun showTitle(show: Boolean) {
+        binding.title.isVisible = show
+        binding.pageIndicator.isVisible = show
     }
 
     private fun initComponent() {
