@@ -6,6 +6,7 @@ import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
 import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadStreamRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileInputStream
@@ -15,7 +16,7 @@ class FirebaseStorageUploadStreamRepositoryImpl @Inject constructor(
     private val storageDataSource: FirebaseStorageUploadStreamDataSource
 ): FirebaseStorageUploadStreamRepository {
 
-    override val loadToFirebaseStorageResult: Flow<FirebaseStorageUploadResult>
+    override val loadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult>
         = storageDataSource.loadToFirebaseStorageResult
 
     /**

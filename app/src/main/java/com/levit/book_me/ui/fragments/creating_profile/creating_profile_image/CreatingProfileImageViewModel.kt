@@ -1,18 +1,14 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_profile_image
 
+import android.content.Context
 import android.net.Uri
-import androidx.core.net.toFile
 import androidx.lifecycle.*
 import com.google.firebase.storage.UploadTask
 import com.levit.book_me.R
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.interactors.interfaces.UploadProfileImageInteractor
 import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.cache
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,11 +37,17 @@ class CreatingProfileImageViewModel @Inject constructor(
         _imageUri.value = imageUri
     }
 
-    fun upLoadProfilePhoto() {
-        val imageFile = _imageUri.value?.toFile() ?: return
+    fun upLoadProfilePhoto(contextProvider: () -> Context) {
+        val imageUri = if (_imageUri.value == null) {
+            photoDoesNotExist()
+            return
+        }
+        else {
+            _imageUri.value!!
+        }
 
         viewModelScope.launch {
-            uploadProfileImageInteractor.uploadProfileImageToStorage(imageFile)
+            uploadProfileImageInteractor.uploadProfileImageToStorage(imageUri)
         }
 
         viewModelScope.launch {
@@ -78,5 +80,9 @@ class CreatingProfileImageViewModel @Inject constructor(
 
     private fun handleSuccessResult(snapshot: UploadTask.TaskSnapshot) {
         _isPhotoUpLoaded.postValue(true)
+    }
+
+    private fun photoDoesNotExist() {
+        _errorMessageId.postValue(R.string.can_not_find_chosen_photo)
     }
 }

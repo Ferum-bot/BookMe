@@ -13,6 +13,8 @@ object FirebaseStorageReferences {
     private const val STORAGE_USER_PROFILE_PHOTOS_PATH = "UsersProfilePhotos/"
     private const val PROFILE_IMAGE_NAME = "ProfilePhoto"
     private const val DOT = "."
+    private const val PHOTO = "photo"
+
 
     private val userId
     get() = (Firebase.auth.currentUser?.uid ?: "UnAuthoredUser") + "/"
@@ -28,6 +30,14 @@ object FirebaseStorageReferences {
         return imageFolderRef
                 .child(userId)
                 .child(fileName)
+    }
+
+    fun getStorageProfileImageReference(imageUri: Uri): StorageReference {
+        val fileName = PROFILE_IMAGE_NAME + DOT + ImageFormats.JPG
+
+        return imageFolderRef
+                .child(userId)
+                .child(PHOTO)
     }
 
 }

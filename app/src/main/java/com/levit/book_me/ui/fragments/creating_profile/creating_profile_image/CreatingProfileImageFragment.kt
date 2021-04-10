@@ -54,7 +54,7 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
             showLoading(true)
-            viewModel.upLoadProfilePhoto()
+            viewModel.upLoadProfilePhoto(this::requireContext)
         }
 
         binding.profilePhoto.setOnClickListener {

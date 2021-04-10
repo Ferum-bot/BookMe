@@ -54,6 +54,7 @@
     <string name="choose_your_favourite_authors">Choose your \nfavourite authors</string>
     <string name="choose_from_3_to_5_authors">Choose from 3 to 5 authors</string>
     <string name="photo_uploaded">Photo uploaded!</string>
+    <string name="can_not_find_chosen_photo">Can\'t find chosen photo</string>
 
     <!--  Choose Author Layout  -->
     <string name="first_author">First Author</string>
