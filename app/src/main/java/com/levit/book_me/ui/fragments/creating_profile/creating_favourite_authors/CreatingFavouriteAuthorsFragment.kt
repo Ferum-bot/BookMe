@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_authors
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -22,12 +23,19 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
 
     private val viewModel by viewModels<CreatingFavouriteAuthorsViewModel> { creatingProfileComponent.viewModelFactory() }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        creatingProfileComponent.inject(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         showMainTitle(true)
         updatePageIndicator()
         setUpAuthorChooser()
+        setAllClickListeners()
     }
 
     private fun updatePageIndicator() {
@@ -51,9 +59,21 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
         binding.authorChooser.setAuthorChangeListener(authorChooserListener)
     }
 
+    private fun setAllClickListeners() {
+        binding.nextButton.setOnClickListener {
+            navigateToCreatingFavouriteBooksFragment()
+        }
+    }
+
     private fun navigateToSearchAuthorFragment(authorPosition: Int) {
         val action = CreatingFavouriteAuthorsFragmentDirections
             .actionCreatingFavouriteAuthorsFragmentToSearchFavouriteAuthorsFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToCreatingFavouriteBooksFragment() {
+        val action = CreatingFavouriteAuthorsFragmentDirections
+            .actionCreatingFavouriteAuthorsFragmentToCreatingFavouriteBooksFragment()
         findNavController().navigate(action)
     }
 }

@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_profile_image
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -35,7 +36,15 @@ class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragmen
 
     private val viewModel by viewModels<CreatingProfileImageViewModel> { creatingProfileComponent.viewModelFactory() }
 
-    private val profileImagePicker by lazy { ProfileImagePicker(activityResultRegistry, this, this::loadProfileImage) }
+    private val profileImagePicker by lazy {
+        ProfileImagePicker(activityResultRegistry, this, this::loadProfileImage)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        creatingProfileComponent.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -17,5 +17,5 @@ data class GoogleBooksResponseError(
     val listOfErrors: List<GoogleBooksError>?,
 
     @SerializedName("status")
-    val errorStatus: String?
+    val errorStatus: String?,
 ): Parcelable

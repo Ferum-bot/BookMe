@@ -56,6 +56,8 @@
     <string name="photo_uploaded">Photo uploaded!</string>
     <string name="can_not_find_chosen_photo">Can\'t find chosen photo</string>
     <string name="search_by_authors">Search by authors</string>
+    <string name="nothing_found">Nothing found</string>
+    <string name="choose_your_favourite_books">Choose your \nfavourite books</string>
 
     <!--  Choose Author Layout  -->
     <string name="first_author">First Author</string>
@@ -71,5 +73,7 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="search_by_books">Search by books</string>
+    <string name="choose_from_3_to_5_books">Choose from 3 to 5 books</string>
 
 </resources>

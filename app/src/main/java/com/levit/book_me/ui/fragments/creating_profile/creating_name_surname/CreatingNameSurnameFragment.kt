@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_name_surname
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -21,6 +22,12 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
     private val binding by viewBinding { FragmentCreatingNameSurnameBinding.bind(it) }
 
     private val viewModel by viewModels<CreatingNameSurnameViewModel> { creatingProfileComponent.viewModelFactory() }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        creatingProfileComponent.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

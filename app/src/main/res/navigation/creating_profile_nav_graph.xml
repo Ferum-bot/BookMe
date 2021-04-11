@@ -59,9 +59,22 @@
             app:popExitAnim="@anim/slide_up_exit_anim"
             app:launchSingleTop="true"
             app:popUpTo="@id/creatingFavouriteAuthorsFragment" />
+        <action
+            android:id="@+id/action_creatingFavouriteAuthorsFragment_to_creatingFavouriteBooksFragment"
+            app:destination="@id/creatingFavouriteBooksFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/creatingFavouriteAuthorsFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/searchFavouriteAuthorsFragment"
         android:name="com.levit.book_me.ui.fragments.creating_profile.search_favourite_authors.SearchFavouriteAuthorsFragment"
         android:label="SearchFavouriteAuthorsFragment" />
+    <fragment
+        android:id="@+id/creatingFavouriteBooksFragment"
+        android:name="com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books.CreatingFavouriteBooksFragment"
+        android:label="CreatingFavouriteBooksFragment" />
 </navigation>

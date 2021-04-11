@@ -13,5 +13,11 @@ data class GoogleBooksError(
     val errorDomain: String?,
 
     @SerializedName("reason")
-    val errorReason: String?
+    val errorReason: String?,
+
+    @SerializedName("location")
+    val errorLocation: String?,
+
+    @SerializedName("locationType")
+    val errorLocationType: String?,
 ): Parcelable

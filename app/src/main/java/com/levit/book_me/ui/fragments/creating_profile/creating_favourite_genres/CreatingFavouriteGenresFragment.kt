@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -20,6 +21,12 @@ class CreatingFavouriteGenresFragment: BaseCreatingProfileFragment(R.layout.frag
     private val binding by viewBinding { FragmentCreatingFavouriteGenresBinding.bind(it) }
 
     private val viewModel by viewModels<CreatingFavouriteGenresViewModel> { creatingProfileComponent.viewModelFactory() }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        creatingProfileComponent.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
