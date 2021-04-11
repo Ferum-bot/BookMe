@@ -25,6 +25,7 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showMainTitle(true)
         updatePageIndicator()
         setUpAuthorChooser()
     }
@@ -37,14 +38,22 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
     private fun setUpAuthorChooser() {
         val authorChooserListener = object: CreatingProfileAuthorChooser.AuthorChangeListener {
 
-            override fun onAuthorAdd(authorPosition: Int): Author {
-                TODO("Not yet implemented")
+            override fun onAuthorAdd(authorPosition: Int) {
+                showMainTitle(false)
+                navigateToSearchAuthorFragment(authorPosition)
             }
 
-            override fun onAuthorRemove(authorPosition: Int, author: Author) {
-                TODO("Not yet implemented")
-            }
+            override fun onAuthorRemoved(authorPosition: Int, author: Author) {
 
+            }
         }
+
+        binding.authorChooser.setAuthorChangeListener(authorChooserListener)
+    }
+
+    private fun navigateToSearchAuthorFragment(authorPosition: Int) {
+        val action = CreatingFavouriteAuthorsFragmentDirections
+            .actionCreatingFavouriteAuthorsFragmentToSearchFavouriteAuthorsFragment()
+        findNavController().navigate(action)
     }
 }

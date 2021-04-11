@@ -22,9 +22,9 @@ class CreatingProfileAuthorChooser @JvmOverloads constructor(
      */
     interface AuthorChangeListener {
 
-        fun onAuthorAdd(authorPosition: Int): Author
+        fun onAuthorAdd(authorPosition: Int)
 
-        fun onAuthorRemove(authorPosition: Int, author: Author)
+        fun onAuthorRemoved(authorPosition: Int, author: Author)
     }
 
     private enum class AuthorStatuses {
@@ -68,6 +68,19 @@ class CreatingProfileAuthorChooser @JvmOverloads constructor(
         setAuthorChangeClickListeners()
     }
 
+    fun setAuthor(position: Int, author: Author) {
+        if (isInvalidPosition(position)) {
+            return
+        }
+
+        authorsTextViewList[position].text = author.fullName
+        authorsChangeButtonList[position].setImageResource(R.drawable.ic_minus)
+        authorStatuses[position] = AuthorStatuses.CHOSEN
+        authorsList[position] = author
+    }
+
+    fun getAllAuthors(): List<Author?> = authorsList
+
     private fun configureLayout() {
         authorsTextViewList = listOf(
             binding.firstAuthor, binding.secondAuthor, binding.thirdAuthor,
@@ -93,16 +106,12 @@ class CreatingProfileAuthorChooser @JvmOverloads constructor(
     }
 
     private fun onEmptyAuthorClicked(position: Int) {
-        val author = authorChangeListener?.onAuthorAdd(position) ?: return
-        authorsTextViewList[position].text = author.fullName
-        authorsChangeButtonList[position].setImageResource(R.drawable.ic_minus)
-        authorStatuses[position] = AuthorStatuses.CHOSEN
-        authorsList[position] = author
+        authorChangeListener?.onAuthorAdd(position) ?: return
     }
 
     private fun onChosenAuthorClicked(position: Int) {
         val author = authorsList[position] ?: return
-        authorChangeListener?.onAuthorRemove(position, author) ?: return
+        authorChangeListener?.onAuthorRemoved(position, author) ?: return
         authorStatuses[position] = AuthorStatuses.EMPTY
         authorsChangeButtonList[position].setImageResource(R.drawable.ic_plus)
         authorsList[position] = null
@@ -121,4 +130,7 @@ class CreatingProfileAuthorChooser @JvmOverloads constructor(
 
     private fun getString(@StringRes id: Int): String =
         context.getString(id)
+
+    private fun isInvalidPosition(position: Int): Boolean =
+        position !in 0..4
 }

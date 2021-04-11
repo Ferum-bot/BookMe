@@ -12,6 +12,7 @@ import com.levit.book_me.databinding.ActivitySplashOnboardingBinding
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.di.components.OnBoardingComponent
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
+import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseActivity
 
 class OnBoardingActivity: BaseActivity() {
@@ -127,7 +128,12 @@ class OnBoardingActivity: BaseActivity() {
         startActivity(intent)
     }
 
+    private fun navigateToCreatingProfile() {
+        val intent = Intent(this, CreatingProfileActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun navigateToMainScreen() {
-        navigateToAuthorization()
+        navigateToCreatingProfile()
     }
 }

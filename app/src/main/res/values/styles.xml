@@ -116,4 +116,17 @@
         <item name="android:textSize">17sp</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
+    <style name="DefaultSearchEditTextStyle" parent="DefaultTextViewStyle">
+        <item name="android:background">@color/light_grey</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="singleLine">true</item>
+        <item name="android:minLines">1</item>
+        <item name="android:maxLength">25</item>
+        <item name="android:drawableStart">@drawable/ic_search_24</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
 </resources>
