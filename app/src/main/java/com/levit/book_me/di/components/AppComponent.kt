@@ -2,6 +2,7 @@ package com.levit.book_me.di.components
 
 import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.di.modules.*
+import com.levit.book_me.di.modules.network.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

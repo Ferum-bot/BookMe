@@ -5,6 +5,7 @@ import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.levit.book_me.BuildConfig
 import com.levit.book_me.R
 import com.levit.book_me.di.components.AppComponent
 import com.levit.book_me.core_network.model.NetworkMonitor
@@ -12,6 +13,7 @@ import com.levit.book_me.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import timber.log.Timber
 import javax.inject.Inject
 
 class BookMeApplication : Application(), HasAndroidInjector {
@@ -34,6 +36,7 @@ class BookMeApplication : Application(), HasAndroidInjector {
         configureFacebookSdk()
         configureFirebase()
         registerNetworkMonitor()
+        initTimber()
     }
 
     override fun onTerminate() {
@@ -63,5 +66,11 @@ class BookMeApplication : Application(), HasAndroidInjector {
 
     private fun removeNetworkMonitor() {
         NetworkMonitor.removeNetworkMonitor(this)
+    }
+
+    private fun initTimber() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }
