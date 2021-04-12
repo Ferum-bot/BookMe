@@ -2,7 +2,6 @@ package com.levit.book_me.di.modules.network
 
 import com.levit.book_me.network.utill.NetworkConstants
 import com.levit.book_me.network.interceptors.ErrorConnectionInterceptor
-import com.levit.book_me.network.services.GoogleBooksService
 import com.levit.book_me.network.utill.TimberHttpLogger
 import dagger.Module
 import dagger.Provides
@@ -11,15 +10,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
-@Module
+@Module(includes = [
+    InterceptorsModule::class,
+    RetrofitServiceModule::class,
+])
 open class NetworkModule {
-
-    @Provides
-    @Singleton
-    fun provideGoogleBooksService(retrofit: Retrofit): GoogleBooksService
-    = retrofit.create(GoogleBooksService::class.java)
 
     @Provides
     fun provideBaseRetrofit(
@@ -45,7 +41,7 @@ open class NetworkModule {
         .build()
 
     @Provides
-    fun provideJSONConverterFactory() = GsonConverterFactory.create()
+    fun provideJSONConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
     fun provideTimberLogger() = TimberHttpLogger()
