@@ -10,5 +10,7 @@ object NetworkConstants {
     const val NETWORK_READ_TIMEOUT_SECONDS = 7L
     const val NETWORK_WRITE_TIMEOUT_SECONDS = 7L
 
-    const val GOOGLE_BOOKS_API_BASE_URL = ""
+    const val GOOGLE_BOOKS_API_BASE_URL = "https://www.googleapis.com/books/v1/"
+
+    const val GOOGLE_BOOKS_API_KEY = "AIzaSyDPkHJKI-bsfrUxKee6y8_88O8JnaqooA8"
 }

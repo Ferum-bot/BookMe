@@ -1,11 +1,11 @@
 package com.levit.book_me.core.utill
 
 import android.net.Uri
-import androidx.core.net.toFile
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.levit.book_me.core.enums.ImageFormats
 import java.io.File
 
 object FirebaseStorageReferences {

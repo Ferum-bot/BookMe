@@ -10,7 +10,7 @@ import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.MobileTelephone
 import com.levit.book_me.core.ui.ParcelableTextWatcher
-import com.levit.book_me.core.utill.PhoneRegionCodes
+import com.levit.book_me.core.enums.PhoneRegionCodes
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentPhoneAuthorizationBinding
 

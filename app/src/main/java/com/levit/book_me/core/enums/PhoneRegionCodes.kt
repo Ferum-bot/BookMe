@@ -1,4 +1,4 @@
-package com.levit.book_me.core.utill
+package com.levit.book_me.core.enums
 
 enum class PhoneRegionCodes(val designation: String, val code: String) {
     RUSSIA("RU", "+7"),
@@ -24,7 +24,7 @@ enum class PhoneRegionCodes(val designation: String, val code: String) {
             = getAll().map { it.code }
 
         fun getFromCode(code: String): PhoneRegionCodes {
-            val allCodes = PhoneRegionCodes.getAll()
+            val allCodes = getAll()
             allCodes.forEach {
                 if (it.code == code) {
                     return it

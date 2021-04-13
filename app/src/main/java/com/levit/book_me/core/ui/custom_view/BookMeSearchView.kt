@@ -9,9 +9,9 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.widget.SearchView
 
 class BookMeSearchView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ): SearchView(context, attrs, defStyleAttr) {
 
     private val searchEditText: EditText = findViewById(androidx.appcompat.R.id.search_src_text)

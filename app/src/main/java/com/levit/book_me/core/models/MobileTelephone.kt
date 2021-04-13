@@ -1,13 +1,13 @@
 package com.levit.book_me.core.models
 
 import android.os.Parcelable
-import com.levit.book_me.core.utill.PhoneRegionCodes
+import com.levit.book_me.core.enums.PhoneRegionCodes
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class MobileTelephone(
-    val regionCode: PhoneRegionCodes,
-    val telephoneNumber: String
+        val regionCode: PhoneRegionCodes,
+        val telephoneNumber: String
 ): Parcelable {
 
     companion object {

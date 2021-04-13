@@ -4,24 +4,18 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.core.net.toFile
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.utill.AssetsImageLoader
-import com.levit.book_me.core.utill.ImageFormats
+import com.levit.book_me.core.enums.ImageFormats
 import com.levit.book_me.core.utill.ProfileImagePicker
 import com.levit.book_me.databinding.FragmentCreatingProfileImageBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
-import java.io.File
-import java.io.FileInputStream
-import java.io.InputStream
 
 class CreatingProfileImageFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_profile_image) {
 

@@ -11,4 +11,6 @@
     <dimen name="creating_profile_indicator_margin">6dp</dimen>
     <dimen name="creating_profile_label_margin_top">32dp</dimen>
     <dimen name="creating_profile_description_label_text_size">17sp</dimen>
+    <dimen name="search_book_item_layout_width">235dp</dimen>
+    <dimen name="search_book_item_layout_height">330dp</dimen>
 </resources>

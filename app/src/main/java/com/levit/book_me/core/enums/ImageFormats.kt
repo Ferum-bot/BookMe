@@ -1,4 +1,4 @@
-package com.levit.book_me.core.utill
+package com.levit.book_me.core.enums
 
 enum class ImageFormats(val string: String) {
     PNG("png"),
