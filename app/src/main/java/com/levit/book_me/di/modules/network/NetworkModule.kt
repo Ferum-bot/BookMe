@@ -2,6 +2,7 @@ package com.levit.book_me.di.modules.network
 
 import com.levit.book_me.network.utill.NetworkConstants
 import com.levit.book_me.network.interceptors.ErrorConnectionInterceptor
+import com.levit.book_me.network.utill.RetrofitResultCallAdapterFactory
 import com.levit.book_me.network.utill.TimberHttpLogger
 import dagger.Module
 import dagger.Provides
@@ -20,9 +21,11 @@ open class NetworkModule {
     @Provides
     fun provideBaseRetrofit(
         converterFactory: GsonConverterFactory,
+        callAdapterFactory: RetrofitResultCallAdapterFactory,
         client: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .addConverterFactory(converterFactory)
+        .addCallAdapterFactory(callAdapterFactory)
         .client(client)
         .baseUrl(NetworkConstants.GOOGLE_BOOKS_API_BASE_URL)
         .build()
@@ -42,6 +45,9 @@ open class NetworkModule {
 
     @Provides
     fun provideJSONConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+
+    @Provides
+    fun provideRetrofitResultCallAdapterFactory() = RetrofitResultCallAdapterFactory()
 
     @Provides
     fun provideTimberLogger() = TimberHttpLogger()
