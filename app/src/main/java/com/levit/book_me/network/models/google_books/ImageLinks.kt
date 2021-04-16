@@ -1,26 +1,26 @@
 package com.levit.book_me.network.models.google_books
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ImageLinks(
-    @SerializedName("smallThumbnail")
+    @Json(name = "smallThumbnail")
     val smallThumbnailImageLink: String?,
 
-    @SerializedName("thumbnail")
+    @Json(name = "thumbnail")
     val defaultThumbnailImageLink: String?,
 
-    @SerializedName("small")
+    @Json(name = "small")
     val smallImageLink: String?,
 
-    @SerializedName("medium")
+    @Json(name = "medium")
     val mediumImageLink: String?,
 
-    @SerializedName("large")
+    @Json(name = "large")
     val largeImageLink: String?,
 
-    @SerializedName("extraLarge")
+    @Json(name = "extraLarge")
     val extraLargeImageLink: String?
 ): Parcelable

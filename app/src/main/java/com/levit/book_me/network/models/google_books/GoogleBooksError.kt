@@ -1,23 +1,23 @@
 package com.levit.book_me.network.models.google_books
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GoogleBooksError(
-    @SerializedName("message")
+    @Json(name = "message")
     val errorMessage: String?,
 
-    @SerializedName("domain")
+    @Json(name = "domain")
     val errorDomain: String?,
 
-    @SerializedName("reason")
+    @Json(name = "reason")
     val errorReason: String?,
 
-    @SerializedName("location")
+    @Json(name = "location")
     val errorLocation: String?,
 
-    @SerializedName("locationType")
+    @Json(name = "locationType")
     val errorLocationType: String?,
 ): Parcelable

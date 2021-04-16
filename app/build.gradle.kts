@@ -108,7 +108,9 @@ dependencies {
     implementation(Dependencies.OKHTTP_CORE)
     implementation(Dependencies.OKHTTP_LOGGING_INTERCEPTOR)
     implementation(Dependencies.RETROFIT_CORE)
-    implementation(Dependencies.RETROFIT_CONVERTER_GSON)
+    implementation(Dependencies.RETROFIT_MOSHI_CONVERTER)
+    implementation(Dependencies.MOSHI)
+    implementation(Dependencies.MOSHI_KOTLIN)
 
     // UI: Androidx presentation views
     implementation(Dependencies.MATERIAL)

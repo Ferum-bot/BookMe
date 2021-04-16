@@ -1,21 +1,21 @@
 package com.levit.book_me.network.response_models
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import com.levit.book_me.network.models.google_books.GoogleBooksError
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GoogleBooksResponseError(
-    @SerializedName("code")
+    @Json(name = "code")
     val errorStatusCode: Int?,
 
-    @SerializedName("message")
+    @Json(name = "message")
     val errorMessage: String?,
 
-    @SerializedName("errors")
+    @Json(name = "errors")
     val listOfErrors: List<GoogleBooksError>?,
 
-    @SerializedName("status")
+    @Json(name = "status")
     val errorStatus: String?,
 ): Parcelable

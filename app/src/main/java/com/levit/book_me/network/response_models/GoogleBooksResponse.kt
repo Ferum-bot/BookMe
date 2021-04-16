@@ -1,21 +1,21 @@
 package com.levit.book_me.network.response_models
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import com.levit.book_me.network.models.google_books.GoogleBookVolume
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GoogleBooksResponse(
-    @SerializedName("kind")
+    @Json(name = "kind")
     val responseKind: String?,
 
-    @SerializedName("totalItems")
+    @Json(name = "totalItems")
     val totalItems: Int?,
 
-    @SerializedName("items")
+    @Json(name = "items")
     val responseResult: GoogleBookVolume?,
 
-    @SerializedName("error")
+    @Json(name = "error")
     val errorResponse: GoogleBooksResponseError?
 ): Parcelable

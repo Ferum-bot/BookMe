@@ -1,29 +1,29 @@
 package com.levit.book_me.network.models.google_books
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GoogleBook(
-    @SerializedName("title")
+    @Json(name = "title")
     val title: String,
 
-    @SerializedName("authors")
+    @Json(name = "authors")
     val listOfAuthors: List<String>,
 
-    @SerializedName("printType")
+    @Json(name = "printType")
     val printType: String,
 
-    @SerializedName("categories")
+    @Json(name = "categories")
     val bookCategories: List<String>,
 
-    @SerializedName("imageLinks")
+    @Json(name = "imageLinks")
     val imageLinks: ImageLinks?,
 
-    @SerializedName("language")
+    @Json(name = "language")
     val bookLanguage: String,
 
-    @SerializedName("previewLink")
+    @Json(name = "previewLink")
     val previewLink: String,
 ): Parcelable

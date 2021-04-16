@@ -20,6 +20,7 @@ object Versions {
     // Network: https (REST API)
     const val OKHTTP = "3.10.0"
     const val RETROFIT = "2.9.0" // do not change without checking Russian characters in the header
+    const val MOSHI = "1.9.3"
 
     // UI: Androidx presentation views
     const val MATERIAL = "1.1.0"
