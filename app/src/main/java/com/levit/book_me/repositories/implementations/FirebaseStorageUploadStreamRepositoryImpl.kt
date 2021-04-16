@@ -11,20 +11,25 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileInputStream
 import javax.inject.Inject
+import javax.inject.Named
+import kotlin.coroutines.CoroutineContext
 
 class FirebaseStorageUploadStreamRepositoryImpl @Inject constructor(
-    private val storageDataSource: FirebaseStorageUploadStreamDataSource
+    private val storageDataSource: FirebaseStorageUploadStreamDataSource,
+
+    @Named("IODispatcherContext")
+    private val launchContext: CoroutineContext,
 ): FirebaseStorageUploadStreamRepository {
 
     override val loadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult>
         = storageDataSource.loadToFirebaseStorageResult
 
     /**
-     * Running blocking method in IO Coroutine context
+     * Running blocking method in Coroutine context
      */
     @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun upLoadFileToFirebaseStorage(file: File, ref: StorageReference)
-    = withContext(Dispatchers.IO) {
+    = withContext(launchContext) {
         val inputStream = FileInputStream(file)
         storageDataSource.loadStreamToFirebaseStorage(inputStream, ref)
     }

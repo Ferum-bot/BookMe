@@ -39,21 +39,50 @@ class SearchFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fragm
 
     private fun setAllObservers() {
         viewModel.searchResult.observe(viewLifecycleOwner, Observer { listOfAuthors ->
-            if (listOfAuthors == null) {
-                binding.alertTextView.visibility = View.GONE
-                binding.recyclerView.visibility = View.VISIBLE
+            setAuthorsToAdapter(listOfAuthors)
+        })
+
+        viewModel.currentStatus.observe(viewLifecycleOwner, Observer { status ->
+            when (status) {
+                SearchFavouriteAuthorsViewModel.SearchStatus.NOT_SEARCHING, null -> {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.alertTextView.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                }
+                SearchFavouriteAuthorsViewModel.SearchStatus.SEARCHING -> {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.alertTextView.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+                SearchFavouriteAuthorsViewModel.SearchStatus.NOTHING_FOUND -> {
+                    binding.recyclerView.visibility = View.GONE
+                    binding.alertTextView.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                }
+                SearchFavouriteAuthorsViewModel.SearchStatus.FOUND -> {
+                    binding.recyclerView.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    binding.alertTextView.visibility = View.GONE
+                }
             }
-            else {
-                setAuthorsToAdapter(listOfAuthors)
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
+            if (message != null) {
+                showError(message)
+                viewModel.errorMessageHasShown()
+            }
+        })
+
+        viewModel.errorMessageId.observe(viewLifecycleOwner, Observer { messageId ->
+            if (messageId != null) {
+                showError(messageId)
+                viewModel.errorMessageHasShown()
             }
         })
     }
 
     private fun setAuthorsToAdapter(listOfAuthors: List<Author>) {
-        if (listOfAuthors.isEmpty()) {
-            binding.alertTextView.visibility = View.VISIBLE
-            binding.recyclerView.visibility = View.GONE
-            return
-        }
+
     }
 }

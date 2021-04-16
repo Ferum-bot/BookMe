@@ -10,5 +10,5 @@ interface UploadProfileImageInteractor {
 
     suspend fun uploadProfileImageToStorage(imageUri: Uri)
 
-    val uploadResult: SharedFlow<FirebaseStorageUploadResult>
+    val uploadResult: Flow<FirebaseStorageUploadResult>
 }

@@ -8,22 +8,30 @@ import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadStreamRepo
 import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadUriRepository
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
+import kotlin.coroutines.CoroutineContext
 
 @Module
 open class FirebaseRepositoryModule {
 
     @Provides
     fun provideStorageUploadStreamRepository(
-        dataSource: FirebaseStorageUploadStreamDataSource
+        dataSource: FirebaseStorageUploadStreamDataSource,
+
+        @Named("IODispatcherContext")
+        coroutineContext: CoroutineContext
     ): FirebaseStorageUploadStreamRepository {
-        return FirebaseStorageUploadStreamRepositoryImpl(dataSource)
+        return FirebaseStorageUploadStreamRepositoryImpl(dataSource, coroutineContext)
     }
 
     @Provides
     fun provideStorageUploadUriRepository(
-        dataSource: FirebaseStorageUploadUriDataSource
+        dataSource: FirebaseStorageUploadUriDataSource,
+
+        @Named("IODispatcherContext")
+        coroutineContext: CoroutineContext
     ): FirebaseStorageUploadUriRepository {
-        return FirebaseStorageUploadUriRepositoryImpl(dataSource)
+        return FirebaseStorageUploadUriRepositoryImpl(dataSource, coroutineContext)
     }
 
 }

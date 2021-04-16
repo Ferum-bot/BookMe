@@ -9,9 +9,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Named
+import kotlin.coroutines.CoroutineContext
 
 class FirebaseStorageUploadUriRepositoryImpl @Inject constructor(
-    private val dataSource: FirebaseStorageUploadUriDataSource
+    private val dataSource: FirebaseStorageUploadUriDataSource,
+
+    @Named("IODispatcherContext")
+    private val launchContext: CoroutineContext,
 ): FirebaseStorageUploadUriRepository {
 
 
@@ -19,7 +24,7 @@ class FirebaseStorageUploadUriRepositoryImpl @Inject constructor(
         = dataSource.loadToFirebaseStorageResult
 
     override suspend fun upLoadUriToFirebaseStorage(uri: Uri, ref: StorageReference)
-    = withContext(Dispatchers.IO) {
+    = withContext(launchContext) {
         dataSource.loadUriToFirebaseStorage(uri, ref)
     }
 }

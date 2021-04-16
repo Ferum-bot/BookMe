@@ -4,6 +4,7 @@ import com.levit.book_me.di.modules.creating_profile.CreatingProfileViewModelsMo
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.core_presentation.utils.ViewModelFactory
 import com.levit.book_me.di.modules.creating_profile.CreatingProfileInteractorsModule
+import com.levit.book_me.di.modules.creating_profile.CreatingProfileRepositoryModule
 import com.levit.book_me.di.modules.firebase.FirebaseDataSourceModule
 import com.levit.book_me.di.modules.firebase.FirebaseRepositoryModule
 import com.levit.book_me.di.modules.network.NetworkModule
@@ -21,6 +22,7 @@ import dagger.Subcomponent
 @Subcomponent(modules = [
     CreatingProfileViewModelsModule::class,
     CreatingProfileInteractorsModule::class,
+    CreatingProfileRepositoryModule::class,
     FirebaseDataSourceModule::class,
     FirebaseRepositoryModule::class,
     NetworkModule::class,

@@ -5,6 +5,7 @@ import com.levit.book_me.data_sources.interfaces.GoogleBooksVolumeDataSource
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.network.response_models.GoogleBooksResponse
 import com.levit.book_me.network.services.GoogleBooksService
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
@@ -17,9 +18,11 @@ class GoogleBooksVolumeDataSourceImpl @Inject constructor(
     override val searchResult: SharedFlow<RetrofitResult<GoogleBooksResponse>>
         get() = _searchResult
 
+    @ExperimentalCoroutinesApi
     override suspend fun searchVolumes(parameters: GoogleBooksVolumeParameters) {
         val paramsMap = parameters.toMap()
         val queryResult = googleBooksService.searchGoogleBooks(paramsMap)
+        _searchResult.resetReplayCache()
         _searchResult.emit(queryResult)
     }
 }
