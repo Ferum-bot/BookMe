@@ -62,7 +62,10 @@ internal class RetrofitResultCall<T>(proxy: Call<T>): CallDelegate<T, RetrofitRe
                     error,
                     messageId = error.stringId
                 )
-                is IOException -> RetrofitResult.Failure.Error(error)
+                is IOException -> RetrofitResult.Failure.Error(
+                    error,
+                    message = error.message
+                )
                 else -> RetrofitResult.Failure.Error(error)
             }
 

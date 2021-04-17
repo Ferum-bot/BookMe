@@ -30,8 +30,8 @@ open class NetworkModule {
         callAdapterFactory: RetrofitResultCallAdapterFactory,
         client: OkHttpClient
     ): Retrofit = Retrofit.Builder()
-        .addConverterFactory(converterFactory)
         .addCallAdapterFactory(callAdapterFactory)
+        .addConverterFactory(converterFactory)
         .client(client)
         .baseUrl(NetworkConstants.GOOGLE_BOOKS_API_BASE_URL)
         .build()

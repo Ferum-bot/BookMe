@@ -3,7 +3,7 @@ package dependencies
 object Versions {
     // Kotlin
     const val KOTLIN = "1.4.30"
-    const val COROUTINES = "1.4.2"
+    const val COROUTINES = "1.4.3"
 
     // Core
     const val MULTIDEX = "2.0.1"

@@ -10,7 +10,6 @@ import javax.inject.Singleton
 class RetrofitServiceModule {
 
     @Provides
-    @Singleton
     fun provideGoogleBooksService(retrofit: Retrofit): GoogleBooksService
             = retrofit.create(GoogleBooksService::class.java)
 

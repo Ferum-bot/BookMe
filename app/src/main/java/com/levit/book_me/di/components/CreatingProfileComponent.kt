@@ -3,12 +3,12 @@ package com.levit.book_me.di.components
 import com.levit.book_me.di.modules.creating_profile.CreatingProfileViewModelsModule
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.core_presentation.utils.ViewModelFactory
+import com.levit.book_me.di.modules.DataSourceModule
+import com.levit.book_me.di.modules.RepositoryModule
 import com.levit.book_me.di.modules.creating_profile.CreatingProfileInteractorsModule
-import com.levit.book_me.di.modules.creating_profile.CreatingProfileRepositoryModule
 import com.levit.book_me.di.modules.firebase.FirebaseDataSourceModule
 import com.levit.book_me.di.modules.firebase.FirebaseRepositoryModule
 import com.levit.book_me.di.modules.network.NetworkModule
-import com.levit.book_me.di.modules.network.InterceptorsModule
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_authors.CreatingFavouriteAuthorsFragment
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books.CreatingFavouriteBooksFragment
@@ -22,10 +22,11 @@ import dagger.Subcomponent
 @Subcomponent(modules = [
     CreatingProfileViewModelsModule::class,
     CreatingProfileInteractorsModule::class,
-    CreatingProfileRepositoryModule::class,
     FirebaseDataSourceModule::class,
     FirebaseRepositoryModule::class,
+    RepositoryModule::class,
     NetworkModule::class,
+    DataSourceModule::class
 ])
 interface CreatingProfileComponent {
 

@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class GoogleBooksResponseError(
     @Json(name = "code")
-    val errorStatusCode: Int?,
+    val errorStatusCode: Int,
 
     @Json(name = "message")
     val errorMessage: String?,
