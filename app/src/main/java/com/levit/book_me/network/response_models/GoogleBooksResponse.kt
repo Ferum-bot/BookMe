@@ -14,7 +14,7 @@ data class GoogleBooksResponse(
     val totalItems: Int?,
 
     @Json(name = "items")
-    val responseResult: GoogleBookVolume?,
+    val responseResult: List<GoogleBookVolume>?,
 
     @Json(name = "error")
     val errorResponse: GoogleBooksResponseError?

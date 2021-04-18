@@ -11,10 +11,11 @@ import java.io.IOException
 
 internal class RetrofitResultCall<T>(proxy: Call<T>): CallDelegate<T, RetrofitResult<T>>(proxy) {
 
-    override fun enqueueImpl(callback: Callback<RetrofitResult<T>>)
-    = proxy.enqueue(ResultCallback(this, callback))
+    override fun enqueueImpl(callback: Callback<RetrofitResult<T>>) {
+        proxy.enqueue(ResultCallback(this, callback))
+    }
 
-    override fun cloneImpl(): Call<RetrofitResult<T>> = RetrofitResultCall(proxy.clone())
+    override fun cloneImpl(): RetrofitResultCall<T> = RetrofitResultCall(proxy.clone())
 
     override fun timeout(): Timeout = proxy.timeout()
 

@@ -61,7 +61,8 @@ class SearchAuthorsRepositoryImpl @Inject constructor(
         val response = responseResult ?: return emptyList()
         val authors = mutableListOf<Author>()
 
-        response.volumeResult.forEach { book ->
+        response.forEach{  volume ->
+            val book = volume.volumeResult
             val bookAuthors = book.listOfAuthors.map {name ->
                 Author(name)
             }

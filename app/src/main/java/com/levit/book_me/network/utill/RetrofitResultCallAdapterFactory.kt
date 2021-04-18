@@ -34,8 +34,9 @@ class RetrofitResultCallAdapterFactory: CallAdapter.Factory() {
         if (callInnerType is ParameterizedType) {
             val resultInnerType = getParameterUpperBound(0, callInnerType)
             RetrofitResultCallAdapter<Any?>(resultInnerType)
+        } else {
+            RetrofitResultCallAdapter<Nothing>(Nothing::class.java)
         }
-        RetrofitResultCallAdapter<Nothing>(Nothing::class.java)
     }
     else {
         null

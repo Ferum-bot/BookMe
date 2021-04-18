@@ -16,7 +16,7 @@ data class GoogleBook(
     val printType: String,
 
     @Json(name = "categories")
-    val bookCategories: List<String>,
+    val bookCategories: List<String>?,
 
     @Json(name = "imageLinks")
     val imageLinks: ImageLinks?,

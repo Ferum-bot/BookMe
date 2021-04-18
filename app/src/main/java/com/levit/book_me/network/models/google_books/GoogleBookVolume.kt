@@ -13,5 +13,5 @@ data class GoogleBookVolume(
     val id: String,
 
     @Json(name = "volumeInfo")
-    val volumeResult: List<GoogleBook>
+    val volumeResult: GoogleBook
 ): Parcelable
