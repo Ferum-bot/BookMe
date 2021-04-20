@@ -12,12 +12,6 @@ import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
  */
 object FavouriteAuthorsStorage {
 
-    private const val FIRST_POSITION = 0
-    private const val SECOND_POSITION = 1
-    private const val THIRD_POSITION = 2
-    private const val FOURS_POSITION = 3
-    private const val FIVES_POSITION = 4
-
     private val _firstAuthor: MutableLiveData<Author?> = MutableLiveData(null)
     val firstAuthor: LiveData<Author?> = _firstAuthor
 

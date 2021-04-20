@@ -18,9 +18,6 @@ class CreatingProfileAuthorChooser @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    /**
-     * Author positions is number between 0 to 4
-     */
     interface AuthorChangeListener {
 
         fun onAuthorAdd(authorPosition: AuthorPosition)
@@ -133,7 +130,6 @@ class CreatingProfileAuthorChooser @JvmOverloads constructor(
                 AuthorPosition.THIRD_POSITION -> getString(R.string.third_author)
                 AuthorPosition.FOURS_POSITION -> getString(R.string.fours_author)
                 AuthorPosition.FIVES_POSITION -> getString(R.string.fives_author)
-                else -> getString(R.string.author)
             }
         }
     }
