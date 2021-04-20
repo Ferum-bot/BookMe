@@ -19,11 +19,4 @@ class CreatingProfileInteractorsModule {
     ): UploadProfileImageInteractor {
         return UploadProfileImageInteractorImpl(repository)
     }
-
-    @Provides
-    fun provideSearchFavouriteAuthorsInteractor(
-        repository: SearchAuthorsRepository
-    ): SearchFavouriteAuthorsInteractor {
-        return SearchFavouriteAuthorsInteractorImpl(repository)
-    }
 }

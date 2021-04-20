@@ -3,6 +3,7 @@ package com.levit.book_me.di.components
 import com.levit.book_me.di.modules.creating_profile.CreatingProfileViewModelsModule
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.core_presentation.utils.ViewModelFactory
+import com.levit.book_me.di.modules.subcomponents.CreatingProfileSubComponents
 import com.levit.book_me.di.modules.DataSourceModule
 import com.levit.book_me.di.modules.RepositoryModule
 import com.levit.book_me.di.modules.creating_profile.CreatingProfileInteractorsModule
@@ -26,7 +27,8 @@ import dagger.Subcomponent
     FirebaseRepositoryModule::class,
     RepositoryModule::class,
     NetworkModule::class,
-    DataSourceModule::class
+    DataSourceModule::class,
+    CreatingProfileSubComponents::class,
 ])
 interface CreatingProfileComponent {
 
@@ -45,6 +47,8 @@ interface CreatingProfileComponent {
     fun inject(fragment: CreatingFavouriteBooksFragment)
 
     fun viewModelFactory(): ViewModelFactory
+
+    fun searchFavouriteAuthorsComponent(): SearchFavouriteAuthorsComponent.Builder
 
     @Subcomponent.Builder
     interface Builder {

@@ -75,5 +75,6 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="chose">Chose</string>
 
 </resources>

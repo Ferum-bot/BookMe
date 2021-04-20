@@ -28,3 +28,7 @@ annotation class OnBoardingScope
 @Scope
 @Retention(value = AnnotationRetention.RUNTIME)
 annotation class CreatingProfileScope
+
+@Scope
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class SearchFavouriteAuthorsScope

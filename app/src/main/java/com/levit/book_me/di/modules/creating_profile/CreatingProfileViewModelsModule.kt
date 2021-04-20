@@ -37,11 +37,6 @@ abstract class CreatingProfileViewModelsModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(SearchFavouriteAuthorsViewModel::class)
-    abstract fun bindSearchFavouriteAuthorsViewModel(viewModel: SearchFavouriteAuthorsViewModel): ViewModel
-
-    @Binds
-    @IntoMap
     @ViewModelKey(CreatingFavouriteBooksViewModel::class)
     abstract fun bindCreatingFavouriteBooksViewModel(viewModel: CreatingFavouriteBooksViewModel): ViewModel
 }

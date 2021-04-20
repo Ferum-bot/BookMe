@@ -8,16 +8,14 @@ import com.google.android.gms.auth.api.Auth
 import com.levit.book_me.R
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core_base.di.CreatingProfileScope
+import com.levit.book_me.core_base.di.SearchFavouriteAuthorsScope
 import com.levit.book_me.interactors.interfaces.SearchFavouriteAuthorsInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@CreatingProfileScope
+@SearchFavouriteAuthorsScope
 class SearchFavouriteAuthorsViewModel @Inject constructor(
     private val interactor: SearchFavouriteAuthorsInteractor
 ): ViewModel() {
@@ -66,6 +64,7 @@ class SearchFavouriteAuthorsViewModel @Inject constructor(
 
     private fun searchAuthors(text: String) {
         _currentStatus.postValue(SearchStatus.SEARCHING)
+        _searchResult.postValue(emptyList())
         currentSearchJob = viewModelScope.launch {
             interactor.searchAuthors(text)
         }
@@ -111,12 +110,12 @@ class SearchFavouriteAuthorsViewModel @Inject constructor(
     private fun handleSuccessResult(result: RetrofitResult.Success<List<Author>>) {
         val authors = result.data
         if (authors.isEmpty()) {
-            _currentStatus.postValue(SearchStatus.NOTHING_FOUND)
             _searchResult.postValue(emptyList())
+            _currentStatus.postValue(SearchStatus.NOTHING_FOUND)
         }
         else {
-            _currentStatus.postValue(SearchStatus.FOUND)
             _searchResult.postValue(authors)
+            _currentStatus.postValue(SearchStatus.FOUND)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.levit.book_me.di.modules
+package com.levit.book_me.di.modules.subcomponents
 
 import com.levit.book_me.di.components.AuthorizationComponent
 import com.levit.book_me.di.components.CreatingProfileComponent

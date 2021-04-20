@@ -34,7 +34,6 @@ class SearchAuthorsRepositoryImpl @Inject constructor(
     private val IOScope = CoroutineScope(Dispatchers.IO)
 
     override val searchResult: SharedFlow<RetrofitResult<List<Author>>> = dataSource.searchResult
-        .flowOnIO()
         .transform<RetrofitResult<GoogleBooksResponse>, RetrofitResult<List<Author>>> { result: RetrofitResult<GoogleBooksResponse> ->
             if (result is RetrofitResult.Failure<*>) {
                 emit(result)
@@ -42,13 +41,17 @@ class SearchAuthorsRepositoryImpl @Inject constructor(
             }
             transformResponse(this, result)
         }
+        .flowOn(Dispatchers.Default)
         .shareIn(
             scope = IOScope,
             started = SharingStarted.Lazily,
             replay = REPLAY_NUMBER
         )
 
+    private var searchString: String = ""
+
     override suspend fun searchAuthors(queryParams: GoogleBooksVolumeParameters) {
+        searchString = queryParams.textToSearch
         withContext(launchContext) {
             dataSource.searchVolumes(queryParams)
         }
@@ -57,6 +60,7 @@ class SearchAuthorsRepositoryImpl @Inject constructor(
     private suspend fun transformResponse(collector: FlowCollector<RetrofitResult<List<Author>>>, result: RetrofitResult<GoogleBooksResponse>) {
         val response = (result as RetrofitResult.Success).data
         val authors = response.getAllAuthors()
+                .applyFilter()
         val newResult = RetrofitResult.Success.Value(authors)
         collector.emit(newResult)
     }
@@ -73,6 +77,11 @@ class SearchAuthorsRepositoryImpl @Inject constructor(
             authors.addAll(bookAuthors ?: emptyList())
         }
 
-        return authors.distinctBy { it.fullName }
+        return authors
+    }
+
+    private fun List<Author>.applyFilter(): List<Author> {
+        val result = distinctBy { it.fullName }
+        return result.filter { it.fullName.contains(searchString, true) }
     }
 }

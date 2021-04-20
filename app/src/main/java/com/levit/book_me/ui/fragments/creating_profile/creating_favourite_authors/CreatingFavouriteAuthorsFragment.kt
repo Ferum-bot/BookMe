@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
@@ -12,11 +13,18 @@ import com.levit.book_me.core.models.Author
 import com.levit.book_me.databinding.FragmentCreatingFavouriteAuthorsBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteAuthorsStorage
 
 class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_favourite_authors) {
 
     companion object {
         private const val FRAGMENT_POSITION = 4
+
+        private const val FIRST_AUTHOR_POSITION = 0
+        private const val SECOND_AUTHOR_POSITION = 1
+        private const val THIRD_AUTHOR_POSITION = 2
+        private const val FOURS_AUTHOR_POSITION = 3
+        private const val FIVES_AUTHOR_POSITION = 4
     }
 
     private val binding by viewBinding { FragmentCreatingFavouriteAuthorsBinding.bind(it) }
@@ -36,6 +44,7 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
         updatePageIndicator()
         setUpAuthorChooser()
         setAllClickListeners()
+        setAllObservers()
     }
 
     private fun updatePageIndicator() {
@@ -52,7 +61,7 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
             }
 
             override fun onAuthorRemoved(authorPosition: Int, author: Author) {
-
+                FavouriteAuthorsStorage.removeAuthorFrom(authorPosition)
             }
         }
 
@@ -65,9 +74,41 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
         }
     }
 
+    private fun setAllObservers() {
+        FavouriteAuthorsStorage.firstAuthor.observe(viewLifecycleOwner, Observer { author ->
+            if (author != null) {
+                binding.authorChooser.setAuthor(FIRST_AUTHOR_POSITION, author)
+            }
+        })
+
+        FavouriteAuthorsStorage.secondAuthor.observe(viewLifecycleOwner, Observer { author ->
+            if (author != null) {
+                binding.authorChooser.setAuthor(SECOND_AUTHOR_POSITION, author)
+            }
+        })
+
+        FavouriteAuthorsStorage.thirdAuthor.observe(viewLifecycleOwner, Observer { author ->
+            if (author != null) {
+                binding.authorChooser.setAuthor(THIRD_AUTHOR_POSITION, author)
+            }
+        })
+
+        FavouriteAuthorsStorage.foursAuthor.observe(viewLifecycleOwner, Observer { author ->
+            if (author != null) {
+                binding.authorChooser.setAuthor(FOURS_AUTHOR_POSITION, author)
+            }
+        })
+
+        FavouriteAuthorsStorage.fivesAuthor.observe(viewLifecycleOwner, Observer { author ->
+            if (author != null) {
+                binding.authorChooser.setAuthor(FIVES_AUTHOR_POSITION, author)
+            }
+        })
+    }
+
     private fun navigateToSearchAuthorFragment(authorPosition: Int) {
         val action = CreatingFavouriteAuthorsFragmentDirections
-            .actionCreatingFavouriteAuthorsFragmentToSearchFavouriteAuthorsFragment()
+            .actionCreatingFavouriteAuthorsFragmentToSearchFavouriteAuthorsFragment(authorPosition)
         findNavController().navigate(action)
     }
 
