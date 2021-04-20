@@ -5,15 +5,20 @@ import com.google.android.gms.auth.api.Auth
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.GoogleBooksVolumeParameters
 import com.levit.book_me.core_base.extensions.flowOnIO
+import com.levit.book_me.data_sources.implementations.GoogleBooksVolumeDataSourceImpl
 import com.levit.book_me.data_sources.interfaces.GoogleBooksVolumeDataSource
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.network.response_models.GoogleBooksResponse
 import com.levit.book_me.repositories.interfaces.SearchAuthorsRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Named
 import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 class SearchAuthorsRepositoryImpl @Inject constructor(
     @Named("IODispatcherContext")
@@ -22,27 +27,26 @@ class SearchAuthorsRepositoryImpl @Inject constructor(
     private val dataSource: GoogleBooksVolumeDataSource,
 ): SearchAuthorsRepository {
 
-    /**
-     * Looks like sheet, but kotlin flow doesn't provide
-     * ability to transform base Flow to SharedFlow, so
-     * this is the best decision I invented
-     */
-    private val dataSourceResult = dataSource.searchResult
+    companion object {
+        private const val REPLAY_NUMBER = 1
+    }
+
+    private val IOScope = CoroutineScope(Dispatchers.IO)
+
+    override val searchResult: SharedFlow<RetrofitResult<List<Author>>> = dataSource.searchResult
         .flowOnIO()
-        .transformLatest<RetrofitResult<GoogleBooksResponse>, RetrofitResult<List<Author>>> { result: RetrofitResult<GoogleBooksResponse> ->
+        .transform<RetrofitResult<GoogleBooksResponse>, RetrofitResult<List<Author>>> { result: RetrofitResult<GoogleBooksResponse> ->
             if (result is RetrofitResult.Failure<*>) {
                 emit(result)
-                return@transformLatest
+                return@transform
             }
             transformResponse(this, result)
         }
-        .onEach { result ->
-            _searchResult.emit(result)
-        }
-
-    private val _searchResult: MutableSharedFlow<RetrofitResult<List<Author>>> = MutableSharedFlow()
-    override val searchResult: SharedFlow<RetrofitResult<List<Author>>>
-        get() = _searchResult
+        .shareIn(
+            scope = IOScope,
+            started = SharingStarted.Lazily,
+            replay = REPLAY_NUMBER
+        )
 
     override suspend fun searchAuthors(queryParams: GoogleBooksVolumeParameters) {
         withContext(launchContext) {
@@ -63,12 +67,12 @@ class SearchAuthorsRepositoryImpl @Inject constructor(
 
         response.forEach{  volume ->
             val book = volume.volumeResult
-            val bookAuthors = book.listOfAuthors.map {name ->
+            val bookAuthors = book.listOfAuthors?.map {name ->
                 Author(name)
             }
-            authors.addAll(bookAuthors)
+            authors.addAll(bookAuthors ?: emptyList())
         }
 
-        return authors
+        return authors.distinctBy { it.fullName }
     }
 }

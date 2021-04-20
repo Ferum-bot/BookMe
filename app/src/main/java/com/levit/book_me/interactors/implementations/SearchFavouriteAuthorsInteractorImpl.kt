@@ -8,6 +8,7 @@ import com.levit.book_me.interactors.interfaces.SearchFavouriteAuthorsInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.interfaces.SearchAuthorsRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 @CreatingProfileScope

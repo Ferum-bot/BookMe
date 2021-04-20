@@ -10,7 +10,7 @@ data class GoogleBook(
     val title: String,
 
     @Json(name = "authors")
-    val listOfAuthors: List<String>,
+    val listOfAuthors: List<String>?,
 
     @Json(name = "printType")
     val printType: String,

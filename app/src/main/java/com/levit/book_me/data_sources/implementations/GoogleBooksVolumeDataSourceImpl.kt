@@ -8,26 +8,32 @@ import com.levit.book_me.network.response_models.GoogleBooksResponse
 import com.levit.book_me.network.response_models.GoogleBooksResponseError
 import com.levit.book_me.network.services.GoogleBooksService
 import com.levit.book_me.network.utill.NetworkConstants
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class GoogleBooksVolumeDataSourceImpl @Inject constructor(
     private val googleBooksService: GoogleBooksService
 ): GoogleBooksVolumeDataSource {
 
-    private val _searchResult = MutableSharedFlow<RetrofitResult<GoogleBooksResponse>>()
+    companion object {
+        private const val REPLAY_NUMBER = 1
+        private const val CAPACITY_SIZE = 1
+    }
+
+    private val _searchResult = MutableSharedFlow<RetrofitResult<GoogleBooksResponse>>(
+        replay = REPLAY_NUMBER,
+        extraBufferCapacity = CAPACITY_SIZE,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
     override val searchResult: SharedFlow<RetrofitResult<GoogleBooksResponse>>
         get() = _searchResult
 
-    @ExperimentalCoroutinesApi
     override suspend fun searchVolumes(parameters: GoogleBooksVolumeParameters) {
         val paramsMap = parameters.toMap()
         val queryResult = googleBooksService.searchGoogleBooks(paramsMap)
                 .parseRowResponse()
-        _searchResult.resetReplayCache()
         _searchResult.emit(queryResult)
     }
 
