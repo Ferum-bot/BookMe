@@ -3,6 +3,7 @@ package com.levit.book_me.ui.fragments.creating_profile.utills
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.levit.book_me.core.models.Author
+import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 
 /**
  * Temporary solution to pass chosen favourite authors
@@ -32,23 +33,23 @@ object FavouriteAuthorsStorage {
     private val _fivesAuthor: MutableLiveData<Author?> = MutableLiveData(null)
     val fivesAuthor: LiveData<Author?> = _fivesAuthor
 
-    fun setAuthorTo(author: Author, position: Int) {
+    fun setAuthorTo(author: Author, position: CreatingProfileAuthorChooser.AuthorPosition) {
         when (position) {
-            FIRST_POSITION -> _firstAuthor.value = author
-            SECOND_POSITION -> _secondAuthor.value = author
-            THIRD_POSITION -> _thirdAuthor.value = author
-            FOURS_POSITION -> _foursAuthor.value = author
-            FIVES_POSITION -> _fivesAuthor.value = author
+            CreatingProfileAuthorChooser.AuthorPosition.FIRST_POSITION -> _firstAuthor.value = author
+            CreatingProfileAuthorChooser.AuthorPosition.SECOND_POSITION -> _secondAuthor.value = author
+            CreatingProfileAuthorChooser.AuthorPosition.THIRD_POSITION -> _thirdAuthor.value = author
+            CreatingProfileAuthorChooser.AuthorPosition.FOURS_POSITION -> _foursAuthor.value = author
+            CreatingProfileAuthorChooser.AuthorPosition.FIVES_POSITION -> _fivesAuthor.value = author
         }
     }
 
-    fun removeAuthorFrom(position: Int) {
+    fun removeAuthorFrom(position: CreatingProfileAuthorChooser.AuthorPosition) {
         when(position) {
-            FIRST_POSITION -> _firstAuthor.value = null
-            SECOND_POSITION -> _secondAuthor.value = null
-            THIRD_POSITION -> _thirdAuthor.value = null
-            FOURS_POSITION -> _foursAuthor.value = null
-            FIVES_POSITION -> _fivesAuthor.value = null
+            CreatingProfileAuthorChooser.AuthorPosition.FIRST_POSITION -> _firstAuthor.value = null
+            CreatingProfileAuthorChooser.AuthorPosition.SECOND_POSITION -> _secondAuthor.value = null
+            CreatingProfileAuthorChooser.AuthorPosition.THIRD_POSITION -> _thirdAuthor.value = null
+            CreatingProfileAuthorChooser.AuthorPosition.FOURS_POSITION -> _foursAuthor.value = null
+            CreatingProfileAuthorChooser.AuthorPosition.FIVES_POSITION -> _fivesAuthor.value = null
         }
     }
 }

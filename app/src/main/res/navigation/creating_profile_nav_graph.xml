@@ -76,8 +76,8 @@
         android:label="SearchFavouriteAuthorsFragment" >
         <argument
             android:name="authorPosition"
-            app:argType="integer"
-            android:defaultValue="1" />
+            app:argType="com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser$AuthorPosition"
+            android:defaultValue="FIRST_POSITION" />
     </fragment>
     <fragment
         android:id="@+id/creatingFavouriteBooksFragment"
