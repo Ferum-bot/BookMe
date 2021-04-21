@@ -1,4 +1,4 @@
-package com.levit.book_me.network.utill
+package com.levit.book_me.network.result_call_adapter
 
 import com.levit.book_me.core.exceptions.ConnectException
 import com.levit.book_me.network.network_result_data.RetrofitResult
@@ -20,8 +20,8 @@ internal class RetrofitResultCall<T>(proxy: Call<T>): CallDelegate<T, RetrofitRe
     override fun timeout(): Timeout = proxy.timeout()
 
     private class ResultCallback<T>(
-        private val proxy: RetrofitResultCall<T>,
-        private val callback: Callback<RetrofitResult<T>>
+            private val proxy: RetrofitResultCall<T>,
+            private val callback: Callback<RetrofitResult<T>>
     ): Callback<T> {
 
         /**

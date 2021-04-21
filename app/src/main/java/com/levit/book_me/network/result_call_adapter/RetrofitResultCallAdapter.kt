@@ -1,4 +1,4 @@
-package com.levit.book_me.network.utill
+package com.levit.book_me.network.result_call_adapter
 
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import retrofit2.Call

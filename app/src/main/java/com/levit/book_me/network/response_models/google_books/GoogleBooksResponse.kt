@@ -1,4 +1,4 @@
-package com.levit.book_me.network.response_models
+package com.levit.book_me.network.response_models.google_books
 
 import android.os.Parcelable
 import com.levit.book_me.network.models.google_books.GoogleBookVolume

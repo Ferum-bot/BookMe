@@ -1,4 +1,4 @@
-package com.levit.book_me.network.utill
+package com.levit.book_me.network.result_call_adapter
 
 import okhttp3.Request
 import retrofit2.Call

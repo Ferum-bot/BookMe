@@ -4,11 +4,10 @@ import com.levit.book_me.core.models.GoogleBooksVolumeParameters
 import com.levit.book_me.data_sources.interfaces.GoogleBooksVolumeDataSource
 import com.levit.book_me.network.exceptions.GoogleBooksException
 import com.levit.book_me.network.network_result_data.RetrofitResult
-import com.levit.book_me.network.response_models.GoogleBooksResponse
-import com.levit.book_me.network.response_models.GoogleBooksResponseError
+import com.levit.book_me.network.response_models.google_books.GoogleBooksResponse
+import com.levit.book_me.network.response_models.google_books.GoogleBooksResponseError
 import com.levit.book_me.network.services.GoogleBooksService
 import com.levit.book_me.network.utill.NetworkConstants
-import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
