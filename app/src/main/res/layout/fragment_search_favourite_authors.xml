@@ -65,7 +65,7 @@
         android:id="@+id/confirm_chose_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/chose"
+        android:text="@string/choose"
         android:visibility="gone"
 
         style="@style/DefaultButtonStyle"

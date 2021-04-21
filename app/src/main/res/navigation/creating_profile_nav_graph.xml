@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFavouriteAuthorsFragment"
-        android:name="com.levit.book_me.ui.fragments.creating_profile.search_favourite_authors.SearchFavouriteAuthorsFragment"
+        android:name="com.levit.book_me.ui.fragments.creating_profile.search_favourites_authors.SearchFavouriteAuthorsFragment"
         android:label="SearchFavouriteAuthorsFragment" >
         <argument
             android:name="authorPosition"
@@ -82,5 +82,19 @@
     <fragment
         android:id="@+id/creatingFavouriteBooksFragment"
         android:name="com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books.CreatingFavouriteBooksFragment"
-        android:label="CreatingFavouriteBooksFragment" />
+        android:label="CreatingFavouriteBooksFragment" >
+        <action
+            android:id="@+id/action_creatingFavouriteBooksFragment_to_creatingBooksWantToReadFragment"
+            app:destination="@id/creatingBooksWantToReadFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/creatingFavouriteBooksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creatingBooksWantToReadFragment"
+        android:name="com.levit.book_me.ui.fragments.creating_profile.creating_books_want_to_read.CreatingBooksWantToReadFragment"
+        android:label="CreatingBooksWantToReadFragment" />
 </navigation>

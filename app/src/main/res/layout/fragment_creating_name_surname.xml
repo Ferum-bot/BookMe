@@ -45,7 +45,7 @@
 
         android:layout_marginTop="16dp"
 
-        app:layout_constraintVertical_bias="0.13"
+        app:layout_constraintVertical_bias="0.05"
         app:layout_constraintTop_toBottomOf="@id/label"
         app:layout_constraintStart_toStartOf="@id/start_guidline"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -93,6 +93,19 @@
 
         tools:visibility="gone"
         tools:text="Invalid surname"/>
+
+    <TextView
+        android:id="@+id/some_words_about_you_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/some_words_about_you"
+
+        style="@style/BigCreatingProfileLabelsStyle"
+
+        android:layout_marginTop="16dp"
+
+        app:layout_constraintStart_toStartOf="@id/start_guidline"
+        app:layout_constraintTop_toBottomOf="@id/invalid_surname_label"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/next_button"

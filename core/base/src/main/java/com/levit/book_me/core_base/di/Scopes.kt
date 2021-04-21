@@ -32,3 +32,7 @@ annotation class CreatingProfileScope
 @Scope
 @Retention(value = AnnotationRetention.RUNTIME)
 annotation class SearchFavouriteAuthorsScope
+
+@Scope
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class SearchBooksScope

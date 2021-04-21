@@ -2,12 +2,12 @@ package com.levit.book_me.di.modules.creating_profile
 
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core_base.annotations.ViewModelKey
+import com.levit.book_me.ui.fragments.creating_profile.creating_books_want_to_read.CreatingBooksWantToReadViewModel
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_authors.CreatingFavouriteAuthorsViewModel
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books.CreatingFavouriteBooksViewModel
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres.CreatingFavouriteGenresViewModel
 import com.levit.book_me.ui.fragments.creating_profile.creating_name_surname.CreatingNameSurnameViewModel
 import com.levit.book_me.ui.fragments.creating_profile.creating_profile_image.CreatingProfileImageViewModel
-import com.levit.book_me.ui.fragments.creating_profile.search_favourite_authors.SearchFavouriteAuthorsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -39,4 +39,9 @@ abstract class CreatingProfileViewModelsModule {
     @IntoMap
     @ViewModelKey(CreatingFavouriteBooksViewModel::class)
     abstract fun bindCreatingFavouriteBooksViewModel(viewModel: CreatingFavouriteBooksViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreatingBooksWantToReadViewModel::class)
+    abstract fun bindCreatingBooksWantToReadViewModel(viewModel: CreatingBooksWantToReadViewModel): ViewModel
 }

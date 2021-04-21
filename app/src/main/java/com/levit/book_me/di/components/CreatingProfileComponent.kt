@@ -11,12 +11,14 @@ import com.levit.book_me.di.modules.firebase.FirebaseDataSourceModule
 import com.levit.book_me.di.modules.firebase.FirebaseRepositoryModule
 import com.levit.book_me.di.modules.network.NetworkModule
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
+import com.levit.book_me.ui.fragments.creating_profile.creating_books_want_to_read.CreatingBooksWantToReadFragment
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_authors.CreatingFavouriteAuthorsFragment
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books.CreatingFavouriteBooksFragment
 import com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres.CreatingFavouriteGenresFragment
 import com.levit.book_me.ui.fragments.creating_profile.creating_name_surname.CreatingNameSurnameFragment
 import com.levit.book_me.ui.fragments.creating_profile.creating_profile_image.CreatingProfileImageFragment
-import com.levit.book_me.ui.fragments.creating_profile.search_favourite_authors.SearchFavouriteAuthorsFragment
+import com.levit.book_me.ui.fragments.creating_profile.search_books.SearchBooksFragment
+import com.levit.book_me.ui.fragments.creating_profile.search_favourites_authors.SearchFavouriteAuthorsFragment
 import dagger.Subcomponent
 
 @CreatingProfileScope
@@ -46,9 +48,14 @@ interface CreatingProfileComponent {
 
     fun inject(fragment: CreatingFavouriteBooksFragment)
 
+    fun inject(fragment: CreatingBooksWantToReadFragment)
+
+    fun inject(fragment: SearchBooksFragment)
+
     fun viewModelFactory(): ViewModelFactory
 
     fun searchFavouriteAuthorsComponent(): SearchFavouriteAuthorsComponent.Builder
+    fun searchBooksComponent(): SearchBooksComponent.Builder
 
     @Subcomponent.Builder
     interface Builder {

@@ -1,10 +1,9 @@
-package com.levit.book_me.ui.fragments.creating_profile.search_favourite_authors
+package com.levit.book_me.ui.fragments.creating_profile.search_favourites_authors
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,7 +19,6 @@ import com.levit.book_me.databinding.FragmentSearchFavouriteAuthorsBinding
 import com.levit.book_me.di.components.SearchFavouriteAuthorsComponent
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteAuthorsStorage
-import kotlinx.coroutines.delay
 
 class SearchFavouriteAuthorsFragment:
     BaseCreatingProfileFragment(R.layout.fragment_search_favourite_authors),

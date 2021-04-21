@@ -1,12 +1,10 @@
-package com.levit.book_me.ui.fragments.creating_profile.search_favourite_authors
+package com.levit.book_me.ui.fragments.creating_profile.search_favourites_authors
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.levit.book_me.R
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.databinding.SearchFavouriteAuthorsItemLayoutBinding
 

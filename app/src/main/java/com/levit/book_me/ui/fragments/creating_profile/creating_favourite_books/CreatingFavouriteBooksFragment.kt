@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingFavouriteBooksBinding
@@ -50,11 +51,21 @@ class CreatingFavouriteBooksFragment: BaseCreatingProfileFragment(R.layout.fragm
 
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
-
+            navigateToCreatingBooksWantToReadFragment()
         }
 
         binding.searchView.setOnClickListener {
-
+            navigateToSearchBooksFragment()
         }
+    }
+
+    private fun navigateToCreatingBooksWantToReadFragment() {
+        val action = CreatingFavouriteBooksFragmentDirections
+            .actionCreatingFavouriteBooksFragmentToCreatingBooksWantToReadFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToSearchBooksFragment() {
+
     }
 }

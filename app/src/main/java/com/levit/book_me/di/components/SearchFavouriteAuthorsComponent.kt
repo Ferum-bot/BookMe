@@ -7,7 +7,7 @@ import com.levit.book_me.di.modules.RepositoryModule
 import com.levit.book_me.di.modules.creating_profile.SearchFavouriteAuthorsInteractorsModule
 import com.levit.book_me.di.modules.creating_profile.SearchFavouriteAuthorsViewModelsModule
 import com.levit.book_me.di.modules.network.NetworkModule
-import com.levit.book_me.ui.fragments.creating_profile.search_favourite_authors.SearchFavouriteAuthorsFragment
+import com.levit.book_me.ui.fragments.creating_profile.search_favourites_authors.SearchFavouriteAuthorsFragment
 import dagger.Subcomponent
 
 @SearchFavouriteAuthorsScope
