@@ -1,5 +1,6 @@
 package com.levit.book_me.di.modules.network
 
+import com.levit.book_me.di.DIConstants
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
@@ -10,14 +11,18 @@ import kotlin.coroutines.CoroutineContext
 open class CoroutineContextModule {
 
     @Provides
-    @Named("IODispatcherContext")
+    @Named(DIConstants.IO_DISPATCHER_CONTEXT)
     fun provideIOCoroutineContext(): CoroutineContext = Dispatchers.IO
 
     @Provides
-    @Named("MainDispatcherContext")
+    @Named(DIConstants.MAIN_DISPATCHER_CONTEXT)
     fun provideMainCoroutineContext(): CoroutineContext = Dispatchers.Main
 
     @Provides
-    @Named("UnconfinedCoroutineContext")
+    @Named(DIConstants.UNCONFINED_DISPATCHER_CONTEXT)
     fun provideUnconfinedCoroutineContext(): CoroutineContext = Dispatchers.Unconfined
+
+    @Provides
+    @Named(DIConstants.DEFAULT_DISPATCHER_CONTEXT)
+    fun provideDefaultCoroutineContext(): CoroutineContext = Dispatchers.Default
 }

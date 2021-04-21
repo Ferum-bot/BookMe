@@ -2,6 +2,7 @@ package com.levit.book_me.di.modules.firebase
 
 import com.levit.book_me.data_sources.interfaces.FirebaseStorageUploadStreamDataSource
 import com.levit.book_me.data_sources.interfaces.FirebaseStorageUploadUriDataSource
+import com.levit.book_me.di.DIConstants
 import com.levit.book_me.repositories.implementations.FirebaseStorageUploadStreamRepositoryImpl
 import com.levit.book_me.repositories.implementations.FirebaseStorageUploadUriRepositoryImpl
 import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadStreamRepository
@@ -18,7 +19,7 @@ open class FirebaseRepositoryModule {
     fun provideStorageUploadStreamRepository(
         dataSource: FirebaseStorageUploadStreamDataSource,
 
-        @Named("IODispatcherContext")
+        @Named(DIConstants.IO_DISPATCHER_CONTEXT)
         coroutineContext: CoroutineContext
     ): FirebaseStorageUploadStreamRepository {
         return FirebaseStorageUploadStreamRepositoryImpl(dataSource, coroutineContext)
@@ -28,7 +29,7 @@ open class FirebaseRepositoryModule {
     fun provideStorageUploadUriRepository(
         dataSource: FirebaseStorageUploadUriDataSource,
 
-        @Named("IODispatcherContext")
+        @Named(DIConstants.IO_DISPATCHER_CONTEXT)
         coroutineContext: CoroutineContext
     ): FirebaseStorageUploadUriRepository {
         return FirebaseStorageUploadUriRepositoryImpl(dataSource, coroutineContext)

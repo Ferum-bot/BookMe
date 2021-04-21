@@ -13,25 +13,15 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 @Module(includes = [
     InterceptorsModule::class,
     RetrofitServiceModule::class,
-    CoroutineContextModule::class
+    CoroutineContextModule::class,
+    RetrofitModule::class,
 ])
 open class NetworkModule {
-
-    @Provides
-    fun provideBaseRetrofit(
-            converterFactory: MoshiConverterFactory,
-            callAdapterFactory: RetrofitResultCallAdapterFactory,
-            client: OkHttpClient
-    ): Retrofit = Retrofit.Builder()
-        .addCallAdapterFactory(callAdapterFactory)
-        .addConverterFactory(converterFactory)
-        .client(client)
-        .baseUrl(NetworkConstants.GOOGLE_BOOKS_API_BASE_URL)
-        .build()
 
     @Provides
     fun provideClient(

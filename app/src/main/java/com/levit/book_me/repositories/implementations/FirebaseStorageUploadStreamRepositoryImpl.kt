@@ -2,6 +2,7 @@ package com.levit.book_me.repositories.implementations
 
 import com.google.firebase.storage.StorageReference
 import com.levit.book_me.data_sources.interfaces.FirebaseStorageUploadStreamDataSource
+import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
 import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadStreamRepository
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
 class FirebaseStorageUploadStreamRepositoryImpl @Inject constructor(
     private val storageDataSource: FirebaseStorageUploadStreamDataSource,
 
-    @Named("IODispatcherContext")
+    @Named(DIConstants.IO_DISPATCHER_CONTEXT)
     private val launchContext: CoroutineContext,
 ): FirebaseStorageUploadStreamRepository {
 

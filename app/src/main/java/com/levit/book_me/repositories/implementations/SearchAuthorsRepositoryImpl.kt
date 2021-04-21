@@ -3,6 +3,7 @@ package com.levit.book_me.repositories.implementations
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.GoogleBooksVolumeParameters
 import com.levit.book_me.data_sources.interfaces.GoogleBooksVolumeDataSource
+import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.network.response_models.google_books.GoogleBooksResponse
 import com.levit.book_me.repositories.interfaces.SearchAuthorsRepository
@@ -15,7 +16,7 @@ import javax.inject.Named
 import kotlin.coroutines.CoroutineContext
 
 class SearchAuthorsRepositoryImpl @Inject constructor(
-    @Named("IODispatcherContext")
+    @Named(DIConstants.IO_DISPATCHER_CONTEXT)
     private val launchContext: CoroutineContext,
 
     private val dataSource: GoogleBooksVolumeDataSource,

@@ -11,7 +11,7 @@ data class GoQuotesQuoteResponse(
     val statusCode: Int,
 
     @Json(name = "message")
-    val statusMessage: Int,
+    val statusMessage: String,
 
     @Json(name = "count")
     val resultCount: Int?,
