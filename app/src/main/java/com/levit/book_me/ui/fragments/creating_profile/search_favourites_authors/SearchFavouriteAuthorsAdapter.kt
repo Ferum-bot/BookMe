@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.levit.book_me.R
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.databinding.SearchFavouriteAuthorsItemLayoutBinding
 
