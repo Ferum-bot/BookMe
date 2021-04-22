@@ -155,4 +155,12 @@
     <style name="AuthorsBigBookItemTextViewStyle" parent="DefaultBigBookItemTextViewStyle">
         <item name="android:textSize">17sp</item>
     </style>
+
+    <style name="QuoteTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:fontFamily">@font/allura</item>
+    </style>
+
+    <style name="QuoteAuthorTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:fontFamily">@font/yrsa</item>
+    </style>
 </resources>

@@ -66,6 +66,7 @@ class SearchFavouriteAuthorsAdapter(
         fun bind(author: Author) {
             this.author = author
             binding.fullName.text = author.fullName
+            setState(AuthorState.NOT_CHOSEN)
         }
 
         private fun changeStateToOpposite() = with(binding.root) {
