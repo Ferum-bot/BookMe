@@ -63,6 +63,10 @@
     <string name="some_words_about_you">Some words \nabout you</string>
     <string name="choose">Choose</string>
     <string name="choose_books_you_want_to_read">Choose books you \nwant to read</string>
+    <string name="finish">Finish</string>
+    <string name="something_interesting_about_you">Something interesting about you</string>
+    <string name="choose_your_favourite_quote">Choose your \nfavourite quote</string>
+    <string name="quotes">Quotes</string>
 
     <!--  Choose Author Layout  -->
     <string name="first_author">First Author</string>
@@ -72,12 +76,16 @@
     <string name="fives_author">Fives Author</string>
     <string name="author">Author</string>
 
+    <!--  Choose Quote Screens  -->
+    <string name="choose_from_tags">Choose from %s tags</string>
+    <string name="choose_from_authors">Choose from %s authors</string>
+    <string name="random_quotes">Random Quotes:</string>
+
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
 
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
-    <string name="finish">Finish</string>
 
 </resources>

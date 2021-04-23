@@ -32,15 +32,24 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        configureLayout()
         setAllClickListeners()
         setTextWatchers()
         setAllObservers()
         updatePageIndicator()
     }
 
+    private fun configureLayout() {
+        binding.quoteItem.hideAuthor(true)
+    }
+
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
             navigateToChooseProfilePhotoFragment()
+        }
+
+        binding.quoteItem.setOnClickListener {
+            //navigateToChooseProfilePhotoFragment()
         }
     }
 

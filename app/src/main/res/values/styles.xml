@@ -158,9 +158,15 @@
 
     <style name="QuoteTextViewStyle" parent="DefaultTextViewStyle">
         <item name="android:fontFamily">@font/allura</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="QuoteAuthorTextViewStyle" parent="DefaultTextViewStyle">
         <item name="android:fontFamily">@font/yrsa</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="QuoteTypeChooseLabel" parent="DefaultTextViewStyle">
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>

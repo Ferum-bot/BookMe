@@ -80,10 +80,6 @@ class SearchFavouriteAuthorsFragment:
     private fun initRecyclerView() {
         with(binding.recyclerView) {
             adapter = this@SearchFavouriteAuthorsFragment.adapter
-            val context = requireContext()
-            val decorator = DividerItemDecoration(context, RecyclerView.VERTICAL)
-            decorator.setDrawable(ContextCompat.getDrawable(context, R.drawable.search_favoutire_authors_item_decorator)!!)
-            //addItemDecoration(decorator)
         }
     }
 

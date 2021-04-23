@@ -14,4 +14,11 @@ data class GoQuote(
 
     @Json(name = "tag")
     val tag: String,
-): Parcelable
+): Parcelable {
+
+    /**
+     * This property needed to correct work with
+     * quotes in {QuotesAdapter.kt}
+     */
+    var isChosen: Boolean = false
+}

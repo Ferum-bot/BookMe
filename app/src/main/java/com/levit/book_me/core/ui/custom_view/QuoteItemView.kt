@@ -3,7 +3,11 @@ package com.levit.book_me.core.ui.custom_view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
+import bolts.Bolts
+import com.levit.book_me.R
 import com.levit.book_me.core.models.GoQuote
 import com.levit.book_me.databinding.QuoteLayoutItemBinding
 
@@ -25,5 +29,15 @@ class QuoteItemView @JvmOverloads constructor(
     fun setQuote(quote: GoQuote) = with(binding) {
         text.text = quote.text
         author.text = quote.authorFullName
+    }
+
+    fun setChosen(chosen: Boolean) = if (chosen) {
+        binding.backGround.setBackgroundResource(R.drawable.bg_for_quote_layout_chosen_item)
+    } else {
+        binding.backGround.setBackgroundResource(R.drawable.bg_for_quote_layout_not_chosen_item)
+    }
+
+    fun hideAuthor(hide: Boolean) {
+        binding.author.isVisible = !hide
     }
 }

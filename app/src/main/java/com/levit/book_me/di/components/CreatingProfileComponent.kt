@@ -19,6 +19,10 @@ import com.levit.book_me.ui.fragments.creating_profile.creating_name_surname.Cre
 import com.levit.book_me.ui.fragments.creating_profile.creating_profile_image.CreatingProfileImageFragment
 import com.levit.book_me.ui.fragments.creating_profile.search_books.SearchBooksFragment
 import com.levit.book_me.ui.fragments.creating_profile.search_favourites_authors.SearchFavouriteAuthorsFragment
+import com.levit.book_me.ui.fragments.quotes.authors_screen.QuotesAuthorsScreenFragment
+import com.levit.book_me.ui.fragments.quotes.main_screen.QuotesMainScreenFragment
+import com.levit.book_me.ui.fragments.quotes.quotes_screen.QuotesScreenFragment
+import com.levit.book_me.ui.fragments.quotes.tags_screen.QuotesTagsScreenFragment
 import dagger.Subcomponent
 
 @CreatingProfileScope
@@ -52,10 +56,19 @@ interface CreatingProfileComponent {
 
     fun inject(fragment: SearchBooksFragment)
 
+    fun inject(fragment: QuotesMainScreenFragment)
+
+    fun inject(fragment: QuotesAuthorsScreenFragment)
+
+    fun inject(fragment: QuotesTagsScreenFragment)
+
+    fun inject(fragment: QuotesScreenFragment)
+
     fun viewModelFactory(): ViewModelFactory
 
     fun searchFavouriteAuthorsComponent(): SearchFavouriteAuthorsComponent.Builder
     fun searchBooksComponent(): SearchBooksComponent.Builder
+    fun quotesComponent(): QuotesComponent.Builder
 
     @Subcomponent.Builder
     interface Builder {

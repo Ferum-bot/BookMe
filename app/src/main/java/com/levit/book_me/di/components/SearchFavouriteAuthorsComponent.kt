@@ -13,10 +13,7 @@ import dagger.Subcomponent
 @SearchFavouriteAuthorsScope
 @Subcomponent(modules = [
     SearchFavouriteAuthorsInteractorsModule::class,
-    SearchFavouriteAuthorsViewModelsModule::class,
-    RepositoryModule::class,
-    NetworkModule::class,
-    DataSourceModule::class,
+    SearchFavouriteAuthorsViewModelsModule::class
 ])
 interface SearchFavouriteAuthorsComponent {
 
