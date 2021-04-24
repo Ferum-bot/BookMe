@@ -32,6 +32,7 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showMainTitle(true)
         configureLayout()
         setAllClickListeners()
         setTextWatchers()
