@@ -49,7 +49,7 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
         }
 
         binding.quoteItem.setOnClickListener {
-            //navigateToChooseProfilePhotoFragment()
+            navigateToChooseQuoteScreens()
         }
     }
 
@@ -88,4 +88,9 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
         findNavController().navigate(action)
     }
 
+    private fun navigateToChooseQuoteScreens() {
+        val action = CreatingNameSurnameFragmentDirections
+            .actionCreatingNameSurnameFragmentToChooseQuoteNavGraph()
+        findNavController().navigate(action)
+    }
 }

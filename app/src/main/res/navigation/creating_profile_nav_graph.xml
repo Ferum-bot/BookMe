@@ -17,6 +17,15 @@
             app:exitAnim="@anim/slide_left_exit_anim"
             app:popEnterAnim="@anim/slide_right_enter_anim"
             app:popExitAnim="@anim/slide_right_exit_anim"/>
+        <action
+            android:id="@+id/action_creatingNameSurnameFragment_to_choose_quote_nav_graph"
+            app:destination="@id/choose_quote_nav_graph"
+            app:enterAnim="@anim/slide_down_enter_anim"
+            app:exitAnim="@anim/slide_down_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/creatingNameSurnameFragment"
+            app:popEnterAnim="@anim/slide_up_enter_anim"
+            app:popExitAnim="@anim/slide_up_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/creatingProfileImageFragment"
@@ -97,4 +106,5 @@
         android:id="@+id/creatingBooksWantToReadFragment"
         android:name="com.levit.book_me.ui.fragments.creating_profile.creating_books_want_to_read.CreatingBooksWantToReadFragment"
         android:label="CreatingBooksWantToReadFragment" />
+    <include app:graph="@navigation/choose_quote_nav_graph" />
 </navigation>

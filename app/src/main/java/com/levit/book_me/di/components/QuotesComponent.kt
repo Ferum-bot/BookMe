@@ -2,7 +2,9 @@ package com.levit.book_me.di.components
 
 import com.levit.book_me.core_base.di.QuotesScreenScope
 import com.levit.book_me.core_presentation.utils.ViewModelFactory
+import com.levit.book_me.di.modules.quotes.QuotesDataSourcesModule
 import com.levit.book_me.di.modules.quotes.QuotesInteractorsModule
+import com.levit.book_me.di.modules.quotes.QuotesRepositoryModule
 import com.levit.book_me.di.modules.quotes.QuotesViewModelsModule
 import com.levit.book_me.ui.fragments.quotes.authors_screen.QuotesAuthorsScreenFragment
 import com.levit.book_me.ui.fragments.quotes.main_screen.QuotesMainScreenFragment
@@ -14,6 +16,8 @@ import dagger.Subcomponent
 @Subcomponent(modules = [
     QuotesViewModelsModule::class,
     QuotesInteractorsModule::class,
+    QuotesDataSourcesModule::class,
+    QuotesRepositoryModule::class,
 ])
 interface QuotesComponent {
 

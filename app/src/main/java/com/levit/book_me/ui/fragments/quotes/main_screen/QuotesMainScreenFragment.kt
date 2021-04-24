@@ -1,11 +1,14 @@
 package com.levit.book_me.ui.fragments.quotes.main_screen
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.GoQuote
@@ -58,8 +61,19 @@ class QuotesMainScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_main
             }
         }
 
+        val decorator = object: RecyclerView.ItemDecoration() {
+
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                super.getItemOffsets(outRect, view, parent, state)
+                outRect.bottom = 16
+            }
+        }
+
         randomQuotesAdapter = QuotesAdapter(statusListener)
-        binding.quoteRecyclerView.adapter = randomQuotesAdapter
+        with(binding.quoteRecyclerView) {
+            adapter = randomQuotesAdapter
+            addItemDecoration(decorator)
+        }
     }
 
     private fun setAllClickListeners() {
@@ -120,20 +134,14 @@ class QuotesMainScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_main
             }
         })
 
-        viewModel.numberOfAuthors.observe(viewLifecycleOwner, Observer { count ->
-            if (count != null) {
-                binding.quoteTypeChoose.setNumberOfAuthors(count)
-            }
-        })
+        viewModel.screenModel.observe(viewLifecycleOwner, Observer { model ->
+            if (model != null) {
+                val authors = model.numberOfAuthors
+                val tags = model.numberOfTags
+                val quotes = model.randomQuotes
 
-        viewModel.numberOfTags.observe(viewLifecycleOwner, Observer { count ->
-            if (count != null) {
-                binding.quoteTypeChoose.setNumberOfTags(count)
-            }
-        })
-
-        viewModel.randomQuotes.observe(viewLifecycleOwner, Observer { quotes ->
-            if (quotes != null) {
+                binding.quoteTypeChoose.setNumberOfTags(tags)
+                binding.quoteTypeChoose.setNumberOfAuthors(authors)
                 randomQuotesAdapter.submitList(quotes)
             }
         })

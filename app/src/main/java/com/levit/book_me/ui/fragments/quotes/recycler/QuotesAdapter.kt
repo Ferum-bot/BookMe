@@ -1,11 +1,17 @@
 package com.levit.book_me.ui.fragments.quotes.recycler
 
+import android.graphics.Rect
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.levit.book_me.R
 import com.levit.book_me.core.models.GoQuote
 import com.levit.book_me.core.ui.custom_view.QuoteItemView
+import timber.log.Timber
 
 class QuotesAdapter(
     private val listener: QuoteStatusListener?
@@ -52,7 +58,14 @@ class QuotesAdapter(
         companion object {
 
             fun getFrom(parent: ViewGroup, adapter: QuotesAdapter): QuoteViewHolder {
-                val view = QuoteItemView(parent.context)
+                val view = QuoteItemView(parent.context).apply {
+                    val layoutParams = ConstraintLayout.LayoutParams(
+                            ConstraintLayout.LayoutParams.MATCH_PARENT,
+                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    )
+                    setLayoutParams(layoutParams)
+                }
+
                 return QuoteViewHolder(view, adapter)
             }
 
@@ -105,6 +118,7 @@ class QuotesAdapter(
     }
 
     override fun onBindViewHolder(holder: QuoteViewHolder, position: Int) {
+        Timber.tag("BindViewHolder").i("Position: $position")
         val quote = getItem(position)
         holder.bind(quote)
     }

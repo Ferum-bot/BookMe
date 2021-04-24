@@ -6,22 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.levit.book_me.R
 import com.levit.book_me.core.models.GoQuote
+import com.levit.book_me.core.models.QuotesMainScreenModel
 import com.levit.book_me.core_base.di.QuotesScreenScope
 import com.levit.book_me.interactors.interfaces.QuotesMainScreenInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@QuotesScreenScope
 class QuotesMainScreenViewModel @Inject constructor(
     private val interactor: QuotesMainScreenInteractor
 ): ViewModel() {
-
-    companion object {
-        private const val DELAY_TIME = 500L
-    }
 
     enum class QuotesMainScreenStatuses {
         LOADING, ERROR, LOADED
@@ -33,27 +30,20 @@ class QuotesMainScreenViewModel @Inject constructor(
     private val _errorMessageId: MutableLiveData<Int?> = MutableLiveData(null)
     val errorMessageId: LiveData<Int?> = _errorMessageId
 
-    private val _numberOfTags: MutableLiveData<Int?> = MutableLiveData(null)
-    val numberOfTags: LiveData<Int?> = _numberOfTags
-
-    private val _numberOfAuthors: MutableLiveData<Int?> = MutableLiveData(null)
-    val numberOfAuthors: LiveData<Int?> = _numberOfAuthors
-
-    private val _randomQuotes: MutableLiveData<List<GoQuote>?> = MutableLiveData(null)
-    val randomQuotes: LiveData<List<GoQuote>?> = _randomQuotes
-
-    private val _allDataIsAvailable: MutableLiveData<Boolean> = MutableLiveData(false)
-    val allDataIsAvailable: LiveData<Boolean> = _allDataIsAvailable
+    private val _screenModel: MutableLiveData<QuotesMainScreenModel?> = MutableLiveData(null)
+    val screenModel: LiveData<QuotesMainScreenModel?> = _screenModel
 
     private val _currentStatus: MutableLiveData<QuotesMainScreenStatuses> = MutableLiveData(QuotesMainScreenStatuses.LOADING)
     val currentStatus: LiveData<QuotesMainScreenStatuses> = _currentStatus
 
-    private val allDataIsReady: Boolean
-    get() = _numberOfTags.value != null && _numberOfAuthors.value != null  && _randomQuotes.value != null
-
     init {
-        launchCollecting()
-        launchRemoteQuery()
+        viewModelScope.launch {
+            interactor.screenModel.collect { result ->
+                handleModelResult(result)
+            }
+        }
+        
+        launchGettingScreenModel()
     }
 
     fun errorMessageHasShown() {
@@ -61,31 +51,11 @@ class QuotesMainScreenViewModel @Inject constructor(
         _errorMessageId.postValue(null)
     }
 
-    private fun launchCollecting() {
-        viewModelScope.launch {
-            interactor.numberOfTags.collect { result ->
-                handleNumberOfTagsResult(result)
-            }
-        }
-
-        viewModelScope.launch {
-            interactor.numberOfAuthors.collect { result ->
-                handleNumberOfAuthorsResult(result)
-            }
-        }
-
-        viewModelScope.launch {
-            interactor.randomQuotes.collect { result ->
-                handleRandomQuotesResult(result)
-            }
-        }
-    }
-
-    private fun launchRemoteQuery() {
+    private fun launchGettingScreenModel() {
         _currentStatus.postValue(QuotesMainScreenStatuses.LOADING)
 
         viewModelScope.launch {
-            interactor.getNumberOfTags()
+            interactor.getRandomQuotes()
         }
 
         viewModelScope.launch {
@@ -93,34 +63,15 @@ class QuotesMainScreenViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            interactor.getRandomQuotes()
+            interactor.getNumberOfTags()
         }
     }
 
-    private suspend fun handleNumberOfTagsResult(result: RetrofitResult<Int>) = when(result) {
+    private fun handleModelResult(result: RetrofitResult<QuotesMainScreenModel>) = when(result) {
         is RetrofitResult.Success -> {
-            _numberOfTags.postValue(result.data)
-            checkDataAvailability()
-        }
-        is RetrofitResult.Failure<*> -> {
-            handleErrorResult(result)
-        }
-    }
-
-    private suspend fun handleNumberOfAuthorsResult(result: RetrofitResult<Int>) = when(result) {
-        is RetrofitResult.Success -> {
-            _numberOfAuthors.postValue(result.data)
-            checkDataAvailability()
-        }
-        is RetrofitResult.Failure<*> -> {
-            handleErrorResult(result)
-        }
-    }
-
-    private suspend fun handleRandomQuotesResult(result: RetrofitResult<List<GoQuote>>) = when(result) {
-        is RetrofitResult.Success -> {
-            _randomQuotes.postValue(result.data)
-            checkDataAvailability()
+            _currentStatus.postValue(QuotesMainScreenStatuses.LOADED)
+            val model = result.data
+            _screenModel.postValue(model)
         }
         is RetrofitResult.Failure<*> -> {
             handleErrorResult(result)
@@ -152,11 +103,4 @@ class QuotesMainScreenViewModel @Inject constructor(
         }
     }
 
-    private suspend fun checkDataAvailability() {
-        delay(DELAY_TIME)
-        if (allDataIsReady) {
-            _allDataIsAvailable.postValue(true)
-            _currentStatus.postValue(QuotesMainScreenStatuses.LOADED)
-        }
-    }
 }
