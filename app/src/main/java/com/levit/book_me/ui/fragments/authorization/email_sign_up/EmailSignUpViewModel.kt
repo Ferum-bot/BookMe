@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.extensions.isValidEmailAddress
 import com.levit.book_me.core.extensions.isValidEmailPassword
 import com.levit.book_me.core_base.di.AuthorizationScope
+import com.levit.book_me.ui.base.BaseViewModel
 import javax.inject.Inject
 
 @AuthorizationScope
-class EmailSignUpViewModel @Inject constructor(): ViewModel() {
+class EmailSignUpViewModel @Inject constructor(): BaseViewModel() {
 
     private val _isEmailValid: MutableLiveData<Boolean> = MutableLiveData(false)
     val isEmailValid: LiveData<Boolean> = _isEmailValid

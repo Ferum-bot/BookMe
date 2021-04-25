@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core_base.di.CreatingProfileScope
+import com.levit.book_me.ui.base.BaseViewModel
 import javax.inject.Inject
 
 @CreatingProfileScope
-class CreatingNameSurnameViewModel @Inject constructor(): ViewModel() {
+class CreatingNameSurnameViewModel @Inject constructor(): BaseViewModel() {
 
     private val _isNameCorrect: MutableLiveData<Boolean> = MutableLiveData(false)
     val isNameCorrect: LiveData<Boolean> = _isNameCorrect
@@ -20,6 +21,10 @@ class CreatingNameSurnameViewModel @Inject constructor(): ViewModel() {
     }
 
     fun onSurnameChanged(text: CharSequence, start: Int, before: Int, count: Int) {
+
+    }
+
+    fun onAboutYouChanged(text: CharSequence, start: Int, before: Int, count: Int) {
 
     }
 }

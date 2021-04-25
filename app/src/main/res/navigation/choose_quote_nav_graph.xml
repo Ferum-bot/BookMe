@@ -57,5 +57,13 @@
     <fragment
         android:id="@+id/quotesScreenFragment"
         android:name="com.levit.book_me.ui.fragments.quotes.quotes_screen.QuotesScreenFragment"
-        android:label="QuotesScreenFragment" />
+        android:label="QuotesScreenFragment" >
+        <argument
+            android:name="type"
+            app:argType="com.levit.book_me.core.models.GoQuotesTypes"
+            android:defaultValue="TAG" />
+        <argument
+            android:name="querySearch"
+            app:argType="string" />
+    </fragment>
 </navigation>

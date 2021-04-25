@@ -9,6 +9,7 @@ import com.levit.book_me.core.models.Author
 import com.levit.book_me.core_base.di.SearchFavouriteAuthorsScope
 import com.levit.book_me.interactors.interfaces.SearchFavouriteAuthorsInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
+import com.levit.book_me.ui.base.BaseViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @SearchFavouriteAuthorsScope
 class SearchFavouriteAuthorsViewModel @Inject constructor(
     private val interactor: SearchFavouriteAuthorsInteractor
-): ViewModel() {
+): BaseViewModel() {
 
     enum class SearchStatus{
         SEARCHING, NOT_SEARCHING, NOTHING_FOUND, FOUND
@@ -24,12 +25,6 @@ class SearchFavouriteAuthorsViewModel @Inject constructor(
 
     private val _searchResult: MutableLiveData<List<Author>> = MutableLiveData(emptyList())
     val searchResult: LiveData<List<Author>> = _searchResult
-
-    private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
-    val errorMessage: LiveData<String?> = _errorMessage
-
-    private val _errorMessageId: MutableLiveData<Int?> = MutableLiveData(null)
-    val errorMessageId: LiveData<Int?> = _errorMessageId
 
     private val _currentStatus: MutableLiveData<SearchStatus> = MutableLiveData(SearchStatus.NOT_SEARCHING)
     val currentStatus: LiveData<SearchStatus> = _currentStatus
@@ -55,11 +50,6 @@ class SearchFavouriteAuthorsViewModel @Inject constructor(
         }
     }
 
-    fun errorMessageHasShown() {
-        _errorMessage.value = null
-        _errorMessageId.value = null
-    }
-
     private fun searchAuthors(text: String) {
         _currentStatus.postValue(SearchStatus.SEARCHING)
         _searchResult.postValue(emptyList())
@@ -71,38 +61,14 @@ class SearchFavouriteAuthorsViewModel @Inject constructor(
     private fun handleSearchResult(result: RetrofitResult<List<Author>>) {
         when (result) {
             is RetrofitResult.Success -> handleSuccessResult(result)
-            is RetrofitResult.Failure<*> -> handleFailureResult(result)
+            is RetrofitResult.Failure<*> -> handleErrorResult(result)
         }
     }
 
-    private fun handleFailureResult(result: RetrofitResult.Failure<*>) {
+    override fun handleErrorResult(error: RetrofitResult.Failure<*>) {
         _currentStatus.postValue(SearchStatus.NOT_SEARCHING)
         _searchResult.postValue(emptyList())
-
-        when (result) {
-
-            is RetrofitResult.Failure.HttpError -> {
-                if (result.statusMessage.isNullOrBlank()) {
-                    _errorMessageId.postValue(R.string.something_went_wrong)
-                }
-                else {
-                    _errorMessage.postValue(result.statusMessage)
-                }
-            }
-
-            is RetrofitResult.Failure.Error -> {
-                if (result.messageId != null) {
-                    _errorMessageId.postValue(result.messageId)
-                    return
-                }
-                if (result.message != null) {
-                    _errorMessage.postValue(result.message)
-                }
-                else {
-                    _errorMessageId.postValue(R.string.something_went_wrong)
-                }
-            }
-        }
+        super.handleErrorResult(error)
     }
 
     private fun handleSuccessResult(result: RetrofitResult.Success<List<Author>>) {

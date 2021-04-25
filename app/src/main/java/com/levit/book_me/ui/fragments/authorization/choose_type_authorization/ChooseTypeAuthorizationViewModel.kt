@@ -14,29 +14,24 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.isDataAvailable
 import com.levit.book_me.core_base.di.AuthorizationScope
+import com.levit.book_me.ui.base.BaseViewModel
 import javax.inject.Inject
 
 @AuthorizationScope
-class ChooseTypeAuthorizationViewModel @Inject constructor(): ViewModel() {
-
-    private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
-    val errorMessage: LiveData<String?> = _errorMessage
-
-    private val _errorMessageResId: MutableLiveData<Int?> = MutableLiveData(null)
-    val errorMessageResId: LiveData<Int?> = _errorMessageResId
+class ChooseTypeAuthorizationViewModel @Inject constructor(): BaseViewModel() {
 
     private val _credential: MutableLiveData<AuthCredential?> = MutableLiveData(null)
     val credential: LiveData<AuthCredential?> = _credential
     
     fun googleSignInActivityResultCallback(result: ActivityResult?) {
         if (result == null) {
-            _errorMessageResId.value = R.string.something_went_wrong
+            _errorMessageId.value = R.string.something_went_wrong
             return
         }
         if (result.isDataAvailable()) {
             tryToAuthWithGoogle(result.data!!)
         } else {
-            _errorMessageResId.value = R.string.something_went_wrong
+            _errorMessageId.value = R.string.something_went_wrong
             return
         }
     }
@@ -44,11 +39,6 @@ class ChooseTypeAuthorizationViewModel @Inject constructor(): ViewModel() {
     fun firebaseAuthWithFacebook(token: AccessToken) {
         val credential = FacebookAuthProvider.getCredential(token.token)
         _credential.value = credential
-    }
-
-    fun errorMessageHasShown() {
-        _errorMessage.value = null
-        _errorMessageResId.value = null
     }
 
     private fun tryToAuthWithGoogle(intent: Intent) {
@@ -60,13 +50,13 @@ class ChooseTypeAuthorizationViewModel @Inject constructor(): ViewModel() {
         catch (ex: ApiException) {
             val defaultErrorMessage = R.string.something_went_wrong
             if (ex.message.isNullOrBlank()) {
-                _errorMessageResId.value = defaultErrorMessage
+                _errorMessageId.value = defaultErrorMessage
             } else {
                 _errorMessage.value = ex.message
             }
         }
         catch (ex: NullPointerException) {
-            _errorMessageResId.value = R.string.something_went_wrong
+            _errorMessageId.value = R.string.something_went_wrong
         }
     }
 

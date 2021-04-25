@@ -65,8 +65,6 @@
     <string name="choose_books_you_want_to_read">Choose books you \nwant to read</string>
     <string name="finish">Finish</string>
     <string name="something_interesting_about_you">Something interesting about you</string>
-    <string name="choose_your_favourite_quote">Choose your \nfavourite quote</string>
-    <string name="quotes">Quotes</string>
 
     <!--  Choose Author Layout  -->
     <string name="first_author">First Author</string>
@@ -77,9 +75,13 @@
     <string name="author">Author</string>
 
     <!--  Choose Quote Screens  -->
+    <string name="choose_your_favourite_quote">Choose your \nfavourite quote</string>
+    <string name="quotes">Quotes</string>
     <string name="choose_from_tags">Choose from %s tags</string>
     <string name="choose_from_authors">Choose from %s authors</string>
     <string name="random_quotes">Random Quotes:</string>
+    <string name="more_than_500_favourite_quotes_from_all_over_the_world">More than 500+ favourite quotes from all over the world!</string>
+    <string name="authors">Authors</string>
 
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
@@ -87,5 +89,6 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="tags">Tags</string>
 
 </resources>

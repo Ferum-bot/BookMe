@@ -15,7 +15,7 @@
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="More than 500+ favourite quotes from all over the world!"
+        android:text="@string/more_than_500_favourite_quotes_from_all_over_the_world"
 
         style="@style/QuoteTextViewStyle"
 

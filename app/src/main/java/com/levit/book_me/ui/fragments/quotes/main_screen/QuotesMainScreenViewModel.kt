@@ -10,6 +10,7 @@ import com.levit.book_me.core.models.QuotesMainScreenModel
 import com.levit.book_me.core_base.di.QuotesScreenScope
 import com.levit.book_me.interactors.interfaces.QuotesMainScreenInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
+import com.levit.book_me.ui.base.BaseViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
@@ -18,17 +19,11 @@ import javax.inject.Inject
 
 class QuotesMainScreenViewModel @Inject constructor(
     private val interactor: QuotesMainScreenInteractor
-): ViewModel() {
+): BaseViewModel() {
 
     enum class QuotesMainScreenStatuses {
         LOADING, ERROR, LOADED
     }
-
-    private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
-    val errorMessage: LiveData<String?> = _errorMessage
-
-    private val _errorMessageId: MutableLiveData<Int?> = MutableLiveData(null)
-    val errorMessageId: LiveData<Int?> = _errorMessageId
 
     private val _screenModel: MutableLiveData<QuotesMainScreenModel?> = MutableLiveData(null)
     val screenModel: LiveData<QuotesMainScreenModel?> = _screenModel
@@ -44,11 +39,6 @@ class QuotesMainScreenViewModel @Inject constructor(
         }
         
         launchGettingScreenModel()
-    }
-
-    fun errorMessageHasShown() {
-        _errorMessage.postValue(null)
-        _errorMessageId.postValue(null)
     }
 
     private fun launchGettingScreenModel() {
@@ -69,38 +59,21 @@ class QuotesMainScreenViewModel @Inject constructor(
 
     private fun handleModelResult(result: RetrofitResult<QuotesMainScreenModel>) = when(result) {
         is RetrofitResult.Success -> {
-            _currentStatus.postValue(QuotesMainScreenStatuses.LOADED)
-            val model = result.data
-            _screenModel.postValue(model)
+            handleSuccessResult(result)
         }
         is RetrofitResult.Failure<*> -> {
             handleErrorResult(result)
         }
     }
 
-    private fun handleErrorResult(error: RetrofitResult.Failure<*>) {
+    override fun handleErrorResult(error: RetrofitResult.Failure<*>) {
         _currentStatus.postValue(QuotesMainScreenStatuses.ERROR)
-        when(error) {
-            is RetrofitResult.Failure.HttpError -> {
-                if (error.statusMessage == null) {
-                    _errorMessageId.postValue(R.string.something_went_wrong)
-                } else {
-                    _errorMessage.postValue(error.statusMessage)
-                }
-            }
-
-            is RetrofitResult.Failure.Error -> {
-                if (error.messageId != null) {
-                    _errorMessageId.postValue(error.messageId)
-                    return
-                }
-                if (error.message != null) {
-                    _errorMessage.postValue(error.message)
-                } else {
-                    _errorMessageId.postValue(R.string.something_went_wrong)
-                }
-            }
-        }
+        super.handleErrorResult(error)
     }
 
+    private fun handleSuccessResult(result: RetrofitResult.Success<QuotesMainScreenModel>) {
+        _currentStatus.postValue(QuotesMainScreenStatuses.LOADED)
+        val model = result.data
+        _screenModel.postValue(model)
+    }
 }

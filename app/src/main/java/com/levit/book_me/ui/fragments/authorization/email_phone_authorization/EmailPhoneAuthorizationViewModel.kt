@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.extensions.isValidEmailAddress
 import com.levit.book_me.core.models.MobileTelephone
 import com.levit.book_me.core_base.di.AuthorizationScope
+import com.levit.book_me.ui.base.BaseViewModel
 import javax.inject.Inject
 
 @AuthorizationScope
-class EmailPhoneAuthorizationViewModel @Inject constructor(): ViewModel() {
-
-    private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
-    val errorMessage: LiveData<String?> = _errorMessage
+class EmailPhoneAuthorizationViewModel @Inject constructor(): BaseViewModel() {
 
     private val _isPhoneValid: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPhoneValid: LiveData<Boolean> = _isPhoneValid
@@ -56,9 +54,5 @@ class EmailPhoneAuthorizationViewModel @Inject constructor(): ViewModel() {
             _isPhoneValid.value = false
             null
         }
-    }
-
-    fun errorMessageHasShown() {
-        _errorMessage.value = null
     }
 }

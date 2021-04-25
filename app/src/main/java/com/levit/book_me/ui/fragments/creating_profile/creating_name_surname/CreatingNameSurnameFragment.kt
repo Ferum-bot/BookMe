@@ -12,6 +12,7 @@ import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentCreatingNameSurnameBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import com.levit.book_me.ui.fragments.quotes.utill.ProfileQuoteStorage
 
 class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_name_surname) {
 
@@ -62,6 +63,10 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
         binding.surnameTextInput.addTextChangedListener(ParcelableTextWatcher().apply {
             onTextChangeListener = viewModel::onSurnameChanged
         })
+
+        binding.wordsAboutYouInputEditText.addTextChangedListener(ParcelableTextWatcher().apply {
+            onTextChangeListener = viewModel::onAboutYouChanged
+        })
     }
 
     private fun setAllObservers() {
@@ -74,6 +79,19 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
         viewModel.isSurnameCorrect.observe(viewLifecycleOwner, Observer { surnameIsCorrect ->
             if (surnameIsCorrect) {
                 binding.invalidSurnameLabel.visibility = View.GONE
+            }
+        })
+
+        ProfileQuoteStorage.quote.observe(viewLifecycleOwner, Observer { quote ->
+            if (quote == null) {
+                binding.quoteItem.hideAuthor(true)
+                binding.quoteItem.setChosen(false)
+                binding.quoteItem.setNotChosenText()
+            }
+            else {
+                binding.quoteItem.hideAuthor(false)
+                binding.quoteItem.setChosen(true)
+                binding.quoteItem.setQuote(quote)
             }
         })
     }

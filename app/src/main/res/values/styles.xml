@@ -169,4 +169,9 @@
     <style name="QuoteTypeChooseLabel" parent="DefaultTextViewStyle">
         <item name="android:textSize">20sp</item>
     </style>
+
+    <style name="QuoteScreenLabelStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

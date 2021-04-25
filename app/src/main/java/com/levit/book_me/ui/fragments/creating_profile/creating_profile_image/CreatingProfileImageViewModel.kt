@@ -8,6 +8,7 @@ import com.levit.book_me.R
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.interactors.interfaces.UploadProfileImageInteractor
 import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
+import com.levit.book_me.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,19 +16,13 @@ import javax.inject.Inject
 @CreatingProfileScope
 class CreatingProfileImageViewModel @Inject constructor(
     private val uploadProfileImageInteractor: UploadProfileImageInteractor,
-): ViewModel() {
+): BaseViewModel() {
 
     private val _isPhotoChosen: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPhotoChosen: LiveData<Boolean> = _isPhotoChosen
 
     private val _imageUri: MutableLiveData<Uri?> = MutableLiveData(null)
     val imageUri: LiveData<Uri?> = _imageUri
-
-    private val _errorMessage: MutableLiveData<String?> = MutableLiveData(null)
-    val errorMessage: LiveData<String?> = _errorMessage
-
-    private val _errorMessageId: MutableLiveData<Int?> = MutableLiveData(null)
-    val errorMessageId: LiveData<Int?> = _errorMessageId
 
     private val _isPhotoUpLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPhotoUpLoaded: LiveData<Boolean> = _isPhotoUpLoaded
@@ -54,11 +49,6 @@ class CreatingProfileImageViewModel @Inject constructor(
             uploadProfileImageInteractor.uploadResult
                 .collectLatest(this@CreatingProfileImageViewModel::handleUploadProfileResult)
         }
-    }
-
-    fun errorMessageHasShown() {
-        _errorMessage.value = null
-        _errorMessageId.value = null
     }
 
     fun photoUploadHasShown() {

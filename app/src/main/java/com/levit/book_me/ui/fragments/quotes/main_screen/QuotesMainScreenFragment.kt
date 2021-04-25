@@ -1,21 +1,20 @@
 package com.levit.book_me.ui.fragments.quotes.main_screen
 
 import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.GoQuote
 import com.levit.book_me.core.ui.custom_view.QuoteTypeChooseView
 import com.levit.book_me.databinding.FragmentQuotesMainScreenBinding
 import com.levit.book_me.ui.base.QuotesBaseFragment
+import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator
 import com.levit.book_me.ui.fragments.quotes.recycler.QuotesAdapter
+import com.levit.book_me.ui.fragments.quotes.utill.ProfileQuoteStorage
 
 class QuotesMainScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_main_screen){
 
@@ -54,21 +53,16 @@ class QuotesMainScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_main
             override fun onQuoteStatusChanged(status: QuotesAdapter.QuoteStatuses, quote: GoQuote) = when(status) {
                 QuotesAdapter.QuoteStatuses.CHOSEN -> {
                     binding.chooseButton.visibility = View.VISIBLE
+                    safeQuoteToProfile(quote)
                 }
                 QuotesAdapter.QuoteStatuses.NOT_CHOSEN -> {
                     binding.chooseButton.visibility = View.GONE
+                    removeQuoteFromProfile()
                 }
             }
         }
 
-        val decorator = object: RecyclerView.ItemDecoration() {
-
-            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                super.getItemOffsets(outRect, view, parent, state)
-                outRect.bottom = 16
-            }
-        }
-
+        val decorator = OffsetQuotesItemDecorator()
         randomQuotesAdapter = QuotesAdapter(statusListener)
         with(binding.quoteRecyclerView) {
             adapter = randomQuotesAdapter
@@ -78,7 +72,7 @@ class QuotesMainScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_main
 
     private fun setAllClickListeners() {
         binding.chooseButton.setOnClickListener {
-
+            navigateToCausedScreen()
         }
     }
 
@@ -171,5 +165,17 @@ class QuotesMainScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_main
         val action = QuotesMainScreenFragmentDirections
             .actionQuotesMainScreenFragmentToQuotesTagsScreenFragment()
         findNavController().navigate(action)
+    }
+
+    private fun navigateToCausedScreen() {
+        findNavController().popBackStack()
+    }
+
+    private fun safeQuoteToProfile(quote: GoQuote) {
+        ProfileQuoteStorage.setQuote(quote)
+    }
+
+    private fun removeQuoteFromProfile() {
+        ProfileQuoteStorage.removeQuote()
     }
 }

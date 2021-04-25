@@ -164,7 +164,7 @@ class ChooseTypeAuthorizationFragment: BaseAuthorizationFragment(R.layout.fragme
             }
         })
 
-        viewModel.errorMessageResId.observe(viewLifecycleOwner, Observer { messageId ->
+        viewModel.errorMessageId.observe(viewLifecycleOwner, Observer { messageId ->
             if (messageId != null) {
                 showError(messageId)
                 viewModel.errorMessageHasShown()
