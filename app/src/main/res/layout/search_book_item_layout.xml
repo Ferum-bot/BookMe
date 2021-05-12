@@ -24,7 +24,7 @@
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_white_empty_rec"
+        android:src="@drawable/ic_white_circle_empty"
 
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"

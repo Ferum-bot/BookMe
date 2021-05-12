@@ -11,4 +11,5 @@
     <color name="light_grey">#cdcdcd</color>
     <color name="dark_wight">#f8f8f8</color>
     <color name="red">#ff0000</color>
+    <color name="image_placeholder">#FF4F4F4F</color>
 </resources>

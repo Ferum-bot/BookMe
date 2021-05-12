@@ -4,14 +4,18 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingFavouriteBooksBinding
+import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 
-class CreatingFavouriteBooksFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_favourite_books) {
+class CreatingFavouriteBooksFragment:
+    BaseCreatingProfileFragment(R.layout.fragment_creating_favourite_books), CreatingBooksAdapter.CreatingBooksClickListener {
 
     companion object {
         private const val FRAGMENT_POSITION = 5
@@ -36,6 +40,10 @@ class CreatingFavouriteBooksFragment: BaseCreatingProfileFragment(R.layout.fragm
         setAllClickListeners()
     }
 
+    override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
+
+    }
+
     private fun updatePageIndicator() {
         val activity = requireActivity() as CreatingProfileActivity
         activity.pageIndicatorController.activePrefixChanged(FRAGMENT_POSITION)
@@ -46,7 +54,19 @@ class CreatingFavouriteBooksFragment: BaseCreatingProfileFragment(R.layout.fragm
     }
 
     private fun setAllObservers() {
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
+            if (message != null) {
+                showError(message)
+                viewModel.errorMessageHasShown()
+            }
+        })
 
+        viewModel.errorMessageId.observe(viewLifecycleOwner, Observer { messageId ->
+            if (messageId != null) {
+                showError(messageId)
+                viewModel.errorMessageHasShown()
+            }
+        })
     }
 
     private fun setAllClickListeners() {

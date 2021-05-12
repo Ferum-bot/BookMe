@@ -2,6 +2,7 @@ package com.levit.book_me.network.models.google_books
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -26,4 +27,8 @@ data class GoogleBook(
 
     @Json(name = "previewLink")
     val previewLink: String,
-): Parcelable
+): Parcelable {
+
+    @IgnoredOnParcel
+    var isChosen: Boolean = false
+}
