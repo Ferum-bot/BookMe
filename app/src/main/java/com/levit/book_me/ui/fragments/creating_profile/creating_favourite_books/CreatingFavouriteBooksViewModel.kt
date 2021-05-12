@@ -25,8 +25,8 @@ class CreatingFavouriteBooksViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            interator.popularBooks.collect{
-                handleResult(it)
+            interator.books.collect{ result ->
+                handleResult(result)
             }
         }
 

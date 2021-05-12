@@ -9,6 +9,7 @@ import com.levit.book_me.interactors.interfaces.UploadProfileImageInteractor
 import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadStreamRepository
 import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadUriRepository
 import com.levit.book_me.repositories.interfaces.SearchAuthorsRepository
+import com.levit.book_me.repositories.interfaces.SearchBooksRepository
 import dagger.Module
 import dagger.Provides
 
@@ -23,7 +24,9 @@ class CreatingProfileInteractorsModule {
     }
 
     @Provides
-    fun provideCreatingBooksInteractor(): CreatingBooksInteractor {
-        return CreatingBooksInteractorImpl()
+    fun provideCreatingBooksInteractor(
+        repository: SearchBooksRepository
+    ): CreatingBooksInteractor {
+        return CreatingBooksInteractorImpl(repository)
     }
 }

@@ -36,6 +36,20 @@ class GoogleBooksVolumeDataSourceImpl @Inject constructor(
         _searchResult.emit(queryResult)
     }
 
+    override suspend fun searchPopularVolumes(parameters: GoogleBooksVolumeParameters) {
+        val paramsMap = parameters.toMap()
+        val queryResult = googleBooksService.searchPopularBooks(paramsMap)
+                .parseRowResponse()
+        _searchResult.emit(queryResult)
+    }
+
+    override suspend fun searchMostChosenVolumes(parameters: GoogleBooksVolumeParameters) {
+        val paramsMap = parameters.toMap()
+        val queryResult = googleBooksService.searchMostChosenBooks(paramsMap)
+                .parseRowResponse()
+        _searchResult.emit(queryResult)
+    }
+
     private fun RetrofitResult<GoogleBooksResponse>.parseRowResponse(): RetrofitResult<GoogleBooksResponse> {
         if (this !is RetrofitResult.Success) {
             return this as RetrofitResult.Failure<*>

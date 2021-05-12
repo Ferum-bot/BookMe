@@ -11,4 +11,7 @@ interface GoogleBooksVolumeDataSource {
 
     suspend fun searchVolumes(parameters: GoogleBooksVolumeParameters)
 
+    suspend fun searchPopularVolumes(parameters: GoogleBooksVolumeParameters)
+
+    suspend fun searchMostChosenVolumes(parameters: GoogleBooksVolumeParameters)
 }

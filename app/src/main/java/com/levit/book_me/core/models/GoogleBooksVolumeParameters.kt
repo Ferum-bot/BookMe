@@ -6,11 +6,12 @@ import com.levit.book_me.core.enums.GoogleBooksSortTypes
 import com.levit.book_me.network.utill.NetworkConstants
 
 data class GoogleBooksVolumeParameters(
-    val textToSearch: String,
+    val textToSearch: String = "",
     val searchType: GoogleBooksSearchTypes = GoogleBooksSearchTypes.SEARCH_IN_TITLE,
     val pageSize: Int = DEFAULT_PAGE_SIZE,
     val printType: GoogleBooksPrintTypes = GoogleBooksPrintTypes.ALL,
-    val sortType: GoogleBooksSortTypes = GoogleBooksSortTypes.RELEVANCE
+    val sortType: GoogleBooksSortTypes = GoogleBooksSortTypes.RELEVANCE,
+    val isSearchParams: Boolean = true,
 ) {
     companion object {
         private const val API_KEY_NAME = "key"
@@ -25,11 +26,14 @@ data class GoogleBooksVolumeParameters(
     private val searchRequest: String
     get() = searchType.queryName + textToSearch
 
-    fun toMap(): Map<String, String> = mapOf(
+    fun toMap(): Map<String, String> = if (isSearchParams) mapOf(
         API_KEY_NAME to NetworkConstants.GOOGLE_BOOKS_API_KEY,
         SEARCH_NAME to  searchRequest,
         PAGE_SIZE_NAME to pageSize.toString(),
         PRINT_TYPE_NAME to printType.queryName,
         SORT_TYPE_NAME to sortType.queryName,
+    ) else mapOf(
+        API_KEY_NAME to NetworkConstants.GOOGLE_BOOKS_API_KEY,
+        PAGE_SIZE_NAME to pageSize.toString(),
     )
 }

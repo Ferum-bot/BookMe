@@ -13,6 +13,7 @@ import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
+import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
 
 class CreatingFavouriteBooksFragment:
     BaseCreatingProfileFragment(R.layout.fragment_creating_favourite_books), CreatingBooksAdapter.CreatingBooksClickListener {
@@ -24,6 +25,8 @@ class CreatingFavouriteBooksFragment:
     private val binding by viewBinding { FragmentCreatingFavouriteBooksBinding.bind(it) }
 
     private val viewModel by viewModels<CreatingFavouriteBooksViewModel> { creatingProfileComponent.viewModelFactory() }
+
+    private val adapter by lazy { CreatingBooksAdapter(this) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,7 +44,12 @@ class CreatingFavouriteBooksFragment:
     }
 
     override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
-
+        when(newState) {
+            CreatingBooksAdapter.CreatingBooksStates.CHOSEN ->
+                viewModel.addChosenBook(book)
+            CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN ->
+                viewModel.removeChosenBook(book)
+        }
     }
 
     private fun updatePageIndicator() {
@@ -51,6 +59,12 @@ class CreatingFavouriteBooksFragment:
 
     private fun configureAllViews() {
         binding.searchView.isEnabled = false
+
+        val booksDecorator = CreatingBooksOffsetDecorator()
+        with(binding.currentBooksRecycler) {
+            adapter = this@CreatingFavouriteBooksFragment.adapter
+            addItemDecoration(booksDecorator)
+        }
     }
 
     private fun setAllObservers() {
@@ -66,6 +80,10 @@ class CreatingFavouriteBooksFragment:
                 showError(messageId)
                 viewModel.errorMessageHasShown()
             }
+        })
+
+        viewModel.popularBooks.observe(viewLifecycleOwner, Observer { books ->
+            adapter.submitList(books)
         })
     }
 

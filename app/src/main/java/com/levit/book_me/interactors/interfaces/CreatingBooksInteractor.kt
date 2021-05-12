@@ -6,11 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CreatingBooksInteractor {
 
-    val popularBooks: Flow<RetrofitResult<List<GoogleBook>>>
-
-    val mostChosenBooks: Flow<List<RetrofitResult<GoogleBook>>>
+    val books: Flow<RetrofitResult<List<GoogleBook>>>
 
     suspend fun getPopularBooks()
-
     suspend fun getMostChosenBooks()
 }
