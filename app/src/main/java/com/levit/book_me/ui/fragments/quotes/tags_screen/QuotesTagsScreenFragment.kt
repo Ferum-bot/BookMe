@@ -97,6 +97,10 @@ class QuotesTagsScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_tags
                 }
             }
         })
+
+        viewModel.tags.observe(viewLifecycleOwner, Observer { tags ->
+            tagsAdapter.submitList(tags)
+        })
     }
 
     private fun navigateToQuotesScreen(tag: GoQuotesTag) {
