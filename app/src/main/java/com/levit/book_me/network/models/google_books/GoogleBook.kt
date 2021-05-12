@@ -23,7 +23,7 @@ data class GoogleBook(
     val imageLinks: ImageLinks?,
 
     @Json(name = "language")
-    val bookLanguage: String,
+    val bookLanguage: String?,
 
     @Json(name = "previewLink")
     val previewLink: String,
