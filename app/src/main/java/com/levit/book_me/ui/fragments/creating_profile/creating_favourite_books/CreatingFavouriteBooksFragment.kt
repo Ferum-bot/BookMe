@@ -114,6 +114,8 @@ class CreatingFavouriteBooksFragment:
     }
 
     private fun navigateToSearchBooksFragment() {
-
+        val action = CreatingFavouriteBooksFragmentDirections
+            .actionCreatingFavouriteBooksFragmentToSearchBooksFragment()
+        findNavController().navigate(action)
     }
 }

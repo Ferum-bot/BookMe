@@ -72,14 +72,45 @@
 
         app:layout_constraintVertical_bias="0.15"
         app:layout_constraintTop_toBottomOf="@id/search_view"
-        app:layout_constraintBottom_toTopOf="@id/next_button"
+        app:layout_constraintBottom_toTopOf="@id/finish_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
         tools:listitem="@layout/search_book_item_layout"/>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+
+        style="@style/DefaultProgressBarStyle"
+
+        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/finish_button"
+
+        tools:visibility="visible"/>
+
+    <TextView
+        android:id="@+id/error_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/something_went_wrong"
+        android:visibility="gone"
+
+        style="@style/DefaultBigTextViewStyle"
+
+        app:layout_constraintTop_toBottomOf="@id/search_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/finish_button"
+
+        tools:visibility="visible"/>
+
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/next_button"
+        android:id="@+id/finish_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/finish"

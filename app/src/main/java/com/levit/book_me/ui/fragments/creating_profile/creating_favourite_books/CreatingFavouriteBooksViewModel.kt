@@ -45,7 +45,9 @@ class CreatingFavouriteBooksViewModel @Inject constructor(
 
     fun addChosenBook(book: GoogleBook) {
         val books = _popularBooks.value?.toMutableList() ?: mutableListOf()
-        books.add(0, book)
+        if (!books.contains(book)) {
+            books.add(book)
+        }
         chosenBooks.add(book)
         _popularBooks.postValue(books)
     }
