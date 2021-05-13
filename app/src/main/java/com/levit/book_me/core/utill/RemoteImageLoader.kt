@@ -23,7 +23,6 @@ class RemoteImageLoader(
             .applyDefaultRequestOptions(options)
             .load(url)
             .override(DEFAULT_CACHE_SIZE, DEFAULT_CACHE_SIZE)
-            .transform(CenterCrop())
             .transition(getDefaultCrossFade())
             .into(imageView)
     }

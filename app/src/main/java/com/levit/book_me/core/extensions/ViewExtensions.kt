@@ -18,7 +18,6 @@ fun View.hideKeyboard() {
 
 fun View.defaultGlideOptions() = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .centerCrop()
         .placeholder(R.drawable.default_image_placeholder)
         .error(R.drawable.ic_default_error_placeholder)
         .fallback(R.drawable.ic_book_me_icon)
