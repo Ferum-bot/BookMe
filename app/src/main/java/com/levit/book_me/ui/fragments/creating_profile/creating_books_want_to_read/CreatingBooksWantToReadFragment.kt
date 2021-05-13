@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingBooksYouWantToReadBinding
@@ -13,15 +14,16 @@ import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 
 class CreatingBooksWantToReadFragment:
-    BaseCreatingProfileFragment(R.layout.fragment_creating_books_you_want_to_read), CreatingBooksAdapter.CreatingBooksClickListener {
+    BaseCreatingProfileFragment<CreatingBooksWantToReadViewModel>(R.layout.fragment_creating_books_you_want_to_read),
+    CreatingBooksAdapter.CreatingBooksClickListener {
 
     companion object {
         private const val FRAGMENT_POSITION = 6
     }
 
-    private val binding by viewBinding { FragmentCreatingBooksYouWantToReadBinding.bind(it) }
+    override val viewModel by viewModels<CreatingBooksWantToReadViewModel> { creatingProfileComponent.viewModelFactory() }
 
-    private val viewModel by viewModels<CreatingBooksWantToReadViewModel> { creatingProfileComponent.viewModelFactory() }
+    private val binding by viewBinding { FragmentCreatingBooksYouWantToReadBinding.bind(it) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,6 +39,11 @@ class CreatingBooksWantToReadFragment:
         setAllObservers()
     }
 
+    override fun setAllObservers() {
+        super.setAllObservers()
+
+    }
+
     override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
 
     }
@@ -47,10 +54,6 @@ class CreatingBooksWantToReadFragment:
     }
 
     private fun setAllClickListeners() {
-
-    }
-
-    private fun setAllObservers() {
 
     }
 }

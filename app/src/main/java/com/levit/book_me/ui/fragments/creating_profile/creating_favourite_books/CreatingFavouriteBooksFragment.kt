@@ -16,15 +16,16 @@ import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapt
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
 
 class CreatingFavouriteBooksFragment:
-    BaseCreatingProfileFragment(R.layout.fragment_creating_favourite_books), CreatingBooksAdapter.CreatingBooksClickListener {
+    BaseCreatingProfileFragment<CreatingFavouriteBooksViewModel>(R.layout.fragment_creating_favourite_books),
+    CreatingBooksAdapter.CreatingBooksClickListener {
 
     companion object {
         private const val FRAGMENT_POSITION = 5
     }
 
-    private val binding by viewBinding { FragmentCreatingFavouriteBooksBinding.bind(it) }
+    override val viewModel by viewModels<CreatingFavouriteBooksViewModel> { creatingProfileComponent.viewModelFactory() }
 
-    private val viewModel by viewModels<CreatingFavouriteBooksViewModel> { creatingProfileComponent.viewModelFactory() }
+    private val binding by viewBinding { FragmentCreatingFavouriteBooksBinding.bind(it) }
 
     private val adapter by lazy { CreatingBooksAdapter(this) }
 
@@ -43,6 +44,37 @@ class CreatingFavouriteBooksFragment:
         setAllClickListeners()
     }
 
+    override fun setAllObservers() {
+        super.setAllObservers()
+
+        viewModel.popularBooks.observe(viewLifecycleOwner, Observer { books ->
+            adapter.submitList(books)
+        })
+
+        viewModel.currentStatus.observe(viewLifecycleOwner, Observer { status ->
+            when(status) {
+                CreatingFavouriteBooksViewModel.Statuses.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.currentBooksRecycler.visibility = View.GONE
+                    binding.errorLabel.visibility = View.GONE
+                    binding.searchView.isEnabled = false
+                }
+                CreatingFavouriteBooksViewModel.Statuses.LOADED -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.currentBooksRecycler.visibility = View.VISIBLE
+                    binding.errorLabel.visibility = View.GONE
+                    binding.searchView.isEnabled = true
+                }
+                CreatingFavouriteBooksViewModel.Statuses.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.currentBooksRecycler.visibility = View.GONE
+                    binding.errorLabel.visibility = View.VISIBLE
+                    binding.searchView.isEnabled = false
+                }
+            }
+        })
+    }
+
     override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
         when(newState) {
             CreatingBooksAdapter.CreatingBooksStates.CHOSEN ->
@@ -58,33 +90,11 @@ class CreatingFavouriteBooksFragment:
     }
 
     private fun configureAllViews() {
-        binding.searchView.isEnabled = false
-
         val booksDecorator = CreatingBooksOffsetDecorator()
         with(binding.currentBooksRecycler) {
             adapter = this@CreatingFavouriteBooksFragment.adapter
             addItemDecoration(booksDecorator)
         }
-    }
-
-    private fun setAllObservers() {
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
-            if (message != null) {
-                showError(message)
-                viewModel.errorMessageHasShown()
-            }
-        })
-
-        viewModel.errorMessageId.observe(viewLifecycleOwner, Observer { messageId ->
-            if (messageId != null) {
-                showError(messageId)
-                viewModel.errorMessageHasShown()
-            }
-        })
-
-        viewModel.popularBooks.observe(viewLifecycleOwner, Observer { books ->
-            adapter.submitList(books)
-        })
     }
 
     private fun setAllClickListeners() {

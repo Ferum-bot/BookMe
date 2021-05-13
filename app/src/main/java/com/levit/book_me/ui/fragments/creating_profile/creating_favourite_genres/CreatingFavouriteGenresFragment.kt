@@ -12,15 +12,16 @@ import com.levit.book_me.databinding.FragmentCreatingFavouriteGenresBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 
-class CreatingFavouriteGenresFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_favourite_genres) {
+class CreatingFavouriteGenresFragment:
+    BaseCreatingProfileFragment<CreatingFavouriteGenresViewModel>(R.layout.fragment_creating_favourite_genres) {
 
     companion object {
         private const val FRAGMENT_POSITION = 3
     }
 
-    private val binding by viewBinding { FragmentCreatingFavouriteGenresBinding.bind(it) }
+    override val viewModel by viewModels<CreatingFavouriteGenresViewModel> { creatingProfileComponent.viewModelFactory() }
 
-    private val viewModel by viewModels<CreatingFavouriteGenresViewModel> { creatingProfileComponent.viewModelFactory() }
+    private val binding by viewBinding { FragmentCreatingFavouriteGenresBinding.bind(it) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,14 +37,15 @@ class CreatingFavouriteGenresFragment: BaseCreatingProfileFragment(R.layout.frag
         updatePageIndicator()
     }
 
+    override fun setAllObservers() {
+        super.setAllObservers()
+
+    }
+
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
             navigateToChooseFavouriteAuthorsFragment()
         }
-    }
-
-    private fun setAllObservers() {
-
     }
 
     private fun updatePageIndicator() {

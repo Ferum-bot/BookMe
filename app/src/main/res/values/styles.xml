@@ -148,12 +148,12 @@
     </style>
 
     <style name="TitleBigBookItemTextViewStyle" parent="DefaultBigBookItemTextViewStyle">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="AuthorsBigBookItemTextViewStyle" parent="DefaultBigBookItemTextViewStyle">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
     <style name="QuoteTextViewStyle" parent="DefaultTextViewStyle">

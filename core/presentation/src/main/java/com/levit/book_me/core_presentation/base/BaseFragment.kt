@@ -30,6 +30,8 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         return activity.activityResultRegistry
     }
 
+
+
     protected fun showError(errorMessage: String) {
         Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_SHORT).apply {
             setBackgroundTint(errorColor)

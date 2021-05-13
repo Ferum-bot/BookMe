@@ -10,13 +10,14 @@ import com.levit.book_me.databinding.FragmentSearchBooksBinding
 import com.levit.book_me.di.components.SearchBooksComponent
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 
-class SearchBooksFragment: BaseCreatingProfileFragment(R.layout.fragment_search_books) {
+class SearchBooksFragment:
+    BaseCreatingProfileFragment<SearchBooksViewModel>(R.layout.fragment_search_books) {
 
     private lateinit var searchBooksComponent: SearchBooksComponent
 
-    private val binding by viewBinding { FragmentSearchBooksBinding.bind(it) }
+    override val viewModel by viewModels<SearchBooksViewModel> { searchBooksComponent.viewModelFactory() }
 
-    private val viewModel by viewModels<SearchBooksViewModel> { searchBooksComponent.viewModelFactory() }
+    private val binding by viewBinding { FragmentSearchBooksBinding.bind(it) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,7 +43,8 @@ class SearchBooksFragment: BaseCreatingProfileFragment(R.layout.fragment_search_
 
     }
 
-    private fun setAllObservers() {
+    override fun setAllObservers() {
+        super.setAllObservers()
 
     }
 }

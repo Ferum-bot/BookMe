@@ -14,15 +14,16 @@ import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.quotes.utill.ProfileQuoteStorage
 
-class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_name_surname) {
+class CreatingNameSurnameFragment:
+    BaseCreatingProfileFragment<CreatingNameSurnameViewModel>(R.layout.fragment_creating_name_surname) {
 
     companion object {
         private const val FRAGMENT_POSITION = 1
     }
 
-    private val binding by viewBinding { FragmentCreatingNameSurnameBinding.bind(it) }
+    override val viewModel by viewModels<CreatingNameSurnameViewModel> { creatingProfileComponent.viewModelFactory() }
 
-    private val viewModel by viewModels<CreatingNameSurnameViewModel> { creatingProfileComponent.viewModelFactory() }
+    private val binding by viewBinding { FragmentCreatingNameSurnameBinding.bind(it) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,6 +40,35 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
         setTextWatchers()
         setAllObservers()
         updatePageIndicator()
+    }
+
+    override fun setAllObservers() {
+        super.setAllObservers()
+
+        viewModel.isNameCorrect.observe(viewLifecycleOwner, Observer { nameIsCorrect ->
+            if (nameIsCorrect) {
+                binding.invalidNameLabel.visibility = View.GONE
+            }
+        })
+
+        viewModel.isSurnameCorrect.observe(viewLifecycleOwner, Observer { surnameIsCorrect ->
+            if (surnameIsCorrect) {
+                binding.invalidSurnameLabel.visibility = View.GONE
+            }
+        })
+
+        ProfileQuoteStorage.quote.observe(viewLifecycleOwner, Observer { quote ->
+            if (quote == null) {
+                binding.quoteItem.hideAuthor(true)
+                binding.quoteItem.setChosen(false)
+                binding.quoteItem.setNotChosenText()
+            }
+            else {
+                binding.quoteItem.hideAuthor(false)
+                binding.quoteItem.setChosen(true)
+                binding.quoteItem.setQuote(quote)
+            }
+        })
     }
 
     private fun configureLayout() {
@@ -66,33 +96,6 @@ class CreatingNameSurnameFragment: BaseCreatingProfileFragment(R.layout.fragment
 
         binding.wordsAboutYouInputEditText.addTextChangedListener(ParcelableTextWatcher().apply {
             onTextChangeListener = viewModel::onAboutYouChanged
-        })
-    }
-
-    private fun setAllObservers() {
-        viewModel.isNameCorrect.observe(viewLifecycleOwner, Observer { nameIsCorrect ->
-            if (nameIsCorrect) {
-                binding.invalidNameLabel.visibility = View.GONE
-            }
-        })
-
-        viewModel.isSurnameCorrect.observe(viewLifecycleOwner, Observer { surnameIsCorrect ->
-            if (surnameIsCorrect) {
-                binding.invalidSurnameLabel.visibility = View.GONE
-            }
-        })
-
-        ProfileQuoteStorage.quote.observe(viewLifecycleOwner, Observer { quote ->
-            if (quote == null) {
-                binding.quoteItem.hideAuthor(true)
-                binding.quoteItem.setChosen(false)
-                binding.quoteItem.setNotChosenText()
-            }
-            else {
-                binding.quoteItem.hideAuthor(false)
-                binding.quoteItem.setChosen(true)
-                binding.quoteItem.setQuote(quote)
-            }
         })
     }
 

@@ -16,15 +16,16 @@ import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteAuthorsStorage
 import kotlinx.coroutines.GlobalScope
 
-class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fragment_creating_favourite_authors) {
+class CreatingFavouriteAuthorsFragment:
+    BaseCreatingProfileFragment<CreatingFavouriteAuthorsViewModel>(R.layout.fragment_creating_favourite_authors) {
 
     companion object {
         private const val FRAGMENT_POSITION = 4
     }
 
-    private val binding by viewBinding { FragmentCreatingFavouriteAuthorsBinding.bind(it) }
+    override val viewModel by viewModels<CreatingFavouriteAuthorsViewModel> { creatingProfileComponent.viewModelFactory() }
 
-    private val viewModel by viewModels<CreatingFavouriteAuthorsViewModel> { creatingProfileComponent.viewModelFactory() }
+    private val binding by viewBinding { FragmentCreatingFavouriteAuthorsBinding.bind(it) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,34 +43,9 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
         setAllObservers()
     }
 
-    private fun updatePageIndicator() {
-        val activity = requireActivity() as CreatingProfileActivity
-        activity.pageIndicatorController.activePrefixChanged(FRAGMENT_POSITION)
-    }
+    override fun setAllObservers() {
+        super.setAllObservers()
 
-    private fun setUpAuthorChooser() {
-        val authorChooserListener = object: CreatingProfileAuthorChooser.AuthorChangeListener {
-
-            override fun onAuthorAdd(authorPosition: CreatingProfileAuthorChooser.AuthorPosition) {
-                showMainTitle(false)
-                navigateToSearchAuthorFragment(authorPosition)
-            }
-
-            override fun onAuthorRemoved(authorPosition: CreatingProfileAuthorChooser.AuthorPosition, author: Author) {
-                FavouriteAuthorsStorage.removeAuthorFrom(authorPosition)
-            }
-        }
-
-        binding.authorChooser.setAuthorChangeListener(authorChooserListener)
-    }
-
-    private fun setAllClickListeners() {
-        binding.nextButton.setOnClickListener {
-            navigateToCreatingFavouriteBooksFragment()
-        }
-    }
-
-    private fun setAllObservers() {
         FavouriteAuthorsStorage.firstAuthor.observe(viewLifecycleOwner, Observer { author ->
             if (author != null) {
                 binding.authorChooser.setAuthor(CreatingProfileAuthorChooser.AuthorPosition.FIRST_POSITION, author)
@@ -99,6 +75,33 @@ class CreatingFavouriteAuthorsFragment: BaseCreatingProfileFragment(R.layout.fra
                 binding.authorChooser.setAuthor(CreatingProfileAuthorChooser.AuthorPosition.FIVES_POSITION, author)
             }
         })
+    }
+
+    private fun updatePageIndicator() {
+        val activity = requireActivity() as CreatingProfileActivity
+        activity.pageIndicatorController.activePrefixChanged(FRAGMENT_POSITION)
+    }
+
+    private fun setUpAuthorChooser() {
+        val authorChooserListener = object: CreatingProfileAuthorChooser.AuthorChangeListener {
+
+            override fun onAuthorAdd(authorPosition: CreatingProfileAuthorChooser.AuthorPosition) {
+                showMainTitle(false)
+                navigateToSearchAuthorFragment(authorPosition)
+            }
+
+            override fun onAuthorRemoved(authorPosition: CreatingProfileAuthorChooser.AuthorPosition, author: Author) {
+                FavouriteAuthorsStorage.removeAuthorFrom(authorPosition)
+            }
+        }
+
+        binding.authorChooser.setAuthorChangeListener(authorChooserListener)
+    }
+
+    private fun setAllClickListeners() {
+        binding.nextButton.setOnClickListener {
+            navigateToCreatingFavouriteBooksFragment()
+        }
     }
 
     private fun navigateToSearchAuthorFragment(authorPosition: CreatingProfileAuthorChooser.AuthorPosition) {

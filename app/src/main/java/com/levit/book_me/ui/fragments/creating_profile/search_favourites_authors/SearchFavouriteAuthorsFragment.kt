@@ -21,14 +21,14 @@ import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteAuthorsStorage
 
 class SearchFavouriteAuthorsFragment:
-    BaseCreatingProfileFragment(R.layout.fragment_search_favourite_authors),
+    BaseCreatingProfileFragment<SearchFavouriteAuthorsViewModel>(R.layout.fragment_search_favourite_authors),
     SearchFavouriteAuthorsAdapter.AuthorStateListener {
+
+    override val viewModel by viewModels<SearchFavouriteAuthorsViewModel> { searchFavouriteAuthorsComponent.viewModelFactory() }
 
     private lateinit var searchFavouriteAuthorsComponent: SearchFavouriteAuthorsComponent
 
     private val binding by viewBinding { FragmentSearchFavouriteAuthorsBinding.bind(it) }
-
-    private val viewModel by viewModels<SearchFavouriteAuthorsViewModel> { searchFavouriteAuthorsComponent.viewModelFactory() }
 
     private val adapter by lazy { SearchFavouriteAuthorsAdapter(this) }
 
@@ -89,7 +89,9 @@ class SearchFavouriteAuthorsFragment:
         })
     }
 
-    private fun setAllObservers() {
+    override fun setAllObservers() {
+        super.setAllObservers()
+
         viewModel.searchResult.observe(viewLifecycleOwner, Observer { listOfAuthors ->
             adapter.submitList(listOfAuthors)
         })
@@ -120,22 +122,6 @@ class SearchFavouriteAuthorsFragment:
                     binding.alertTextView.visibility = View.GONE
                     binding.confirmChoseButton.visibility = View.GONE
                 }
-            }
-        })
-
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
-            if (message != null) {
-                hideKeyboard()
-                showError(message)
-                viewModel.errorMessageHasShown()
-            }
-        })
-
-        viewModel.errorMessageId.observe(viewLifecycleOwner, Observer { messageId ->
-            if (messageId != null) {
-                hideKeyboard()
-                showError(messageId)
-                viewModel.errorMessageHasShown()
             }
         })
     }
