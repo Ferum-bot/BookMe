@@ -36,6 +36,10 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
             }
         }
 
+        getAllAuthors()
+    }
+
+    fun getAllAuthors() {
         viewModelScope.launch {
             interator.getAllAuthors()
         }

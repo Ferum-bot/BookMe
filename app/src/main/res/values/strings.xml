@@ -31,6 +31,7 @@
     <string name="password_must_meet_all_conditions">Password must meet all conditions</string>
     <string name="password_mismatch">Password mismatch</string>
     <string name="network_not_available">Network connection is not available</string>
+    <string name="try_again">Try again</string>
 
     <!--  OnBoarding  -->
     <string name="onboarding_first_label">You are what \nyou read</string>
@@ -82,6 +83,7 @@
     <string name="random_quotes">Random Quotes:</string>
     <string name="more_than_500_favourite_quotes_from_all_over_the_world">More than 500+ favourite quotes from all over the world!</string>
     <string name="authors">Authors</string>
+    <string name="tags">Tags</string>
 
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
@@ -89,6 +91,5 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
-    <string name="tags">Tags</string>
 
 </resources>

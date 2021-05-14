@@ -35,6 +35,10 @@ class QuotesTagsScreenViewModel @Inject constructor(
             }
         }
 
+        getAllTags()
+    }
+
+    fun getAllTags() {
         viewModelScope.launch {
             interactor.getAllTags()
         }

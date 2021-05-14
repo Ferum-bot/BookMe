@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.GoQuotesTag
 import com.levit.book_me.core.models.GoQuotesTypes
@@ -15,13 +16,15 @@ import com.levit.book_me.ui.base.QuotesBaseFragment
 import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator
 import com.levit.book_me.ui.fragments.quotes.recycler.QuotesTagAdapter
 
-class QuotesTagsScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_tags_screen) {
+class QuotesTagsScreenFragment:
+    QuotesBaseFragment(R.layout.fragment_quotes_tags_screen),
+    QuotesTagAdapter.TagClickListener{
 
     private val binding by viewBinding { FragmentQuotesTagsScreenBinding.bind(it) }
 
     private val viewModel by viewModels<QuotesTagsScreenViewModel> { quotesComponent.viewModelFactory() }
 
-    private lateinit var tagsAdapter: QuotesTagAdapter
+    private val tagsAdapter by lazy { QuotesTagAdapter(this) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,20 +41,23 @@ class QuotesTagsScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_tags
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        configureLayout()
         setUpAdapter()
         setAllObservers()
     }
 
-    private fun setUpAdapter() {
-        val listener = object: QuotesTagAdapter.TagClickListener {
+    override fun onTagClicked(tag: GoQuotesTag) {
+        navigateToQuotesScreen(tag)
+    }
 
-            override fun onTagClicked(tag: GoQuotesTag) {
-                navigateToQuotesScreen(tag)
-            }
+    private fun configureLayout() {
+        binding.errorLabel.addClickableText(R.string.try_again) {
+            viewModel.getAllTags()
         }
+    }
 
+    private fun setUpAdapter() {
         val decorator = OffsetQuotesItemDecorator()
-        tagsAdapter = QuotesTagAdapter(listener)
         with(binding.recyclerView) {
             adapter = tagsAdapter
             addItemDecoration(decorator)

@@ -81,6 +81,7 @@
         android:layout_height="wrap_content"
         android:text="@string/something_went_wrong"
         android:visibility="gone"
+        android:gravity="center"
 
         style="@style/CreatingProfileLabelStyle"
 

@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.GoQuotesAuthor
 import com.levit.book_me.core.models.GoQuotesTypes
@@ -15,13 +16,15 @@ import com.levit.book_me.ui.base.QuotesBaseFragment
 import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator
 import com.levit.book_me.ui.fragments.quotes.recycler.QuotesAuthorAdapter
 
-class QuotesAuthorsScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_authors_screen) {
+class QuotesAuthorsScreenFragment:
+    QuotesBaseFragment(R.layout.fragment_quotes_authors_screen),
+    QuotesAuthorAdapter.AuthorClickListener {
 
     private val binding by viewBinding { FragmentQuotesAuthorsScreenBinding.bind(it) }
 
     private val viewModel by viewModels<QuotesAuthorsScreenViewModel> { quotesComponent.viewModelFactory() }
 
-    private lateinit var authorsAdapter: QuotesAuthorAdapter
+    private val authorsAdapter by lazy { QuotesAuthorAdapter(this) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,20 +41,24 @@ class QuotesAuthorsScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_a
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        configureLayout()
         initAdapter()
         setAllObservers()
     }
 
-    private fun initAdapter() {
-        val listener = object: QuotesAuthorAdapter.AuthorClickListener {
+    override fun onAuthorClicked(author: GoQuotesAuthor) {
+        navigateToQuotesScreen(author)
+    }
 
-            override fun onAuthorClicked(author: GoQuotesAuthor) {
-                navigateToQuotesScreen(author)
-            }
+    private fun configureLayout() {
+        binding.errorLabel.addClickableText(R.string.try_again) {
+            viewModel.getAllAuthors()
         }
+    }
+
+    private fun initAdapter() {
 
         val decorator = OffsetQuotesItemDecorator()
-        authorsAdapter = QuotesAuthorAdapter(listener)
         with(binding.recyclerView) {
             adapter = authorsAdapter
             addItemDecoration(decorator)

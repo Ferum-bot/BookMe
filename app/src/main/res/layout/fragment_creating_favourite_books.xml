@@ -99,8 +99,9 @@
         android:layout_height="wrap_content"
         android:text="@string/something_went_wrong"
         android:visibility="gone"
+        android:gravity="center"
 
-        style="@style/DefaultBigTextViewStyle"
+        style="@style/CreatingProfileLabelStyle"
 
         app:layout_constraintTop_toBottomOf="@id/search_view"
         app:layout_constraintStart_toStartOf="parent"

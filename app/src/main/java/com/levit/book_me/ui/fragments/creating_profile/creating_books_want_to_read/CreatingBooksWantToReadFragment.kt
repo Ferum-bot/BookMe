@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingBooksYouWantToReadBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -102,6 +103,10 @@ class CreatingBooksWantToReadFragment:
         with(binding.currentBooksRecycler) {
             adapter = booksAdapter
             addItemDecoration(decorator)
+        }
+
+        binding.errorLabel.addClickableText(R.string.try_again) {
+            viewModel.getMostChosenBooks()
         }
     }
 

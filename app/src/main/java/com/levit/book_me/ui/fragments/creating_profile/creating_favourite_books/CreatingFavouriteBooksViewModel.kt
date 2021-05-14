@@ -9,6 +9,7 @@ import com.levit.book_me.interactors.interfaces.CreatingBooksInteractor
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,6 +31,8 @@ class CreatingFavouriteBooksViewModel @Inject constructor(
 
     private val chosenBooks: MutableList<GoogleBook> = mutableListOf()
 
+    private var searchPopularBooksJob: Job? = null
+
     init {
         viewModelScope.launch {
             interator.books.collect{ result ->
@@ -37,7 +40,12 @@ class CreatingFavouriteBooksViewModel @Inject constructor(
             }
         }
 
-        viewModelScope.launch {
+        getPopularBooks()
+    }
+
+    fun getPopularBooks() {
+        searchPopularBooksJob?.cancel()
+        searchPopularBooksJob = viewModelScope.launch {
             _currentStatus.postValue(Statuses.LOADING)
             interator.getPopularBooks()
         }

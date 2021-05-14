@@ -18,6 +18,8 @@ open class RetrofitModule {
     fun provideGoogleBooksRetrofit(
         converterFactory: MoshiConverterFactory,
         callAdapterFactory: RetrofitResultCallAdapterFactory,
+
+        @Named(DIConstants.GOOGLE_BOOK_CLIENT_NAME)
         client: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .addCallAdapterFactory(callAdapterFactory)
@@ -31,6 +33,8 @@ open class RetrofitModule {
     fun provideGoQuotesRetrofit(
         converterFactory: MoshiConverterFactory,
         callAdapterFactory: RetrofitResultCallAdapterFactory,
+
+        @Named(DIConstants.GO_QUOTES_CLIENT_NAME)
         client: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .addCallAdapterFactory(callAdapterFactory)

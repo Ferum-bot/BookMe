@@ -41,7 +41,7 @@ class QuotesMainScreenViewModel @Inject constructor(
         launchGettingScreenModel()
     }
 
-    private fun launchGettingScreenModel() {
+    fun launchGettingScreenModel() {
         _currentStatus.postValue(QuotesMainScreenStatuses.LOADING)
 
         viewModelScope.launch {

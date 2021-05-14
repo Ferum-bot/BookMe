@@ -20,21 +20,9 @@ import javax.inject.Named
     RetrofitServiceModule::class,
     CoroutineContextModule::class,
     RetrofitModule::class,
+    ClientModule::class,
 ])
 open class NetworkModule {
-
-    @Provides
-    fun provideClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        connectionInterceptor: ErrorConnectionInterceptor
-    ): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .addInterceptor(connectionInterceptor)
-        .connectTimeout(NetworkConstants.NETWORK_CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .callTimeout(NetworkConstants.NETWORK_CALL_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .readTimeout(NetworkConstants.NETWORK_READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .writeTimeout(NetworkConstants.NETWORK_WRITE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .build()
 
     @Provides
     fun provideMoshiConverterFactory(moshi: Moshi) = MoshiConverterFactory.create(moshi)

@@ -15,6 +15,7 @@ import com.levit.book_me.core.extensions.hideKeyboard
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.ui.ParcelableTextWatcher
+import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.databinding.FragmentSearchFavouriteAuthorsBinding
 import com.levit.book_me.di.components.SearchFavouriteAuthorsComponent
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
@@ -34,7 +35,7 @@ class SearchFavouriteAuthorsFragment:
 
     private val args by navArgs<SearchFavouriteAuthorsFragmentArgs>()
 
-    private val authorPosition by lazy { args.authorPosition }
+    private val authorPosition by lazy<CreatingProfileAuthorChooser.AuthorPosition> { args.authorPosition }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.GoQuote
 import com.levit.book_me.databinding.FragmentQuotesScreenBinding
@@ -16,7 +17,9 @@ import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator
 import com.levit.book_me.ui.fragments.quotes.recycler.QuotesAdapter
 import com.levit.book_me.ui.fragments.quotes.utill.ProfileQuoteStorage
 
-class QuotesScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_screen) {
+class QuotesScreenFragment:
+    QuotesBaseFragment(R.layout.fragment_quotes_screen),
+    QuotesAdapter.QuoteStatusListener {
 
     private val binding by viewBinding { FragmentQuotesScreenBinding.bind(it) }
 
@@ -24,7 +27,7 @@ class QuotesScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_screen) 
 
     private val args by navArgs<QuotesScreenFragmentArgs>()
 
-    private lateinit var quotesAdapter: QuotesAdapter
+    private val quotesAdapter by lazy { QuotesAdapter(this) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,31 +44,34 @@ class QuotesScreenFragment: QuotesBaseFragment(R.layout.fragment_quotes_screen) 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        configureLayout()
         initAdapter()
         setAllClickListeners()
         setAllObservers()
         searchQuotes()
     }
 
-    private fun initAdapter() {
-        val listener = object: QuotesAdapter.QuoteStatusListener {
-
-            override fun onQuoteStatusChanged(status: QuotesAdapter.QuoteStatuses, quote: GoQuote) {
-                when(status) {
-                    QuotesAdapter.QuoteStatuses.CHOSEN -> {
-                        binding.chooseButton.visibility = View.VISIBLE
-                        safeQuoteToProfile(quote)
-                    }
-                    QuotesAdapter.QuoteStatuses.NOT_CHOSEN -> {
-                        binding.chooseButton.visibility = View.GONE
-                        removeQuoteFromProfile()
-                    }
-                }
+    override fun onQuoteStatusChanged(status: QuotesAdapter.QuoteStatuses, quote: GoQuote) {
+        when(status) {
+            QuotesAdapter.QuoteStatuses.CHOSEN -> {
+                binding.chooseButton.visibility = View.VISIBLE
+                safeQuoteToProfile(quote)
+            }
+            QuotesAdapter.QuoteStatuses.NOT_CHOSEN -> {
+                binding.chooseButton.visibility = View.GONE
+                removeQuoteFromProfile()
             }
         }
+    }
 
+    private fun configureLayout() {
+        binding.errorLabel.addClickableText(R.string.try_again) {
+            searchQuotes()
+        }
+    }
+
+    private fun initAdapter() {
         val decorator = OffsetQuotesItemDecorator()
-        quotesAdapter = QuotesAdapter(listener)
         with(binding.recyclerView) {
             adapter = quotesAdapter
             addItemDecoration(decorator)
