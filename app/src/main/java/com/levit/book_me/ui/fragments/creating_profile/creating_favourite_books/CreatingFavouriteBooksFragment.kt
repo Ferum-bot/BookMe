@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
+import com.levit.book_me.core.enums.SearchBooksTypes
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingFavouriteBooksBinding
@@ -15,6 +16,7 @@ import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
+import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteBooksStorage
 
 class CreatingFavouriteBooksFragment:
     BaseCreatingProfileFragment<CreatingFavouriteBooksViewModel>(R.layout.fragment_creating_favourite_books),
@@ -39,10 +41,13 @@ class CreatingFavouriteBooksFragment:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showMainPageIndicator(true)
         updatePageIndicator()
         configureAllViews()
         setAllObservers()
         setAllClickListeners()
+
+        binding.searchView.isSelected = false
     }
 
     override fun setAllObservers() {
@@ -72,6 +77,16 @@ class CreatingFavouriteBooksFragment:
                     binding.errorLabel.visibility = View.VISIBLE
                     binding.searchView.isEnabled = false
                 }
+            }
+        })
+
+        /**
+         * Remove lately with storage.
+         * I know it is awful code
+         */
+        FavouriteBooksStorage.books.observe(viewLifecycleOwner, { books ->
+            books.forEach { book ->
+                viewModel.addChosenBook(book)
             }
         })
     }
@@ -108,6 +123,7 @@ class CreatingFavouriteBooksFragment:
         }
 
         binding.searchView.setOnClickListener {
+            showMainPageIndicator(false)
             navigateToSearchBooksFragment()
         }
     }
@@ -120,7 +136,9 @@ class CreatingFavouriteBooksFragment:
 
     private fun navigateToSearchBooksFragment() {
         val action = CreatingFavouriteBooksFragmentDirections
-            .actionCreatingFavouriteBooksFragmentToSearchBooksFragment()
+            .actionCreatingFavouriteBooksFragmentToSearchBooksFragment(
+                searchType = SearchBooksTypes.FAVOURITE_BOOKS
+            )
         findNavController().navigate(action)
     }
 }

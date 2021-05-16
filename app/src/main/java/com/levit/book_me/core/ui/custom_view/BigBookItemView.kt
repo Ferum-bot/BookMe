@@ -40,7 +40,7 @@ class BigBookItemView @JvmOverloads constructor(
     }
 
     fun setBook(book: GoogleBook) {
-        binding.bookAuthor.text = book.bookCategories?.parseListOfAuthors()
+        binding.bookAuthor.text = book.listOfAuthors?.parseListOfAuthors()
         binding.bookTitle.text = book.title
 
         if (book.isChosen) {

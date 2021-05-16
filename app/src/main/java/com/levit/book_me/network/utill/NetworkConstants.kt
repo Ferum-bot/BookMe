@@ -22,7 +22,7 @@ object NetworkConstants {
     const val MOST_CHOSEN_GOOGLE_BOOKS_ID = "100776151416000974307"
 
     const val POPULAR_GOOGLE_SHELF_ID = "0"
-    const val MOST_CHOSEN_GOOGLE_SHELF_ID = "1"
+    const val MOST_CHOSEN_GOOGLE_SHELF_ID = "2"
 
     const val GOOGLE_BOOKS_API_KEY = "AIzaSyDPkHJKI-bsfrUxKee6y8_88O8JnaqooA8"
 }

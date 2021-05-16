@@ -12,10 +12,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 import javax.inject.Named
 import kotlin.coroutines.CoroutineContext
 
-class SearchBooksRepositoryImpl(
+class SearchBooksRepositoryImpl @Inject constructor(
     @Named(DIConstants.IO_DISPATCHER_CONTEXT)
     private val launchContext: CoroutineContext,
 

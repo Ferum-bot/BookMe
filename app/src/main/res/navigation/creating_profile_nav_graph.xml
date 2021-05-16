@@ -140,5 +140,10 @@
         android:id="@+id/searchBooksFragment"
         android:name="com.levit.book_me.ui.fragments.creating_profile.search_books.SearchBooksFragment"
         android:label="SearchBooksFragment"
-        tools:layout="@layout/fragment_search_books"/>
+        tools:layout="@layout/fragment_search_books">
+        <argument
+            android:name="searchType"
+            app:argType="com.levit.book_me.core.enums.SearchBooksTypes"
+            android:defaultValue="FAVOURITE_BOOKS" />
+    </fragment>
 </navigation>

@@ -2,10 +2,9 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.levit.book_me.core_base.di.CreatingProfileScope
-import com.levit.book_me.interactors.interfaces.CreatingBooksInteractor
+import com.levit.book_me.interactors.interfaces.SearchBooksInteractor
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
@@ -16,7 +15,7 @@ import javax.inject.Inject
 
 @CreatingProfileScope
 class CreatingFavouriteBooksViewModel @Inject constructor(
-    private val interator: CreatingBooksInteractor
+    private val interator: SearchBooksInteractor
 ): BaseViewModel() {
 
     enum class Statuses {

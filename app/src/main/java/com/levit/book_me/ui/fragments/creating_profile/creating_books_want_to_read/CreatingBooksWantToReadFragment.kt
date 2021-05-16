@@ -5,13 +5,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
+import com.levit.book_me.core.enums.SearchBooksTypes
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingBooksYouWantToReadBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import com.levit.book_me.ui.fragments.creating_profile.utills.BooksYouWantToReadStorage
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
 
@@ -38,6 +41,7 @@ class CreatingBooksWantToReadFragment:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showMainPageIndicator(true)
         updatePageIndicator()
         setAllClickListeners()
         setAllObservers()
@@ -73,6 +77,16 @@ class CreatingBooksWantToReadFragment:
                 }
             }
         })
+
+        /**
+         * Remove lately with Storage.
+         * I know it is awful code.
+         */
+        BooksYouWantToReadStorage.books.observe(viewLifecycleOwner, { books ->
+            books.forEach { book ->
+                viewModel.addChosenBook(book)
+            }
+        })
     }
 
     override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
@@ -95,6 +109,11 @@ class CreatingBooksWantToReadFragment:
         binding.finishButton.setOnClickListener {
             navigateToMainScreen()
         }
+
+        binding.searchView.setOnClickListener {
+            showMainPageIndicator(false)
+            navigateToSearchBooksScreen()
+        }
     }
 
     private fun configureLayout() {
@@ -112,5 +131,13 @@ class CreatingBooksWantToReadFragment:
 
     private fun navigateToMainScreen() {
 
+    }
+
+    private fun navigateToSearchBooksScreen() {
+        val action = CreatingBooksWantToReadFragmentDirections
+            .actionCreatingBooksWantToReadFragmentToSearchBooksFragment(
+                searchType = SearchBooksTypes.BOOKS_YOU_WANT_TO_RED
+            )
+        findNavController().navigate(action)
     }
 }

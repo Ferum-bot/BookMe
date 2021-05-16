@@ -12,11 +12,7 @@ import dagger.Subcomponent
 
 @SearchBooksScope
 @Subcomponent(modules = [
-    RepositoryModule::class,
-    NetworkModule::class,
-    DataSourceModule::class,
-    SearchBooksViewModelModule::class,
-    SearchBooksInteractorModule::class,
+    SearchBooksViewModelModule::class
 ])
 interface SearchBooksComponent {
 

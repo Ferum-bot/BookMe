@@ -14,7 +14,6 @@ import com.levit.book_me.databinding.FragmentCreatingFavouriteAuthorsBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteAuthorsStorage
-import kotlinx.coroutines.GlobalScope
 
 class CreatingFavouriteAuthorsFragment:
     BaseCreatingProfileFragment<CreatingFavouriteAuthorsViewModel>(R.layout.fragment_creating_favourite_authors) {
@@ -36,7 +35,7 @@ class CreatingFavouriteAuthorsFragment:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showMainTitle(true)
+        showMainPageIndicator(true)
         updatePageIndicator()
         setUpAuthorChooser()
         setAllClickListeners()
@@ -86,7 +85,7 @@ class CreatingFavouriteAuthorsFragment:
         val authorChooserListener = object: CreatingProfileAuthorChooser.AuthorChangeListener {
 
             override fun onAuthorAdd(authorPosition: CreatingProfileAuthorChooser.AuthorPosition) {
-                showMainTitle(false)
+                showMainPageIndicator(false)
                 navigateToSearchAuthorFragment(authorPosition)
             }
 

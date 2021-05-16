@@ -34,7 +34,7 @@ class CreatingNameSurnameFragment:
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showMainTitle(true)
+        showMainPageIndicator(true)
         configureLayout()
         setAllClickListeners()
         setTextWatchers()

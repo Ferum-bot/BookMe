@@ -12,8 +12,8 @@ import dagger.Subcomponent
 
 @SearchFavouriteAuthorsScope
 @Subcomponent(modules = [
+    SearchFavouriteAuthorsViewModelsModule::class,
     SearchFavouriteAuthorsInteractorsModule::class,
-    SearchFavouriteAuthorsViewModelsModule::class
 ])
 interface SearchFavouriteAuthorsComponent {
 
