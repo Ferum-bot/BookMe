@@ -54,9 +54,21 @@ class CreatingBooksWantToReadViewModel @Inject constructor(
         val books = _mostChosenBooks.value?.toMutableList() ?: mutableListOf()
         if (!books.contains(book)) {
             books.add(0, book)
+            _mostChosenBooks.postValue(books)
         }
         chosenBooks.add(book)
-        _mostChosenBooks.postValue(books)
+    }
+
+    fun addChosenBooks(books: List<GoogleBook>) {
+        val currentBooks = _mostChosenBooks.value?.toMutableList() ?: mutableListOf()
+        books.forEach { book ->
+            currentBooks.remove(book)
+            currentBooks.add(0, book)
+
+            chosenBooks.remove(book)
+            chosenBooks.add(book)
+        }
+        _mostChosenBooks.postValue(currentBooks)
     }
 
     fun removeChosenBook(book: GoogleBook) {

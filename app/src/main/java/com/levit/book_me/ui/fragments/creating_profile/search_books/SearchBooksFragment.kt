@@ -99,9 +99,11 @@ class SearchBooksFragment:
         when(newState) {
             CreatingBooksAdapter.CreatingBooksStates.CHOSEN -> {
                 viewModel.addChosenBook(book)
+                sharedViewModel.addChosenBook(args.searchType, book)
             }
             CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN -> {
                 viewModel.removeChosenBook(book)
+                sharedViewModel.removeChosenBook(args.searchType, book)
             }
         }
     }
@@ -115,7 +117,6 @@ class SearchBooksFragment:
 
     private fun setAllClickListeners() {
         binding.choseButton.setOnClickListener {
-            viewModel.safeChosenBooks(args.searchType)
             binding.searchView.hideKeyboard()
             popBackStack()
         }

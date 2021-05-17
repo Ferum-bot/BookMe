@@ -2,16 +2,12 @@ package com.levit.book_me.ui.fragments.creating_profile.search_books
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.core.enums.SearchBooksTypes
 import com.levit.book_me.core_base.di.SearchBooksScope
 import com.levit.book_me.interactors.interfaces.SearchBooksInteractor
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
-import com.levit.book_me.ui.fragments.creating_profile.utills.BooksYouWantToReadStorage
-import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteBooksStorage
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -71,22 +67,6 @@ class SearchBooksViewModel @Inject constructor(
         chosenBooks.remove(book)
         if (chosenBooks.isEmpty()) {
             _someBooksIsChosen.postValue(false)
-        }
-    }
-
-    /**
-     * Rewrite lately to right solution with local database
-     * and right architecture after removing FavouriteBooksStorage and
-     * BooksYouWantToReadStorage
-     */
-    fun safeChosenBooks(type: SearchBooksTypes) {
-        when(type) {
-            SearchBooksTypes.FAVOURITE_BOOKS -> {
-                FavouriteBooksStorage.setBooks(chosenBooks)
-            }
-            SearchBooksTypes.BOOKS_YOU_WANT_TO_RED -> {
-                BooksYouWantToReadStorage.setBooks(chosenBooks)
-            }
         }
     }
 

@@ -14,7 +14,6 @@ import com.levit.book_me.databinding.FragmentCreatingBooksYouWantToReadBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
-import com.levit.book_me.ui.fragments.creating_profile.utills.BooksYouWantToReadStorage
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
 
@@ -78,14 +77,8 @@ class CreatingBooksWantToReadFragment:
             }
         })
 
-        /**
-         * Remove lately with Storage.
-         * I know it is awful code.
-         */
-        BooksYouWantToReadStorage.books.observe(viewLifecycleOwner, { books ->
-            books.forEach { book ->
-                viewModel.addChosenBook(book)
-            }
+        sharedViewModel.chosenWantToReadBooks.observe(viewLifecycleOwner, { books ->
+            viewModel.addChosenBooks(books)
         })
     }
 
@@ -93,9 +86,17 @@ class CreatingBooksWantToReadFragment:
         when(newState) {
             CreatingBooksAdapter.CreatingBooksStates.CHOSEN -> {
                 viewModel.addChosenBook(book)
+                sharedViewModel.addChosenBook(
+                    type = SearchBooksTypes.BOOKS_YOU_WANT_TO_RED,
+                    book = book
+                )
             }
             CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN -> {
                 viewModel.removeChosenBook(book)
+                sharedViewModel.removeChosenBook(
+                    type = SearchBooksTypes.BOOKS_YOU_WANT_TO_RED,
+                    book = book
+                )
             }
         }
     }

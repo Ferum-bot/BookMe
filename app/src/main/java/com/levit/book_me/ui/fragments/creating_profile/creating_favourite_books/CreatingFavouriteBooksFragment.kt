@@ -16,7 +16,6 @@ import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
-import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteBooksStorage
 
 class CreatingFavouriteBooksFragment:
     BaseCreatingProfileFragment<CreatingFavouriteBooksViewModel>(R.layout.fragment_creating_favourite_books),
@@ -80,23 +79,27 @@ class CreatingFavouriteBooksFragment:
             }
         })
 
-        /**
-         * Remove lately with storage.
-         * I know it is awful code
-         */
-        FavouriteBooksStorage.books.observe(viewLifecycleOwner, { books ->
-            books.forEach { book ->
-                viewModel.addChosenBook(book)
-            }
+        sharedViewModel.chosenFavouriteBooks.observe(viewLifecycleOwner, { books ->
+            viewModel.addChosenBooks(books)
         })
     }
 
     override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
         when(newState) {
-            CreatingBooksAdapter.CreatingBooksStates.CHOSEN ->
+            CreatingBooksAdapter.CreatingBooksStates.CHOSEN -> {
                 viewModel.addChosenBook(book)
-            CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN ->
+                sharedViewModel.addChosenBook(
+                    type = SearchBooksTypes.FAVOURITE_BOOKS,
+                    book = book
+                )
+            }
+            CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN -> {
                 viewModel.removeChosenBook(book)
+                sharedViewModel.removeChosenBook(
+                    type = SearchBooksTypes.FAVOURITE_BOOKS,
+                    book = book
+                )
+            }
         }
     }
 
