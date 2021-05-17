@@ -3,13 +3,10 @@ package com.levit.book_me.ui.fragments.creating_profile.search_favourites_author
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.hideKeyboard
 import com.levit.book_me.core.extensions.viewBinding
@@ -19,7 +16,6 @@ import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.databinding.FragmentSearchFavouriteAuthorsBinding
 import com.levit.book_me.di.components.SearchFavouriteAuthorsComponent
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
-import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteAuthorsStorage
 
 class SearchFavouriteAuthorsFragment:
     BaseCreatingProfileFragment<SearchFavouriteAuthorsViewModel>(R.layout.fragment_search_favourite_authors),
@@ -64,11 +60,16 @@ class SearchFavouriteAuthorsFragment:
     }
 
     private fun safeChosenAuthor(author: Author) {
-        FavouriteAuthorsStorage.setAuthorTo(author, authorPosition)
+        sharedViewModel.safeFavouriteAuthor(
+            author = author,
+            position = authorPosition
+        )
     }
 
     private fun removeChosenAuthor() {
-        FavouriteAuthorsStorage.removeAuthorFrom(authorPosition)
+        sharedViewModel.removeFavouriteAuthor(
+            position = authorPosition
+        )
     }
 
     private fun initDI() {

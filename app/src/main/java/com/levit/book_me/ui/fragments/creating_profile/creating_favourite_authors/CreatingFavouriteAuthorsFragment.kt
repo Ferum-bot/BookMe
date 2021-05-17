@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
@@ -13,10 +12,10 @@ import com.levit.book_me.core.models.Author
 import com.levit.book_me.databinding.FragmentCreatingFavouriteAuthorsBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
-import com.levit.book_me.ui.fragments.creating_profile.utills.FavouriteAuthorsStorage
 
 class CreatingFavouriteAuthorsFragment:
-    BaseCreatingProfileFragment<CreatingFavouriteAuthorsViewModel>(R.layout.fragment_creating_favourite_authors) {
+    BaseCreatingProfileFragment<CreatingFavouriteAuthorsViewModel>(R.layout.fragment_creating_favourite_authors),
+    CreatingProfileAuthorChooser.AuthorChangeListener{
 
     companion object {
         private const val FRAGMENT_POSITION = 4
@@ -45,35 +44,26 @@ class CreatingFavouriteAuthorsFragment:
     override fun setAllObservers() {
         super.setAllObservers()
 
-        FavouriteAuthorsStorage.firstAuthor.observe(viewLifecycleOwner, Observer { author ->
-            if (author != null) {
-                binding.authorChooser.setAuthor(CreatingProfileAuthorChooser.AuthorPosition.FIRST_POSITION, author)
+        sharedViewModel.chosenFavouriteAuthors.observe(viewLifecycleOwner,  { chosenAuthors ->
+            chosenAuthors.forEach { authorPair ->
+                binding.authorChooser.setAuthor(
+                    author = authorPair.first,
+                    position = authorPair.second,
+                )
             }
         })
+    }
 
-        FavouriteAuthorsStorage.secondAuthor.observe(viewLifecycleOwner, Observer { author ->
-            if (author != null) {
-                binding.authorChooser.setAuthor(CreatingProfileAuthorChooser.AuthorPosition.SECOND_POSITION, author)
-            }
-        })
+    override fun onAuthorAdd(authorPosition: CreatingProfileAuthorChooser.AuthorPosition) {
+        showMainPageIndicator(false)
+        navigateToSearchAuthorFragment(authorPosition)
+    }
 
-        FavouriteAuthorsStorage.thirdAuthor.observe(viewLifecycleOwner, Observer { author ->
-            if (author != null) {
-                binding.authorChooser.setAuthor(CreatingProfileAuthorChooser.AuthorPosition.THIRD_POSITION, author)
-            }
-        })
-
-        FavouriteAuthorsStorage.foursAuthor.observe(viewLifecycleOwner, Observer { author ->
-            if (author != null) {
-                binding.authorChooser.setAuthor(CreatingProfileAuthorChooser.AuthorPosition.FOURS_POSITION, author)
-            }
-        })
-
-        FavouriteAuthorsStorage.fivesAuthor.observe(viewLifecycleOwner, Observer { author ->
-            if (author != null) {
-                binding.authorChooser.setAuthor(CreatingProfileAuthorChooser.AuthorPosition.FIVES_POSITION, author)
-            }
-        })
+    override fun onAuthorRemoved(
+        authorPosition: CreatingProfileAuthorChooser.AuthorPosition,
+        author: Author
+    ) {
+        sharedViewModel.removeFavouriteAuthor(authorPosition)
     }
 
     private fun updatePageIndicator() {
@@ -82,19 +72,7 @@ class CreatingFavouriteAuthorsFragment:
     }
 
     private fun setUpAuthorChooser() {
-        val authorChooserListener = object: CreatingProfileAuthorChooser.AuthorChangeListener {
-
-            override fun onAuthorAdd(authorPosition: CreatingProfileAuthorChooser.AuthorPosition) {
-                showMainPageIndicator(false)
-                navigateToSearchAuthorFragment(authorPosition)
-            }
-
-            override fun onAuthorRemoved(authorPosition: CreatingProfileAuthorChooser.AuthorPosition, author: Author) {
-                FavouriteAuthorsStorage.removeAuthorFrom(authorPosition)
-            }
-        }
-
-        binding.authorChooser.setAuthorChangeListener(authorChooserListener)
+        binding.authorChooser.setAuthorChangeListener(this)
     }
 
     private fun setAllClickListeners() {
