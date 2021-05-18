@@ -19,7 +19,8 @@ import com.levit.book_me.ui.fragments.quotes.utill.ProfileQuoteStorage
 
 class QuotesMainScreenFragment:
     QuotesBaseFragment(R.layout.fragment_quotes_main_screen),
-    QuotesAdapter.QuoteStatusListener {
+    QuotesAdapter.QuoteStatusListener,
+    QuoteTypeChooseView.OnTypeClickListener {
 
     private val binding by viewBinding { FragmentQuotesMainScreenBinding.bind(it) }
 
@@ -61,6 +62,14 @@ class QuotesMainScreenFragment:
                 removeQuoteFromProfile()
             }
         }
+    }
+
+    override fun onAuthorsClicked() {
+        navigateToAuthorsScreen()
+    }
+
+    override fun onTagsClicked() {
+        navigateToTagsScreen()
     }
 
     private fun configureLayout() {
@@ -149,17 +158,7 @@ class QuotesMainScreenFragment:
     }
 
     private fun setTypeListener() {
-        val typeListener = object: QuoteTypeChooseView.OnTypeClickListener {
-
-            override fun onTagsClicked() {
-                navigateToTagsScreen()
-            }
-
-            override fun onAuthorsClicked() {
-                navigateToAuthorsScreen()
-            }
-        }
-        binding.quoteTypeChoose.setTypeListener(typeListener)
+        binding.quoteTypeChoose.setTypeListener(this)
     }
 
     private fun navigateToAuthorsScreen() {
