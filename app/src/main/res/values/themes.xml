@@ -2,6 +2,8 @@
 
     <style name="DefaultAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:colorBackground">@color/white</item>
+        <item name="android:searchViewStyle">@style/SearchActionViewTheme</item>
+        <item name="searchViewStyle">@style/SearchActionViewTheme</item>
     </style>
 
     <style name="DefaultAppTheme.Launcher">

@@ -27,6 +27,8 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
     private val _authors: MutableLiveData<List<GoQuotesAuthor>> = MutableLiveData()
     val authors: LiveData<List<GoQuotesAuthor>> = _authors
 
+    private val allAuthors: MutableList<GoQuotesAuthor> = mutableListOf()
+
     init {
         _currentStatus.postValue(Statuses.LOADING)
 
@@ -45,6 +47,19 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
         }
     }
 
+    fun getAuthorsByQuery(query: String?) {
+        if (query.isNullOrBlank()) {
+            _authors.postValue(allAuthors)
+            return
+        }
+        _currentStatus.postValue(Statuses.LOADING)
+        val resultAuthors = allAuthors.filter { author ->
+            author.fullName.contains(query, true)
+        }
+        _authors.postValue(resultAuthors)
+        _currentStatus.postValue(Statuses.LOADED)
+    }
+
     private fun handleAuthorsResult(result: RetrofitResult<List<GoQuotesAuthor>>) = when(result) {
         is RetrofitResult.Success -> {
             handleSuccessResult(result)
@@ -58,6 +73,8 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
         _currentStatus.postValue(Statuses.LOADED)
         val authorsList = result.data
         _authors.postValue(authorsList)
+        allAuthors.clear()
+        allAuthors.addAll(authorsList)
     }
 
     override fun handleErrorResult(error: RetrofitResult.Failure<*>) {

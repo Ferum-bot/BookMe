@@ -174,4 +174,20 @@
         <item name="android:textSize">@dimen/label_text_size</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="SearchActionViewTheme" parent="Widget.AppCompat.SearchView.ActionBar">
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/light_grey</item>
+        <item name="android:closeIcon">@drawable/ic_baseline_cancel_24</item>
+        <item name="closeIcon">@drawable/ic_baseline_cancel_24</item>
+        <item name="android:commitIcon">@drawable/ic_search_black</item>
+        <item name="commitIcon">@drawable/ic_search_black</item>
+        <item name="android:searchIcon">@drawable/ic_search_black</item>
+        <item name="searchIcon">@drawable/ic_search_black</item>
+        <item name="android:goIcon">@drawable/ic_search_black</item>
+        <item name="goIcon">@drawable/ic_search_black</item>
+        <item name="android:voiceIcon">@drawable/ic_search_black</item>
+        <item name="voiceIcon">@drawable/ic_search_black</item>
+        <item name="android:searchHintIcon">@drawable/ic_search_black</item>
+    </style>
 </resources>
