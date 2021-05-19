@@ -43,6 +43,7 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
 
     fun getAllAuthors() {
         viewModelScope.launch {
+            _currentStatus.postValue(Statuses.LOADING)
             interator.getAllAuthors()
         }
     }
@@ -52,12 +53,10 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
             _authors.postValue(allAuthors)
             return
         }
-        _currentStatus.postValue(Statuses.LOADING)
         val resultAuthors = allAuthors.filter { author ->
             author.fullName.contains(query, true)
         }
         _authors.postValue(resultAuthors)
-        _currentStatus.postValue(Statuses.LOADED)
     }
 
     private fun handleAuthorsResult(result: RetrofitResult<List<GoQuotesAuthor>>) = when(result) {
