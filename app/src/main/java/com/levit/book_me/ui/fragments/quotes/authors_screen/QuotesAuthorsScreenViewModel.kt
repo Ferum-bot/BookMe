@@ -30,8 +30,6 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
     private val allAuthors: MutableList<GoQuotesAuthor> = mutableListOf()
 
     init {
-        _currentStatus.postValue(Statuses.LOADING)
-
         viewModelScope.launch {
             interator.authors.collect { result ->
                 handleAuthorsResult(result)

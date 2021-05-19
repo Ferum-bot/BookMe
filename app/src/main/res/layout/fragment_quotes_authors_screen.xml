@@ -12,10 +12,7 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
 
-        app:liftOnScroll="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/tool_bar"
@@ -45,11 +42,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
-        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-
         tools:listitem="@layout/quote_author_tag_item_layout"/>
 
     <TextView
@@ -62,11 +54,6 @@
         android:layout_gravity="center"
 
         style="@style/QuoteScreenLabelStyle"
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
 
         tools:visibility="visible"/>
 
