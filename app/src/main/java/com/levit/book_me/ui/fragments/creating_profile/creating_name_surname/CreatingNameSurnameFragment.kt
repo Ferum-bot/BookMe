@@ -48,19 +48,19 @@ class CreatingNameSurnameFragment:
         super.setAllObservers()
 
         viewModel.isNameCorrect.observe(viewLifecycleOwner, Observer { nameIsCorrect ->
-            binding.invalidNameLabel.isVisible = nameIsCorrect
+            binding.invalidNameLabel.isVisible = !nameIsCorrect
         })
 
         viewModel.isSurnameCorrect.observe(viewLifecycleOwner, Observer { surnameIsCorrect ->
-            binding.invalidSurnameLabel.isVisible = surnameIsCorrect
+            binding.invalidSurnameLabel.isVisible = !surnameIsCorrect
         })
 
         viewModel.isWordsAboutYouCorrect.observe(viewLifecycleOwner,  { isWordsAboutYouCorrect ->
-            binding.invalidWordsAboutYouLabel.isVisible = isWordsAboutYouCorrect
+            binding.invalidWordsAboutYouLabel.isVisible = !isWordsAboutYouCorrect
         })
 
         viewModel.isQuoteChosen.observe(viewLifecycleOwner, { isQuoteChosen ->
-            binding.quoteNotChosenLabel.isVisible = isQuoteChosen
+            binding.quoteNotChosenLabel.isVisible = !isQuoteChosen
         })
 
         viewModel.isWordsAboutYouErrorStringId.observe(viewLifecycleOwner, { stringId ->

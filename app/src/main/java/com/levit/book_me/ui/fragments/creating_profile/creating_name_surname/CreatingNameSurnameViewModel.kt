@@ -22,7 +22,7 @@ class CreatingNameSurnameViewModel @Inject constructor(): BaseViewModel() {
     private val _isWordsAboutYouCorrect: MutableLiveData<Boolean> = MutableLiveData(true)
     val isWordsAboutYouCorrect: LiveData<Boolean> = _isWordsAboutYouCorrect
 
-    private val _isWordsAboutYouErrorStringId: MutableLiveData<Int> = MutableLiveData()
+    private val _isWordsAboutYouErrorStringId: MutableLiveData<Int> = MutableLiveData(R.string.write_some_words_about_you)
     val isWordsAboutYouErrorStringId: LiveData<Int> = _isWordsAboutYouErrorStringId
 
     private val _isQuoteChosen: MutableLiveData<Boolean> = MutableLiveData(true)

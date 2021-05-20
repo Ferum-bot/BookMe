@@ -8,7 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.enums.SearchBooksTypes
-import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingFavouriteBooksBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -53,6 +52,7 @@ class CreatingFavouriteBooksFragment:
         super.setAllObservers()
 
         viewModel.popularBooks.observe(viewLifecycleOwner, Observer { books ->
+            binding
             adapter.submitList(books)
         })
 
