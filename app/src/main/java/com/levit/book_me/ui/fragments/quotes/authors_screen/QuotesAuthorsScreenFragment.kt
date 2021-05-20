@@ -11,7 +11,7 @@ import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.hideKeyboard
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.models.GoQuotesAuthor
+import com.levit.book_me.core.models.quote.GoQuotesAuthor
 import com.levit.book_me.core.models.GoQuotesTypes
 import com.levit.book_me.databinding.FragmentQuotesAuthorsScreenBinding
 import com.levit.book_me.ui.base.QuotesBaseFragment

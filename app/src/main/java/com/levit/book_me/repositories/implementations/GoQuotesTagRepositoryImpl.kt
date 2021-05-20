@@ -1,6 +1,6 @@
 package com.levit.book_me.repositories.implementations
 
-import com.levit.book_me.core.models.GoQuotesTag
+import com.levit.book_me.core.models.quote.GoQuotesTag
 import com.levit.book_me.data_sources.interfaces.GoQuotesTagDataSource
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.network_result_data.RetrofitResult

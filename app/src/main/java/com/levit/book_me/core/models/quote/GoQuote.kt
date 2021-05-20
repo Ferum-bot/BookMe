@@ -1,4 +1,4 @@
-package com.levit.book_me.core.models
+package com.levit.book_me.core.models.quote
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

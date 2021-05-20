@@ -1,7 +1,6 @@
 package com.levit.book_me.repositories.implementations
 
-import androidx.navigation.Navigator
-import com.levit.book_me.core.models.GoQuotesAuthor
+import com.levit.book_me.core.models.quote.GoQuotesAuthor
 import com.levit.book_me.data_sources.interfaces.GoQuotesAuthorDataSource
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.network_result_data.RetrofitResult

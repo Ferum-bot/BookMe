@@ -1,7 +1,7 @@
 package com.levit.book_me.repositories.implementations
 
 import com.levit.book_me.core.models.Author
-import com.levit.book_me.core.models.GoogleBooksVolumeParameters
+import com.levit.book_me.core.models.google_books.GoogleBooksVolumeParameters
 import com.levit.book_me.data_sources.interfaces.GoogleBooksVolumeDataSource
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.network_result_data.RetrofitResult

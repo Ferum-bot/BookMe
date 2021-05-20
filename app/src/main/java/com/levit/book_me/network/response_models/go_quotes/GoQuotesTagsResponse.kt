@@ -1,7 +1,7 @@
 package com.levit.book_me.network.response_models.go_quotes
 
 import android.os.Parcelable
-import com.levit.book_me.core.models.GoQuotesTag
+import com.levit.book_me.core.models.quote.GoQuotesTag
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 

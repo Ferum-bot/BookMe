@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.models.GoQuote
+import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.databinding.FragmentQuotesScreenBinding
 import com.levit.book_me.ui.base.QuotesBaseFragment
 import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator

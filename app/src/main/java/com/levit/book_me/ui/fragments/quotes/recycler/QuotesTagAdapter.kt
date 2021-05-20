@@ -6,7 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.levit.book_me.core.models.GoQuotesTag
+import com.levit.book_me.core.models.quote.GoQuotesTag
 import com.levit.book_me.core.ui.custom_view.QuoteAuthorTagItemView
 
 class QuotesTagAdapter(

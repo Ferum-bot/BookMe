@@ -1,6 +1,6 @@
 package com.levit.book_me.interactors.implementations
 
-import com.levit.book_me.core.models.GoQuotesAuthor
+import com.levit.book_me.core.models.quote.GoQuotesAuthor
 import com.levit.book_me.interactors.interfaces.QuotesAuthorsScreenInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.interfaces.GoQuotesAuthorRepository

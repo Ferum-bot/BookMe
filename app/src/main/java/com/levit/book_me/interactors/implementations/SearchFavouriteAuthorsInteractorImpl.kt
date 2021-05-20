@@ -2,14 +2,12 @@ package com.levit.book_me.interactors.implementations
 
 import com.levit.book_me.core.enums.GoogleBooksSearchTypes
 import com.levit.book_me.core.models.Author
-import com.levit.book_me.core.models.GoogleBooksVolumeParameters
-import com.levit.book_me.core_base.di.CreatingProfileScope
+import com.levit.book_me.core.models.google_books.GoogleBooksVolumeParameters
 import com.levit.book_me.core_base.di.SearchFavouriteAuthorsScope
 import com.levit.book_me.interactors.interfaces.SearchFavouriteAuthorsInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.interfaces.SearchAuthorsRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
 
 @SearchFavouriteAuthorsScope

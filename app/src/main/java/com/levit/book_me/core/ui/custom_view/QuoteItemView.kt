@@ -3,13 +3,11 @@ package com.levit.book_me.core.ui.custom_view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import bolts.Bolts
 import com.levit.book_me.R
-import com.levit.book_me.core.models.GoQuote
+import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.databinding.QuoteLayoutItemBinding
 import kotlinx.android.synthetic.main.quote_layout_item.view.*
 

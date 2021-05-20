@@ -2,9 +2,8 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_name_surname
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.levit.book_me.R
-import com.levit.book_me.core.models.GoQuote
+import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.ui.base.BaseViewModel
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants

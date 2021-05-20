@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.models.GoQuotesTag
+import com.levit.book_me.core.models.quote.GoQuotesTag
 import com.levit.book_me.core.models.GoQuotesTypes
 import com.levit.book_me.databinding.FragmentQuotesTagsScreenBinding
 import com.levit.book_me.ui.base.QuotesBaseFragment

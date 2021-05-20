@@ -2,7 +2,7 @@ package com.levit.book_me.ui.fragments.quotes.utill
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.levit.book_me.core.models.GoQuote
+import com.levit.book_me.core.models.quote.GoQuote
 
 /**
  * I know that is not good code. So I

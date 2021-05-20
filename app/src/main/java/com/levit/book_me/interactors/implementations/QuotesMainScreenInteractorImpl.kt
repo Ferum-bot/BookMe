@@ -1,9 +1,9 @@
 package com.levit.book_me.interactors.implementations
 
-import com.levit.book_me.core.models.GoQuote
-import com.levit.book_me.core.models.GoQuotesAuthor
-import com.levit.book_me.core.models.GoQuotesTag
-import com.levit.book_me.core.models.QuotesMainScreenModel
+import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.GoQuotesAuthor
+import com.levit.book_me.core.models.quote.GoQuotesTag
+import com.levit.book_me.core.models.quote.QuotesMainScreenModel
 import com.levit.book_me.interactors.interfaces.QuotesMainScreenInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.interfaces.GoQuotesAuthorRepository

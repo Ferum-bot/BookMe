@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.levit.book_me.core.models.GoQuotesAuthor
-import com.levit.book_me.core.models.GoQuotesTag
+import com.levit.book_me.core.models.quote.GoQuotesAuthor
+import com.levit.book_me.core.models.quote.GoQuotesTag
 import com.levit.book_me.databinding.QuoteAuthorTagItemLayoutBinding
 
 class QuoteAuthorTagItemView @JvmOverloads constructor(

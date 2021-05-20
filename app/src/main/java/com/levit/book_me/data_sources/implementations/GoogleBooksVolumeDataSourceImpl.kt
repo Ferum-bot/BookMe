@@ -1,6 +1,6 @@
 package com.levit.book_me.data_sources.implementations
 
-import com.levit.book_me.core.models.GoogleBooksVolumeParameters
+import com.levit.book_me.core.models.google_books.GoogleBooksVolumeParameters
 import com.levit.book_me.data_sources.interfaces.GoogleBooksVolumeDataSource
 import com.levit.book_me.network.exceptions.GoogleBooksException
 import com.levit.book_me.network.network_result_data.RetrofitResult

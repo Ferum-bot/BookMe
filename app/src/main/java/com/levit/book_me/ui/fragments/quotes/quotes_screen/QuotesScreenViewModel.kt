@@ -2,10 +2,8 @@ package com.levit.book_me.ui.fragments.quotes.quotes_screen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.R
-import com.levit.book_me.core.models.GoQuote
+import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core.models.GoQuotesTypes
 import com.levit.book_me.interactors.interfaces.QuotesScreenInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult

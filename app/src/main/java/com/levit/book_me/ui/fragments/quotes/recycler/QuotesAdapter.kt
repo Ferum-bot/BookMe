@@ -1,15 +1,11 @@
 package com.levit.book_me.ui.fragments.quotes.recycler
 
-import android.graphics.Rect
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.levit.book_me.R
-import com.levit.book_me.core.models.GoQuote
+import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core.ui.custom_view.QuoteItemView
 import timber.log.Timber
 

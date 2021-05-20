@@ -1,4 +1,4 @@
-package com.levit.book_me.core.models
+package com.levit.book_me.core.models.google_books
 
 import com.levit.book_me.core.enums.GoogleBooksPrintTypes
 import com.levit.book_me.core.enums.GoogleBooksSearchTypes
