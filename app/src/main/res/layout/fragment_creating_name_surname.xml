@@ -62,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:text="@string/name_can_not_be_empty"
 
             style="@style/DefaultErrorTextStyle"
 
@@ -92,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            android:text="@string/surname_can_not_be_empty"
 
             style="@style/DefaultErrorTextStyle"
 
@@ -132,6 +134,17 @@
             app:layout_constraintEnd_toEndOf="@id/end_guidline"/>
 
         <TextView
+            android:id="@+id/invalid_words_about_you_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+
+            style="@style/DefaultErrorTextStyle"
+
+            app:layout_constraintStart_toStartOf="@id/words_about_you_input_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/words_about_you_input_edit_text"/>
+
+        <TextView
             android:id="@+id/choose_favourite_qoute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,7 +154,7 @@
 
             android:layout_marginTop="32dp"
 
-            app:layout_constraintTop_toBottomOf="@id/words_about_you_input_edit_text"
+            app:layout_constraintTop_toBottomOf="@id/invalid_words_about_you_label"
             app:layout_constraintStart_toStartOf="@id/start_guidline"/>
 
         <com.levit.book_me.core.ui.custom_view.QuoteItemView
@@ -157,6 +170,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <TextView
+            android:id="@+id/quote_not_chosen_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quote_not_chosen"
+            android:visibility="gone"
+
+            style="@style/DefaultErrorTextStyle"
+
+            android:layout_marginStart="8dp"
+
+            app:layout_constraintStart_toStartOf="@id/quote_item"
+            app:layout_constraintTop_toBottomOf="@id/quote_item"/>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/next_button"
             android:layout_width="0dp"
@@ -169,7 +196,7 @@
             android:layout_marginBottom="32dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/quote_item"
+            app:layout_constraintTop_toBottomOf="@id/quote_not_chosen_label"
             app:layout_constraintStart_toStartOf="@id/start_guidline"
             app:layout_constraintEnd_toEndOf="@id/end_guidline" />
     </androidx.constraintlayout.widget.ConstraintLayout>

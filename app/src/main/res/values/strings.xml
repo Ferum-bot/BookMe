@@ -1,11 +1,6 @@
 <resources>
     <string name="app_name">BookMe</string>
     <string name="welcome_back_to_the_bookme">Welcome to \nthe BookMe</string>
-    <string name="how_would_you_like_to_log_in">How would you like to log in?</string>
-    <string name="by_continuing_you_agree_to_the_bookme_s_terms_of_use_and_privacy_policy">By continuing, you agree to the BookMe\'s \nTerms of Use and Privacy Policy</string>
-    <string name="join_with_google">Join with Google</string>
-    <string name="join_with_facebook">Join with Facebook</string>
-    <string name="join_with_phone_email">Join with Phone/Email</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="registration_was_canceled">Registration was canceled</string>
     <string name="phone">Phone</string>
@@ -17,6 +12,19 @@
     <string name="time_out">Time out!</string>
     <string name="invalid_request">Invalid request</string>
     <string name="too_many_request">Too many requests</string>
+    <string name="network_not_available">Network connection is not available</string>
+    <string name="try_again">Try again</string>
+    <string name="search">Search</string>
+
+    <!--  OnBoarding  -->
+    <string name="onboarding_first_label">You are what \nyou read</string>
+    <string name="onboarding_first_description">We are convinced that you are deeply shaped by the books you read. That is why we carefully select a person for you by your book preferences</string>
+    <string name="onboarding_second_label">Each chance \nis a new story</string>
+    <string name="onboarding_second_description">Everyday you have only onc chance to meet your bookish friend. Each chance is a new story, so do not miss it</string>
+    <string name="onboarding_third_label">Let us start \nyour own story</string>
+    <string name="onboarding_third_description">Every story has a beginning. That is why we ask everyone to start with profile creation</string>
+
+    <!--  Authorization  -->
     <string name="enter_6_digit_code">Enter 6-digit \ncode</string>
     <string name="your_code_was_send_to">Your code was sent to %s</string>
     <string name="entered_code_was_invalid">The code entered was Invalid!</string>
@@ -30,16 +38,11 @@
     <string name="invalid_address">Invalid address</string>
     <string name="password_must_meet_all_conditions">Password must meet all conditions</string>
     <string name="password_mismatch">Password mismatch</string>
-    <string name="network_not_available">Network connection is not available</string>
-    <string name="try_again">Try again</string>
-
-    <!--  OnBoarding  -->
-    <string name="onboarding_first_label">You are what \nyou read</string>
-    <string name="onboarding_first_description">We are convinced that you are deeply shaped by the books you read. That is why we carefully select a person for you by your book preferences</string>
-    <string name="onboarding_second_label">Each chance \nis a new story</string>
-    <string name="onboarding_second_description">Everyday you have only onc chance to meet your bookish friend. Each chance is a new story, so do not miss it</string>
-    <string name="onboarding_third_label">Let us start \nyour own story</string>
-    <string name="onboarding_third_description">Every story has a beginning. That is why we ask everyone to start with profile creation</string>
+    <string name="how_would_you_like_to_log_in">How would you like to log in?</string>
+    <string name="by_continuing_you_agree_to_the_bookme_s_terms_of_use_and_privacy_policy">By continuing, you agree to the BookMe\'s \nTerms of Use and Privacy Policy</string>
+    <string name="join_with_google">Join with Google</string>
+    <string name="join_with_facebook">Join with Facebook</string>
+    <string name="join_with_phone_email">Join with Phone/Email</string>
 
     <!--  Creating Profile  -->
     <string name="profile_creation">Profile creation</string>
@@ -66,6 +69,11 @@
     <string name="choose_books_you_want_to_read">Choose books you \nwant to read</string>
     <string name="finish">Finish</string>
     <string name="something_interesting_about_you">Something interesting about you</string>
+    <string name="name_can_not_be_empty">Name can\'t be empty</string>
+    <string name="surname_can_not_be_empty">Surname can\'t be empty</string>
+    <string name="write_some_words_about_you">Write some words about you</string>
+    <string name="minimum_length_is">Minimum length is %s symbols</string>
+    <string name="maximum_length_is">Maximum length is %s symbols</string>
 
     <!--  Choose Author Layout  -->
     <string name="first_author">First Author</string>
@@ -91,6 +99,6 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
-    <string name="search">Search</string>
+    <string name="quote_not_chosen">Quote not chosen</string>
 
 </resources>

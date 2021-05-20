@@ -3,6 +3,7 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_name_surname
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentCreatingNameSurnameBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 import com.levit.book_me.ui.fragments.quotes.utill.ProfileQuoteStorage
 
 class CreatingNameSurnameFragment:
@@ -46,18 +48,42 @@ class CreatingNameSurnameFragment:
         super.setAllObservers()
 
         viewModel.isNameCorrect.observe(viewLifecycleOwner, Observer { nameIsCorrect ->
-            if (nameIsCorrect) {
-                binding.invalidNameLabel.visibility = View.GONE
-            }
+            binding.invalidNameLabel.isVisible = nameIsCorrect
         })
 
         viewModel.isSurnameCorrect.observe(viewLifecycleOwner, Observer { surnameIsCorrect ->
-            if (surnameIsCorrect) {
-                binding.invalidSurnameLabel.visibility = View.GONE
+            binding.invalidSurnameLabel.isVisible = surnameIsCorrect
+        })
+
+        viewModel.isWordsAboutYouCorrect.observe(viewLifecycleOwner,  { isWordsAboutYouCorrect ->
+            binding.invalidWordsAboutYouLabel.isVisible = isWordsAboutYouCorrect
+        })
+
+        viewModel.isQuoteChosen.observe(viewLifecycleOwner, { isQuoteChosen ->
+            binding.quoteNotChosenLabel.isVisible = isQuoteChosen
+        })
+
+        viewModel.isWordsAboutYouErrorStringId.observe(viewLifecycleOwner, { stringId ->
+            val errorString = when(stringId) {
+                R.string.minimum_length_is -> {
+                    getString(stringId, CreatingProfileConstants.WORDS_ABOUT_YOU_MIN_LENGTH)
+                }
+                R.string.maximum_length_is -> {
+                    getString(stringId, CreatingProfileConstants.WORDS_ABOUT_YOU_MAX_LENGTH)
+                }
+                R.string.write_some_words_about_you -> {
+                    getString(stringId)
+                }
+                else -> {
+                    getString(R.string.something_went_wrong)
+                }
             }
+            
+            binding.invalidWordsAboutYouLabel.text = errorString
         })
 
         ProfileQuoteStorage.quote.observe(viewLifecycleOwner, Observer { quote ->
+            viewModel.chosenQuote = quote
             if (quote == null) {
                 binding.quoteItem.hideAuthor(true)
                 binding.quoteItem.setChosen(false)
@@ -77,7 +103,12 @@ class CreatingNameSurnameFragment:
 
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
-            navigateToChooseProfilePhotoFragment()
+            val name = binding.nameTextInput.text.toString()
+            val surname = binding.surnameTextInput.text.toString()
+            val wordsAboutYou = binding.wordsAboutYouInputEditText.text.toString()
+            if (viewModel.checkIsEverythingIsValid(name, surname, wordsAboutYou)) {
+                navigateToChooseProfilePhotoFragment()
+            }
         }
 
         binding.quoteItem.setOnClickListener {

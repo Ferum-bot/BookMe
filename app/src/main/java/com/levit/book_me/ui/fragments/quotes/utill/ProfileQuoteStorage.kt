@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.levit.book_me.core.models.GoQuote
 
+/**
+ * I know that is not good code. So I
+ * will remove it lately.
+ */
 object ProfileQuoteStorage {
 
     private val _quote: MutableLiveData<GoQuote?> = MutableLiveData(null)
