@@ -3,11 +3,13 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.levit.book_me.R
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.interactors.interfaces.SearchBooksInteractor
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
+import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -27,6 +29,9 @@ class CreatingFavouriteBooksViewModel @Inject constructor(
 
     private val _currentStatus: MutableLiveData<Statuses> = MutableLiveData()
     val currentStatus: LiveData<Statuses> = _currentStatus
+
+    private val _isChosenEnoughBooks: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isChosenEnoughBooks: LiveData<Boolean> = _isChosenEnoughBooks
 
     private val chosenBooks: MutableList<GoogleBook> = mutableListOf()
 
@@ -57,6 +62,7 @@ class CreatingFavouriteBooksViewModel @Inject constructor(
             _popularBooks.postValue(books)
         }
         chosenBooks.add(book)
+        checkBooksCount()
     }
 
     fun addChosenBooks(books: List<GoogleBook>) {
@@ -69,10 +75,29 @@ class CreatingFavouriteBooksViewModel @Inject constructor(
             chosenBooks.add(book)
         }
         _popularBooks.postValue(currentBooks)
+        checkBooksCount()
     }
 
     fun removeChosenBook(book: GoogleBook) {
         chosenBooks.remove(book)
+    }
+
+    fun everythingIsValid(): Boolean {
+        if (chosenBooks.size < CreatingProfileConstants.MIN_COUNT_OF_FAVOURITE_BOOKS) {
+            _isChosenEnoughBooks.postValue(false)
+            return false
+        }
+        if (chosenBooks.size > CreatingProfileConstants.MAX_COUNT_OF_FAVOURITE_BOOKS) {
+            _errorMessageId.postValue(R.string.you_can_choose_not_more_books)
+            return false
+        }
+        return true
+    }
+
+    private fun checkBooksCount() {
+        if (chosenBooks.size >= CreatingProfileConstants.MIN_COUNT_OF_FAVOURITE_BOOKS) {
+            _isChosenEnoughBooks.postValue(true)
+        }
     }
 
     private fun handleResult(result: RetrofitResult<List<GoogleBook>>) {

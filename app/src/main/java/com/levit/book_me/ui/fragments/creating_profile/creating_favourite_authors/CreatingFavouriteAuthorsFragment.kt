@@ -3,6 +3,7 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_autho
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
@@ -12,6 +13,7 @@ import com.levit.book_me.core.models.Author
 import com.levit.book_me.databinding.FragmentCreatingFavouriteAuthorsBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 
 class CreatingFavouriteAuthorsFragment:
     BaseCreatingProfileFragment<CreatingFavouriteAuthorsViewModel>(R.layout.fragment_creating_favourite_authors),
@@ -36,6 +38,7 @@ class CreatingFavouriteAuthorsFragment:
 
         showMainPageIndicator(true)
         updatePageIndicator()
+        configureLayout()
         setUpAuthorChooser()
         setAllClickListeners()
         setAllObservers()
@@ -45,12 +48,20 @@ class CreatingFavouriteAuthorsFragment:
         super.setAllObservers()
 
         sharedViewModel.chosenFavouriteAuthors.observe(viewLifecycleOwner,  { chosenAuthors ->
+            val authors = mutableListOf<Author>()
+
             chosenAuthors.forEach { authorPair ->
+                authors.add(authorPair.first)
                 binding.authorChooser.setAuthor(
                     author = authorPair.first,
                     position = authorPair.second,
                 )
             }
+            viewModel.setChosenAuthors(authors)
+        })
+
+        viewModel.isChosenEnoughAuthors.observe(viewLifecycleOwner, { isChosenEnoughAuthors ->
+            binding.errorLabel.isVisible = !isChosenEnoughAuthors
         })
     }
 
@@ -71,13 +82,30 @@ class CreatingFavouriteAuthorsFragment:
         activity.pageIndicatorController.activePrefixChanged(FRAGMENT_POSITION)
     }
 
+    private fun configureLayout() {
+        val labelDescription = getString(
+            R.string.choose_from_to_authors,
+            CreatingProfileConstants.MIN_COUNT_OF_FAVOURITE_AUTHORS.toString(),
+            CreatingProfileConstants.MAX_COUNT_OF_FAVOURITE_AUTHORS.toString(),
+        )
+        val errorLabel = getString(
+            R.string.choose_at_least_authors,
+            CreatingProfileConstants.MIN_COUNT_OF_FAVOURITE_AUTHORS.toString()
+        )
+
+        binding.labelDescription.text = labelDescription
+        binding.errorLabel.text = errorLabel
+    }
+
     private fun setUpAuthorChooser() {
         binding.authorChooser.setAuthorChangeListener(this)
     }
 
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
-            navigateToCreatingFavouriteBooksFragment()
+            if (viewModel.everythingIsValid()) {
+                navigateToCreatingFavouriteBooksFragment()
+            }
         }
     }
 

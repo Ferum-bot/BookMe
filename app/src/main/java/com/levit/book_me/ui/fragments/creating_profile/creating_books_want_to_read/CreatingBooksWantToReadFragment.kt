@@ -3,6 +3,7 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_books_want_to_r
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
+import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 
 class CreatingBooksWantToReadFragment:
     BaseCreatingProfileFragment<CreatingBooksWantToReadViewModel>(R.layout.fragment_creating_books_you_want_to_read),
@@ -50,6 +52,23 @@ class CreatingBooksWantToReadFragment:
     override fun setAllObservers() {
         super.setAllObservers()
 
+        viewModel.errorMessageId.removeObservers(viewLifecycleOwner)
+        viewModel.errorMessageId.observe(viewLifecycleOwner, { messageId ->
+            if (messageId == null) {
+                return@observe
+            }
+            if (messageId == R.string.you_can_choose_not_more_books) {
+                val errorString = getString(
+                    messageId,
+                    CreatingProfileConstants.MAX_COUNT_OF_WANT_TO_READ_BOOKS
+                )
+                showError(errorString)
+            } else {
+                showError(messageId)
+            }
+            viewModel.errorMessageHasShown()
+        })
+
         viewModel.mostChosenBooks.observe(viewLifecycleOwner, Observer { books ->
             booksAdapter.submitList(books)
         })
@@ -75,6 +94,10 @@ class CreatingBooksWantToReadFragment:
                     binding.searchView.isEnabled = false
                 }
             }
+        })
+
+        viewModel.isChosenEnoughBooks.observe(viewLifecycleOwner, { isChosenEnoughBooks ->
+            binding.countBooksErrorLabel.isVisible = !isChosenEnoughBooks
         })
 
         sharedViewModel.chosenWantToReadBooks.observe(viewLifecycleOwner, { books ->
@@ -108,7 +131,9 @@ class CreatingBooksWantToReadFragment:
 
     private fun setAllClickListeners() {
         binding.finishButton.setOnClickListener {
-            navigateToMainScreen()
+            if (viewModel.everythingIsValid()) {
+                navigateToMainScreen()
+            }
         }
 
         binding.searchView.setOnClickListener {
@@ -128,6 +153,18 @@ class CreatingBooksWantToReadFragment:
         binding.errorLabel.addClickableText(R.string.try_again) {
             viewModel.getMostChosenBooks()
         }
+
+        val labelDescription = getString(
+            R.string.choose_from_to_books,
+            CreatingProfileConstants.MIN_COUNT_OF_WANT_TO_READ_BOOKS.toString(),
+            CreatingProfileConstants.MAX_COUNT_OF_WANT_TO_READ_BOOKS.toString()
+        )
+        val errorCountBooksLabel = getString(
+            R.string.choose_at_least_books,
+            CreatingProfileConstants.MIN_COUNT_OF_WANT_TO_READ_BOOKS.toString()
+        )
+        binding.labelDescription.text = labelDescription
+        binding.countBooksErrorLabel.text = errorCountBooksLabel
     }
 
     private fun navigateToMainScreen() {

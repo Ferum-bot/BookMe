@@ -3,11 +3,13 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_books
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.enums.SearchBooksTypes
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingFavouriteBooksBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -15,6 +17,7 @@ import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
+import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 
 class CreatingFavouriteBooksFragment:
     BaseCreatingProfileFragment<CreatingFavouriteBooksViewModel>(R.layout.fragment_creating_favourite_books),
@@ -51,8 +54,24 @@ class CreatingFavouriteBooksFragment:
     override fun setAllObservers() {
         super.setAllObservers()
 
+        viewModel.errorMessageId.removeObservers(viewLifecycleOwner)
+        viewModel.errorMessageId.observe(viewLifecycleOwner, { messageId ->
+            if (messageId == null) {
+                return@observe
+            }
+            if (messageId == R.string.you_can_choose_not_more_books) {
+                var errorString = getString(
+                    messageId,
+                    CreatingProfileConstants.MAX_COUNT_OF_FAVOURITE_BOOKS
+                )
+                showError(errorString)
+            } else {
+                showError(messageId)
+            }
+            viewModel.errorMessageHasShown()
+        })
+
         viewModel.popularBooks.observe(viewLifecycleOwner, Observer { books ->
-            binding
             adapter.submitList(books)
         })
 
@@ -77,6 +96,10 @@ class CreatingFavouriteBooksFragment:
                     binding.searchView.isEnabled = false
                 }
             }
+        })
+
+        viewModel.isChosenEnoughBooks.observe(viewLifecycleOwner, { isChosenEnoughBooks ->
+            binding.countBooksErrorLabel.isVisible = !isChosenEnoughBooks
         })
 
         sharedViewModel.chosenFavouriteBooks.observe(viewLifecycleOwner, { books ->
@@ -118,11 +141,25 @@ class CreatingFavouriteBooksFragment:
         binding.errorLabel.addClickableText(R.string.try_again) {
             viewModel.getPopularBooks()
         }
+
+        val labelDescription = getString(
+            R.string.choose_from_to_books,
+            CreatingProfileConstants.MIN_COUNT_OF_FAVOURITE_BOOKS.toString(),
+            CreatingProfileConstants.MAX_COUNT_OF_FAVOURITE_BOOKS.toString()
+        )
+        val booksCountErrorLabel = getString(
+            R.string.choose_at_least_books,
+            CreatingProfileConstants.MIN_COUNT_OF_FAVOURITE_BOOKS.toString()
+        )
+        binding.labelDescription.text = labelDescription
+        binding.countBooksErrorLabel.text = booksCountErrorLabel
     }
 
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
-            navigateToCreatingBooksWantToReadFragment()
+            if (viewModel.everythingIsValid()) {
+                navigateToCreatingBooksWantToReadFragment()
+            }
         }
 
         binding.searchView.setOnClickListener {
