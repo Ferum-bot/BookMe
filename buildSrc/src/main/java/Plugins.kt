@@ -2,6 +2,7 @@ object Plugins {
     const val ANDROID_APPLICATION = "com.android.application"
 
     const val CORE_MODULE = "commons.core-module"
+    const val PROJECT_MODULE = "commons.project-module"
 
     const val GOOGLE_SERVICES = "com.google.gms.google-services"
 

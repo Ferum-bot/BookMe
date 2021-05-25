@@ -81,6 +81,8 @@ dependencies {
     implementation(project(Core.NETWORK.path))
     implementation(project(Core.PRESENTATION.path))
 
+    implementation(project(CustomView.ROUND_CLOUDS_VIEW.path))
+    
     // Kotlin
     implementation(Dependencies.KOTLIN)
 

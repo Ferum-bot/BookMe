@@ -6,6 +6,6 @@ include(
     ":core:network",
     ":core:presentation"
 )
-
+include(":RoundCloudsView")
 rootProject.name = "BookMe"
 rootProject.buildFileName = "build.gradle.kts"

@@ -1,6 +1,7 @@
 package extensions
 
 import dependencies.TestDependencies
+import dependencies.Dependencies
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
@@ -21,4 +22,14 @@ fun DependencyHandler.addTestDependencies() {
     testImplementation(TestDependencies.MOCKITO_KOTLIN)
     testImplementation(TestDependencies.POWERMOCK_API)
     testImplementation(TestDependencies.POWERMOCK_MODULE)
+}
+
+fun DependencyHandler.addAllUIDependencies() {
+    implementation(Dependencies.CONSTRAIN_LAYOUT)
+    implementation(Dependencies.FRAGMENT_KTX)
+    implementation(Dependencies.MATERIAL)
+    implementation(Dependencies.VIEW_PAGER2)
+    implementation(Dependencies.NAVIGATION_FRAGMENT)
+    implementation(Dependencies.PIN_VIEW)
+    implementation(Dependencies.PAGE_INDICATOR)
 }
