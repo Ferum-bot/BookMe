@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundCloudsView">
+        <attr name="checked_cloud_color" format="color"/>
+        <attr name="not_checked_cloud_color" format="color"/>
+
+        <attr name="checked_text_color" format="color"/>
+        <attr name="not_checked_text_color" format="color"/>
+    </declare-styleable>
+</resources>
