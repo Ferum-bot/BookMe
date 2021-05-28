@@ -57,8 +57,9 @@ class CreatingProfileImageFragment:
 
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
-            showLoading(true)
-            viewModel.upLoadProfilePhoto(this::requireContext)
+            //showLoading(true)
+            //viewModel.upLoadProfilePhoto(this::requireContext)
+            navigateToCreatingFavouriteGenresFragment()
         }
 
         binding.profilePhoto.setOnClickListener {
@@ -69,7 +70,7 @@ class CreatingProfileImageFragment:
     override fun setAllObservers() {
 
         viewModel.isPhotoChosen.observe(viewLifecycleOwner, Observer { photoIsChosen ->
-            binding.nextButton.isEnabled = photoIsChosen
+            binding.nextButton.isEnabled = true
             if(photoIsChosen) {
                 binding.photoHint.text = getString(R.string.press_next_or_choose_another_photo)
             }

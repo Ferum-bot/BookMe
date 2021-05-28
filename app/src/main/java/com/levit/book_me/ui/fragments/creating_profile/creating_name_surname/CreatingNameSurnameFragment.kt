@@ -55,16 +55,16 @@ class CreatingNameSurnameFragment:
             binding.invalidSurnameLabel.isVisible = !surnameIsCorrect
         })
 
-        viewModel.isWordsAboutYouCorrect.observe(viewLifecycleOwner,  { isWordsAboutYouCorrect ->
+        viewModel.isWordsAboutYouCorrect.observe(viewLifecycleOwner) { isWordsAboutYouCorrect ->
             binding.invalidWordsAboutYouLabel.isVisible = !isWordsAboutYouCorrect
-        })
+        }
 
-        viewModel.isQuoteChosen.observe(viewLifecycleOwner, { isQuoteChosen ->
+        viewModel.isQuoteChosen.observe(viewLifecycleOwner) { isQuoteChosen ->
             binding.quoteNotChosenLabel.isVisible = !isQuoteChosen
-        })
+        }
 
-        viewModel.isWordsAboutYouErrorStringId.observe(viewLifecycleOwner, { stringId ->
-            val errorString = when(stringId) {
+        viewModel.isWordsAboutYouErrorStringId.observe(viewLifecycleOwner) { stringId ->
+            val errorString = when (stringId) {
                 R.string.minimum_length_is -> {
                     getString(stringId, CreatingProfileConstants.WORDS_ABOUT_YOU_MIN_LENGTH)
                 }
@@ -78,9 +78,9 @@ class CreatingNameSurnameFragment:
                     getString(R.string.something_went_wrong)
                 }
             }
-            
+
             binding.invalidWordsAboutYouLabel.text = errorString
-        })
+        }
 
         ProfileQuoteStorage.quote.observe(viewLifecycleOwner, Observer { quote ->
             viewModel.chosenQuote = quote
@@ -106,9 +106,9 @@ class CreatingNameSurnameFragment:
             val name = binding.nameTextInput.text.toString()
             val surname = binding.surnameTextInput.text.toString()
             val wordsAboutYou = binding.wordsAboutYouInputEditText.text.toString()
-            if (viewModel.checkIsEverythingIsValid(name, surname, wordsAboutYou)) {
+            //if (viewModel.checkIsEverythingIsValid(name, surname, wordsAboutYou)) {
                 navigateToChooseProfilePhotoFragment()
-            }
+            //}
         }
 
         binding.quoteItem.setOnClickListener {

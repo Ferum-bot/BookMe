@@ -9,6 +9,9 @@ internal class RoundCloudModel(
 
     var state: RoundCloudState = RoundCloudState.NOT_CHECKED,
 
+    /**
+     * The circle radius in pixels.
+     */
     val radiusPx: Int = 0,
 
     /**
@@ -31,4 +34,11 @@ internal class RoundCloudModel(
     val size: RoundCloudSize
     get() = cloud.size
 
+    fun getXCenterCoordinatePx(viewCenterXPx: Int): Int {
+        return viewCenterXPx + xOffsetPx
+    }
+
+    fun getYCenterCoordinatePx(viewCenterYPx: Int): Int {
+        return viewCenterYPx + yOffsetPx
+    }
 }
