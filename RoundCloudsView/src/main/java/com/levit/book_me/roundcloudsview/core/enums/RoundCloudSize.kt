@@ -16,6 +16,10 @@ enum class RoundCloudSize {
      * padding. For example:
      * View height is 110dp and paddingTop = 10dp, paddingBottom = 10dp.
      * Then available height is 110dp - 10dp - 10dp = 90dp
+     *
+     * @Default:
+     * Default value for Large cloud is about 80dp, but may vary depending
+     * on screen sizes.
      */
     LARGE,
 
@@ -30,6 +34,10 @@ enum class RoundCloudSize {
      * padding. For example:
      * View height is 110dp and paddingTop = 10dp, paddingBottom = 10dp.
      * Then available height is 110dp - 10dp - 10dp = 90dp
+     *
+     * @Default:
+     * Default value for Large cloud is about 60dp, but may vary depending
+     * on screen sizes.
      */
     SMALL,
 }
