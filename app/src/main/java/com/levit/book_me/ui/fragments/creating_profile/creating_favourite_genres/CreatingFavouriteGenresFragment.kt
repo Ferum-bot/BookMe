@@ -1,6 +1,7 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
+import com.levit.book_me.core.models.GenreCloud
 import com.levit.book_me.databinding.FragmentCreatingFavouriteGenresBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
@@ -35,11 +37,18 @@ class CreatingFavouriteGenresFragment:
         setAllClickListeners()
         setAllObservers()
         updatePageIndicator()
+        configureLayout()
     }
 
     override fun setAllObservers() {
         super.setAllObservers()
 
+        viewModel.genres.observe(viewLifecycleOwner) { genres ->
+            val adaptiveGenres = genres.map { genre ->
+                GenreCloud.getFrom(genre)
+            }
+            binding.cloudsView.setClouds(adaptiveGenres)
+        }
     }
 
     private fun setAllClickListeners() {
@@ -51,6 +60,11 @@ class CreatingFavouriteGenresFragment:
     private fun updatePageIndicator() {
         val activity = requireActivity() as CreatingProfileActivity
         activity.pageIndicatorController.activePrefixChanged(FRAGMENT_POSITION)
+    }
+
+    private fun configureLayout() {
+        binding.cloudsView.setNotCheckedCloudColor(Color.RED)
+        binding.cloudsView.setNotCheckedTextColor(Color.BLUE)
     }
 
     private fun navigateToChooseFavouriteAuthorsFragment() {

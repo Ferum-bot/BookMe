@@ -14,6 +14,11 @@ internal object RoundCloudsViewConstants {
     const val DEFAULT_LARGE_CLOUD_SIZE = 85
     const val DEFAULT_SMALL_CLOUD_SIZE = 65
 
+    /**
+     * The relative cloud size relatively RoundCloudsView
+     */
     const val RELATIVELY_LARGE_CLOUD_SIZE = 3
     const val RELATIVELY_SMALL_CLOUD_SIZE = 4
+
+    const val RELATIVELY_CLOUD_MARGIN = 15
 }

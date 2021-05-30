@@ -10,7 +10,8 @@ internal class RoundCloudModel(
     var state: RoundCloudState = RoundCloudState.NOT_CHECKED,
 
     /**
-     * The circle radius in pixels.
+     * The circle radius in pixels. Use the requested radius from
+     * @CloudModelSizeHolder to get correct behavior of cloud view.
      */
     val radiusPx: Int = 0,
 

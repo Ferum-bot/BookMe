@@ -2,6 +2,7 @@ package com.levit.book_me.roundcloudsview.core.models
 
 import android.content.Context
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
+import java.lang.Integer.max
 
 /**
  * This class holds all data size about specific
@@ -9,35 +10,49 @@ import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
  */
 internal data class CloudModelSizeHolder(
 
-    val viewCenterXCoordinateDp: Int = 0,
-    val viewCenterYCoordinateDp: Int = 0,
+    val viewCenterXCoordinatePx: Int = 0,
+    val viewCenterYCoordinatePx: Int = 0,
 
-    val largeCloudSizeDp: Int = 0,
+    /**
+     * The requested diameter of large cloud view.
+     */
+    val largeCloudSizePx: Int = 0,
 
-    val smallCloudSizeDp: Int = 0,
+    /**
+     * The requested diameter of small cloud view.
+     */
+    val smallCloudSizePx: Int = 0,
+
+    /**
+     * The margin between clouds.
+     */
+    val cloudMargin: Int = 0,
 ) {
 
     companion object {
 
-        fun getFromViewSize(viewWidthDp: Int, viewHeightDp: Int): CloudModelSizeHolder {
-            val centerX = viewWidthDp / 2
-            val centerY = viewHeightDp / 2
+        fun getFromViewSize(viewWidthPx: Int, viewHeightPx: Int): CloudModelSizeHolder {
+            val centerX = viewWidthPx / 2
+            val centerY = viewHeightPx / 2
 
-            val largeCloudSize = viewHeightDp / RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE
-            val smallCloudSize = viewWidthDp / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE
+            val cloudMargin = max(viewHeightPx, viewWidthPx) / RoundCloudsViewConstants.RELATIVELY_CLOUD_MARGIN
+
+            val largeCloudSize = viewHeightPx / RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE - cloudMargin
+            val smallCloudSize = viewWidthPx / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE - cloudMargin
 
             return CloudModelSizeHolder(
-                viewCenterXCoordinateDp = centerX,
-                viewCenterYCoordinateDp = centerY,
-                largeCloudSizeDp = largeCloudSize,
-                smallCloudSizeDp = smallCloudSize,
+                viewCenterXCoordinatePx = centerX,
+                viewCenterYCoordinatePx = centerY,
+                largeCloudSizePx = largeCloudSize,
+                smallCloudSizePx = smallCloudSize,
+                cloudMargin = cloudMargin,
             )
         }
     }
 
-    val largeCloudRadiusDp: Int
-    get() = largeCloudSizeDp / 2
+    val largeCloudRadiusPx: Int
+    get() = largeCloudSizePx / 2
 
-    val smallCloudRadiusDp: Int
-    get() = smallCloudSizeDp / 2
+    val smallCloudRadiusPx: Int
+    get() = smallCloudSizePx / 2
 }

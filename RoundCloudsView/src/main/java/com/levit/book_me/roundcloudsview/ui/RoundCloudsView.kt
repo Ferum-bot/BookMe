@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PointF
+import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -23,6 +24,7 @@ import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewAttrs
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import com.levit.book_me.roundcloudsview.entity.CloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.impl.AndroidCloudCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.impl.ColumnsCloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.impl.MockCloudCoordinateCalculator
 
 class RoundCloudsView @JvmOverloads constructor(
@@ -46,8 +48,8 @@ class RoundCloudsView @JvmOverloads constructor(
     private val checkedCloudPaint = Paint()
     private val notCheckedCloudPaint = Paint()
 
-    private val checkedTextPaint = Paint()
-    private val notCheckedTextPaint = Paint()
+    private val checkedTextPaint = TextPaint()
+    private val notCheckedTextPaint = TextPaint()
 
     private var clouds: List<RoundCloud> = listOf()
     private var cloudModels: List<RoundCloudModel> = listOf()
@@ -56,7 +58,8 @@ class RoundCloudsView @JvmOverloads constructor(
 
     private val coordinateCalculator: CloudCoordinateCalculator by lazy {
         //AndroidCloudCoordinateCalculator(this::getContext, this::dpToPx, this::pxToDp)
-        MockCloudCoordinateCalculator()
+        //MockCloudCoordinateCalculator()
+        ColumnsCloudCoordinateCalculator()
     }
 
     private var cloudSizeHolder = CloudModelSizeHolder()
@@ -122,8 +125,8 @@ class RoundCloudsView @JvmOverloads constructor(
             h.toFloat() / 2f,
         )
         cloudSizeHolder = CloudModelSizeHolder.getFromViewSize(
-            viewHeightDp= pxToDp(w),
-            viewWidthDp = pxToDp(h),
+            viewHeightPx = h,
+            viewWidthPx = w,
         )
         cloudModels = coordinateCalculator.calculateCloudModels(
             clouds = clouds,

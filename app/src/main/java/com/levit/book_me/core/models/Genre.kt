@@ -11,6 +11,8 @@ data class Genre(
     val id: Long,
 
     @Json(name = "")
-    val string: String
+    val string: String,
 
+    @Json(name = "")
+    val isBig: Boolean = true
 ): Parcelable
