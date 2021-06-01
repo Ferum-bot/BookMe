@@ -6,11 +6,19 @@ import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
 import com.levit.book_me.roundcloudsview.core.utills.MathHelper
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 
-internal class RoundCloudModel(
+internal data class RoundCloudModel(
 
     val cloud: RoundCloud,
 
     var state: RoundCloudState = RoundCloudState.NOT_CHECKED,
+
+    /**
+     * The cloud text model. Needed to calculate text start coordinates
+     * personal for each cloud model.
+     * Use the @CloudTextCoordinateCalculator
+     * to calculate valid value.
+     */
+    var textModel: CloudTextModel = CloudTextModel(cloud.text),
 
     /**
      * The circle radius in pixels. Use the requested radius from
@@ -29,7 +37,6 @@ internal class RoundCloudModel(
      * center y coordinate.
      */
     val yOffsetPx: Int = 0,
-
 ) {
 
     val text: String

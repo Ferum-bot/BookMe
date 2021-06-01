@@ -20,7 +20,9 @@ import com.levit.book_me.roundcloudsview.core.models.RoundCloudModel
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewAttrs
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import com.levit.book_me.roundcloudsview.entity.CloudCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.CloudTextCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.impl.ColumnsCloudCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.impl.TestCloudTextCoordinateCalculator
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
@@ -73,6 +75,10 @@ class RoundCloudsView @JvmOverloads constructor(
         ColumnsCloudCoordinateCalculator()
     }
 
+    private val textCoordinateCalculator: CloudTextCoordinateCalculator by lazy {
+        TestCloudTextCoordinateCalculator()
+    }
+
     private var cloudSizeHolder = CloudModelSizeHolder()
 
     init {
@@ -107,10 +113,7 @@ class RoundCloudsView @JvmOverloads constructor(
     fun setClouds(clouds: List<RoundCloud>) {
         this.clouds = clouds.toList()
 
-        cloudModels = coordinateCalculator.calculateCloudModels(
-            clouds = this.clouds,
-            sizeHolder = cloudSizeHolder,
-        )
+        calculateCloudModelCoordinates()
         invalidate()
     }
 
@@ -144,10 +147,8 @@ class RoundCloudsView @JvmOverloads constructor(
             viewWidthPx = w,
             cloudMarginPx = dpToPx(cloudMarginDp),
         )
-        cloudModels = coordinateCalculator.calculateCloudModels(
-            clouds = clouds,
-            sizeHolder = cloudSizeHolder,
-        )
+
+        calculateCloudModelCoordinates()
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -164,8 +165,8 @@ class RoundCloudsView @JvmOverloads constructor(
         performClick()
 
         when(event.action) {
-            MotionEvent.ACTION_DOWN -> handleActionDownEvent(event)
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> handleActionUpEvent(event)
+            MotionEvent.ACTION_DOWN -> handleActionDownEvent(event)
             MotionEvent.ACTION_MOVE -> handleActionMoveEvent(event)
         }
 
@@ -285,6 +286,19 @@ class RoundCloudsView @JvmOverloads constructor(
         return resultCloud
     }
 
+    private fun calculateCloudModelCoordinates() {
+        cloudModels = coordinateCalculator.calculateCloudModels(
+            clouds = clouds,
+            sizeHolder = cloudSizeHolder,
+        )
+        cloudModels.forEach { model ->
+            model.textModel = textCoordinateCalculator.calculateCloudTextCoordinates(
+                cloudModel = model,
+                sizeHolder = cloudSizeHolder,
+            )
+        }
+    }
+
     private fun initPropertiesWithAttrs(attrs: AttributeSet?) {
         attrs ?: return
 
@@ -322,12 +336,13 @@ class RoundCloudsView @JvmOverloads constructor(
         with(checkedTextPaint) {
             color = checkedTextColor
             isAntiAlias = true
-
+            textSize = 25f
         }
 
         with(notCheckedTextPaint) {
             color = notCheckedTextColor
             isAntiAlias = true
+            textSize = 25f
         }
     }
 
