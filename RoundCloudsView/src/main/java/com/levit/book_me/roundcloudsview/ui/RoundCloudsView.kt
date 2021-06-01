@@ -21,7 +21,6 @@ import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewAttrs
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import com.levit.book_me.roundcloudsview.entity.CloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.impl.ColumnsCloudCoordinateCalculator
-import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -46,7 +45,14 @@ class RoundCloudsView @JvmOverloads constructor(
 
     private var viewCenterPointPx = PointF(0f, 0f)
 
+    /**
+     * Horizontal pixel offset needed to handle scroll events
+     * and correctly draw needed clouds.
+     */
     private var currentXOffsetPx = 0
+
+    private var startTouchPointPx: PointF? = null
+    private var currentMovePointPx: PointF? = null
 
     private val checkedCloudPaint = Paint()
     private val notCheckedCloudPaint = Paint()
@@ -55,12 +61,10 @@ class RoundCloudsView @JvmOverloads constructor(
     private val notCheckedTextPaint = TextPaint()
 
     private var clouds: List<RoundCloud> = listOf()
+
     private var cloudModels: List<RoundCloudModel> = listOf()
 
     private var cloudListener: RoundCloudStateChangeListener? = null
-
-    private var startTouchPointPx: PointF? = null
-    private var endTouchPointPx: PointF? = null
 
     private val coordinateCalculator: CloudCoordinateCalculator by lazy {
         //AndroidCloudCoordinateCalculator(this::getContext, this::dpToPx, this::pxToDp)
@@ -177,6 +181,7 @@ class RoundCloudsView @JvmOverloads constructor(
         val yCoordinate = event.y
 
         startTouchPointPx = PointF(xCoordinate, yCoordinate)
+        currentMovePointPx = PointF(xCoordinate, yCoordinate)
     }
 
     private fun handleActionUpEvent(event: MotionEvent) {
@@ -192,7 +197,15 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     private fun handleActionMoveEvent(event: MotionEvent) {
+        val lastMovePoint = currentMovePointPx ?: return
+        val xCoordinate = event.x
+        val yCoordinate = event.y
 
+        val currentXOffset = (xCoordinate - lastMovePoint.x).toInt()
+        this.currentXOffsetPx += currentXOffset
+        currentMovePointPx = PointF(xCoordinate, yCoordinate)
+
+        invalidate()
     }
 
     private fun isClickEvent(startPoint: PointF, endPoint: PointF): Boolean {
@@ -211,6 +224,7 @@ class RoundCloudsView @JvmOverloads constructor(
 
     private fun handleClickEvent(clickPoint: PointF) {
         val clickedCloud = getClickedCloud(clickPoint) ?: return
+
         when(clickedCloud.state) {
             RoundCloudState.CHECKED -> {
                 clickedCloud.state = RoundCloudState.NOT_CHECKED
@@ -225,6 +239,7 @@ class RoundCloudsView @JvmOverloads constructor(
                 )
             }
         }
+
         invalidate()
     }
 
@@ -323,10 +338,7 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     private fun drawCheckedCloud(canvas: Canvas, model: RoundCloudModel) {
-        val xCenter = model.getXCenterCoordinatePx(viewCenterPointPx.x.toInt())
-            .toFloat()
-        val yCenter = model.getYCenterCoordinatePx(viewCenterPointPx.y.toInt())
-            .toFloat()
+        val (xCenter: Float, yCenter: Float) = model.getCoordinatesWithOffset()
         val radius = model.radiusPx.toFloat()
 
         canvas.drawCircle(
@@ -339,10 +351,7 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     private fun drawNotCheckedCloud(canvas: Canvas, model: RoundCloudModel) {
-        val xCenter = model.getXCenterCoordinatePx(viewCenterPointPx.x.toInt())
-            .toFloat()
-        val yCenter = model.getYCenterCoordinatePx(viewCenterPointPx.y.toInt())
-            .toFloat()
+        val (xCenter: Float, yCenter: Float) = model.getCoordinatesWithOffset()
         val radius = model.radiusPx.toFloat()
 
         canvas.drawCircle(
@@ -352,5 +361,13 @@ class RoundCloudsView @JvmOverloads constructor(
         canvas.drawText(
             model.text, xCenter, yCenter, notCheckedTextPaint,
         )
+    }
+
+    private fun RoundCloudModel.getCoordinatesWithOffset(): Pair<Float, Float> {
+        val xCenter = getXCenterCoordinatePx(viewCenterPointPx.x.toInt())
+            .toFloat() + currentXOffsetPx
+        val yCenter = getYCenterCoordinatePx(viewCenterPointPx.y.toInt())
+            .toFloat()
+        return xCenter to yCenter
     }
 }

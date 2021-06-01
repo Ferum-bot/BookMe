@@ -46,7 +46,7 @@ internal class RoundCloudModel(
     }
 
     fun containsPoint(pointPx: PointF, viewCenterPx: PointF, currentXOffsetPx: Int): Boolean {
-        val realXClickCoordinate = pointPx.x.toInt() + currentXOffsetPx
+        val realXClickCoordinate = pointPx.x.toInt() - currentXOffsetPx
         val realYClickCoordinate = pointPx.y.toInt()
         val clickPoint = PointF(realXClickCoordinate.toFloat(), realYClickCoordinate.toFloat())
 
