@@ -23,6 +23,7 @@ import com.levit.book_me.roundcloudsview.entity.CloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.impl.ColumnsCloudCoordinateCalculator
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 
 class RoundCloudsView @JvmOverloads constructor(
     context: Context,
@@ -200,12 +201,40 @@ class RoundCloudsView @JvmOverloads constructor(
         val lastMovePoint = currentMovePointPx ?: return
         val xCoordinate = event.x
         val yCoordinate = event.y
-
         val currentXOffset = (xCoordinate - lastMovePoint.x).toInt()
+
+        if (nothingToScroll(currentXOffset)) {
+            return
+        }
+
         this.currentXOffsetPx += currentXOffset
         currentMovePointPx = PointF(xCoordinate, yCoordinate)
 
         invalidate()
+    }
+
+    private fun nothingToScroll(currentXOffset: Int): Boolean {
+        val newXOffset = this.currentXOffsetPx + currentXOffset
+
+        return if (newXOffset < 0) {
+            isAllRightModelsVisibleWith(-newXOffset)
+        } else {
+            isAllLeftModelsVisibleWith(-newXOffset)
+        }
+    }
+
+    private fun isAllRightModelsVisibleWith(newXOffset: Int): Boolean {
+        val rightModel = cloudModels.findLastRightModel()
+            ?: return true
+
+        return rightModel.isVisibleWith(newXOffset, viewCenterPointPx)
+    }
+
+    private fun isAllLeftModelsVisibleWith(newXOffset: Int): Boolean {
+        val leftModel = cloudModels.findLastLeftModel()
+            ?: return true
+
+        return leftModel.isVisibleWith(newXOffset, viewCenterPointPx)
     }
 
     private fun isClickEvent(startPoint: PointF, endPoint: PointF): Boolean {
@@ -369,5 +398,35 @@ class RoundCloudsView @JvmOverloads constructor(
         val yCenter = getYCenterCoordinatePx(viewCenterPointPx.y.toInt())
             .toFloat()
         return xCenter to yCenter
+    }
+
+    private fun List<RoundCloudModel>.findLastRightModel(): RoundCloudModel? {
+        if (isEmpty()) {
+            return null
+        }
+        var maxXOffset = Int.MIN_VALUE
+        var rightModel: RoundCloudModel? = null
+        forEach { model ->
+            if (maxXOffset < (model.xOffsetPx + model.radiusPx)) {
+                rightModel = model
+            }
+            maxXOffset = max(maxXOffset, model.xOffsetPx + model.radiusPx)
+        }
+        return rightModel
+    }
+
+    private fun List<RoundCloudModel>.findLastLeftModel(): RoundCloudModel? {
+        if (isEmpty()) {
+            return null
+        }
+        var minXOffset = Int.MAX_VALUE
+        var leftModel: RoundCloudModel? = null
+        forEach { model ->
+            if (minXOffset > (model.xOffsetPx - model.radiusPx)) {
+                leftModel = model
+            }
+            minXOffset = min(minXOffset, model.xOffsetPx - model.radiusPx)
+        }
+        return leftModel
     }
 }

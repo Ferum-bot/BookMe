@@ -12,7 +12,7 @@ class CreatingFavouriteGenresInteractorImpl @Inject constructor(
 ): CreatingFavouriteGenresInteractor {
 
     companion object {
-        private const val REPEAT_VALUE = 15
+        private const val REPEAT_VALUE = 25
     }
 
     override val genres: Flow<RetrofitResult<List<Genre>>>

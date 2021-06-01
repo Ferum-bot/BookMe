@@ -27,4 +27,10 @@ internal object RoundCloudsViewConstants {
      * event to action up x/y touch event.
      */
     const val PERMISSIBLE_TOUCH_CLICK_OFFSET = 5
+
+    /**
+     * The available addition scroll offset. Needed to have some
+     * extra space around the edges of RoundCloudsView.
+     */
+    const val ADDITIONAL_SCROLL_AVAILABLE_HORIZONTAL_DISTANCE = 50
 }

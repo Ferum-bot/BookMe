@@ -4,6 +4,7 @@ import android.graphics.PointF
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudSize
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
 import com.levit.book_me.roundcloudsview.core.utills.MathHelper
+import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 
 internal class RoundCloudModel(
 
@@ -55,5 +56,26 @@ internal class RoundCloudModel(
         val actualCloudPoint = PointF(currentCloudXCoordinate.toFloat(), currentCloudYCoordinate.toFloat())
 
         return MathHelper.circleContainsPoint(actualCloudPoint, radiusPx, clickPoint)
+    }
+
+    fun isVisibleWith(newXOffset: Int, viewCenterPx: PointF): Boolean {
+        val realXCloudCoordinate = viewCenterPx.x.toInt() + xOffsetPx
+        val realXViewCoordinate =
+        if (newXOffset >= 0) {
+            viewCenterPx.x.toInt() + newXOffset - RoundCloudsViewConstants.ADDITIONAL_SCROLL_AVAILABLE_HORIZONTAL_DISTANCE
+        } else {
+            viewCenterPx.x.toInt() + newXOffset + RoundCloudsViewConstants.ADDITIONAL_SCROLL_AVAILABLE_HORIZONTAL_DISTANCE
+        }
+
+        val xMaxAvailableCoordinate = realXViewCoordinate + viewCenterPx.x.toInt()
+        val xMinAvailableCoordinate = realXViewCoordinate - viewCenterPx.x.toInt()
+
+        if (realXCloudCoordinate + radiusPx <= xMaxAvailableCoordinate && newXOffset >= 0) {
+            return true
+        }
+        if (realXCloudCoordinate - radiusPx >= xMinAvailableCoordinate && newXOffset < 0) {
+            return true
+        }
+        return false
     }
 }
