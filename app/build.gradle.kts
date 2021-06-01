@@ -1,6 +1,9 @@
 import dependencies.Dependencies
 import dependencies.KaptDependencies
-import extensions.addTestDependencies
+import extensions.*
+import org.gradle.kotlin.dsl.api
+import org.gradle.kotlin.dsl.implementation
+import org.gradle.kotlin.dsl.kapt
 
 plugins{
     id(Plugins.ANDROID_APPLICATION)
@@ -87,41 +90,23 @@ dependencies {
     implementation(Dependencies.KOTLIN)
 
     // Core
-    implementation(Dependencies.MULTIDEX)
-    implementation(Dependencies.APPCOMPAT)
-    implementation(Dependencies.KTX)
-    implementation(Dependencies.FRAGMENT_KTX)
-    api(Dependencies.COROUTINES)
-    api(Dependencies.COROUTINES_ANDROID)
+    addBaseCoreDependencies()
 
     // Lifecycle
-    implementation(Dependencies.LIFECYCLE_RUNTIME)
-    implementation(Dependencies.LIFECYCLE_EXTENSIONS)
-    implementation(Dependencies.LIFECYCLE_LIVEDATA_KTX)
-    implementation(Dependencies.LIFECYCLE_VIEW_MODEL)
-    kapt(KaptDependencies.LIFECYCLE_COMPILER)
+    addLifecycleDependencies()
 
     // Storage: database
-    implementation(Dependencies.ROOM)
-    implementation(Dependencies.ROOM_KTX)
-    kapt(KaptDependencies.ROOM_COMPILER)
+    addRoomDependencies()
 
     // Network: https (REST API)
-    implementation(Dependencies.OKHTTP_CORE)
-    implementation(Dependencies.OKHTTP_LOGGING_INTERCEPTOR)
-    implementation(Dependencies.RETROFIT_CORE)
-    implementation(Dependencies.RETROFIT_MOSHI_CONVERTER)
-    implementation(Dependencies.MOSHI)
-    implementation(Dependencies.MOSHI_KOTLIN)
+    addAllNetworkDependencies()
 
     // UI: Androidx presentation views
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAIN_LAYOUT)
 
     // UI: Images
-    implementation(Dependencies.GLIDE)
-    implementation(Dependencies.GLIDE_TRANSFORMATIONS)
-    kapt(KaptDependencies.GLIDE_COMPILER)
+    addGlideDependencies()
 
     // UI: ViewPager2
     implementation(Dependencies.VIEW_PAGER2)
@@ -131,21 +116,13 @@ dependencies {
     implementation(Dependencies.NAVIGATION_UI)
 
     // DI
-    implementation(Dependencies.DAGGER)
-    implementation(Dependencies.DAGGER_ANDROID)
-    implementation(Dependencies.DAGGER_ANDROID_SUPPORT)
-    kapt(KaptDependencies.DAGGER_COMPILER)
-    kapt(KaptDependencies.DAGGER_ANDROID_PROCESSOR)
+    addAllDIDependencies()
 
     // Logging
     implementation(Dependencies.TIMBER)
 
     // Firebase
-    implementation(platform(Dependencies.FIREBASE_BOM))
-    implementation(Dependencies.FIREBASE_AUTH)
-    implementation(Dependencies.FIREBASE_FIRESTORE)
-    implementation(Dependencies.FIREBASE_REALTIME_DATABASE)
-    implementation(Dependencies.FIREBASE_STORAGE)
+    addAllFirebaseDependencies()
 
     // Google Play Services
     implementation(Dependencies.GOOGLE_PLAY_SERVICES_AUTH)

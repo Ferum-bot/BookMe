@@ -11,7 +11,7 @@ import extensions.implementation
 import extensions.kapt
 
 /**
- * базовый скрипт для feature/core модулей проекта
+ * Base plugin to feature modules
  */
 
 plugins {
@@ -48,8 +48,6 @@ dependencies {
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.DAGGER)
     implementation(Dependencies.TIMBER)
-
-    kapt(KaptDependencies.DAGGER_COMPILER)
 
     addTestDependencies()
 }
