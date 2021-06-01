@@ -39,7 +39,7 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
                 RoundCloudSize.LARGE -> sizeHolder.largeCloudRadiusPx
                 RoundCloudSize.SMALL -> sizeHolder.smallCloudRadiusPx
             }
-            val cloudMargin = sizeHolder.cloudMargin
+            val cloudMargin = sizeHolder.cloudMarginPx
 
             when(currentIteration) {
                 RIGHT_ITERATION -> {
@@ -48,13 +48,13 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
                     } else {
                         leftXOffset -= cloudRadius + cloudMargin
                     }
-                    resultList += getColumnFrom(rightXOffset, sizeType)
+                    resultList += getColumnFrom(rightXOffset, sizeType, column)
                     rightXOffset += cloudRadius + cloudMargin
                     currentIteration = LEFT_ITERATION
                 }
                 LEFT_ITERATION -> {
                     leftXOffset -= cloudRadius
-                    resultList += getColumnFrom(leftXOffset, sizeType)
+                    resultList += getColumnFrom(leftXOffset, sizeType, column)
                     leftXOffset -= cloudRadius + cloudMargin
                     currentIteration = RIGHT_ITERATION
                 }
@@ -73,8 +73,14 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
         }
 
         val resultList = mutableListOf<List<RoundCloud>>()
-        val numberOfLargeColumns = largeClouds.size / RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE
-        val numberOfSmallColumns = smallClouds.size / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE
+        var numberOfLargeColumns = largeClouds.size / RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE
+        if (largeClouds.size % RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE != 0) {
+            numberOfLargeColumns++
+        }
+        var numberOfSmallColumns = smallClouds.size / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE
+        if (smallClouds.size % RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE != 0) {
+            numberOfSmallColumns++
+        }
         val listCount = numberOfLargeColumns + numberOfSmallColumns
 
         var currentStartLargeIndex = 0
@@ -118,13 +124,13 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
         }
         val endIndex = startIndex + LARGE_CLOUD_COUNT
         if (endIndex >= size) {
-            return null
+            return size - 1
         }
         return endIndex
     }
 
-    private fun getColumnFrom(viewXCoordinateOffset: Int, cloudTypeSize: RoundCloudSize): List<RoundCloudModel> {
-        val cloudMargin = sizeHolder.cloudMargin
+    private fun getColumnFrom(viewXCoordinateOffset: Int, cloudTypeSize: RoundCloudSize, clouds: List<RoundCloud>): List<RoundCloudModel> {
+        val cloudMargin = sizeHolder.cloudMarginPx
         val cloudSize = when(cloudTypeSize) {
             RoundCloudSize.LARGE -> sizeHolder.largeCloudSizePx
             RoundCloudSize.SMALL -> sizeHolder.smallCloudSizePx

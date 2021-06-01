@@ -1,6 +1,5 @@
 package com.levit.book_me.roundcloudsview.core.models
 
-import android.content.Context
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import java.lang.Integer.max
 
@@ -24,18 +23,19 @@ internal data class CloudModelSizeHolder(
     val smallCloudSizePx: Int = 0,
 
     /**
-     * The margin between clouds.
+     * The margin between clouds in pixels.
      */
-    val cloudMargin: Int = 0,
+    val cloudMarginPx: Int = 0,
 ) {
 
     companion object {
 
-        fun getFromViewSize(viewWidthPx: Int, viewHeightPx: Int): CloudModelSizeHolder {
+        fun getFromViewSize(viewWidthPx: Int, viewHeightPx: Int, cloudMarginPx: Int? = null): CloudModelSizeHolder {
             val centerX = viewWidthPx / 2
             val centerY = viewHeightPx / 2
 
-            val cloudMargin = max(viewHeightPx, viewWidthPx) / RoundCloudsViewConstants.RELATIVELY_CLOUD_MARGIN
+            val cloudMargin =
+                cloudMarginPx ?: max(viewHeightPx, viewWidthPx) / RoundCloudsViewConstants.RELATIVELY_CLOUD_MARGIN
 
             val largeCloudSize = viewHeightPx / RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE - cloudMargin
             val smallCloudSize = viewWidthPx / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE - cloudMargin
@@ -45,7 +45,7 @@ internal data class CloudModelSizeHolder(
                 viewCenterYCoordinatePx = centerY,
                 largeCloudSizePx = largeCloudSize,
                 smallCloudSizePx = smallCloudSize,
-                cloudMargin = cloudMargin,
+                cloudMarginPx = cloudMargin,
             )
         }
     }

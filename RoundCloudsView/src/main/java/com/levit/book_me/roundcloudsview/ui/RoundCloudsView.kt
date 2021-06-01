@@ -1,18 +1,15 @@
 package com.levit.book_me.roundcloudsview.ui
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.PointF
+import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.annotation.ColorInt
+import androidx.annotation.Dimension
 import com.levit.book_me.roundcloudsview.R
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
-import com.levit.book_me.roundcloudsview.core.extensions.*
 import com.levit.book_me.roundcloudsview.core.extensions.dpToPx
 import com.levit.book_me.roundcloudsview.core.extensions.getLeftPadding
 import com.levit.book_me.roundcloudsview.core.extensions.getRightPadding
@@ -23,9 +20,10 @@ import com.levit.book_me.roundcloudsview.core.models.RoundCloudModel
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewAttrs
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import com.levit.book_me.roundcloudsview.entity.CloudCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.impl.AndroidCloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.impl.ColumnsCloudCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.impl.MockCloudCoordinateCalculator
+import timber.log.Timber
+import kotlin.math.abs
+import kotlin.math.max
 
 class RoundCloudsView @JvmOverloads constructor(
     context: Context,
@@ -43,7 +41,12 @@ class RoundCloudsView @JvmOverloads constructor(
     @ColorInt
     private var notCheckedTextColor: Int = Color.BLACK
 
-    private var viewCenterPoint = PointF(0f, 0f)
+    @Dimension
+    private var cloudMarginDp: Int = 8
+
+    private var viewCenterPointPx = PointF(0f, 0f)
+
+    private var currentXOffsetPx = 0
 
     private val checkedCloudPaint = Paint()
     private val notCheckedCloudPaint = Paint()
@@ -55,6 +58,9 @@ class RoundCloudsView @JvmOverloads constructor(
     private var cloudModels: List<RoundCloudModel> = listOf()
 
     private var cloudListener: RoundCloudStateChangeListener? = null
+
+    private var startTouchPointPx: PointF? = null
+    private var endTouchPointPx: PointF? = null
 
     private val coordinateCalculator: CloudCoordinateCalculator by lazy {
         //AndroidCloudCoordinateCalculator(this::getContext, this::dpToPx, this::pxToDp)
@@ -107,6 +113,10 @@ class RoundCloudsView @JvmOverloads constructor(
         cloudListener = listener
     }
 
+    fun setCloudMargin(@Dimension dp: Int) {
+        cloudMarginDp = dp
+    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val neededWidth = calculateNeededWidth()
         val neededHeight = calculateNeededHeight()
@@ -120,13 +130,14 @@ class RoundCloudsView @JvmOverloads constructor(
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
-        viewCenterPoint = PointF(
+        viewCenterPointPx = PointF(
             w.toFloat() / 2f,
             h.toFloat() / 2f,
         )
         cloudSizeHolder = CloudModelSizeHolder.getFromViewSize(
             viewHeightPx = h,
             viewWidthPx = w,
+            cloudMarginPx = dpToPx(cloudMarginDp),
         )
         cloudModels = coordinateCalculator.calculateCloudModels(
             clouds = clouds,
@@ -144,12 +155,90 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return performClick()
+        event ?: return false
+        performClick()
+
+        when(event.action) {
+            MotionEvent.ACTION_DOWN -> handleActionDownEvent(event)
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> handleActionUpEvent(event)
+            MotionEvent.ACTION_MOVE -> handleActionMoveEvent(event)
+        }
+
+        return true
     }
 
     override fun performClick(): Boolean {
-        val result = super.performClick()
+        super.performClick()
         return false
+    }
+
+    private fun handleActionDownEvent(event: MotionEvent) {
+        val xCoordinate = event.x
+        val yCoordinate = event.y
+
+        startTouchPointPx = PointF(xCoordinate, yCoordinate)
+    }
+
+    private fun handleActionUpEvent(event: MotionEvent) {
+        val startPoint = startTouchPointPx ?: return
+        val endPoint = PointF(event.x, event.y)
+
+        if (isClickEvent(startPoint, endPoint)) {
+            val xClickCoordinate = abs(startPoint.x + endPoint.x) / 2
+            val yClickCoordinate = abs(startPoint.y + endPoint.y) / 2
+            val clickPoint = PointF(xClickCoordinate, yClickCoordinate)
+            handleClickEvent(clickPoint)
+        }
+    }
+
+    private fun handleActionMoveEvent(event: MotionEvent) {
+
+    }
+
+    private fun isClickEvent(startPoint: PointF, endPoint: PointF): Boolean {
+        val startX = startPoint.x.toInt()
+        val startY = startPoint.y.toInt()
+        val endX = endPoint.x.toInt()
+        val endY = endPoint.y.toInt()
+
+        val xDiff = abs(startX - endX)
+        val yDiff = abs(startY - endY)
+        if (max(xDiff, yDiff) > RoundCloudsViewConstants.PERMISSIBLE_TOUCH_CLICK_OFFSET) {
+            return false
+        }
+        return true
+    }
+
+    private fun handleClickEvent(clickPoint: PointF) {
+        val clickedCloud = getClickedCloud(clickPoint) ?: return
+        when(clickedCloud.state) {
+            RoundCloudState.CHECKED -> {
+                clickedCloud.state = RoundCloudState.NOT_CHECKED
+                cloudListener?.onStateChanged(
+                    RoundCloudState.NOT_CHECKED, clickedCloud.cloud
+                )
+            }
+            RoundCloudState.NOT_CHECKED -> {
+                clickedCloud.state = RoundCloudState.CHECKED
+                cloudListener?.onStateChanged(
+                    RoundCloudState.CHECKED, clickedCloud.cloud
+                )
+            }
+        }
+        invalidate()
+    }
+
+    private fun getClickedCloud(clickPoint: PointF): RoundCloudModel? {
+        var resultCloud: RoundCloudModel? = null
+
+        cloudModels.forEach { cloudModel ->
+            if (cloudModel.containsPoint(clickPoint, viewCenterPointPx, currentXOffsetPx)) {
+                resultCloud = cloudModel
+                return@forEach
+            }
+        }
+
+        return resultCloud
     }
 
     private fun initPropertiesWithAttrs(attrs: AttributeSet?) {
@@ -234,9 +323,9 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     private fun drawCheckedCloud(canvas: Canvas, model: RoundCloudModel) {
-        val xCenter = model.getXCenterCoordinatePx(viewCenterPoint.x.toInt())
+        val xCenter = model.getXCenterCoordinatePx(viewCenterPointPx.x.toInt())
             .toFloat()
-        val yCenter = model.getYCenterCoordinatePx(viewCenterPoint.y.toInt())
+        val yCenter = model.getYCenterCoordinatePx(viewCenterPointPx.y.toInt())
             .toFloat()
         val radius = model.radiusPx.toFloat()
 
@@ -250,9 +339,9 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     private fun drawNotCheckedCloud(canvas: Canvas, model: RoundCloudModel) {
-        val xCenter = model.getXCenterCoordinatePx(viewCenterPoint.x.toInt())
+        val xCenter = model.getXCenterCoordinatePx(viewCenterPointPx.x.toInt())
             .toFloat()
-        val yCenter = model.getYCenterCoordinatePx(viewCenterPoint.y.toInt())
+        val yCenter = model.getYCenterCoordinatePx(viewCenterPointPx.y.toInt())
             .toFloat()
         val radius = model.radiusPx.toFloat()
 

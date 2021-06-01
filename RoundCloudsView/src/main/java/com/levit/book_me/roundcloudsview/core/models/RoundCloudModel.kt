@@ -1,7 +1,9 @@
 package com.levit.book_me.roundcloudsview.core.models
 
+import android.graphics.PointF
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudSize
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
+import com.levit.book_me.roundcloudsview.core.utills.MathHelper
 
 internal class RoundCloudModel(
 
@@ -41,5 +43,17 @@ internal class RoundCloudModel(
 
     fun getYCenterCoordinatePx(viewCenterYPx: Int): Int {
         return viewCenterYPx + yOffsetPx
+    }
+
+    fun containsPoint(pointPx: PointF, viewCenterPx: PointF, currentXOffsetPx: Int): Boolean {
+        val realXClickCoordinate = pointPx.x.toInt() + currentXOffsetPx
+        val realYClickCoordinate = pointPx.y.toInt()
+        val clickPoint = PointF(realXClickCoordinate.toFloat(), realYClickCoordinate.toFloat())
+
+        val currentCloudXCoordinate = xOffsetPx + viewCenterPx.x.toInt()
+        val currentCloudYCoordinate = yOffsetPx + viewCenterPx.y.toInt()
+        val actualCloudPoint = PointF(currentCloudXCoordinate.toFloat(), currentCloudYCoordinate.toFloat())
+
+        return MathHelper.circleContainsPoint(actualCloudPoint, radiusPx, clickPoint)
     }
 }

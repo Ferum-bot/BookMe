@@ -21,4 +21,10 @@ internal object RoundCloudsViewConstants {
     const val RELATIVELY_SMALL_CLOUD_SIZE = 4
 
     const val RELATIVELY_CLOUD_MARGIN = 15
+
+    /**
+     * The permissible touch offset between action down x/y touch
+     * event to action up x/y touch event.
+     */
+    const val PERMISSIBLE_TOUCH_CLICK_OFFSET = 5
 }
