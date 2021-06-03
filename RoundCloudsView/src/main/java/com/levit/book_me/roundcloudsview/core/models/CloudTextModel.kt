@@ -15,4 +15,13 @@ internal data class CloudTextModel(
      * center y coordinate.
      */
     val textYOffsetPx: Int = 0,
-)
+) {
+
+    fun getXCoordinatePx(viewCenterPx: Int): Int {
+        return textXOffsetPx + viewCenterPx
+    }
+
+    fun getYCoordinatePx(viewCenterPx: Int): Int {
+        return textYOffsetPx + viewCenterPx
+    }
+}

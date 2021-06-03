@@ -11,6 +11,9 @@ internal object RoundCloudsViewConstants {
     const val DEFAULT_MIN_VIEW_WIDTH = 1500
     const val DEFAULT_MIN_VIEW_HEIGHT = 1500
 
+    /**
+     * Default cloud's size in pixel.
+     */
     const val DEFAULT_LARGE_CLOUD_SIZE = 85
     const val DEFAULT_SMALL_CLOUD_SIZE = 65
 

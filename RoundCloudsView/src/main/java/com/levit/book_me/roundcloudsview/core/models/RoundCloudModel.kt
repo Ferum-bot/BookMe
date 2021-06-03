@@ -15,10 +15,12 @@ internal data class RoundCloudModel(
     /**
      * The cloud text model. Needed to calculate text start coordinates
      * personal for each cloud model.
+     * This text model also needed to support multiline text drawing on
+     * canvas. Every value of list contains information about new text line.
      * Use the @CloudTextCoordinateCalculator
      * to calculate valid value.
      */
-    var textModel: CloudTextModel = CloudTextModel(cloud.text),
+    var textModels: List<CloudTextModel> = listOf(),
 
     /**
      * The circle radius in pixels. Use the requested radius from

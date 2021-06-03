@@ -10,7 +10,13 @@ internal class TestCloudTextCoordinateCalculator: CloudTextCoordinateCalculator 
     override fun calculateCloudTextCoordinates(
         cloudModel: RoundCloudModel,
         sizeHolder: CloudModelSizeHolder
-    ): CloudTextModel {
-        return CloudTextModel("Hello world!")
+    ): List<CloudTextModel> {
+        return listOf(
+            CloudTextModel(
+                text = cloudModel.text,
+                textXOffsetPx = cloudModel.xOffsetPx,
+                textYOffsetPx = cloudModel.yOffsetPx,
+            )
+        )
     }
 }

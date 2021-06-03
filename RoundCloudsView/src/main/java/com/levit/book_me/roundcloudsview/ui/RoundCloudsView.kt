@@ -15,6 +15,7 @@ import com.levit.book_me.roundcloudsview.core.extensions.getLeftPadding
 import com.levit.book_me.roundcloudsview.core.extensions.getRightPadding
 import com.levit.book_me.roundcloudsview.core.interfaces.RoundCloudStateChangeListener
 import com.levit.book_me.roundcloudsview.core.models.CloudModelSizeHolder
+import com.levit.book_me.roundcloudsview.core.models.CloudTextModel
 import com.levit.book_me.roundcloudsview.core.models.RoundCloud
 import com.levit.book_me.roundcloudsview.core.models.RoundCloudModel
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewAttrs
@@ -44,7 +45,7 @@ class RoundCloudsView @JvmOverloads constructor(
     private var notCheckedTextColor: Int = Color.BLACK
 
     @Dimension
-    private var cloudMarginDp: Int = 8
+    private var cloudMarginDp: Int = 5
 
     private var viewCenterPointPx = PointF(0f, 0f)
 
@@ -292,7 +293,7 @@ class RoundCloudsView @JvmOverloads constructor(
             sizeHolder = cloudSizeHolder,
         )
         cloudModels.forEach { model ->
-            model.textModel = textCoordinateCalculator.calculateCloudTextCoordinates(
+            model.textModels = textCoordinateCalculator.calculateCloudTextCoordinates(
                 cloudModel = model,
                 sizeHolder = cloudSizeHolder,
             )
@@ -336,12 +337,14 @@ class RoundCloudsView @JvmOverloads constructor(
         with(checkedTextPaint) {
             color = checkedTextColor
             isAntiAlias = true
+            textAlign = Paint.Align.CENTER
             textSize = 25f
         }
 
         with(notCheckedTextPaint) {
             color = notCheckedTextColor
             isAntiAlias = true
+            textAlign = Paint.Align.CENTER
             textSize = 25f
         }
     }
@@ -389,9 +392,7 @@ class RoundCloudsView @JvmOverloads constructor(
             xCenter, yCenter,
             radius, checkedCloudPaint,
         )
-        canvas.drawText(
-            model.text, xCenter, yCenter, checkedTextPaint,
-        )
+        canvas.drawText(model)
     }
 
     private fun drawNotCheckedCloud(canvas: Canvas, model: RoundCloudModel) {
@@ -402,9 +403,7 @@ class RoundCloudsView @JvmOverloads constructor(
             xCenter, yCenter,
             radius, notCheckedCloudPaint
         )
-        canvas.drawText(
-            model.text, xCenter, yCenter, notCheckedTextPaint,
-        )
+        canvas.drawText(model)
     }
 
     private fun RoundCloudModel.getCoordinatesWithOffset(): Pair<Float, Float> {
@@ -443,5 +442,27 @@ class RoundCloudsView @JvmOverloads constructor(
             minXOffset = min(minXOffset, model.xOffsetPx - model.radiusPx)
         }
         return leftModel
+    }
+
+    private fun Canvas.drawText(model: RoundCloudModel) {
+        val textModels = model.textModels
+        textModels.forEach { textModel ->
+            val (xCoordinate: Float, yCoordinate: Float) = textModel.getCoordinatesWithOffset()
+            when(model.state) {
+                RoundCloudState.CHECKED ->
+                    drawText(textModel.text, xCoordinate, yCoordinate, checkedTextPaint)
+                RoundCloudState.NOT_CHECKED ->
+                    drawText(textModel.text, xCoordinate, yCoordinate, notCheckedTextPaint)
+            }
+        }
+    }
+
+    private fun CloudTextModel.getCoordinatesWithOffset(): Pair<Float, Float> {
+        val xCoordinate = getXCoordinatePx(viewCenterPointPx.x.toInt())
+            .toFloat() + currentXOffsetPx
+        val yCoordinate = getYCoordinatePx(viewCenterPointPx.y.toInt())
+            .toFloat()
+
+        return xCoordinate to yCoordinate
     }
 }

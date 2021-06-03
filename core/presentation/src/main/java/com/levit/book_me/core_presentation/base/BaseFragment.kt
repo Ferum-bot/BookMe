@@ -7,8 +7,10 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultRegistry
+import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.levit.book_me.core_presentation.R
@@ -29,8 +31,6 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         val activity = requireActivity()
         return activity.activityResultRegistry
     }
-
-
 
     protected fun showError(errorMessage: String) {
         Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_SHORT).apply {
@@ -81,5 +81,10 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
     protected fun showSuccessMessage(@StringRes id: Int) {
         val message = getString(id)
         showSuccessMessage(message)
+    }
+
+    protected fun getColor(@ColorRes id: Int): Int {
+        val context = requireContext()
+        return ContextCompat.getColor(context, id)
     }
 }

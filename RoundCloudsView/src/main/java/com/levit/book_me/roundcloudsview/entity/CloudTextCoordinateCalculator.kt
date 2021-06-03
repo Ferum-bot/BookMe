@@ -8,7 +8,7 @@ internal interface CloudTextCoordinateCalculator {
 
     /**
      * This method requests when we needed to calculate the right
-     * text coordinates of current cloud model to show it on screen.
+     * text coordinates of the current cloud model to show it on the screen.
      */
-    fun calculateCloudTextCoordinates(cloudModel: RoundCloudModel, sizeHolder: CloudModelSizeHolder): CloudTextModel
+    fun calculateCloudTextCoordinates(cloudModel: RoundCloudModel, sizeHolder: CloudModelSizeHolder): List<CloudTextModel>
 }

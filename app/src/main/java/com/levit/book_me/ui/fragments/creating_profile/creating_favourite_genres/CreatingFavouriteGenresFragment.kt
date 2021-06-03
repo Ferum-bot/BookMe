@@ -1,10 +1,8 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genres
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
@@ -63,8 +61,17 @@ class CreatingFavouriteGenresFragment:
     }
 
     private fun configureLayout() {
-        binding.cloudsView.setNotCheckedCloudColor(Color.RED)
-        binding.cloudsView.setNotCheckedTextColor(Color.BLUE)
+        val notCheckedTextColor = getColor(R.color.black)
+        val notCheckedCloudColor = getColor(R.color.light_grey)
+        val checkedTextColor = getColor(R.color.white)
+        val checkedCloudColor = getColor(R.color.cloud_checked_color)
+
+        with(binding.cloudsView) {
+            setNotCheckedTextColor(notCheckedTextColor)
+            setNotCheckedCloudColor(notCheckedCloudColor)
+            setCheckedTextColor(checkedTextColor)
+            setCheckedCloudColor(checkedCloudColor)
+        }
     }
 
     private fun navigateToChooseFavouriteAuthorsFragment() {
