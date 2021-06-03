@@ -20,10 +20,10 @@ import com.levit.book_me.roundcloudsview.core.models.RoundCloud
 import com.levit.book_me.roundcloudsview.core.models.RoundCloudModel
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewAttrs
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
-import com.levit.book_me.roundcloudsview.entity.CloudCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.CloudTextCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.impl.ColumnsCloudCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.impl.TestCloudTextCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.cloud_calculator.CloudCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.text_calculator.CloudTextCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl.ColumnsCloudCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.text_calculator.impl.TestCloudTextCoordinateCalculator
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min

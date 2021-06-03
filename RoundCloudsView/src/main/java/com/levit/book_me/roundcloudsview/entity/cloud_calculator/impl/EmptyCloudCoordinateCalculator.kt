@@ -1,13 +1,12 @@
-package com.levit.book_me.roundcloudsview.entity.impl
+package com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl
 
 import android.content.Context
-import com.levit.book_me.roundcloudsview.core.enums.RoundCloudSize
 import com.levit.book_me.roundcloudsview.core.models.CloudModelSizeHolder
 import com.levit.book_me.roundcloudsview.core.models.RoundCloud
 import com.levit.book_me.roundcloudsview.core.models.RoundCloudModel
-import com.levit.book_me.roundcloudsview.entity.CloudCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.cloud_calculator.CloudCoordinateCalculator
 
-internal class AndroidCloudCoordinateCalculator(
+internal class EmptyCloudCoordinateCalculator(
 
     private val getContext: () -> Context,
 

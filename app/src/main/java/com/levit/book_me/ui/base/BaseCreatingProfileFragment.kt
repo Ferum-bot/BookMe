@@ -36,18 +36,18 @@ abstract class BaseCreatingProfileFragment<VM: BaseViewModel>(
     }
 
     protected open fun setAllObservers() {
-        viewModel.errorMessageId.observe(viewLifecycleOwner, { messageId ->
+        viewModel.errorMessageId.observe(viewLifecycleOwner) { messageId ->
             if (messageId != null) {
                 showError(messageId)
                 viewModel.errorMessageHasShown()
             }
-        })
+        }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner, { message ->
+        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
             if (message != null) {
                 showError(message)
                 viewModel.errorMessageHasShown()
             }
-        })
+        }
     }
 }

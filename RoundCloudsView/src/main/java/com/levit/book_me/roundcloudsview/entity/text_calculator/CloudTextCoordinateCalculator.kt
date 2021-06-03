@@ -1,4 +1,4 @@
-package com.levit.book_me.roundcloudsview.entity
+package com.levit.book_me.roundcloudsview.entity.text_calculator
 
 import com.levit.book_me.roundcloudsview.core.models.CloudModelSizeHolder
 import com.levit.book_me.roundcloudsview.core.models.CloudTextModel

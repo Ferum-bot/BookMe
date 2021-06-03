@@ -1,9 +1,9 @@
-package com.levit.book_me.roundcloudsview.entity.impl
+package com.levit.book_me.roundcloudsview.entity.text_calculator.impl
 
 import com.levit.book_me.roundcloudsview.core.models.CloudModelSizeHolder
 import com.levit.book_me.roundcloudsview.core.models.CloudTextModel
 import com.levit.book_me.roundcloudsview.core.models.RoundCloudModel
-import com.levit.book_me.roundcloudsview.entity.CloudTextCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.text_calculator.CloudTextCoordinateCalculator
 
 internal class TestCloudTextCoordinateCalculator: CloudTextCoordinateCalculator {
 
