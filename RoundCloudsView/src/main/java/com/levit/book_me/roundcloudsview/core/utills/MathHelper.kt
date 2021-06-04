@@ -5,6 +5,9 @@ import kotlin.math.sqrt
 
 internal object MathHelper {
 
+    const val PI = Math.PI
+    const val ANGLE_45_RAD = PI / 4f
+
     private const val EPS = 1e-5
 
     fun circleContainsPoint(circleCenterPx: PointF, radiusPx: Int, pointPx: PointF): Boolean {

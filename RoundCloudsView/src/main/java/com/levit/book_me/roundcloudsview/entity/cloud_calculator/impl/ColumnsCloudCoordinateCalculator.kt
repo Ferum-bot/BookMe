@@ -12,9 +12,6 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
 
     companion object {
 
-        private const val LEFT_ITERATION = 0
-        private const val RIGHT_ITERATION = 1
-
         private const val LARGE_CLOUD_COUNT = RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE
         private const val SMALL_CLOUD_COUNT = RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE
     }
@@ -31,7 +28,7 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
 
         var leftXOffset = 0
         var rightXOffset = 0
-        var currentIteration = RIGHT_ITERATION
+        var currentIteration = Iterations.RIGHT_ITERATION
 
         listOfColumns.forEachIndexed { index, column ->
             val sizeType = column[0].size
@@ -42,7 +39,7 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
             val cloudMargin = sizeHolder.cloudMarginPx
 
             when(currentIteration) {
-                RIGHT_ITERATION -> {
+                Iterations.RIGHT_ITERATION -> {
                     if (index != 0) {
                         rightXOffset += cloudRadius
                     } else {
@@ -50,13 +47,13 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
                     }
                     resultList += getColumnFrom(rightXOffset, sizeType, column)
                     rightXOffset += cloudRadius + cloudMargin
-                    currentIteration = LEFT_ITERATION
+                    currentIteration = Iterations.LEFT_ITERATION
                 }
-                LEFT_ITERATION -> {
+                Iterations.LEFT_ITERATION -> {
                     leftXOffset -= cloudRadius
                     resultList += getColumnFrom(leftXOffset, sizeType, column)
                     leftXOffset -= cloudRadius + cloudMargin
-                    currentIteration = RIGHT_ITERATION
+                    currentIteration = Iterations.RIGHT_ITERATION
                 }
             }
         }
@@ -158,4 +155,8 @@ internal class ColumnsCloudCoordinateCalculator: CloudCoordinateCalculator {
         return resultList
     }
 
+}
+
+private enum class Iterations {
+    LEFT_ITERATION, RIGHT_ITERATION;
 }
