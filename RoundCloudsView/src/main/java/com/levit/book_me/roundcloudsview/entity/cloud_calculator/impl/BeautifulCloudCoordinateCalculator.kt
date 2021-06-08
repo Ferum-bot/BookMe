@@ -47,7 +47,7 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
             prevCloud = currentCloud
         }
 
-        return resultList
+        return moveAllLargeCloudsToCenter(resultList)
     }
 
     private fun calculateSmallModelsWith(largeModels: List<RoundCloudModel>): List<RoundCloudModel> {
@@ -96,8 +96,7 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
     private fun calculateNewLargeCloudDestination(
         previousCloud: RoundCloudModel
     ): NewLargeCloudDestination {
-        val neededDistanceBetweenClouds = 2 * sizeHolder.largeCloudRadiusPx + sizeHolder.cloudMarginPx
-        val neededXOffset = (neededDistanceBetweenClouds * sin(MathHelper.ANGLE_45_RAD)).toInt()
+        val neededXOffset = calculateNeededLargeXOffset()
         val neededYOffset = when(currentLargeCloudDestination) {
             NewLargeCloudDestination.UP ->
                 -neededXOffset
@@ -115,8 +114,7 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
     }
 
     private fun calculateNewLargeCloudUp(previousCloud: RoundCloudModel, cloud: RoundCloud): RoundCloudModel {
-        val neededDistanceBetweenClouds = 2 * sizeHolder.largeCloudRadiusPx + sizeHolder.cloudMarginPx
-        val neededXOffset = (neededDistanceBetweenClouds * sin(MathHelper.ANGLE_45_RAD)).toInt()
+        val neededXOffset = calculateNeededLargeXOffset()
         val neededYOffset = -neededXOffset
         val actualXOffset = neededXOffset + previousCloud.xOffsetPx
         val actualYOffset = neededYOffset + previousCloud.yOffsetPx
@@ -135,8 +133,7 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
     }
 
     private fun calculateNewLargeCloudDown(previousCloud: RoundCloudModel, cloud: RoundCloud): RoundCloudModel {
-        val neededDistanceBetweenClouds = 2 * sizeHolder.largeCloudRadiusPx + sizeHolder.cloudMarginPx
-        val neededXOffset = (neededDistanceBetweenClouds * sin(MathHelper.ANGLE_45_RAD)).toInt()
+        val neededXOffset = calculateNeededLargeXOffset()
         val actualXOffset = neededXOffset + previousCloud.xOffsetPx
         val actualYOffset = neededXOffset + previousCloud.yOffsetPx
 
@@ -166,6 +163,28 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
         }
         return true
     }
+
+    private fun calculateNeededLargeXOffset(): Int {
+        val neededDistanceBetweenClouds = 2 * sizeHolder.largeCloudRadiusPx + sizeHolder.cloudMarginPx
+        return (neededDistanceBetweenClouds * sin(MathHelper.ANGLE_45_RAD)).toInt()
+    }
+
+    private fun moveAllLargeCloudsToCenter(clouds: List<RoundCloudModel>): List<RoundCloudModel> {
+        val topOffsetCoordinate = clouds.findTopCloud()?.yOffsetPx
+            ?: return clouds
+        val bottomOffsetCoordinate = clouds.findBottomCloud()?.yOffsetPx
+            ?: return clouds
+        val cloudsVerticalCenter = (topOffsetCoordinate + bottomOffsetCoordinate + 2 * sizeHolder.viewCenterYCoordinatePx) / 2
+        val viewCenter = sizeHolder.viewCenterYCoordinatePx
+        val additionalYOffset = viewCenter - cloudsVerticalCenter
+
+        return clouds.map { oldCloud ->
+            val newYOffset = oldCloud.yOffsetPx + additionalYOffset
+            oldCloud.getWithNewOffsets(
+                newYOffset = newYOffset,
+            )
+        }
+    }
 }
 
 private enum class NewLargeCloudDestination {
@@ -182,4 +201,28 @@ private enum class NewLargeCloudDestination {
     };
 
     abstract val opposite: NewLargeCloudDestination
+}
+
+private fun List<RoundCloudModel>.findTopCloud(): RoundCloudModel? {
+    var minOffset = Int.MAX_VALUE
+    var resultCloud: RoundCloudModel? = null
+    forEach { cloud ->
+        if (cloud.yOffsetPx < minOffset) {
+            minOffset = cloud.yOffsetPx
+            resultCloud = cloud
+        }
+    }
+    return resultCloud
+}
+
+private fun List<RoundCloudModel>.findBottomCloud(): RoundCloudModel? {
+    var maxOffset = Int.MIN_VALUE
+    var resultCloud: RoundCloudModel? = null
+    forEach { cloud ->
+        if (cloud.yOffsetPx > maxOffset) {
+            maxOffset = cloud.yOffsetPx
+            resultCloud = cloud
+        }
+    }
+    return resultCloud
 }

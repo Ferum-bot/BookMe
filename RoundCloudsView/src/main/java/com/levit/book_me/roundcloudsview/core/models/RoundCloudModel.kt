@@ -30,13 +30,13 @@ internal data class RoundCloudModel(
 
     /**
      * The circle x coordinate offset relatively RoundCloudsView
-     * center x coordinate.
+     * @center x coordinate.
      */
     val xOffsetPx: Int = 0,
 
     /**
      * The circle y coordinate offset relatively RoundCloudsView
-     * center y coordinate.
+     * @center y coordinate.
      */
     val yOffsetPx: Int = 0,
 ) {
@@ -86,5 +86,19 @@ internal data class RoundCloudModel(
             return true
         }
         return false
+    }
+
+    fun getWithNewOffsets(newXOffset: Int? = null, newYOffset: Int? = null): RoundCloudModel {
+        val actualXOffset = newXOffset ?: xOffsetPx
+        val actualYOffset = newYOffset ?: yOffsetPx
+
+        return RoundCloudModel(
+            cloud = cloud,
+            state = state,
+            textModels = textModels,
+            radiusPx = radiusPx,
+            xOffsetPx = actualXOffset,
+            yOffsetPx = actualYOffset,
+        )
     }
 }

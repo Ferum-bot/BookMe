@@ -6,13 +6,13 @@ internal data class CloudTextModel(
 
     /**
      * The text left x coordinate offset relatively RoundCloudsView
-     * center x coordinate.
+     * @center x coordinate.
      */
     val textXOffsetPx: Int = 0,
 
     /**
      * The text bottom y coordinate offset relatively RoundCloudsView
-     * center y coordinate.
+     * @center y coordinate.
      */
     val textYOffsetPx: Int = 0,
 ) {
