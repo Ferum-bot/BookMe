@@ -1,6 +1,9 @@
 import dependencies.Dependencies
 import dependencies.KaptDependencies
-import extensions.addTestDependencies
+import extensions.*
+import org.gradle.kotlin.dsl.api
+import org.gradle.kotlin.dsl.implementation
+import org.gradle.kotlin.dsl.kapt
 
 plugins{
     id(Plugins.ANDROID_APPLICATION)
@@ -9,6 +12,7 @@ plugins{
     id(Plugins.KOTLIN_KAPT)
     id(Plugins.KOTLIN_ALLOPEN)
     id(Plugins.GOOGLE_SERVICES)
+    id(Plugins.NAVIGATION_SAFE_ARGS)
 }
 
 android {
@@ -30,7 +34,16 @@ android {
         BuildTypeDebug.createOrConfig(this)
     }
 
+//    signingConfigs {
+//        SigningConfigRelease.createOrConfig(this)
+//        SigningConfigDebug.createOrConfig(this)
+//    }
+
     flavorDimensions(flavor.FlavorDimensions.ENVIRONMENT)
+
+    buildFeatures {
+        viewBinding = true
+    }
 
     productFlavors {
         flavor.EnvironmentFlavor.Master.createOrConfigForApp(this)
@@ -71,51 +84,57 @@ dependencies {
     implementation(project(Core.NETWORK.path))
     implementation(project(Core.PRESENTATION.path))
 
+    implementation(project(CustomView.ROUND_CLOUDS_VIEW.path))
+    
     // Kotlin
     implementation(Dependencies.KOTLIN)
 
     // Core
-    implementation(Dependencies.MULTIDEX)
-    implementation(Dependencies.APPCOMPAT)
-    implementation(Dependencies.KTX)
-    implementation(Dependencies.FRAGMENT_KTX)
-    api(Dependencies.COROUTINES)
-    api(Dependencies.COROUTINES_ANDROID)
+    addBaseCoreDependencies()
 
     // Lifecycle
-    implementation(Dependencies.LIFECYCLE_RUNTIME)
-    implementation(Dependencies.LIFECYCLE_EXTENSIONS)
-    kapt(KaptDependencies.LIFECYCLE_COMPILER)
+    addLifecycleDependencies()
 
     // Storage: database
-    implementation(Dependencies.ROOM)
-    implementation(Dependencies.ROOM_KTX)
-    kapt(KaptDependencies.ROOM_COMPILER)
+    addRoomDependencies()
 
     // Network: https (REST API)
-    implementation(Dependencies.OKHTTP_CORE)
-    implementation(Dependencies.OKHTTP_LOGGING_INTERCEPTOR)
-    implementation(Dependencies.RETROFIT_CORE)
-    implementation(Dependencies.RETROFIT_CONVERTER_GSON)
+    addAllNetworkDependencies()
 
     // UI: Androidx presentation views
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAIN_LAYOUT)
 
     // UI: Images
-    implementation(Dependencies.GLIDE)
-    implementation(Dependencies.GLIDE_TRANSFORMATIONS)
-    kapt(KaptDependencies.GLIDE_COMPILER)
+    addGlideDependencies()
+
+    // UI: ViewPager2
+    implementation(Dependencies.VIEW_PAGER2)
+
+    // Navigation Component
+    implementation(Dependencies.NAVIGATION_FRAGMENT)
+    implementation(Dependencies.NAVIGATION_UI)
 
     // DI
-    implementation(Dependencies.DAGGER)
-    implementation(Dependencies.DAGGER_ANDROID)
-    implementation(Dependencies.DAGGER_ANDROID_SUPPORT)
-    kapt(KaptDependencies.DAGGER_COMPILER)
-    kapt(KaptDependencies.DAGGER_ANDROID_PROCESSOR)
+    addAllDIDependencies()
 
     // Logging
     implementation(Dependencies.TIMBER)
+
+    // Firebase
+    addAllFirebaseDependencies()
+
+    // Google Play Services
+    implementation(Dependencies.GOOGLE_PLAY_SERVICES_AUTH)
+
+    // Facebook
+    implementation(Dependencies.FACEBOOK_ANDROID_SDK)
+
+    // Pin View
+    implementation(Dependencies.PIN_VIEW)
+
+    // Page Indicator
+    implementation(Dependencies.PAGE_INDICATOR)
 
     // Test dependencies
     addTestDependencies()

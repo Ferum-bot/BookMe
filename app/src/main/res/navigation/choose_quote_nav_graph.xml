@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/choose_quote_nav_graph"
+    app:startDestination="@id/quotesMainScreenFragment">
+
+    <fragment
+        android:id="@+id/quotesMainScreenFragment"
+        android:name="com.levit.book_me.ui.fragments.quotes.main_screen.QuotesMainScreenFragment"
+        android:label="QuotesMainScreenFragment" >
+        <action
+            android:id="@+id/action_quotesMainScreenFragment_to_quotesTagsScreenFragment"
+            app:destination="@id/quotesTagsScreenFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/quotesMainScreenFragment" />
+        <action
+            android:id="@+id/action_quotesMainScreenFragment_to_quotesAuthorsScreenFragment"
+            app:destination="@id/quotesAuthorsScreenFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/quotesMainScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quotesTagsScreenFragment"
+        android:name="com.levit.book_me.ui.fragments.quotes.tags_screen.QuotesTagsScreenFragment"
+        android:label="QuotesTagsScreenFragment" >
+        <action
+            android:id="@+id/action_quotesTagsScreenFragment_to_quotesScreenFragment"
+            app:destination="@id/quotesScreenFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/quotesTagsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quotesAuthorsScreenFragment"
+        android:name="com.levit.book_me.ui.fragments.quotes.authors_screen.QuotesAuthorsScreenFragment"
+        android:label="QuotesAuthorsScreenFragment" >
+        <action
+            android:id="@+id/action_quotesAuthorsScreenFragment_to_quotesScreenFragment"
+            app:destination="@id/quotesScreenFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/quotesAuthorsScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quotesScreenFragment"
+        android:name="com.levit.book_me.ui.fragments.quotes.quotes_screen.QuotesScreenFragment"
+        android:label="QuotesScreenFragment" >
+        <argument
+            android:name="type"
+            app:argType="com.levit.book_me.core.models.GoQuotesTypes"
+            android:defaultValue="TAG" />
+        <argument
+            android:name="querySearch"
+            app:argType="string" />
+    </fragment>
+</navigation>

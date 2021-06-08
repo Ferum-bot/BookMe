@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/authorization_nav_graph"
+    app:startDestination="@id/chooseTypeAuthorizationFragment">
+
+    <fragment
+        android:id="@+id/chooseTypeAuthorizationFragment"
+        android:name="com.levit.book_me.ui.fragments.authorization.choose_type_authorization.ChooseTypeAuthorizationFragment"
+        android:label="ChooseTypeAuthorizationFragment" >
+        <action
+            android:id="@+id/action_chooseTypeAuthorizationFragment_to_emailPhoneAuthorizationContainerFragment"
+            app:destination="@id/emailPhoneAuthorizationContainerFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/chooseTypeAuthorizationFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailPhoneAuthorizationContainerFragment"
+        android:name="com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneAuthorizationContainerFragment"
+        android:label="EmailPhoneAuthorizationContainerFragment" >
+        <action
+            android:id="@+id/action_emailPhoneAuthorizationContainerFragment_to_confirmPhoneCodeFragment"
+            app:destination="@id/confirmPhoneCodeFragment"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/emailPhoneAuthorizationContainerFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_emailPhoneAuthorizationContainerFragment_to_emailSignUpFragment"
+            app:destination="@id/emailSignUpFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@anim/slide_left_enter_anim"
+            app:exitAnim="@anim/slide_left_exit_anim"
+            app:popEnterAnim="@anim/slide_right_enter_anim"
+            app:popExitAnim="@anim/slide_right_exit_anim"
+            app:popUpTo="@id/emailPhoneAuthorizationContainerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmPhoneCodeFragment"
+        android:name="com.levit.book_me.ui.fragments.authorization.confirm_phone_code.ConfirmPhoneCodeFragment"
+        android:label="ConfirmPhoneCodeFragment" >
+        <argument
+            android:name="phone_number"
+            app:argType="com.levit.book_me.core.models.MobileTelephone" />
+        <argument
+            android:name="verification_id"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="com.google.firebase.auth.PhoneAuthProvider$ForceResendingToken" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailSignUpFragment"
+        android:name="com.levit.book_me.ui.fragments.authorization.email_sign_up.EmailSignUpFragment"
+        android:label="EmailSignUpFragment" />
+</navigation>

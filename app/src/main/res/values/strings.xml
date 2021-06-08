@@ -1,3 +1,107 @@
 <resources>
     <string name="app_name">BookMe</string>
+    <string name="welcome_back_to_the_bookme">Welcome to \nthe BookMe</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="registration_was_canceled">Registration was canceled</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="authorization">Authorization</string>
+    <string name="next">Next</string>
+    <string name="email_address">Email address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="time_out">Time out!</string>
+    <string name="invalid_request">Invalid request</string>
+    <string name="too_many_request">Too many requests</string>
+    <string name="network_not_available">Network connection is not available</string>
+    <string name="try_again">Try again</string>
+    <string name="search">Search</string>
+
+    <!--  OnBoarding  -->
+    <string name="onboarding_first_label">You are what \nyou read</string>
+    <string name="onboarding_first_description">We are convinced that you are deeply shaped by the books you read. That is why we carefully select a person for you by your book preferences</string>
+    <string name="onboarding_second_label">Each chance \nis a new story</string>
+    <string name="onboarding_second_description">Everyday you have only onc chance to meet your bookish friend. Each chance is a new story, so do not miss it</string>
+    <string name="onboarding_third_label">Let us start \nyour own story</string>
+    <string name="onboarding_third_description">Every story has a beginning. That is why we ask everyone to start with profile creation</string>
+
+    <!--  Authorization  -->
+    <string name="enter_6_digit_code">Enter 6-digit \ncode</string>
+    <string name="your_code_was_send_to">Your code was sent to %s</string>
+    <string name="entered_code_was_invalid">The code entered was Invalid!</string>
+    <string name="dont_have_an_account_yet">Do not have an account yet?\nSign Up!</string>
+    <string name="password_rules">\u25CF Password length must be from 8 to 14 characters \n\u25CF Password must contains at least 2 digits \n\u25CF Password must contains at least 2 letters \n\u25CF Must be one uppercase letter and one lowercase</string>
+    <string name="enter_password">Enter password</string>
+    <string name="wrong_email_or_password">Wrong email or password</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="invalid_address">Invalid address</string>
+    <string name="password_must_meet_all_conditions">Password must meet all conditions</string>
+    <string name="password_mismatch">Password mismatch</string>
+    <string name="how_would_you_like_to_log_in">How would you like to log in?</string>
+    <string name="by_continuing_you_agree_to_the_bookme_s_terms_of_use_and_privacy_policy">By continuing, you agree to the BookMe\'s \nTerms of Use and Privacy Policy</string>
+    <string name="join_with_google">Join with Google</string>
+    <string name="join_with_facebook">Join with Facebook</string>
+    <string name="join_with_phone_email">Join with Phone/Email</string>
+
+    <!--  Creating Profile  -->
+    <string name="profile_creation">Profile creation</string>
+    <string name="name_surname">Name, surname</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="now_your_photo">Now, your photo</string>
+    <string name="creating_profile_make_photo_description">Let\'s be honest, photo is important for several reasons, but mainly because it is the very first impression you are making to your matches</string>
+    <string name="take_a_photo_or_choose_from_your_library">Take a photo or choose \nfrom your library</string>
+    <string name="press_next_or_choose_another_photo">Press next or choose \nanother photo</string>
+    <string name="choose_genres_you_read">Choose genres \nyou read</string>
+    <string name="choose_up_to_three_genres">Choose up to three genres</string>
+    <string name="choose_your_favourite_authors">Choose your \nfavourite authors</string>
+    <string name="choose_from_to_authors">Choose from %s to %s authors</string>
+    <string name="choose_at_least_authors">Choose at least %s authors</string>
+    <string name="photo_uploaded">Photo uploaded!</string>
+    <string name="can_not_find_chosen_photo">Can\'t find chosen photo</string>
+    <string name="search_by_authors">Search by authors</string>
+    <string name="nothing_found">Nothing found</string>
+    <string name="choose_your_favourite_books">Choose your \nfavourite books</string>
+    <string name="search_by_books">Search by books</string>
+    <string name="choose_from_to_books">Choose from %s to %s books</string>
+    <string name="choose_at_least_books">Choose at least %s books</string>
+    <string name="you_can_choose_not_more_books">You can choose not more %s books!</string>
+    <string name="some_words_about_you">Some words \nabout you</string>
+    <string name="choose">Choose</string>
+    <string name="choose_books_you_want_to_read">Choose books you \nwant to read</string>
+    <string name="finish">Finish</string>
+    <string name="something_interesting_about_you">Something interesting about you</string>
+    <string name="name_can_not_be_empty">Name can\'t be empty</string>
+    <string name="surname_can_not_be_empty">Surname can\'t be empty</string>
+    <string name="write_some_words_about_you">Write some words about you</string>
+    <string name="minimum_length_is">Minimum length is %s symbols</string>
+    <string name="maximum_length_is">Maximum length is %s symbols</string>
+
+    <!--  Choose Author Layout  -->
+    <string name="first_author">First Author</string>
+    <string name="second_author">Second Author</string>
+    <string name="third_author">Third Author</string>
+    <string name="fours_author">Fours Author</string>
+    <string name="fives_author">Fives Author</string>
+    <string name="author">Author</string>
+
+    <!--  Choose Quote Screens  -->
+    <string name="choose_your_favourite_quote">Choose your \nfavourite quote</string>
+    <string name="quotes">Quotes</string>
+    <string name="choose_from_tags">Choose from %s tags</string>
+    <string name="choose_from_authors">Choose from %s authors</string>
+    <string name="random_quotes">Random Quotes:</string>
+    <string name="more_than_500_favourite_quotes_from_all_over_the_world">More than 500+ favourite quotes from all over the world!</string>
+    <string name="authors">Authors</string>
+    <string name="tags">Tags</string>
+
+    <!--  Google Play Services  -->
+    <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
+
+    <!--  Facebook  -->
+    <string name="facebook_app_id">341735473936192</string>
+    <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="quote_not_chosen">Quote not chosen</string>
+
 </resources>

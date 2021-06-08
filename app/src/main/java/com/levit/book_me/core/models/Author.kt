@@ -1,0 +1,9 @@
+package com.levit.book_me.core.models
+
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Author(
+    val fullName: String
+): Parcelable

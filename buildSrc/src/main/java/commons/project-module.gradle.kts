@@ -1,4 +1,3 @@
-@file:Suppress("UnstableApiUsage")
 
 package commons
 
@@ -12,7 +11,7 @@ import extensions.implementation
 import extensions.kapt
 
 /**
- * базовый скрипт для feature/core модулей проекта
+ * Base plugin to feature modules
  */
 
 plugins {
@@ -20,7 +19,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("de.mannodermaus.android-junit5")
+    //id("de.mannodermaus.android-junit5")
 }
 
 android {
@@ -40,16 +39,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    androidExtensions {
-        isExperimental = true
-    }
-
     sourceSets.forEach {
         it.java.setSrcDirs(it.java.srcDirs + "src/$it.name/kotlin")
-    }
-
-    testOptions {
-        unitTests.isReturnDefaultValues = true
     }
 }
 
@@ -57,8 +48,6 @@ dependencies {
     implementation(Dependencies.KOTLIN)
     implementation(Dependencies.DAGGER)
     implementation(Dependencies.TIMBER)
-
-    kapt(KaptDependencies.DAGGER_COMPILER)
 
     addTestDependencies()
 }

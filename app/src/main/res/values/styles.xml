@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DefaultTextViewStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/lato</item>
+    </style>
+
+    <style name="DefaultErrorTextStyle" parent="DefaultTextViewStyle">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="DefaultButtonStyle" parent="DefaultTextViewStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_for_default_button</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    
+    <style name="BigAuthorizationLabelsStyle" parent="DefaultTextViewStyle">
+        <item name="android:fontFamily">@font/yrsa</item>
+        <item name="android:textSize">@dimen/big_label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BigCreatingProfileLabelsStyle" parent="CreatingProfileLabelStyle">
+        <item name="android:fontFamily">@font/yrsa</item>
+        <item name="android:textSize">@dimen/big_label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CreatingProfileLabelStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AuthorizationEmailPhoneTabStyle" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/DefaultTabTextAppearance</item>
+        <item name="tabTextColor">@color/black</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="fontFamily">@font/lato</item>
+        <item name="tabIndicatorColor">@color/black</item>
+    </style>
+
+    <style name="DefaultTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="DefaultEditTextStyle" parent="DefaultTextViewStyle">
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="background">@drawable/bg_for_authorization_edit_texts</item>
+        <item name="android:background">@drawable/bg_for_authorization_edit_texts</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AuthorizationEditTextStyle" parent="DefaultEditTextStyle">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="AuthorizationSpinnerStyle" parent="DefaultTextViewStyle">
+        <item name="backgroundTint">@color/black</item>
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:spinnerMode">dropdown</item>
+    </style>
+
+    <style name="DefaultProgressBarStyle">
+        <item name="android:indeterminateTint">@color/black</item>
+    </style>
+
+    <style name="DefaultPinViewStyle" parent="PinWidget.PinView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:inputType">number</item>
+        <item name="viewType">line</item>
+        <item name="itemCount">6</item>
+        <item name="cursorWidth">1dp</item>
+        <item name="cursorColor">@color/grey</item>
+        <item name="lineWidth">2dp</item>
+        <item name="lineColor">@color/light_grey</item>
+        <item name="itemSpacing">8dp</item>
+        <item name="itemWidth">@dimen/pin_view_item_size</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="OnBoardingLabelStyle" parent="DefaultTextViewStyle">
+        <item name="android:fontFamily">@font/yrsa</item>
+        <item name="android:textSize">@dimen/big_label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="OnBoardingDescriptionStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
+    
+    <style name="OnBoardingImageViewStyle">
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="DefaultIndicatorViewStyle">
+        <item name="piv_dynamicCount">true</item>
+        <item name="piv_interactiveAnimation">true</item>
+        <item name="piv_animationType">worm</item>
+        <item name="piv_selectedColor">@color/black</item>
+        <item name="piv_unselectedColor">@color/grey</item>
+        <item name="piv_radius">5dp</item>
+        <item name="piv_padding">4dp</item>
+    </style>
+
+    <style name="ChooseAuthorTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:minLines">1</item>
+        <item name="android:maxLines">1</item>
+   </style>
+
+    <style name="DefaultSearchEditTextStyle" parent="DefaultTextViewStyle">
+        <item name="android:background">@color/light_grey</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="singleLine">true</item>
+        <item name="android:minLines">1</item>
+        <item name="android:maxLength">25</item>
+        <item name="android:drawableStart">@drawable/ic_search_24</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <style name="DefaultBigTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="DefaultBigBookItemTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:ellipsize">end</item>
+        <item name="singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minLines">1</item>
+        <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <style name="TitleBigBookItemTextViewStyle" parent="DefaultBigBookItemTextViewStyle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AuthorsBigBookItemTextViewStyle" parent="DefaultBigBookItemTextViewStyle">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="QuoteTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:fontFamily">@font/allura</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="QuoteAuthorTextViewStyle" parent="DefaultTextViewStyle">
+        <item name="android:fontFamily">@font/yrsa</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="QuoteTypeChooseLabel" parent="DefaultTextViewStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="QuoteScreenLabelStyle" parent="DefaultTextViewStyle">
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SearchActionViewTheme" parent="Widget.AppCompat.SearchView.ActionBar">
+        <item name="android:editTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/light_grey</item>
+        <item name="android:closeIcon">@drawable/ic_baseline_cancel_24</item>
+        <item name="closeIcon">@drawable/ic_baseline_cancel_24</item>
+        <item name="android:commitIcon">@drawable/ic_search_black</item>
+        <item name="commitIcon">@drawable/ic_search_black</item>
+        <item name="android:searchIcon">@drawable/ic_search_black</item>
+        <item name="searchIcon">@drawable/ic_search_black</item>
+        <item name="android:goIcon">@drawable/ic_search_black</item>
+        <item name="goIcon">@drawable/ic_search_black</item>
+        <item name="android:voiceIcon">@drawable/ic_search_black</item>
+        <item name="voiceIcon">@drawable/ic_search_black</item>
+        <item name="android:searchHintIcon">@drawable/ic_search_black</item>
+    </style>
+</resources>

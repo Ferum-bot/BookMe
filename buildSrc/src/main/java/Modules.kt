@@ -13,3 +13,7 @@ enum class Core(val path: String) {
     NETWORK(":core:network"),
     PRESENTATION(":core:presentation")
 }
+
+enum class CustomView(val path: String) {
+    ROUND_CLOUDS_VIEW(":RoundCloudsView")
+}
