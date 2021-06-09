@@ -3,6 +3,8 @@ package com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl
 import android.graphics.PointF
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudSize
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
+import com.levit.book_me.roundcloudsview.core.extensions.findLastLeftModel
+import com.levit.book_me.roundcloudsview.core.extensions.findLastRightModel
 import com.levit.book_me.roundcloudsview.core.extensions.getDefaultTextModel
 import com.levit.book_me.roundcloudsview.core.models.CloudModelSizeHolder
 import com.levit.book_me.roundcloudsview.core.models.RoundCloud
@@ -67,18 +69,41 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
             resultSmallClouds.addAll(rightClouds)
         }
 
-//        resultSmallClouds = resultSmallClouds.filter { smallCloud ->
-//            largeModels.notIntercepts(smallCloud)
-//        }.toMutableList()
+        resultSmallClouds = resultSmallClouds.filter { smallCloud ->
+            largeModels.notIntercepts(smallCloud)
+        }.toMutableList()
 
         return resultSmallClouds
     }
 
+    /**
+     * This method add some xOffset to all clouds to make clouds
+     * be in the horizontal center of RoundCloudsView.
+     */
     private fun moveModelsToCenter(
         smallModels: List<RoundCloudModel>, largeModels: List<RoundCloudModel>
     ): List<RoundCloudModel> {
+        val leftModel = getLeftModel(smallModels, largeModels)
+            ?: return largeModels + smallModels
+        val rightModel = getRightModel(smallModels, largeModels)
+            ?: return largeModels + smallModels
+        val additionalXOffset = (rightModel.xOffsetPx - leftModel.xOffsetPx) / 3
+        val resultList = mutableListOf<RoundCloudModel>()
 
-        return largeModels + smallModels
+        smallModels.forEach { cloud ->
+            val newCloud = cloud.getWithNewOffsets(
+                newXOffset = cloud.xOffsetPx - additionalXOffset,
+            )
+            resultList.add(newCloud)
+        }
+        largeModels.forEach { cloud ->
+            val newCloud = cloud.getWithNewOffsets(
+                newXOffset = cloud.xOffsetPx - additionalXOffset,
+            )
+            resultList.add(newCloud)
+        }
+
+        return resultList
     }
 
     private fun calculateNewLargeCloudFrom(previousCloud: RoundCloudModel?, cloud: RoundCloud): RoundCloudModel {
@@ -188,6 +213,10 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
         return (neededDistanceBetweenClouds * sin(MathHelper.ANGLE_45_RAD)).toInt()
     }
 
+    /**
+     * This method moves all Large clouds to vertical center of
+     * RoundCloudsView.
+     */
     private fun moveAllLargeCloudsToCenter(clouds: List<RoundCloudModel>): List<RoundCloudModel> {
         val topOffsetCoordinate = clouds.findTopCloud()?.yOffsetPx
             ?: return clouds
@@ -220,7 +249,7 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
                 calculateSmallAndLargeDistance()
             val smallCloudXOffset = nextCloud.xOffsetPx - distanceBetweenSmallCloud
             val smallCloudYOffset = nextCloud.yOffsetPx + calculateYOffsetForSmallClouds(largeCloud, nextCloud)
-            val currentCloud = availableSmallClouds.removeFirst()
+            val currentCloud = availableSmallClouds.first()
 
             val newModel = RoundCloudModel(
                 cloud = currentCloud,
@@ -234,11 +263,11 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
                 yOffsetPx = smallCloudYOffset,
             )
             if (allColumns.intercepts(newModel)) {
-                availableSmallClouds.add(currentCloud)
                 return@forEachIndexed
             }
 
             resultClouds.add(newModel)
+            availableSmallClouds.removeFirst()
         }
 
         return resultClouds
@@ -259,7 +288,7 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
                 calculateSmallAndLargeDistance()
             val smallCloudXOffset = largeCloud.xOffsetPx + distanceBetweenSmallCloud
             val smallCloudYOffset = largeCloud.yOffsetPx - calculateYOffsetForSmallClouds(largeCloud, nextCloud)
-            val currentCloud = availableSmallClouds.removeFirst()
+            val currentCloud = availableSmallClouds.first()
 
             val newModel = RoundCloudModel(
                 cloud = currentCloud,
@@ -273,11 +302,11 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
                 yOffsetPx = smallCloudYOffset,
             )
             if (allColumns.intercepts(newModel)) {
-                availableSmallClouds.add(currentCloud)
                 return@forEachIndexed
             }
 
             resultClouds.add(newModel)
+            availableSmallClouds.removeFirst()
         }
 
         return resultClouds
@@ -294,9 +323,39 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
         val currentYOffset = cloud.yOffsetPx
         val nextYOffset = nextCloud.yOffsetPx
         return if (nextYOffset - currentYOffset >= 0) {
-            sizeHolder.cloudMarginPx * 3
+            sizeHolder.cloudMarginPx * 4
         } else {
-            -sizeHolder.cloudMarginPx * 3
+            -sizeHolder.cloudMarginPx * 4
+        }
+    }
+
+    private fun getLeftModel(smallClouds: List<RoundCloudModel>, largeModels: List<RoundCloudModel>): RoundCloudModel? {
+        val smallLeftModel = smallClouds.findLastLeftModel()
+        val largeLeftModel = largeModels.findLastLeftModel()
+        val resultLeftModel: RoundCloudModel = smallLeftModel ?: largeLeftModel ?: return null
+
+        if (largeLeftModel == null) {
+            return resultLeftModel
+        }
+        return if (resultLeftModel.xOffsetPx >= largeLeftModel.xOffsetPx) {
+            largeLeftModel
+        } else {
+            resultLeftModel
+        }
+    }
+
+    private fun getRightModel(smallClouds: List<RoundCloudModel>, largeModels: List<RoundCloudModel>): RoundCloudModel? {
+        val smallRightModel = smallClouds.findLastRightModel()
+        val largeRightModel = largeModels.findLastRightModel()
+        val resultLeftModel: RoundCloudModel = smallRightModel ?: largeRightModel ?: return null
+
+        if (largeRightModel == null) {
+            return resultLeftModel
+        }
+        return if (resultLeftModel.xOffsetPx <= largeRightModel.xOffsetPx) {
+            largeRightModel
+        } else {
+            resultLeftModel
         }
     }
 }

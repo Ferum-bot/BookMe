@@ -37,7 +37,7 @@ internal data class CloudModelSizeHolder(
             val cloudMargin =
                 cloudMarginPx ?: max(viewHeightPx, viewWidthPx) / RoundCloudsViewConstants.RELATIVELY_CLOUD_MARGIN
 
-            var largeCloudSize = viewHeightPx / RoundCloudsViewConstants.RELATIVELY_LARGE_CLOUD_SIZE
+            var largeCloudSize = (viewHeightPx + viewWidthPx) / 6
             largeCloudSize -= cloudMargin + RoundCloudsViewConstants.ADDITIONAL_CLOUD_MARGIN
             var smallCloudSize = viewWidthPx / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE - cloudMargin
             smallCloudSize -= cloudMargin + RoundCloudsViewConstants.ADDITIONAL_CLOUD_MARGIN
