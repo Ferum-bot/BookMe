@@ -1,5 +1,6 @@
 package com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl
 
+import android.graphics.PointF
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudSize
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
 import com.levit.book_me.roundcloudsview.core.extensions.getDefaultTextModel
@@ -14,6 +15,8 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
 
     private lateinit var clouds: List<RoundCloud>
     private lateinit var sizeHolder: CloudModelSizeHolder
+
+    private lateinit var availableSmallClouds: MutableList<RoundCloud>
 
     private var currentLargeCloudDestination = NewLargeCloudDestination.DOWN
 
@@ -51,8 +54,24 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
     }
 
     private fun calculateSmallModelsWith(largeModels: List<RoundCloudModel>): List<RoundCloudModel> {
+        val largeColumns = largeModels.getLargeColumns().reversed()
+        availableSmallClouds = clouds.filter { cloud ->
+            cloud.size == RoundCloudSize.SMALL
+        }.toMutableList()
+        var resultSmallClouds = mutableListOf<RoundCloudModel>()
 
-        return emptyList()
+        largeColumns.forEach { column ->
+            val leftClouds = calculateSmallLeftClouds(column, largeColumns)
+            val rightClouds = calculateSmallRightClouds(column, largeColumns)
+            resultSmallClouds.addAll(leftClouds)
+            resultSmallClouds.addAll(rightClouds)
+        }
+
+//        resultSmallClouds = resultSmallClouds.filter { smallCloud ->
+//            largeModels.notIntercepts(smallCloud)
+//        }.toMutableList()
+
+        return resultSmallClouds
     }
 
     private fun moveModelsToCenter(
@@ -185,6 +204,101 @@ internal class BeautifulCloudCoordinateCalculator: CloudCoordinateCalculator {
             )
         }
     }
+
+    private fun calculateSmallLeftClouds(largeColumn: List<RoundCloudModel>, allColumns: List<List<RoundCloudModel>>): List<RoundCloudModel> {
+        val resultClouds = mutableListOf<RoundCloudModel>()
+
+        largeColumn.forEachIndexed { index, largeCloud ->
+            if (availableSmallClouds.isEmpty()) {
+                return@forEachIndexed
+            }
+            if (index >= largeColumn.size - 1) {
+                return@forEachIndexed
+            }
+            val nextCloud = largeColumn[index + 1]
+            val (distanceBetweenLargeClouds: Int, distanceBetweenSmallCloud: Int) =
+                calculateSmallAndLargeDistance()
+            val smallCloudXOffset = nextCloud.xOffsetPx - distanceBetweenSmallCloud
+            val smallCloudYOffset = nextCloud.yOffsetPx + calculateYOffsetForSmallClouds(largeCloud, nextCloud)
+            val currentCloud = availableSmallClouds.removeFirst()
+
+            val newModel = RoundCloudModel(
+                cloud = currentCloud,
+                state = RoundCloudState.NOT_CHECKED,
+                textModels = currentCloud.getDefaultTextModel(
+                    defXOffset = smallCloudXOffset,
+                    defYOffset = smallCloudYOffset,
+                ),
+                radiusPx = sizeHolder.smallCloudRadiusPx,
+                xOffsetPx = smallCloudXOffset,
+                yOffsetPx = smallCloudYOffset,
+            )
+            if (allColumns.intercepts(newModel)) {
+                availableSmallClouds.add(currentCloud)
+                return@forEachIndexed
+            }
+
+            resultClouds.add(newModel)
+        }
+
+        return resultClouds
+    }
+
+    private fun calculateSmallRightClouds(largeColumns: List<RoundCloudModel>, allColumns: List<List<RoundCloudModel>>): List<RoundCloudModel> {
+        val resultClouds = mutableListOf<RoundCloudModel>()
+
+        largeColumns.forEachIndexed { index, largeCloud ->
+            if (availableSmallClouds.isEmpty()) {
+                return@forEachIndexed
+            }
+            if (index >= largeColumns.size - 1) {
+                return@forEachIndexed
+            }
+            val nextCloud = largeColumns[index + 1]
+            val (distanceBetweenLargeClouds: Int, distanceBetweenSmallCloud: Int) =
+                calculateSmallAndLargeDistance()
+            val smallCloudXOffset = largeCloud.xOffsetPx + distanceBetweenSmallCloud
+            val smallCloudYOffset = largeCloud.yOffsetPx - calculateYOffsetForSmallClouds(largeCloud, nextCloud)
+            val currentCloud = availableSmallClouds.removeFirst()
+
+            val newModel = RoundCloudModel(
+                cloud = currentCloud,
+                state = RoundCloudState.NOT_CHECKED,
+                textModels = currentCloud.getDefaultTextModel(
+                    defXOffset = smallCloudXOffset,
+                    defYOffset = smallCloudYOffset,
+                ),
+                radiusPx = sizeHolder.smallCloudRadiusPx,
+                xOffsetPx = smallCloudXOffset,
+                yOffsetPx = smallCloudYOffset,
+            )
+            if (allColumns.intercepts(newModel)) {
+                availableSmallClouds.add(currentCloud)
+                return@forEachIndexed
+            }
+
+            resultClouds.add(newModel)
+        }
+
+        return resultClouds
+    }
+
+    private fun calculateSmallAndLargeDistance(): Pair<Int, Int> {
+        val distanceBetweenLargeClouds = sizeHolder.largeCloudRadiusPx * 2 + sizeHolder.cloudMarginPx
+        val distanceBetweenSmallCloud = sizeHolder.largeCloudRadiusPx + sizeHolder.smallCloudRadiusPx + sizeHolder.cloudMarginPx
+
+        return distanceBetweenLargeClouds to distanceBetweenSmallCloud
+    }
+
+    private fun calculateYOffsetForSmallClouds(cloud: RoundCloudModel, nextCloud: RoundCloudModel): Int {
+        val currentYOffset = cloud.yOffsetPx
+        val nextYOffset = nextCloud.yOffsetPx
+        return if (nextYOffset - currentYOffset >= 0) {
+            sizeHolder.cloudMarginPx * 3
+        } else {
+            -sizeHolder.cloudMarginPx * 3
+        }
+    }
 }
 
 private enum class NewLargeCloudDestination {
@@ -225,4 +339,70 @@ private fun List<RoundCloudModel>.findBottomCloud(): RoundCloudModel? {
         }
     }
     return resultCloud
+}
+
+private fun List<RoundCloudModel>.getLargeColumns(): List<List<RoundCloudModel>> {
+    val currentList = mutableListOf<RoundCloudModel>()
+    val resultList = mutableListOf<List<RoundCloudModel>>()
+
+    forEachIndexed { index, largeCloud ->
+        if (index == size - 1) {
+            currentList.add(largeCloud)
+            return@forEachIndexed
+        }
+        if (index == 0) {
+            currentList.add(largeCloud)
+            return@forEachIndexed
+        }
+
+        val prevYOffset = get(index - 1).yOffsetPx
+        val currentYOffset = largeCloud.yOffsetPx
+        val nextYOffset = get(index + 1).yOffsetPx
+
+        val firstValue = (nextYOffset - currentYOffset).toLong()
+        val secondValue = (currentYOffset - prevYOffset).toLong()
+
+        if (firstValue * secondValue >= 0) {
+            currentList.add(largeCloud)
+        } else {
+            currentList.add(largeCloud)
+            resultList.add(currentList.toList())
+            currentList.clear()
+            currentList.add(largeCloud)
+        }
+    }
+    if (currentList.isNotEmpty()) {
+        resultList.add(currentList.toList())
+    }
+
+    return resultList
+}
+
+private fun List<RoundCloudModel>.notIntercepts(cloud: RoundCloudModel): Boolean {
+    val cloudCenter = PointF(cloud.xOffsetPx.toFloat(), cloud.yOffsetPx.toFloat())
+    val cloudRadius = cloud.radiusPx
+
+    forEach { currentCloud ->
+        val currentCenter = PointF(currentCloud.xOffsetPx.toFloat(), currentCloud.yOffsetPx.toFloat())
+        val currentRadius = currentCloud.radiusPx
+
+        if (MathHelper.circlesIntercept(cloudCenter, cloudRadius, currentCenter, currentRadius)) {
+            return false
+        }
+    }
+
+    return true
+}
+
+private fun List<RoundCloudModel>.intercepts(cloud: RoundCloudModel): Boolean
+    = !notIntercepts(cloud)
+
+@JvmName("interceptsRoundCloudModel")
+private fun List<List<RoundCloudModel>>.intercepts(cloud: RoundCloudModel): Boolean {
+    forEach { column ->
+        if (column.intercepts(cloud)) {
+            return true
+        }
+    }
+    return false
 }
