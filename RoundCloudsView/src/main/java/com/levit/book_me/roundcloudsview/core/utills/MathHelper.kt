@@ -15,6 +15,12 @@ internal object MathHelper {
         return distance.isLess(radiusPx.toDouble())
     }
 
+    fun circlesIntercept(firstCenter: PointF, firstRadius: Int, secondCenter: PointF, secondRadius: Int): Boolean {
+        val distanceBetweenCenters = distanceBetween(firstCenter, secondCenter)
+        val minAvailableDistance = firstRadius + secondRadius
+        return distanceBetweenCenters.isLess(minAvailableDistance.toDouble())
+    }
+
     fun distanceBetween(startPoint: PointF, endPoint: PointF): Double {
         val startX = startPoint.x.toDouble()
         val startY = startPoint.y.toDouble()

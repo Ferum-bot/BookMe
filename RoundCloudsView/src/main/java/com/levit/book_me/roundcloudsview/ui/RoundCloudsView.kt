@@ -10,7 +10,9 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.levit.book_me.roundcloudsview.R
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
+import com.levit.book_me.roundcloudsview.core.extensions.*
 import com.levit.book_me.roundcloudsview.core.extensions.dpToPx
+import com.levit.book_me.roundcloudsview.core.extensions.findLastRightModel
 import com.levit.book_me.roundcloudsview.core.extensions.getLeftPadding
 import com.levit.book_me.roundcloudsview.core.extensions.getRightPadding
 import com.levit.book_me.roundcloudsview.core.interfaces.RoundCloudStateChangeListener
@@ -414,36 +416,6 @@ class RoundCloudsView @JvmOverloads constructor(
         val yCenter = getYCenterCoordinatePx(viewCenterPointPx.y.toInt())
             .toFloat()
         return xCenter to yCenter
-    }
-
-    private fun List<RoundCloudModel>.findLastRightModel(): RoundCloudModel? {
-        if (isEmpty()) {
-            return null
-        }
-        var maxXOffset = Int.MIN_VALUE
-        var rightModel: RoundCloudModel? = null
-        forEach { model ->
-            if (maxXOffset < (model.xOffsetPx + model.radiusPx)) {
-                rightModel = model
-            }
-            maxXOffset = max(maxXOffset, model.xOffsetPx + model.radiusPx)
-        }
-        return rightModel
-    }
-
-    private fun List<RoundCloudModel>.findLastLeftModel(): RoundCloudModel? {
-        if (isEmpty()) {
-            return null
-        }
-        var minXOffset = Int.MAX_VALUE
-        var leftModel: RoundCloudModel? = null
-        forEach { model ->
-            if (minXOffset > (model.xOffsetPx - model.radiusPx)) {
-                leftModel = model
-            }
-            minXOffset = min(minXOffset, model.xOffsetPx - model.radiusPx)
-        }
-        return leftModel
     }
 
     private fun Canvas.drawText(model: RoundCloudModel) {
