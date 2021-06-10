@@ -25,6 +25,7 @@ import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import com.levit.book_me.roundcloudsview.entity.cloud_calculator.CloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl.BeautifulCloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.text_calculator.CloudTextCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.text_calculator.impl.SimpleCloudTextCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.text_calculator.impl.TestCloudTextCoordinateCalculator
 import kotlin.math.abs
 import kotlin.math.max
@@ -74,14 +75,11 @@ class RoundCloudsView @JvmOverloads constructor(
     private var cloudListener: RoundCloudStateChangeListener? = null
 
     private val coordinateCalculator: CloudCoordinateCalculator by lazy {
-        //AndroidCloudCoordinateCalculator(this::getContext, this::dpToPx, this::pxToDp)
-        //MockCloudCoordinateCalculator()
-        //ColumnsCloudCoordinateCalculator()
         BeautifulCloudCoordinateCalculator()
     }
 
     private val textCoordinateCalculator: CloudTextCoordinateCalculator by lazy {
-        TestCloudTextCoordinateCalculator()
+        SimpleCloudTextCoordinateCalculator()
     }
 
     private var cloudSizeHolder = CloudModelSizeHolder()
