@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.enums.SearchBooksTypes
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
+import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -15,6 +16,10 @@ import javax.inject.Inject
 class CreatingProfileActivityViewModel @Inject constructor(
 
 ): ViewModel() {
+
+    enum class Status {
+        LOADING, ERROR, DONE;
+    }
 
     private val _chosenFavouriteAuthors:
         MutableLiveData<List<Pair<Author, CreatingProfileAuthorChooser.AuthorPosition>>> =
@@ -31,6 +36,31 @@ class CreatingProfileActivityViewModel @Inject constructor(
 
     private val _chosenGenres: MutableLiveData<List<Genre>> = MutableLiveData()
     val chosenGenres: LiveData<List<Genre>> = _chosenGenres
+
+    private val _name: MutableLiveData<String> = MutableLiveData()
+    val name: LiveData<String> = _name
+
+    private val _surname: MutableLiveData<String> = MutableLiveData()
+    val surname: LiveData<String> = _surname
+
+    private val _wordsAboutProfile: MutableLiveData<String> = MutableLiveData()
+    val wordsAboutProfile: LiveData<String> = _wordsAboutProfile
+
+    private val _quote: MutableLiveData<GoQuote> = MutableLiveData()
+    val quote: LiveData<GoQuote> = _quote
+
+    private val _creatingProfileStatus: MutableLiveData<Status> = MutableLiveData()
+    val creatingProfileStatus: LiveData<Status> = _creatingProfileStatus
+
+    fun safeBaseProfileInformation(
+        name: String, surname: String,
+        wordsAboutYou: String, quote: GoQuote
+    ) {
+        _name.postValue(name)
+        _surname.postValue(surname)
+        _wordsAboutProfile.postValue(wordsAboutYou)
+        _quote.postValue(quote)
+    }
 
     fun safeFavouriteAuthor(author: Author, position: CreatingProfileAuthorChooser.AuthorPosition) {
         val authors = _chosenFavouriteAuthors.value?.toMutableList()
@@ -65,6 +95,10 @@ class CreatingProfileActivityViewModel @Inject constructor(
 
     fun safeChosenGenres(genres: List<Genre>) {
         _chosenGenres.postValue(genres)
+    }
+
+    fun registerNewUser() {
+
     }
 
     private fun addFavouriteBook(book: GoogleBook) {

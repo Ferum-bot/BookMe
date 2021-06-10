@@ -1,5 +1,7 @@
 package com.levit.book_me.network.utill
 
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
@@ -25,4 +27,7 @@ object NetworkConstants {
     const val MOST_CHOSEN_GOOGLE_SHELF_ID = "2"
 
     const val GOOGLE_BOOKS_API_KEY = "AIzaSyDPkHJKI-bsfrUxKee6y8_88O8JnaqooA8"
+
+    const val PLATFORM_HEADER_KEY = "platform"
+    const val PLATFORM_HEADER_VALUE = "Android"
 }
