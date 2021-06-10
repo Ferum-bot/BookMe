@@ -10,10 +10,10 @@ import kotlinx.android.parcel.Parcelize
 data class Genre(
 
     @Json(name = "")
-    val id: Long,
+    val id: Long = 0,
 
     @Json(name = "")
-    val string: String,
+    val string: String = "",
 
     @Json(name = "")
     val isBig: Boolean = true

@@ -2,6 +2,7 @@ package com.levit.book_me.roundcloudsview.ui
 
 import android.content.Context
 import android.graphics.*
+import android.os.Parcelable
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -16,20 +17,19 @@ import com.levit.book_me.roundcloudsview.core.extensions.findLastRightModel
 import com.levit.book_me.roundcloudsview.core.extensions.getLeftPadding
 import com.levit.book_me.roundcloudsview.core.extensions.getRightPadding
 import com.levit.book_me.roundcloudsview.core.interfaces.RoundCloudStateChangeListener
+import com.levit.book_me.roundcloudsview.core.models.*
 import com.levit.book_me.roundcloudsview.core.models.CloudModelSizeHolder
 import com.levit.book_me.roundcloudsview.core.models.CloudTextModel
-import com.levit.book_me.roundcloudsview.core.models.RoundCloud
+import com.levit.book_me.roundcloudsview.core.models.CloudsViewStateModel
 import com.levit.book_me.roundcloudsview.core.models.RoundCloudModel
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewAttrs
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import com.levit.book_me.roundcloudsview.entity.cloud_calculator.CloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl.BeautifulCloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.text_calculator.CloudTextCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl.ColumnsCloudCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.text_calculator.impl.TestCloudTextCoordinateCalculator
+import com.levit.book_me.roundcloudsview.entity.text_calculator.impl.SimpleCloudTextCoordinateCalculator
 import kotlin.math.abs
 import kotlin.math.max
-import kotlin.math.min
 
 class RoundCloudsView @JvmOverloads constructor(
     context: Context,
@@ -48,7 +48,9 @@ class RoundCloudsView @JvmOverloads constructor(
     private var notCheckedTextColor: Int = Color.BLACK
 
     @Dimension
-    private var cloudMarginDp: Int = 5
+    private var cloudMarginDp: Int = RoundCloudsViewConstants.DEFAULT_CLOUD_MARGIN_DP
+    @Dimension
+    private var cloudTextSize: Int = RoundCloudsViewConstants.DEFAULT_TEXT_SIZE_SP
 
     private var viewCenterPointPx = PointF(0f, 0f)
 
@@ -71,17 +73,20 @@ class RoundCloudsView @JvmOverloads constructor(
 
     private var cloudModels: List<RoundCloudModel> = listOf()
 
+    /**
+     * This flag shows that current data is from @onRestoreInstanceState.
+     * So, we don't need to recalculate coordinates.
+     */
+    private var modelsAreFromRestoreState: Boolean = false
+
     private var cloudListener: RoundCloudStateChangeListener? = null
 
     private val coordinateCalculator: CloudCoordinateCalculator by lazy {
-        //AndroidCloudCoordinateCalculator(this::getContext, this::dpToPx, this::pxToDp)
-        //MockCloudCoordinateCalculator()
-        //ColumnsCloudCoordinateCalculator()
         BeautifulCloudCoordinateCalculator()
     }
 
     private val textCoordinateCalculator: CloudTextCoordinateCalculator by lazy {
-        TestCloudTextCoordinateCalculator()
+        SimpleCloudTextCoordinateCalculator()
     }
 
     private var cloudSizeHolder = CloudModelSizeHolder()
@@ -116,6 +121,9 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     fun setClouds(clouds: List<RoundCloud>) {
+        if (this.clouds.isEqual(clouds)) {
+            return
+        }
         this.clouds = clouds.toList()
 
         calculateCloudModelCoordinates()
@@ -128,6 +136,11 @@ class RoundCloudsView @JvmOverloads constructor(
 
     fun setCloudMargin(@Dimension dp: Int) {
         cloudMarginDp = dp
+    }
+
+    fun setCloudTextSize(@Dimension sp: Int) {
+        cloudTextSize = sp
+        configureTextPaints()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -181,6 +194,33 @@ class RoundCloudsView @JvmOverloads constructor(
     override fun performClick(): Boolean {
         super.performClick()
         return false
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState() as? BaseSavedState
+        return CloudsViewStateModel(
+            cloudModels = cloudModels,
+            baseStateModel = superState,
+        )
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state == null) {
+            super.onRestoreInstanceState(state)
+            return
+        }
+        if (state !is CloudsViewStateModel) {
+            super.onRestoreInstanceState(state)
+            return
+        }
+
+        val superState = state.baseStateModel
+        val cloudModels = state.cloudModels
+
+        super.onRestoreInstanceState(superState)
+        this.cloudModels = cloudModels
+        this.clouds = cloudModels.getRawRoundClouds()
+        this.modelsAreFromRestoreState = true
     }
 
     private fun handleActionDownEvent(event: MotionEvent) {
@@ -292,6 +332,11 @@ class RoundCloudsView @JvmOverloads constructor(
     }
 
     private fun calculateCloudModelCoordinates() {
+        if (modelsAreFromRestoreState) {
+            modelsAreFromRestoreState = false
+            return
+        }
+
         cloudModels = coordinateCalculator.calculateCloudModels(
             clouds = clouds,
             sizeHolder = cloudSizeHolder,
@@ -342,14 +387,14 @@ class RoundCloudsView @JvmOverloads constructor(
             color = checkedTextColor
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
-            textSize = 25f
+            textSize = spToFloat(cloudTextSize)
         }
 
         with(notCheckedTextPaint) {
             color = notCheckedTextColor
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
-            textSize = 25f
+            textSize = spToFloat(cloudTextSize)
         }
     }
 

@@ -8,6 +8,8 @@ object DIConstants {
     const val GOOGLE_BOOK_CLIENT_NAME = "google_books_client"
     const val GO_QUOTES_CLIENT_NAME = "go_quotes_client"
 
+    const val PROFILE_SHARED_PREFERENCE_NAME = "profile_shared_preference"
+
     const val IO_DISPATCHER_CONTEXT = "IODispatcherContext"
     const val MAIN_DISPATCHER_CONTEXT = "MainDispatcherContext"
     const val UNCONFINED_DISPATCHER_CONTEXT = "UnconfinedCoroutineContext"

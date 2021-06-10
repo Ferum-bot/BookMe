@@ -54,10 +54,11 @@
     <string name="take_a_photo_or_choose_from_your_library">Take a photo or choose \nfrom your library</string>
     <string name="press_next_or_choose_another_photo">Press next or choose \nanother photo</string>
     <string name="choose_genres_you_read">Choose genres \nyou read</string>
-    <string name="choose_up_to_three_genres">Choose up to three genres</string>
+    <string name="choose_from_to_genres">Choose from %s to %s genres</string>
     <string name="choose_your_favourite_authors">Choose your \nfavourite authors</string>
     <string name="choose_from_to_authors">Choose from %s to %s authors</string>
     <string name="choose_at_least_authors">Choose at least %s authors</string>
+    <string name="chose_at_least_genres">Chose at least %s genres</string>
     <string name="photo_uploaded">Photo uploaded!</string>
     <string name="can_not_find_chosen_photo">Can\'t find chosen photo</string>
     <string name="search_by_authors">Search by authors</string>
@@ -95,6 +96,7 @@
     <string name="more_than_500_favourite_quotes_from_all_over_the_world">More than 500+ favourite quotes from all over the world!</string>
     <string name="authors">Authors</string>
     <string name="tags">Tags</string>
+    <string name="quote_not_chosen">Quote not chosen</string>
 
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
@@ -102,6 +104,5 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
-    <string name="quote_not_chosen">Quote not chosen</string>
 
 </resources>

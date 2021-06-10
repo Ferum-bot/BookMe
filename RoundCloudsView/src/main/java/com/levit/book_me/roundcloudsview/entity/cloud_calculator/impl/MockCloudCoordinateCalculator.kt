@@ -8,40 +8,41 @@ import com.levit.book_me.roundcloudsview.entity.cloud_calculator.CloudCoordinate
 
 internal class MockCloudCoordinateCalculator: CloudCoordinateCalculator {
 
-    private val testCloud1 = object: RoundCloud {
+//    private val testCloud1 = object: RoundCloud {
+//
+//        override val size: RoundCloudSize
+//            get() = RoundCloudSize.LARGE
+//
+//        override val text: String
+//            get() = "LargeCloud"
+//    }
 
-        override val size: RoundCloudSize
-            get() = RoundCloudSize.LARGE
-
-        override val text: String
-            get() = "LargeCloud"
-    }
-
-    private val testCloud2 = object: RoundCloud {
-
-        override val size: RoundCloudSize
-            get() = RoundCloudSize.SMALL
-
-        override val text: String
-            get() = "Small Cloud"
-
-    }
+//    private val testCloud2 = object: RoundCloud {
+//
+//        override val size: RoundCloudSize
+//            get() = RoundCloudSize.SMALL
+//
+//        override val text: String
+//            get() = "Small Cloud"
+//
+//    }
 
     override fun calculateCloudModels(clouds: List<RoundCloud>, sizeHolder: CloudModelSizeHolder): List<RoundCloudModel> {
-        return listOf(
-            RoundCloudModel(
-                cloud = testCloud1,
-                radiusPx = sizeHolder.largeCloudRadiusPx,
-                xOffsetPx = 0,
-                yOffsetPx = 0,
-            ),
-            RoundCloudModel(
-                cloud = testCloud2,
-                radiusPx = sizeHolder.smallCloudRadiusPx,
-                xOffsetPx = sizeHolder.smallCloudRadiusPx * 3,
-                yOffsetPx = sizeHolder.smallCloudRadiusPx * 3,
-            )
-        )
+//        return listOf(
+//            RoundCloudModel(
+//                cloud = testCloud1,
+//                radiusPx = sizeHolder.largeCloudRadiusPx,
+//                xOffsetPx = 0,
+//                yOffsetPx = 0,
+//            ),
+//            RoundCloudModel(
+//                cloud = testCloud2,
+//                radiusPx = sizeHolder.smallCloudRadiusPx,
+//                xOffsetPx = sizeHolder.smallCloudRadiusPx * 3,
+//                yOffsetPx = sizeHolder.smallCloudRadiusPx * 3,
+//            )
+//        )
+        return emptyList()
     }
 
 }

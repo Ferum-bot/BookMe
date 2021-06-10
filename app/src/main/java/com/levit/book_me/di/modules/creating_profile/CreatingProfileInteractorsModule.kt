@@ -7,6 +7,7 @@ import com.levit.book_me.interactors.interfaces.CreatingFavouriteGenresInteracto
 import com.levit.book_me.interactors.interfaces.SearchBooksInteractor
 import com.levit.book_me.interactors.interfaces.UploadProfileImageInteractor
 import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadUriRepository
+import com.levit.book_me.repositories.interfaces.GenresRepository
 import com.levit.book_me.repositories.interfaces.SearchBooksRepository
 import dagger.Module
 import dagger.Provides
@@ -29,7 +30,9 @@ class CreatingProfileInteractorsModule {
     }
 
     @Provides
-    fun provideCreatingGenresInteractor(): CreatingFavouriteGenresInteractor {
-        return CreatingFavouriteGenresInteractorImpl()
+    fun provideCreatingGenresInteractor(
+        repository: GenresRepository
+    ): CreatingFavouriteGenresInteractor {
+        return CreatingFavouriteGenresInteractorImpl(repository)
     }
 }

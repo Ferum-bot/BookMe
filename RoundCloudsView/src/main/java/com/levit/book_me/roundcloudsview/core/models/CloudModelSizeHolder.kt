@@ -39,7 +39,7 @@ internal data class CloudModelSizeHolder(
 
             var largeCloudSize = (viewHeightPx + viewWidthPx) / 6
             largeCloudSize -= cloudMargin + RoundCloudsViewConstants.ADDITIONAL_CLOUD_MARGIN
-            var smallCloudSize = viewWidthPx / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE - cloudMargin
+            var smallCloudSize = viewWidthPx / RoundCloudsViewConstants.RELATIVELY_SMALL_CLOUD_SIZE
             smallCloudSize -= cloudMargin + RoundCloudsViewConstants.ADDITIONAL_CLOUD_MARGIN
 
             return CloudModelSizeHolder(

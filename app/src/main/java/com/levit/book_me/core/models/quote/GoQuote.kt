@@ -7,13 +7,13 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class GoQuote(
     @Json(name = "text")
-    val text: String,
+    val text: String = "",
 
     @Json(name = "author")
-    val authorFullName: String,
+    val authorFullName: String = "",
 
     @Json(name = "tag")
-    val tag: String,
+    val tag: String = "",
 ): Parcelable {
 
     /**
