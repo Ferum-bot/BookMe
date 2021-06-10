@@ -1,11 +1,14 @@
 package com.levit.book_me.roundcloudsview.core.models
 
 import android.graphics.PointF
+import android.os.Parcelable
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudSize
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudState
 import com.levit.book_me.roundcloudsview.core.utills.MathHelper
 import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 internal data class RoundCloudModel(
 
     val cloud: RoundCloud,
@@ -39,7 +42,7 @@ internal data class RoundCloudModel(
      * @center y coordinate.
      */
     val yOffsetPx: Int = 0,
-) {
+): Parcelable {
 
     val text: String
     get() = cloud.text

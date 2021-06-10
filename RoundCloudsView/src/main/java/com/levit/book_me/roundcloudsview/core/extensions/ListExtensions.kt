@@ -43,3 +43,23 @@ internal fun List<RoundCloudModel>.findLastLeftModel(): RoundCloudModel? {
     }
     return leftModel
 }
+
+internal fun List<RoundCloudModel>.getRawRoundClouds(): List<RoundCloud> {
+    val resultList = mutableListOf<RoundCloud>()
+    forEach { cloudModel ->
+        resultList.add(cloudModel.cloud)
+    }
+    return resultList
+}
+
+internal fun List<RoundCloud>.isEqual(other: List<RoundCloud>): Boolean {
+    if (isEmpty()) {
+        return false
+    }
+    forEach { currentModel ->
+        if (!other.contains(currentModel)) {
+            return false
+        }
+    }
+    return true
+}

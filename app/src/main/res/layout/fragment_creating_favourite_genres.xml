@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:animateLayoutChanges="true"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_guidline"
@@ -37,7 +38,7 @@
         android:id="@+id/label_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/choose_up_to_three_genres"
+        android:text="@string/choose_from_to_genres"
         android:textSize="@dimen/creating_profile_description_label_text_size"
 
         style="@style/DefaultTextViewStyle"
@@ -46,6 +47,20 @@
 
         app:layout_constraintTop_toBottomOf="@id/label"
         app:layout_constraintStart_toStartOf="@id/start_guidline"/>
+
+    <TextView
+        android:id="@+id/error_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/chose_at_least_genres"
+
+        style="@style/DefaultErrorTextStyle"
+
+        app:layout_constraintStart_toStartOf="@id/label_description"
+        app:layout_constraintTop_toBottomOf="@id/label_description"
+
+        tools:visibility="visible"/>
 
     <com.levit.book_me.roundcloudsview.ui.RoundCloudsView
         android:id="@+id/clouds_view"

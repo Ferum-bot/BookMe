@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.levit.book_me.core.enums.SearchBooksTypes
 import com.levit.book_me.core.models.Author
+import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -27,6 +28,9 @@ class CreatingProfileActivityViewModel @Inject constructor(
 
     private val _chosenWantToReadBooks: MutableLiveData<List<GoogleBook>> = MutableLiveData()
     val chosenWantToReadBooks: LiveData<List<GoogleBook>> = _chosenWantToReadBooks
+
+    private val _chosenGenres: MutableLiveData<List<Genre>> = MutableLiveData()
+    val chosenGenres: LiveData<List<Genre>> = _chosenGenres
 
     fun safeFavouriteAuthor(author: Author, position: CreatingProfileAuthorChooser.AuthorPosition) {
         val authors = _chosenFavouriteAuthors.value?.toMutableList()
@@ -57,6 +61,10 @@ class CreatingProfileActivityViewModel @Inject constructor(
             SearchBooksTypes.FAVOURITE_BOOKS -> removeFavouriteBook(book)
             SearchBooksTypes.BOOKS_YOU_WANT_TO_RED -> removeWantToReadBook(book)
         }
+    }
+
+    fun safeChosenGenres(genres: List<Genre>) {
+        _chosenGenres.postValue(genres)
     }
 
     private fun addFavouriteBook(book: GoogleBook) {

@@ -18,4 +18,7 @@ object CreatingProfileConstants {
 
     const val MIN_COUNT_OF_WANT_TO_READ_BOOKS = 3
     const val MAX_COUNT_OF_WANT_TO_READ_BOOKS = 8
+
+    const val MIN_COUNT_CHOSEN_GENRES = 3
+    const val MAX_COUNT_CHOSEN_GENRES = 5
 }

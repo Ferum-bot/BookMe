@@ -1,5 +1,9 @@
 package com.levit.book_me.roundcloudsview.core.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 internal data class CloudTextModel(
 
     val text: String,
@@ -15,7 +19,7 @@ internal data class CloudTextModel(
      * @center y coordinate.
      */
     val textYOffsetPx: Int = 0,
-) {
+): Parcelable {
 
     fun getXCoordinatePx(viewCenterPx: Int): Int {
         return textXOffsetPx + viewCenterPx
