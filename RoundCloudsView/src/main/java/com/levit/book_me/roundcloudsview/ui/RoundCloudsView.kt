@@ -25,11 +25,9 @@ import com.levit.book_me.roundcloudsview.core.utills.RoundCloudsViewConstants
 import com.levit.book_me.roundcloudsview.entity.cloud_calculator.CloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl.BeautifulCloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.text_calculator.CloudTextCoordinateCalculator
-import com.levit.book_me.roundcloudsview.entity.cloud_calculator.impl.ColumnsCloudCoordinateCalculator
 import com.levit.book_me.roundcloudsview.entity.text_calculator.impl.TestCloudTextCoordinateCalculator
 import kotlin.math.abs
 import kotlin.math.max
-import kotlin.math.min
 
 class RoundCloudsView @JvmOverloads constructor(
     context: Context,
@@ -48,7 +46,9 @@ class RoundCloudsView @JvmOverloads constructor(
     private var notCheckedTextColor: Int = Color.BLACK
 
     @Dimension
-    private var cloudMarginDp: Int = 5
+    private var cloudMarginDp: Int = RoundCloudsViewConstants.DEFAULT_CLOUD_MARGIN_DP
+    @Dimension
+    private var cloudTextSize: Int = RoundCloudsViewConstants.DEFAULT_TEXT_SIZE_SP
 
     private var viewCenterPointPx = PointF(0f, 0f)
 
@@ -128,6 +128,11 @@ class RoundCloudsView @JvmOverloads constructor(
 
     fun setCloudMargin(@Dimension dp: Int) {
         cloudMarginDp = dp
+    }
+
+    fun setCloudTextSize(@Dimension sp: Int) {
+        cloudTextSize = sp
+        configureTextPaints()
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -342,14 +347,14 @@ class RoundCloudsView @JvmOverloads constructor(
             color = checkedTextColor
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
-            textSize = 25f
+            textSize = spToFloat(cloudTextSize)
         }
 
         with(notCheckedTextPaint) {
             color = notCheckedTextColor
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
-            textSize = 25f
+            textSize = spToFloat(cloudTextSize)
         }
     }
 

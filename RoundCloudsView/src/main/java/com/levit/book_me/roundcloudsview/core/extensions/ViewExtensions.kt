@@ -1,6 +1,7 @@
 package com.levit.book_me.roundcloudsview.core.extensions
 
 import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.View
 
 internal fun View.getLeftPadding(): Int {
@@ -25,4 +26,13 @@ internal fun View.pxToDp(px: Int): Int {
 internal fun View.dpToPx(dp: Int): Int {
     val density = resources.displayMetrics.densityDpi
     return dp * (density / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+internal fun View.spToFloat(sp: Int): Float {
+    val metrics = resources.displayMetrics
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        sp.toFloat(),
+        metrics
+    )
 }

@@ -25,6 +25,7 @@ internal object RoundCloudsViewConstants {
 
     const val RELATIVELY_CLOUD_MARGIN = 15
     const val ADDITIONAL_CLOUD_MARGIN = 10
+    const val DEFAULT_CLOUD_MARGIN_DP = 7
 
     /**
      * The permissible touch offset between action down x/y touch
@@ -37,4 +38,9 @@ internal object RoundCloudsViewConstants {
      * extra space around the edges of RoundCloudsView.
      */
     const val ADDITIONAL_SCROLL_AVAILABLE_HORIZONTAL_DISTANCE = 50
+
+    /**
+     * The default value of cloud's text size.
+     */
+    const val DEFAULT_TEXT_SIZE_SP = 11
 }

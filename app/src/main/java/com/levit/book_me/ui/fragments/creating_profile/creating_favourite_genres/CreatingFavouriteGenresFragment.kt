@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.models.GenreCloud
 import com.levit.book_me.databinding.FragmentCreatingFavouriteGenresBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
@@ -42,10 +41,7 @@ class CreatingFavouriteGenresFragment:
         super.setAllObservers()
 
         viewModel.genres.observe(viewLifecycleOwner) { genres ->
-            val adaptiveGenres = genres.map { genre ->
-                GenreCloud.getFrom(genre)
-            }
-            binding.cloudsView.setClouds(adaptiveGenres)
+            binding.cloudsView.setClouds(genres)
         }
     }
 
