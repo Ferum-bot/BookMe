@@ -2,6 +2,7 @@ package com.levit.book_me.data_sources.profile.impl
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.internal.LinkedTreeMap
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
@@ -122,7 +123,15 @@ class SharedPrefProfileDataSource @Inject constructor(
     }
 
     private fun getFavoriteGenres(): List<Genre> {
-        return getValueFromGson(FAVORITE_GENRES_FIELD, emptyList())
+        val rawString = storage.getString(FAVORITE_GENRES_FIELD, null)
+            ?: return emptyList()
+        val type = object: TypeTokenAdapter<List<Genre>>() {}.adaptedType
+        return try {
+            val result = gson.fromJson<List<Genre>>(rawString, type)
+            result
+        } catch (ex: Exception) {
+            emptyList()
+        }
     }
 
     private fun safeFavoriteGenres(genres: List<Genre>) {
@@ -134,7 +143,15 @@ class SharedPrefProfileDataSource @Inject constructor(
     }
 
     private fun getFavoriteAuthors(): List<Author> {
-        return getValueFromGson(FAVORITE_AUTHORS_FIELD, emptyList())
+        val rawString = storage.getString(FAVORITE_AUTHORS_FIELD, null)
+            ?: return emptyList()
+        val type = object: TypeTokenAdapter<List<Author>>() {}.adaptedType
+        return try {
+            val result = gson.fromJson<List<Author>>(rawString, type)
+            result
+        } catch (ex: Exception) {
+            emptyList()
+        }
     }
 
     private fun safeFavoriteAuthors(authors: List<Author>) {
@@ -146,7 +163,15 @@ class SharedPrefProfileDataSource @Inject constructor(
     }
 
     private fun getFavoriteBooks(): List<GoogleBook> {
-        return getValueFromGson(FAVORITE_BOOKS_FIELD, emptyList())
+        val rawString = storage.getString(FAVORITE_BOOKS_FIELD, null)
+            ?: return emptyList()
+        val type = object: TypeTokenAdapter<List<GoogleBook>>() {}.adaptedType
+        return try {
+            val result = gson.fromJson<List<GoogleBook>>(rawString, type)
+            result
+        } catch (ex: Exception) {
+            emptyList()
+        }
     }
 
     private fun safeFavoriteBooks(books: List<GoogleBook>) {
@@ -158,7 +183,15 @@ class SharedPrefProfileDataSource @Inject constructor(
     }
 
     private fun getWantToReadBooks(): List<GoogleBook> {
-        return getValueFromGson(WANT_TO_READ_BOOKS_FIELD, emptyList())
+        val rawString = storage.getString(WANT_TO_READ_BOOKS_FIELD, null)
+            ?: return emptyList()
+        val type = object: TypeTokenAdapter<List<GoogleBook>>() {}.adaptedType
+        return try {
+            val result = gson.fromJson<List<GoogleBook>>(rawString, type)
+            result
+        } catch (ex: Exception) {
+            emptyList()
+        }
     }
 
     private fun safeWantToReadBooks(books: List<GoogleBook>) {
@@ -173,7 +206,7 @@ class SharedPrefProfileDataSource @Inject constructor(
         val rawString = storage.getString(QUOTE_FIELD, null)
             ?: return GoQuote()
         return try {
-            val result = gson.fromJson<GoQuote>(rawString, GoQuote::class.java)
+            val result = gson.fromJson(rawString, GoQuote::class.java)
             result
         } catch (ex: Exception) {
             GoQuote()
@@ -185,18 +218,6 @@ class SharedPrefProfileDataSource @Inject constructor(
         with(storage.edit()) {
             putString(QUOTE_FIELD, rawString)
             apply()
-        }
-    }
-
-    private fun <T: Any> getValueFromGson(fieldName: String, defValue: T): T {
-        val rawString = storage.getString(fieldName, null)
-            ?: return defValue
-        val type = object: TypeTokenAdapter<T>() {}.adaptedType
-        return try {
-            val result = gson.fromJson<T>(rawString, type)
-            result
-        } catch (ex: Exception) {
-            defValue
         }
     }
 }
