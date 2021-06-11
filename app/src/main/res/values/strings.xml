@@ -78,6 +78,7 @@
     <string name="write_some_words_about_you">Write some words about you</string>
     <string name="minimum_length_is">Minimum length is %s symbols</string>
     <string name="maximum_length_is">Maximum length is %s symbols</string>
+    <string name="profile_created_success">Profile created!</string>
 
     <!--  Choose Author Layout  -->
     <string name="first_author">First Author</string>

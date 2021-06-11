@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.base
 
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.levit.book_me.application.BookMeApplication
 

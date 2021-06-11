@@ -1,6 +1,7 @@
 package com.levit.book_me.ui.fragments.creating_profile.creating_books_want_to_read
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -14,6 +15,8 @@ import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingBooksYouWantToReadBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
+import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivityViewModel
+import com.levit.book_me.ui.activities.main_screen.MainScreenActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
@@ -53,7 +56,7 @@ class CreatingBooksWantToReadFragment:
         super.setAllObservers()
 
         viewModel.errorMessageId.removeObservers(viewLifecycleOwner)
-        viewModel.errorMessageId.observe(viewLifecycleOwner, { messageId ->
+        viewModel.errorMessageId.observe(viewLifecycleOwner) { messageId ->
             if (messageId == null) {
                 return@observe
             }
@@ -67,7 +70,7 @@ class CreatingBooksWantToReadFragment:
                 showError(messageId)
             }
             viewModel.errorMessageHasShown()
-        })
+        }
 
         viewModel.mostChosenBooks.observe(viewLifecycleOwner, Observer { books ->
             booksAdapter.submitList(books)
@@ -96,13 +99,57 @@ class CreatingBooksWantToReadFragment:
             }
         })
 
-        viewModel.isChosenEnoughBooks.observe(viewLifecycleOwner, { isChosenEnoughBooks ->
+        viewModel.isChosenEnoughBooks.observe(viewLifecycleOwner) { isChosenEnoughBooks ->
             binding.countBooksErrorLabel.isVisible = !isChosenEnoughBooks
-        })
+        }
 
-        sharedViewModel.chosenWantToReadBooks.observe(viewLifecycleOwner, { books ->
+        sharedViewModel.chosenWantToReadBooks.observe(viewLifecycleOwner) { books ->
             viewModel.addChosenBooks(books)
-        })
+        }
+
+        sharedViewModel.errorMessage.observe(viewLifecycleOwner) { message ->
+            if (message == null) {
+                return@observe
+            }
+            showError(message)
+            sharedViewModel.errorMessageHasShown()
+        }
+
+        sharedViewModel.errorMessageId.observe(viewLifecycleOwner) { messageId ->
+            if (messageId == null) {
+                return@observe
+            }
+            showError(messageId)
+            sharedViewModel.errorMessageHasShown()
+        }
+
+        sharedViewModel.creatingProfileStatus.observe(viewLifecycleOwner) { status ->
+            when(status) {
+                CreatingProfileActivityViewModel.Status.LOADING -> {
+                    binding.creatingProfileProgressBar.visibility = View.VISIBLE
+                    binding.finishButton.visibility = View.INVISIBLE
+                    binding.searchView.isEnabled = false
+                }
+                CreatingProfileActivityViewModel.Status.ERROR -> {
+                    binding.creatingProfileProgressBar.visibility = View.GONE
+                    binding.finishButton.visibility = View.VISIBLE
+                    binding.searchView.isEnabled = true
+                }
+                CreatingProfileActivityViewModel.Status.DONE -> {
+                    binding.searchView.isEnabled = false
+                    binding.creatingProfileProgressBar.visibility = View.GONE
+
+                    val successString = getString(R.string.profile_created_success)
+                    showSuccessMessage(successString)
+                    navigateToMainScreen()
+                }
+                CreatingProfileActivityViewModel.Status.NOTHING, null -> {
+                    binding.creatingProfileProgressBar.visibility = View.GONE
+                    binding.finishButton.visibility = View.VISIBLE
+                    binding.searchView.isEnabled = true
+                }
+            }
+        }
     }
 
     override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
@@ -132,7 +179,7 @@ class CreatingBooksWantToReadFragment:
     private fun setAllClickListeners() {
         binding.finishButton.setOnClickListener {
             if (viewModel.everythingIsValid()) {
-                navigateToMainScreen()
+                sharedViewModel.registerNewUser()
             }
         }
 
@@ -168,7 +215,9 @@ class CreatingBooksWantToReadFragment:
     }
 
     private fun navigateToMainScreen() {
-
+        showSuccessMessage("Navigated to main screen ")
+//        val intent = Intent(requireContext(), MainScreenActivity::class.java)
+//        startActivity(intent)
     }
 
     private fun navigateToSearchBooksScreen() {

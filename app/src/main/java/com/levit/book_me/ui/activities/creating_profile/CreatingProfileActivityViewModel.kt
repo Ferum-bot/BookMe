@@ -3,22 +3,30 @@ package com.levit.book_me.ui.activities.creating_profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.levit.book_me.core.enums.SearchBooksTypes
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
+import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.core_base.di.CreatingProfileScope
+import com.levit.book_me.interactors.creating_profile.CreatingProfileInteractor
 import com.levit.book_me.network.models.google_books.GoogleBook
+import com.levit.book_me.network.network_result_data.RetrofitResult
+import com.levit.book_me.network.response_models.user.UserResponseModel
+import com.levit.book_me.ui.base.BaseViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @CreatingProfileScope
 class CreatingProfileActivityViewModel @Inject constructor(
-
-): ViewModel() {
+    private val interactor: CreatingProfileInteractor,
+): BaseViewModel() {
 
     enum class Status {
-        LOADING, ERROR, DONE;
+        LOADING, ERROR, DONE, NOTHING;
     }
 
     private val _chosenFavouriteAuthors:
@@ -49,8 +57,19 @@ class CreatingProfileActivityViewModel @Inject constructor(
     private val _quote: MutableLiveData<GoQuote> = MutableLiveData()
     val quote: LiveData<GoQuote> = _quote
 
+    private val _profilePhotoUrl: MutableLiveData<String> = MutableLiveData()
+    val profilePhotoUrl: LiveData<String> = _profilePhotoUrl
+
     private val _creatingProfileStatus: MutableLiveData<Status> = MutableLiveData()
     val creatingProfileStatus: LiveData<Status> = _creatingProfileStatus
+
+    init {
+        viewModelScope.launch {
+            interactor.resultStatus.collect { result ->
+                handleCreatingProfileResult(result)
+            }
+        }
+    }
 
     fun safeBaseProfileInformation(
         name: String, surname: String,
@@ -98,7 +117,27 @@ class CreatingProfileActivityViewModel @Inject constructor(
     }
 
     fun registerNewUser() {
+        val profile = ProfileModel(
+            name = name.value ?: "",
+            surname = surname.value ?: "",
+            wordsAboutPerson = wordsAboutProfile.value ?: "",
+            profilePhotoUrl = profilePhotoUrl.value ?: "",
+            favouriteGenres = chosenGenres.value ?: emptyList(),
+            favouriteAuthors = chosenFavouriteAuthors.getFavoriteAuthors(),
+            favouriteBooks = chosenFavouriteBooks.value ?: emptyList(),
+            wantToReadBooks = chosenWantToReadBooks.value ?: emptyList(),
+            quote = quote.value ?: GoQuote(),
+        )
 
+        viewModelScope.launch {
+            _creatingProfileStatus.postValue(Status.LOADING)
+            interactor.uploadNewProfile(profile)
+        }
+    }
+
+    override fun handleErrorResult(error: RetrofitResult.Failure<*>) {
+        _creatingProfileStatus.postValue(Status.ERROR)
+        super.handleErrorResult(error)
     }
 
     private fun addFavouriteBook(book: GoogleBook) {
@@ -123,5 +162,26 @@ class CreatingProfileActivityViewModel @Inject constructor(
         val books = _chosenWantToReadBooks.value?.toMutableList() ?: mutableListOf()
         books.remove(book)
         _chosenWantToReadBooks.postValue(books)
+    }
+
+    private fun handleCreatingProfileResult(result: RetrofitResult<UserResponseModel>) {
+        when (result) {
+            is RetrofitResult.Failure<*> -> handleErrorResult(result)
+            is RetrofitResult.Success -> handleSuccessResult(result)
+        }
+    }
+
+    private fun handleSuccessResult(result: RetrofitResult.Success<UserResponseModel>) {
+        _creatingProfileStatus.postValue(Status.DONE)
+
+    }
+
+    private fun LiveData<List<Pair<Author, CreatingProfileAuthorChooser.AuthorPosition>>>.getFavoriteAuthors(): List<Author> {
+        val value = value ?: return emptyList()
+        val result = mutableListOf<Author>()
+        value.forEach { pair ->
+            result.add(pair.first)
+        }
+        return result
     }
 }

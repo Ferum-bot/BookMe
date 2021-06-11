@@ -14,7 +14,7 @@ open class SharedPreferenceModule {
     @Named(DIConstants.PROFILE_SHARED_PREFERENCE_NAME)
     @Provides
     fun provideProfileSharedPreference(app: BookMeApplication): SharedPreferences {
-        val context = app.baseContext
+        val context = app.applicationContext
         return context.getSharedPreferences(
             DIConstants.PROFILE_SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE,
         )

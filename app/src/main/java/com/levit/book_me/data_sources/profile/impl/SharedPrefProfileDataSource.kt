@@ -2,6 +2,7 @@ package com.levit.book_me.data_sources.profile.impl
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.internal.LinkedTreeMap
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
@@ -169,7 +170,14 @@ class SharedPrefProfileDataSource @Inject constructor(
     }
 
     private fun getQuote(): GoQuote {
-        return getValueFromGson(QUOTE_FIELD, GoQuote())
+        val rawString = storage.getString(QUOTE_FIELD, null)
+            ?: return GoQuote()
+        return try {
+            val result = gson.fromJson<GoQuote>(rawString, GoQuote::class.java)
+            result
+        } catch (ex: Exception) {
+            GoQuote()
+        }
     }
 
     private fun safeQuote(quote: GoQuote) {

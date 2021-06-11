@@ -31,7 +31,7 @@ class SearchFavouriteAuthorsFragment:
 
     private val args by navArgs<SearchFavouriteAuthorsFragmentArgs>()
 
-    private val authorPosition by lazy<CreatingProfileAuthorChooser.AuthorPosition> { args.authorPosition }
+    private val authorPosition by lazy { args.authorPosition }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
