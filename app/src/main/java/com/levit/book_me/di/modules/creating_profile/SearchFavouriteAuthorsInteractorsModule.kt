@@ -1,8 +1,8 @@
 package com.levit.book_me.di.modules.creating_profile
 
-import com.levit.book_me.interactors.implementations.SearchFavouriteAuthorsInteractorImpl
-import com.levit.book_me.interactors.interfaces.SearchFavouriteAuthorsInteractor
-import com.levit.book_me.repositories.interfaces.SearchAuthorsRepository
+import com.levit.book_me.interactors.creating_profile.impl.SearchFavouriteAuthorsInteractorImpl
+import com.levit.book_me.interactors.creating_profile.SearchFavouriteAuthorsInteractor
+import com.levit.book_me.repositories.google.SearchAuthorsRepository
 import dagger.Module
 import dagger.Provides
 

@@ -1,15 +1,15 @@
 package com.levit.book_me.di.modules.quotes
 
-import com.levit.book_me.data_sources.interfaces.GoQuotesAuthorDataSource
-import com.levit.book_me.data_sources.interfaces.GoQuotesQuoteDataSource
-import com.levit.book_me.data_sources.interfaces.GoQuotesTagDataSource
+import com.levit.book_me.data_sources.quotes.GoQuotesAuthorDataSource
+import com.levit.book_me.data_sources.quotes.GoQuotesQuoteDataSource
+import com.levit.book_me.data_sources.quotes.GoQuotesTagDataSource
 import com.levit.book_me.di.DIConstants
-import com.levit.book_me.repositories.implementations.GoQuotesAuthorRepositoryImpl
-import com.levit.book_me.repositories.implementations.GoQuotesQuoteRepositoryImpl
-import com.levit.book_me.repositories.implementations.GoQuotesTagRepositoryImpl
-import com.levit.book_me.repositories.interfaces.GoQuotesAuthorRepository
-import com.levit.book_me.repositories.interfaces.GoQuotesQuoteRepository
-import com.levit.book_me.repositories.interfaces.GoQuotesTagRepository
+import com.levit.book_me.repositories.guotes.impl.GoQuotesAuthorRepositoryImpl
+import com.levit.book_me.repositories.guotes.impl.GoQuotesQuoteRepositoryImpl
+import com.levit.book_me.repositories.guotes.impl.GoQuotesTagRepositoryImpl
+import com.levit.book_me.repositories.guotes.GoQuotesAuthorRepository
+import com.levit.book_me.repositories.guotes.GoQuotesQuoteRepository
+import com.levit.book_me.repositories.guotes.GoQuotesTagRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named

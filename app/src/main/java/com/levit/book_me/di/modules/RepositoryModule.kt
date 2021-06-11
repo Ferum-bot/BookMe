@@ -1,16 +1,13 @@
 package com.levit.book_me.di.modules
 
-import android.content.SharedPreferences
-import com.levit.book_me.data_sources.interfaces.GoogleBooksVolumeDataSource
+import com.levit.book_me.data_sources.google.GoogleBooksVolumeDataSource
 import com.levit.book_me.di.DIConstants
-import com.levit.book_me.repositories.implementations.GenresRepositoryMock
-import com.levit.book_me.repositories.implementations.SearchAuthorsRepositoryImpl
-import com.levit.book_me.repositories.implementations.SearchBooksRepositoryImpl
-import com.levit.book_me.repositories.implementations.SharedPrefProfileDataSource
-import com.levit.book_me.repositories.interfaces.CacheProfileDataSource
-import com.levit.book_me.repositories.interfaces.GenresRepository
-import com.levit.book_me.repositories.interfaces.SearchAuthorsRepository
-import com.levit.book_me.repositories.interfaces.SearchBooksRepository
+import com.levit.book_me.repositories.profile.impl.GenresRepositoryMock
+import com.levit.book_me.repositories.google.impl.SearchAuthorsRepositoryImpl
+import com.levit.book_me.repositories.google.impl.SearchBooksRepositoryImpl
+import com.levit.book_me.repositories.profile.GenresRepository
+import com.levit.book_me.repositories.google.SearchAuthorsRepository
+import com.levit.book_me.repositories.google.SearchBooksRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named

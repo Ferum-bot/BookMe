@@ -2,12 +2,10 @@ package com.levit.book_me.ui.fragments.creating_profile.search_favourites_author
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.R
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core_base.di.SearchFavouriteAuthorsScope
-import com.levit.book_me.interactors.interfaces.SearchFavouriteAuthorsInteractor
+import com.levit.book_me.interactors.creating_profile.SearchFavouriteAuthorsInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
 import kotlinx.coroutines.*

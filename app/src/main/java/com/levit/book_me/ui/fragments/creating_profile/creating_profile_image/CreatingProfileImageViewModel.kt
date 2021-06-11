@@ -6,7 +6,7 @@ import androidx.lifecycle.*
 import com.google.firebase.storage.UploadTask
 import com.levit.book_me.R
 import com.levit.book_me.core_base.di.CreatingProfileScope
-import com.levit.book_me.interactors.interfaces.UploadProfileImageInteractor
+import com.levit.book_me.interactors.creating_profile.UploadProfileImageInteractor
 import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
 import com.levit.book_me.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.collectLatest

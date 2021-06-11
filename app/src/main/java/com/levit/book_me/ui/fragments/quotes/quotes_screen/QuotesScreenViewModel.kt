@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core.models.GoQuotesTypes
-import com.levit.book_me.interactors.interfaces.QuotesScreenInteractor
+import com.levit.book_me.interactors.quotes.QuotesScreenInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.collect
