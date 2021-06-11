@@ -29,6 +29,7 @@ object Dependencies {
     const val RETROFIT_MOSHI_CONVERTER = "com.squareup.retrofit2:converter-moshi:${Versions.RETROFIT}"
     const val MOSHI = "com.squareup.moshi:moshi:${Versions.MOSHI}"
     const val MOSHI_KOTLIN = "com.squareup.moshi:moshi-kotlin:${Versions.MOSHI}"
+    const val GSON = "com.google.code.gson:gson:${Versions.GSON}"
 
     // UI: Androidx presentation views
     const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"

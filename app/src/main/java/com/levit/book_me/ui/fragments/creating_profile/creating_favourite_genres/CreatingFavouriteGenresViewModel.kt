@@ -2,12 +2,11 @@ package com.levit.book_me.ui.fragments.creating_profile.creating_favourite_genre
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.levit.book_me.R
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core_base.di.CreatingProfileScope
-import com.levit.book_me.interactors.interfaces.CreatingFavouriteGenresInteractor
+import com.levit.book_me.interactors.creating_profile.CreatingFavouriteGenresInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants

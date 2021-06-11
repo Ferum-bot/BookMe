@@ -1,9 +1,9 @@
 package com.levit.book_me.di.modules.firebase
 
-import com.levit.book_me.data_sources.implementations.FirebaseStorageUploadStreamDataSourceImpl
-import com.levit.book_me.data_sources.implementations.FirebaseStorageUploadUriDataSourceImpl
-import com.levit.book_me.data_sources.interfaces.FirebaseStorageUploadStreamDataSource
-import com.levit.book_me.data_sources.interfaces.FirebaseStorageUploadUriDataSource
+import com.levit.book_me.data_sources.firebase.impl.FirebaseStorageUploadStreamDataSourceImpl
+import com.levit.book_me.data_sources.firebase.impl.FirebaseStorageUploadUriDataSourceImpl
+import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadStreamDataSource
+import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadUriDataSource
 import dagger.Module
 import dagger.Provides
 

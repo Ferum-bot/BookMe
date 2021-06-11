@@ -15,6 +15,7 @@ import javax.inject.Singleton
         AppModule::class,
         DatabaseModule::class,
         AppSubComponents::class,
+        SharedPreferenceModule::class,
     ]
 )
 interface AppComponent {

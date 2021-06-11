@@ -45,6 +45,7 @@ fun DependencyHandler.addAllNetworkDependencies() {
     implementation(Dependencies.RETROFIT_MOSHI_CONVERTER)
     implementation(Dependencies.MOSHI)
     implementation(Dependencies.MOSHI_KOTLIN)
+    implementation(Dependencies.GSON)
 }
 
 fun DependencyHandler.addAllDIDependencies() {

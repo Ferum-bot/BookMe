@@ -3,6 +3,7 @@ package com.levit.book_me.ui.activities.creating_profile
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.levit.book_me.R
 import com.levit.book_me.core.ui.custom_view.CreatingProfilePageIndicator
 import com.levit.book_me.databinding.ActivityCreatingProfileBinding

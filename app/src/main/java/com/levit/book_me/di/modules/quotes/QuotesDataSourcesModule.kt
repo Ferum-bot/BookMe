@@ -1,11 +1,11 @@
 package com.levit.book_me.di.modules.quotes
 
-import com.levit.book_me.data_sources.implementations.GoQuotesAuthorDataSourceImpl
-import com.levit.book_me.data_sources.implementations.GoQuotesQuoteDataSourceImpl
-import com.levit.book_me.data_sources.implementations.GoQuotesTagDataSourceImpl
-import com.levit.book_me.data_sources.interfaces.GoQuotesAuthorDataSource
-import com.levit.book_me.data_sources.interfaces.GoQuotesQuoteDataSource
-import com.levit.book_me.data_sources.interfaces.GoQuotesTagDataSource
+import com.levit.book_me.data_sources.quotes.impl.GoQuotesAuthorDataSourceImpl
+import com.levit.book_me.data_sources.quotes.impl.GoQuotesQuoteDataSourceImpl
+import com.levit.book_me.data_sources.quotes.impl.GoQuotesTagDataSourceImpl
+import com.levit.book_me.data_sources.quotes.GoQuotesAuthorDataSource
+import com.levit.book_me.data_sources.quotes.GoQuotesQuoteDataSource
+import com.levit.book_me.data_sources.quotes.GoQuotesTagDataSource
 import com.levit.book_me.network.services.GoQuotesService
 import dagger.Module
 import dagger.Provides

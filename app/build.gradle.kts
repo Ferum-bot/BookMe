@@ -1,9 +1,6 @@
 import dependencies.Dependencies
-import dependencies.KaptDependencies
 import extensions.*
-import org.gradle.kotlin.dsl.api
 import org.gradle.kotlin.dsl.implementation
-import org.gradle.kotlin.dsl.kapt
 
 plugins{
     id(Plugins.ANDROID_APPLICATION)

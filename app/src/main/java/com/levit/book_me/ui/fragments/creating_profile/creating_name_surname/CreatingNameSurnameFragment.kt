@@ -47,13 +47,13 @@ class CreatingNameSurnameFragment:
     override fun setAllObservers() {
         super.setAllObservers()
 
-        viewModel.isNameCorrect.observe(viewLifecycleOwner, Observer { nameIsCorrect ->
+        viewModel.isNameCorrect.observe(viewLifecycleOwner) { nameIsCorrect ->
             binding.invalidNameLabel.isVisible = !nameIsCorrect
-        })
+        }
 
-        viewModel.isSurnameCorrect.observe(viewLifecycleOwner, Observer { surnameIsCorrect ->
+        viewModel.isSurnameCorrect.observe(viewLifecycleOwner) { surnameIsCorrect ->
             binding.invalidSurnameLabel.isVisible = !surnameIsCorrect
-        })
+        }
 
         viewModel.isWordsAboutYouCorrect.observe(viewLifecycleOwner) { isWordsAboutYouCorrect ->
             binding.invalidWordsAboutYouLabel.isVisible = !isWordsAboutYouCorrect
@@ -82,19 +82,18 @@ class CreatingNameSurnameFragment:
             binding.invalidWordsAboutYouLabel.text = errorString
         }
 
-        ProfileQuoteStorage.quote.observe(viewLifecycleOwner, Observer { quote ->
+        ProfileQuoteStorage.quote.observe(viewLifecycleOwner) { quote ->
             viewModel.chosenQuote = quote
             if (quote == null) {
                 binding.quoteItem.hideAuthor(true)
                 binding.quoteItem.setChosen(false)
                 binding.quoteItem.setNotChosenText()
-            }
-            else {
+            } else {
                 binding.quoteItem.hideAuthor(false)
                 binding.quoteItem.setChosen(true)
                 binding.quoteItem.setQuote(quote)
             }
-        })
+        }
     }
 
     private fun configureLayout() {

@@ -1,14 +1,17 @@
 package com.levit.book_me.di.modules.creating_profile
 
-import com.levit.book_me.interactors.implementations.CreatingFavouriteGenresInteractorImpl
-import com.levit.book_me.interactors.implementations.SearchBooksInteractorImpl
-import com.levit.book_me.interactors.implementations.UploadProfileImageInteractorImpl
-import com.levit.book_me.interactors.interfaces.CreatingFavouriteGenresInteractor
-import com.levit.book_me.interactors.interfaces.SearchBooksInteractor
-import com.levit.book_me.interactors.interfaces.UploadProfileImageInteractor
-import com.levit.book_me.repositories.interfaces.FirebaseStorageUploadUriRepository
-import com.levit.book_me.repositories.interfaces.GenresRepository
-import com.levit.book_me.repositories.interfaces.SearchBooksRepository
+import com.levit.book_me.data_sources.profile.CacheProfileDataSource
+import com.levit.book_me.interactors.creating_profile.impl.CreatingFavouriteGenresInteractorImpl
+import com.levit.book_me.interactors.creating_profile.impl.SearchBooksInteractorImpl
+import com.levit.book_me.interactors.creating_profile.impl.UploadProfileImageInteractorImpl
+import com.levit.book_me.interactors.creating_profile.CreatingFavouriteGenresInteractor
+import com.levit.book_me.interactors.creating_profile.CreatingProfileInteractor
+import com.levit.book_me.interactors.creating_profile.SearchBooksInteractor
+import com.levit.book_me.interactors.creating_profile.UploadProfileImageInteractor
+import com.levit.book_me.interactors.creating_profile.impl.CacheCreatingProfileInteractor
+import com.levit.book_me.repositories.firebase.FirebaseStorageUploadUriRepository
+import com.levit.book_me.repositories.profile.GenresRepository
+import com.levit.book_me.repositories.google.SearchBooksRepository
 import dagger.Module
 import dagger.Provides
 
@@ -34,5 +37,12 @@ class CreatingProfileInteractorsModule {
         repository: GenresRepository
     ): CreatingFavouriteGenresInteractor {
         return CreatingFavouriteGenresInteractorImpl(repository)
+    }
+
+    @Provides
+    fun provideActivityCreatingProfileInteractor(
+        cacheDataSource: CacheProfileDataSource
+    ): CreatingProfileInteractor {
+        return CacheCreatingProfileInteractor(cacheDataSource)
     }
 }

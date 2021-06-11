@@ -1,7 +1,7 @@
 package com.levit.book_me.ui.activities.onboarding
 
 import androidx.lifecycle.ViewModel
-import com.levit.book_me.interactors.interfaces.OnBoardingInteractor
+import com.levit.book_me.interactors.onboarding.OnBoardingInteractor
 import com.levit.book_me.core_base.di.OnBoardingScope
 import javax.inject.Inject
 
