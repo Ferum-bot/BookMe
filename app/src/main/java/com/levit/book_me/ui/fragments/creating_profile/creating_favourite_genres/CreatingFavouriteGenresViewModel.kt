@@ -25,7 +25,8 @@ class CreatingFavouriteGenresViewModel @Inject constructor(
     private val _genresAreChosen: MutableLiveData<Boolean> = MutableLiveData()
     val genresAreChosen: LiveData<Boolean> = _genresAreChosen
 
-    private val chosenGenres: MutableList<Genre> = mutableListOf()
+    private val _chosenGenres: MutableList<Genre> = mutableListOf()
+    val chosenGenres: List<Genre> = _chosenGenres
 
     init {
 
@@ -45,14 +46,14 @@ class CreatingFavouriteGenresViewModel @Inject constructor(
     }
 
     fun addGenre(genre: Genre) {
-        chosenGenres.add(genre)
+        _chosenGenres.add(genre)
         if (chosenGenres.size >= CreatingProfileConstants.MIN_COUNT_CHOSEN_GENRES) {
             _genresAreChosen.postValue(true)
         }
     }
 
     fun removeGenre(genre: Genre) {
-        chosenGenres.remove(genre)
+        _chosenGenres.remove(genre)
     }
 
     fun allGenresAreChosen(): Boolean {

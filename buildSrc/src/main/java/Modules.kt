@@ -15,5 +15,6 @@ enum class Core(val path: String) {
 }
 
 enum class CustomView(val path: String) {
-    ROUND_CLOUDS_VIEW(":RoundCloudsView")
+    ROUND_CLOUDS_VIEW(":RoundCloudsView"),
+    BOX_PROGRESS_BAR(":BoxProgressBar")
 }

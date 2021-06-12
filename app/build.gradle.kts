@@ -82,6 +82,7 @@ dependencies {
     implementation(project(Core.PRESENTATION.path))
 
     implementation(project(CustomView.ROUND_CLOUDS_VIEW.path))
+    implementation(project(CustomView.BOX_PROGRESS_BAR.path))
     
     // Kotlin
     implementation(Dependencies.KOTLIN)

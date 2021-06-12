@@ -99,6 +99,11 @@
     <string name="tags">Tags</string>
     <string name="quote_not_chosen">Quote not chosen</string>
 
+    <!--  Main Screen  -->
+    <string name="now_let_the_magic_do_the_work">Now let the magic \ndo the work</string>
+    <string name="we_will_introduce_you_to_one_bookish_person_to_have_the_booktalk_with">We will introduce you to one bookish person to have the BookTalk with.</string>
+    <string name="searching_for_person_may_take_a_time_keep_it_working">Searching for person may take a time. \nKeep it working.</string>
+
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
 

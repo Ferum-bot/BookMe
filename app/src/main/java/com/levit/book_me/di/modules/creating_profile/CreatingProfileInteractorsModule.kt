@@ -1,17 +1,15 @@
 package com.levit.book_me.di.modules.creating_profile
 
 import com.levit.book_me.data_sources.profile.CacheProfileDataSource
-import com.levit.book_me.interactors.creating_profile.impl.CreatingFavouriteGenresInteractorImpl
-import com.levit.book_me.interactors.creating_profile.impl.SearchBooksInteractorImpl
-import com.levit.book_me.interactors.creating_profile.impl.UploadProfileImageInteractorImpl
 import com.levit.book_me.interactors.creating_profile.CreatingFavouriteGenresInteractor
 import com.levit.book_me.interactors.creating_profile.CreatingProfileInteractor
 import com.levit.book_me.interactors.creating_profile.SearchBooksInteractor
 import com.levit.book_me.interactors.creating_profile.UploadProfileImageInteractor
-import com.levit.book_me.interactors.creating_profile.impl.CacheCreatingProfileInteractor
+import com.levit.book_me.interactors.creating_profile.impl.*
 import com.levit.book_me.repositories.firebase.FirebaseStorageUploadUriRepository
 import com.levit.book_me.repositories.profile.GenresRepository
 import com.levit.book_me.repositories.google.SearchBooksRepository
+import com.levit.book_me.repositories.profile.RegisterNewUserRepository
 import dagger.Module
 import dagger.Provides
 
@@ -41,8 +39,8 @@ class CreatingProfileInteractorsModule {
 
     @Provides
     fun provideActivityCreatingProfileInteractor(
-        cacheDataSource: CacheProfileDataSource
+        repository: RegisterNewUserRepository
     ): CreatingProfileInteractor {
-        return CacheCreatingProfileInteractor(cacheDataSource)
+        return FirebaseCreatingProfileInteractor(repository)
     }
 }

@@ -1,5 +1,6 @@
 package com.levit.book_me.ui.activities.creating_profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
@@ -8,6 +9,7 @@ import com.levit.book_me.R
 import com.levit.book_me.core.ui.custom_view.CreatingProfilePageIndicator
 import com.levit.book_me.databinding.ActivityCreatingProfileBinding
 import com.levit.book_me.di.components.CreatingProfileComponent
+import com.levit.book_me.ui.activities.main_screen.MainScreenActivity
 import com.levit.book_me.ui.base.BaseActivity
 
 class CreatingProfileActivity: BaseActivity(), TitleViewController {

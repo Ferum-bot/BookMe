@@ -25,6 +25,7 @@ interface AppComponent {
     fun authorizationComponent(): AuthorizationComponent.Builder
     fun onBoardingComponent(): OnBoardingComponent.Builder
     fun creatingProfileComponent(): CreatingProfileComponent.Builder
+    fun mainScreenComponent(): MainScreenComponent.Builder
 
     @Component.Builder
     interface Builder {

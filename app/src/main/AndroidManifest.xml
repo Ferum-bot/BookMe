@@ -37,6 +37,10 @@
             android:theme="@style/DefaultAppTheme">
         </activity>
         <activity
+            android:name=".ui.activities.main_screen.MainScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultAppTheme"/>
+        <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />

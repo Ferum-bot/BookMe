@@ -40,3 +40,7 @@ annotation class SearchBooksScope
 @Scope
 @Retention(value = AnnotationRetention.RUNTIME)
 annotation class QuotesScreenScope
+
+@Scope
+@Retention(value = AnnotationRetention.RUNTIME)
+annotation class MainScreenScope

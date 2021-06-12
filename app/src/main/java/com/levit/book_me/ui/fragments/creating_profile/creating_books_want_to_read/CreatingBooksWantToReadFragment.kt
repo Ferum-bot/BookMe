@@ -215,9 +215,8 @@ class CreatingBooksWantToReadFragment:
     }
 
     private fun navigateToMainScreen() {
-        showSuccessMessage("Navigated to main screen ")
-//        val intent = Intent(requireContext(), MainScreenActivity::class.java)
-//        startActivity(intent)
+        val intent = Intent(requireContext(), MainScreenActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToSearchBooksScreen() {
