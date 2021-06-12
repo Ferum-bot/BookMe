@@ -38,8 +38,6 @@ class CreatingProfileActivity: BaseActivity(), TitleViewController {
 
         binding = ActivityCreatingProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val intent = Intent(this, MainScreenActivity::class.java)
-        startActivity(intent)
     }
 
     override fun showTitle(show: Boolean) {
