@@ -57,9 +57,8 @@ class CreatingProfileImageFragment:
 
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
-            //showLoading(true)
-            //viewModel.upLoadProfilePhoto(this::requireContext)
-            navigateToCreatingFavouriteGenresFragment()
+            showLoading(true)
+            viewModel.upLoadProfilePhoto(this::requireContext)
         }
 
         binding.profilePhoto.setOnClickListener {
@@ -69,46 +68,46 @@ class CreatingProfileImageFragment:
 
     override fun setAllObservers() {
 
-        viewModel.isPhotoChosen.observe(viewLifecycleOwner, Observer { photoIsChosen ->
+        viewModel.isPhotoChosen.observe(viewLifecycleOwner) { photoIsChosen ->
             binding.nextButton.isEnabled = true
-            if(photoIsChosen) {
+            if (photoIsChosen) {
                 binding.photoHint.text = getString(R.string.press_next_or_choose_another_photo)
-            }
-            else {
+            } else {
                 binding.photoHint.text = getString(R.string.take_a_photo_or_choose_from_your_library)
             }
-        })
+        }
 
-        viewModel.imageUri.observe(viewLifecycleOwner, Observer { imageUri ->
+        viewModel.imageUri.observe(viewLifecycleOwner) { imageUri ->
             if (imageUri != null) {
                 binding.profilePhoto.setImageURI(imageUri)
+                sharedViewModel.safeProfileImageUrl(imageUri.toString())
             }
-        })
+        }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
+        viewModel.errorMessage.observe(viewLifecycleOwner) { message ->
             if (message != null) {
                 showError(message)
                 viewModel.errorMessageHasShown()
                 showLoading(false)
             }
-        })
+        }
 
-        viewModel.errorMessageId.observe(viewLifecycleOwner, Observer { messageId ->
+        viewModel.errorMessageId.observe(viewLifecycleOwner) { messageId ->
             if (messageId != null) {
                 showError(messageId)
                 viewModel.errorMessageHasShown()
                 showLoading(false)
             }
-        })
+        }
 
-        viewModel.isPhotoUpLoaded.observe(viewLifecycleOwner, Observer { photoIsUpLoaded ->
+        viewModel.isPhotoUpLoaded.observe(viewLifecycleOwner) { photoIsUpLoaded ->
             if (photoIsUpLoaded) {
                 showLoading(false)
                 showSuccessMessage(R.string.photo_uploaded)
                 navigateToCreatingFavouriteGenresFragment()
                 viewModel.photoUploadHasShown()
             }
-        })
+        }
     }
 
     private fun updatePageIndicator() {

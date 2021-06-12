@@ -16,6 +16,7 @@ import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.network.response_models.user.UserResponseModel
 import com.levit.book_me.ui.base.BaseViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -63,6 +64,8 @@ class CreatingProfileActivityViewModel @Inject constructor(
     private val _creatingProfileStatus: MutableLiveData<Status> = MutableLiveData()
     val creatingProfileStatus: LiveData<Status> = _creatingProfileStatus
 
+    private var creatingProfileJob: Job? = null
+
     init {
         viewModelScope.launch {
             interactor.resultStatus.collect { result ->
@@ -79,6 +82,10 @@ class CreatingProfileActivityViewModel @Inject constructor(
         _surname.postValue(surname)
         _wordsAboutProfile.postValue(wordsAboutYou)
         _quote.postValue(quote)
+    }
+
+    fun safeProfileImageUrl(profileUrl: String) {
+        _profilePhotoUrl.postValue(profileUrl)
     }
 
     fun safeFavouriteAuthor(author: Author, position: CreatingProfileAuthorChooser.AuthorPosition) {
@@ -129,7 +136,8 @@ class CreatingProfileActivityViewModel @Inject constructor(
             quote = quote.value ?: GoQuote(),
         )
 
-        viewModelScope.launch {
+        creatingProfileJob?.cancel()
+        creatingProfileJob = viewModelScope.launch {
             _creatingProfileStatus.postValue(Status.LOADING)
             interactor.uploadNewProfile(profile)
         }
@@ -173,7 +181,6 @@ class CreatingProfileActivityViewModel @Inject constructor(
 
     private fun handleSuccessResult(result: RetrofitResult.Success<UserResponseModel>) {
         _creatingProfileStatus.postValue(Status.DONE)
-
     }
 
     private fun LiveData<List<Pair<Author, CreatingProfileAuthorChooser.AuthorPosition>>>.getFavoriteAuthors(): List<Author> {

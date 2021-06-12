@@ -90,7 +90,7 @@ class CreatingFavouriteGenresFragment:
     private fun setAllClickListeners() {
         binding.nextButton.setOnClickListener {
             if (viewModel.allGenresAreChosen()) {
-                val chosenGenres = viewModel.genres.value ?: emptyList()
+                val chosenGenres = viewModel.chosenGenres
                 sharedViewModel.safeChosenGenres(chosenGenres)
                 navigateToChooseFavouriteAuthorsFragment()
             }
