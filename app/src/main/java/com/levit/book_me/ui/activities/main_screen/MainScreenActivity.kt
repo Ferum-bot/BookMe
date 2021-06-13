@@ -15,7 +15,7 @@ class MainScreenActivity: BaseActivity() {
         mainScreenComponent.viewModelFactory()
     }
 
-    private lateinit var mainScreenComponent: MainScreenComponent
+    lateinit var mainScreenComponent: MainScreenComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         initComponent()

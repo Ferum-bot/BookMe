@@ -10,6 +10,11 @@ import com.levit.book_me.di.modules.main_screen.MainScreenInteractorsModule
 import com.levit.book_me.di.modules.main_screen.MainScreenViewModelsModule
 import com.levit.book_me.di.modules.network.NetworkModule
 import com.levit.book_me.ui.activities.main_screen.MainScreenActivity
+import com.levit.book_me.ui.fragments.main_screens.chats.MainScreenChatsFragment
+import com.levit.book_me.ui.fragments.main_screens.current_chat.MainScreenCurrentChatFragment
+import com.levit.book_me.ui.fragments.main_screens.current_friend_profile.MainScreenFriendProfileFragment
+import com.levit.book_me.ui.fragments.main_screens.search_new_friend.MainScreenSearchFriendFragment
+import com.levit.book_me.ui.fragments.main_screens.user_profile.MainScreenUserProfileFragment
 import dagger.Subcomponent
 
 @MainScreenScope
@@ -25,6 +30,16 @@ import dagger.Subcomponent
 interface MainScreenComponent {
 
     fun inject(activity: MainScreenActivity)
+
+    fun inject(fragment: MainScreenChatsFragment)
+
+    fun inject(fragment: MainScreenUserProfileFragment)
+
+    fun inject(fragment: MainScreenFriendProfileFragment)
+
+    fun inject(fragment: MainScreenSearchFriendFragment)
+
+    fun inject(fragment: MainScreenCurrentChatFragment)
 
     fun viewModelFactory(): ViewModelFactory
 
