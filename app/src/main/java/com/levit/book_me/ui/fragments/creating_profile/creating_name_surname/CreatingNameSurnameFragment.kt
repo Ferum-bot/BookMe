@@ -105,8 +105,8 @@ class CreatingNameSurnameFragment:
             val name = binding.nameTextInput.text.toString()
             val surname = binding.surnameTextInput.text.toString()
             val wordsAboutYou = binding.wordsAboutYouInputEditText.text.toString()
-            val quote = viewModel.chosenQuote ?: return@setOnClickListener
             if (viewModel.checkIsEverythingIsValid(name, surname, wordsAboutYou)) {
+                val quote = viewModel.chosenQuote ?: return@setOnClickListener
                 sharedViewModel.safeBaseProfileInformation(
                     name, surname, wordsAboutYou, quote
                 )

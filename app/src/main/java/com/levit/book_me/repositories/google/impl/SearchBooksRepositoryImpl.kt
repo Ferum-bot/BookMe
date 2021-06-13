@@ -63,7 +63,7 @@ class SearchBooksRepositoryImpl @Inject constructor(
         result: RetrofitResult.Success<GoogleBooksResponse>
     ) {
         val response = result.data
-        val resultList = mutableListOf<GoogleBook>()
+        var resultList = mutableListOf<GoogleBook>()
 
         if (response.responseResult == null) {
             val newResult = RetrofitResult.Success.Value(resultList)
@@ -72,6 +72,9 @@ class SearchBooksRepositoryImpl @Inject constructor(
         }
 
         resultList.addAll(response.responseResult.getAllBooks())
+        resultList = resultList.filter { book ->
+            book.title != null
+        }.toMutableList()
         val newResult = RetrofitResult.Success.Value(resultList)
         emit(newResult)
     }

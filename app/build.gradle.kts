@@ -10,6 +10,7 @@ plugins{
     id(Plugins.KOTLIN_ALLOPEN)
     id(Plugins.GOOGLE_SERVICES)
     id(Plugins.NAVIGATION_SAFE_ARGS)
+    id(Plugins.FIREBASE_CRASHLYTICS)
 }
 
 android {
@@ -20,7 +21,7 @@ android {
         minSdkVersion(Config.MIN_SDK_VERSION)
         targetSdkVersion(Config.TARGET_SDK_VERSION)
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
         multiDexEnabled = Config.MULTIDEX_ENABLED
 
         testInstrumentationRunner = Config.TEST_INSTRUMENTATION_RUNNER
@@ -83,7 +84,7 @@ dependencies {
 
     implementation(project(CustomView.ROUND_CLOUDS_VIEW.path))
     implementation(project(CustomView.BOX_PROGRESS_BAR.path))
-    
+
     // Kotlin
     implementation(Dependencies.KOTLIN)
 

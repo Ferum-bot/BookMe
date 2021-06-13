@@ -55,7 +55,7 @@ class CreatingFavouriteBooksFragment:
         super.setAllObservers()
 
         viewModel.errorMessageId.removeObservers(viewLifecycleOwner)
-        viewModel.errorMessageId.observe(viewLifecycleOwner, { messageId ->
+        viewModel.errorMessageId.observe(viewLifecycleOwner) { messageId ->
             if (messageId == null) {
                 return@observe
             }
@@ -69,14 +69,14 @@ class CreatingFavouriteBooksFragment:
                 showError(messageId)
             }
             viewModel.errorMessageHasShown()
-        })
+        }
 
-        viewModel.popularBooks.observe(viewLifecycleOwner, Observer { books ->
+        viewModel.popularBooks.observe(viewLifecycleOwner) { books ->
             adapter.submitList(books)
-        })
+        }
 
-        viewModel.currentStatus.observe(viewLifecycleOwner, Observer { status ->
-            when(status) {
+        viewModel.currentStatus.observe(viewLifecycleOwner) { status ->
+            when (status) {
                 CreatingFavouriteBooksViewModel.Statuses.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.currentBooksRecycler.visibility = View.GONE
@@ -96,15 +96,15 @@ class CreatingFavouriteBooksFragment:
                     binding.searchView.isEnabled = false
                 }
             }
-        })
+        }
 
-        viewModel.isChosenEnoughBooks.observe(viewLifecycleOwner, { isChosenEnoughBooks ->
+        viewModel.isChosenEnoughBooks.observe(viewLifecycleOwner) { isChosenEnoughBooks ->
             binding.countBooksErrorLabel.isVisible = !isChosenEnoughBooks
-        })
+        }
 
-        sharedViewModel.chosenFavouriteBooks.observe(viewLifecycleOwner, { books ->
+        sharedViewModel.chosenFavouriteBooks.observe(viewLifecycleOwner) { books ->
             viewModel.addChosenBooks(books)
-        })
+        }
     }
 
     override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {

@@ -13,6 +13,7 @@ import com.levit.book_me.application.BookMeApplication
 import com.levit.book_me.di.components.OnBoardingComponent
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
+import com.levit.book_me.ui.activities.main_screen.MainScreenActivity
 import com.levit.book_me.ui.base.BaseActivity
 
 class OnBoardingActivity: BaseActivity() {
@@ -134,6 +135,7 @@ class OnBoardingActivity: BaseActivity() {
     }
 
     private fun navigateToMainScreen() {
-        navigateToCreatingProfile()
+        val intent = Intent(this, MainScreenActivity::class.java)
+        startActivity(intent)
     }
 }

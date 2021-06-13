@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class GoogleBook(
     @Json(name = "title")
-    val title: String,
+    val title: String?,
 
     @Json(name = "authors")
     val listOfAuthors: List<String>?,

@@ -67,6 +67,8 @@ object Dependencies {
     const val FIREBASE_STORAGE = "com.google.firebase:firebase-storage-ktx"
     const val FIREBASE_REALTIME_DATABASE = "com.google.firebase:firebase-database-ktx"
     const val FIREBASE_FIRESTORE = "com.google.firebase:firebase-firestore-ktx"
+    const val FIREBASE_CRASHLYTICS = "com.google.firebase:firebase-crashlytics"
+    const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics"
 
 
     // Google Play Services
