@@ -195,7 +195,7 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
 
     private fun GoogleBook.toMap(): Map<String, String>
     = mapOf(
-        "title" to title,
+        "title" to (title ?: ""),
         "authors" to (listOfAuthors?.joinToString() ?: ""),
         "imageLink" to (imageLinks?.getBiggestAvailableLink() ?: "")
     )
