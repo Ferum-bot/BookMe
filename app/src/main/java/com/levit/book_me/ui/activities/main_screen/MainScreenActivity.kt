@@ -38,8 +38,6 @@ class MainScreenActivity: BaseActivity() {
     }
 
     private fun configureLayout() {
-        binding.progressBar.setBackgroundColor(Color.BLACK)
-        binding.progressBar.setLoaderColor(Color.WHITE)
-        binding.progressBar.setSpeed(10)
+
     }
 }

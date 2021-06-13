@@ -62,6 +62,8 @@ fun DependencyHandler.addAllFirebaseDependencies() {
     implementation(Dependencies.FIREBASE_FIRESTORE)
     implementation(Dependencies.FIREBASE_REALTIME_DATABASE)
     implementation(Dependencies.FIREBASE_STORAGE)
+    implementation(Dependencies.FIREBASE_CRASHLYTICS)
+    implementation(Dependencies.FIREBASE_ANALYTICS)
 }
 
 fun DependencyHandler.addRoomDependencies() {

@@ -203,4 +203,9 @@
         <item name="voiceIcon">@drawable/ic_search_black</item>
         <item name="android:searchHintIcon">@drawable/ic_search_black</item>
     </style>
+
+    <style name="MainScreenFABStyle">
+        <item name="fabSize">mini</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
 </resources>

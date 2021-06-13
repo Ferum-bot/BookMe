@@ -5,6 +5,9 @@ object Versions {
     const val KOTLIN = "1.4.30"
     const val COROUTINES = "1.4.3"
 
+    // Gradle
+    const val TOOLS_GRADLE = "4.0.1"
+
     // Core
     const val MULTIDEX = "2.0.1"
     const val APPCOMPAT = "1.2.0"
@@ -56,10 +59,15 @@ object Versions {
 
     // Firebase
     const val FIREBASE = "26.7.0"
+    const val FIREBASE_CRASHLYTICS = "2.7.0"
 
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES = "19.0.0"
+    const val CLASSPATH_GOOGLE_PLAY_SERVICES = "4.3.8"
 
     // Facebook
     const val FACEBOOK_SDK = "[4,5)"
+
+    // Navigation Safe args
+    const val SAFE_ARGS = "2.3.5"
 }
