@@ -12,6 +12,10 @@ import com.levit.book_me.databinding.FragmentOnboardingBinding
 
 class OnBoardingViewPagerAdapter: RecyclerView.Adapter<OnBoardingViewPagerAdapter.OnBoardingViewPagerVH>(){
 
+    companion object {
+        private const val ITEMS_COUNT = 3
+    }
+
     override fun getItemCount(): Int = ITEMS_COUNT
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnBoardingViewPagerVH {
@@ -22,10 +26,6 @@ class OnBoardingViewPagerAdapter: RecyclerView.Adapter<OnBoardingViewPagerAdapte
 
     override fun onBindViewHolder(holder: OnBoardingViewPagerVH, position: Int)
         = holder.bind(position)
-
-    companion object {
-        private const val ITEMS_COUNT = 3
-    }
 
     class OnBoardingViewPagerVH(
         private val binding: FragmentOnboardingBinding
