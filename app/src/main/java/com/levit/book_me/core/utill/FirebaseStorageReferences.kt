@@ -32,7 +32,7 @@ object FirebaseStorageReferences {
                 .child(fileName)
     }
 
-    fun getStorageProfileImageReference(imageUri: Uri): StorageReference {
+    fun getStorageProfileImageReference(imageUri: Uri? = null): StorageReference {
         val fileName = PROFILE_IMAGE_NAME + DOT + ImageFormats.JPG
 
         return imageFolderRef

@@ -1,4 +1,4 @@
-package com.levit.book_me.ui.fragments.creating_profile.utills
+package com.levit.book_me.ui.fragments.utills
 
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.levit.book_me.core.ui.custom_view.BigBookItemView
 import com.levit.book_me.network.models.google_books.GoogleBook
 
-class CreatingBooksAdapter(
-    private val listener: CreatingBooksClickListener
-): ListAdapter<GoogleBook, CreatingBooksAdapter.CreatingBooksViewHolder>(CALL_BACK) {
+class BaseBooksAdapter(
+    private val listener: BaseBooksClickListener? = null,
+    private val isCheckable: Boolean = true,
+): ListAdapter<GoogleBook, BaseBooksAdapter.BaseBooksViewHolder>(CALL_BACK) {
 
     companion object {
 
@@ -27,23 +28,26 @@ class CreatingBooksAdapter(
         }
     }
 
-    interface CreatingBooksClickListener {
+    interface BaseBooksClickListener {
 
-        fun onBookClicked(newState: CreatingBooksStates, book: GoogleBook)
+        fun onBookClicked(newState: BaseBooksStates, book: GoogleBook)
     }
 
-    enum class CreatingBooksStates(val boolean: Boolean) {
+    enum class BaseBooksStates(val boolean: Boolean) {
         CHOSEN(true), NOT_CHOSEN(false);
     }
 
-    class CreatingBooksViewHolder private constructor(
+    class BaseBooksViewHolder private constructor(
         private val bookView: BigBookItemView,
-        private val listener: CreatingBooksClickListener
+        private val listener: BaseBooksClickListener?,
+        private val isCheckable: Boolean,
     ): RecyclerView.ViewHolder(bookView) {
 
         companion object {
 
-            fun getFrom(parent: ViewGroup, listener: CreatingBooksClickListener): CreatingBooksViewHolder {
+            fun getFrom(
+                parent: ViewGroup, listener: BaseBooksClickListener?, isCheckable: Boolean
+            ): BaseBooksViewHolder {
                 val context = parent.context
                 val layoutParams = ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.WRAP_CONTENT,
@@ -52,47 +56,48 @@ class CreatingBooksAdapter(
                 val view = BigBookItemView(context).apply {
                     setLayoutParams(layoutParams)
                 }
-                return CreatingBooksViewHolder(view, listener)
+                return BaseBooksViewHolder(view, listener, isCheckable)
             }
         }
 
         private lateinit var currentBook: GoogleBook
 
-        private var currentState: CreatingBooksStates = CreatingBooksStates.NOT_CHOSEN
+        private var currentState: BaseBooksStates = BaseBooksStates.NOT_CHOSEN
 
         init {
 
             bookView.setClickListener(View.OnClickListener {
-                currentState = if (currentState == CreatingBooksStates.NOT_CHOSEN) {
-                    CreatingBooksStates.CHOSEN
+                currentState = if (currentState == BaseBooksStates.NOT_CHOSEN) {
+                    BaseBooksStates.CHOSEN
                 } else {
-                    CreatingBooksStates.NOT_CHOSEN
+                    BaseBooksStates.NOT_CHOSEN
                 }
                 currentBook.isChosen = currentState.boolean
                 bookView.setChosen(currentState.boolean)
 
-                listener::onBookClicked.invoke(currentState, currentBook)
+                listener?.onBookClicked(currentState, currentBook)
             })
         }
 
         fun bind(book: GoogleBook) {
             currentBook = book
             currentState = if (book.isChosen) {
-                CreatingBooksStates.CHOSEN
+                BaseBooksStates.CHOSEN
             }
             else {
-                CreatingBooksStates.NOT_CHOSEN
+                BaseBooksStates.NOT_CHOSEN
             }
 
             bookView.setBook(currentBook)
+            bookView.isCheckable = isCheckable
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreatingBooksViewHolder {
-        return CreatingBooksViewHolder.getFrom(parent, listener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseBooksViewHolder {
+        return BaseBooksViewHolder.getFrom(parent, listener, isCheckable)
     }
 
-    override fun onBindViewHolder(holder: CreatingBooksViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseBooksViewHolder, position: Int) {
         val book = getItem(position)
         holder.bind(book)
     }

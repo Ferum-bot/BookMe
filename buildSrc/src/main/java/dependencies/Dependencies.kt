@@ -48,6 +48,10 @@ object Dependencies {
     // UI: Page indicator for view pager
     const val PAGE_INDICATOR = "com.romandanylyk:pageindicatorview:${Versions.PAGE_INDICATOR}"
 
+    // UI: Adapter delegates
+    const val ADAPTER_DELEGATES_DSL = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:${Versions.DELEGATE_ADAPTER}"
+    const val ADAPTER_DELEGATES_VIEW_BINDING = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:${Versions.DELEGATE_ADAPTER}"
+
     // Navigation Component
     const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
 
@@ -69,6 +73,7 @@ object Dependencies {
     const val FIREBASE_FIRESTORE = "com.google.firebase:firebase-firestore-ktx"
     const val FIREBASE_CRASHLYTICS = "com.google.firebase:firebase-crashlytics"
     const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics"
+    const val FIREBASE_UI_STORAGE = "com.firebaseui:firebase-ui-storage:${Versions.FIREBASE_UI_STORAGE}"
 
 
     // Google Play Services

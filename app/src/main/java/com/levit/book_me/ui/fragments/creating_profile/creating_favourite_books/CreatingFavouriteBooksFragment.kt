@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.enums.SearchBooksTypes
@@ -15,13 +14,13 @@ import com.levit.book_me.databinding.FragmentCreatingFavouriteBooksBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
-import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
-import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
+import com.levit.book_me.ui.fragments.utills.BaseBooksAdapter
+import com.levit.book_me.ui.fragments.utills.BaseBooksOffsetDecorator
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 
 class CreatingFavouriteBooksFragment:
     BaseCreatingProfileFragment<CreatingFavouriteBooksViewModel>(R.layout.fragment_creating_favourite_books),
-    CreatingBooksAdapter.CreatingBooksClickListener {
+    BaseBooksAdapter.BaseBooksClickListener {
 
     companion object {
         private const val FRAGMENT_POSITION = 5
@@ -31,7 +30,7 @@ class CreatingFavouriteBooksFragment:
 
     private val binding by viewBinding { FragmentCreatingFavouriteBooksBinding.bind(it) }
 
-    private val adapter by lazy { CreatingBooksAdapter(this) }
+    private val adapter by lazy { BaseBooksAdapter(this) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -107,16 +106,16 @@ class CreatingFavouriteBooksFragment:
         }
     }
 
-    override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
+    override fun onBookClicked(newState: BaseBooksAdapter.BaseBooksStates, book: GoogleBook) {
         when(newState) {
-            CreatingBooksAdapter.CreatingBooksStates.CHOSEN -> {
+            BaseBooksAdapter.BaseBooksStates.CHOSEN -> {
                 viewModel.addChosenBook(book)
                 sharedViewModel.addChosenBook(
                     type = SearchBooksTypes.FAVOURITE_BOOKS,
                     book = book
                 )
             }
-            CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN -> {
+            BaseBooksAdapter.BaseBooksStates.NOT_CHOSEN -> {
                 viewModel.removeChosenBook(book)
                 sharedViewModel.removeChosenBook(
                     type = SearchBooksTypes.FAVOURITE_BOOKS,
@@ -132,7 +131,7 @@ class CreatingFavouriteBooksFragment:
     }
 
     private fun configureAllViews() {
-        val booksDecorator = CreatingBooksOffsetDecorator()
+        val booksDecorator = BaseBooksOffsetDecorator()
         with(binding.currentBooksRecycler) {
             adapter = this@CreatingFavouriteBooksFragment.adapter
             addItemDecoration(booksDecorator)

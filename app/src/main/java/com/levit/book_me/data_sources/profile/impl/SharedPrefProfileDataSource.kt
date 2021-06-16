@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.internal.LinkedTreeMap
+import com.levit.book_me.core.enums.CurrentUserStatus
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
@@ -37,6 +38,8 @@ class SharedPrefProfileDataSource @Inject constructor(
         private const val FAVORITE_BOOKS_FIELD = "favorite_books_field"
         private const val WANT_TO_READ_BOOKS_FIELD = "want_to_read_books_field"
         private const val QUOTE_FIELD = "quote_field"
+
+        private const val CURRENT_USER_STATUS_FIELD = "current_user_status"
     }
 
     private val _profile: MutableSharedFlow<ProfileModel> = MutableSharedFlow(
@@ -76,6 +79,19 @@ class SharedPrefProfileDataSource @Inject constructor(
         safeFavoriteBooks(profile.favouriteBooks)
         safeWantToReadBooks(profile.wantToReadBooks)
         safeQuote(profile.quote)
+    }
+
+    override suspend fun getCurrentStatus(): CurrentUserStatus {
+        val status = storage.getString(CURRENT_USER_STATUS_FIELD, CurrentUserStatus.NOT_AUTHORIZED.name)
+            ?: CurrentUserStatus.NOT_AUTHORIZED.name
+        return CurrentUserStatus.getFromName(status)
+    }
+
+    override suspend fun setCurrentStatus(status: CurrentUserStatus) {
+        with(storage.edit()) {
+            putString(CURRENT_USER_STATUS_FIELD, status.name)
+            apply()
+        }
     }
 
     private fun getName(): String {

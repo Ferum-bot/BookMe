@@ -1,6 +1,7 @@
 package com.levit.book_me.ui.activities.onboarding
 
 import androidx.lifecycle.ViewModel
+import com.levit.book_me.core.enums.CurrentUserStatus
 import com.levit.book_me.interactors.onboarding.OnBoardingInteractor
 import com.levit.book_me.core_base.di.OnBoardingScope
 import javax.inject.Inject
@@ -15,5 +16,7 @@ class OnBoardingViewModel @Inject constructor(
         interator.firstLaunchHappened()
         return result
     }
+
+    fun getCurrentUserStatus(): CurrentUserStatus = interator.getCurrentUserStatus()
 
 }

@@ -21,3 +21,8 @@ fun View.defaultGlideOptions() = RequestOptions()
         .placeholder(R.drawable.default_image_placeholder)
         .error(R.drawable.ic_default_error_placeholder)
         .fallback(R.drawable.ic_book_me_icon)
+
+fun View.dpToPx(dp: Int): Int {
+    val density = resources.displayMetrics.density
+    return (dp.toFloat() *  density + 0.5f).toInt()
+}

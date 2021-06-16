@@ -1,5 +1,6 @@
 package com.levit.book_me.repositories.profile.impl
 
+import com.levit.book_me.core.enums.CurrentUserStatus
 import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.data_sources.profile.CacheProfileDataSource
 import com.levit.book_me.data_sources.profile.RegisterNewUserDataSource
@@ -26,6 +27,7 @@ class RegisterNewUserRepositoryImpl @Inject constructor(
     override suspend fun registerNewUser(profileModel: ProfileModel)
     = withContext(coroutineContext)  {
         localDataSource.safeProfile(profileModel)
+        localDataSource.setCurrentStatus(CurrentUserStatus.AUTHORIZED_PROFILE_CREATED)
         remoteDataSource.registerNewUser(profileModel)
     }
 }

@@ -10,6 +10,7 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.databinding.ActivitySplashOnboardingBinding
 import com.levit.book_me.application.BookMeApplication
+import com.levit.book_me.core.enums.CurrentUserStatus
 import com.levit.book_me.di.components.OnBoardingComponent
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
@@ -112,17 +113,17 @@ class OnBoardingActivity: BaseActivity() {
     }
 
     private fun handleAuthorization() {
-        if (isUserSignIn()) {
-            navigateToMainScreen()
-        }
-        else {
-            navigateToAuthorization()
+        val currentUserStatus = viewModel.getCurrentUserStatus()
+        when(currentUserStatus) {
+            CurrentUserStatus.NOT_AUTHORIZED ->
+                navigateToAuthorization()
+            CurrentUserStatus.AUTHORIZED_BUT_PROFILE_NOT_CREATED ->
+                navigateToCreatingProfile()
+            CurrentUserStatus.AUTHORIZED_PROFILE_CREATED ->
+                navigateToMainScreen()
         }
         finish()
     }
-
-    private fun isUserSignIn(): Boolean =
-        Firebase.auth.currentUser != null
 
     private fun navigateToAuthorization() {
         val intent = Intent(this, AuthorizationActivity::class.java)

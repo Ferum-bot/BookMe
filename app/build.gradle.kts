@@ -20,8 +20,8 @@ android {
         applicationId  = Config.APPLICATION_ID
         minSdkVersion(Config.MIN_SDK_VERSION)
         targetSdkVersion(Config.TARGET_SDK_VERSION)
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
         multiDexEnabled = Config.MULTIDEX_ENABLED
 
         testInstrumentationRunner = Config.TEST_INSTRUMENTATION_RUNNER
@@ -84,6 +84,7 @@ dependencies {
 
     implementation(project(CustomView.ROUND_CLOUDS_VIEW.path))
     implementation(project(CustomView.BOX_PROGRESS_BAR.path))
+    implementation(project(CustomView.NESTED_SCROLLABLE_HOST.path))
 
     // Kotlin
     implementation(Dependencies.KOTLIN)
@@ -100,15 +101,10 @@ dependencies {
     // Network: https (REST API)
     addAllNetworkDependencies()
 
-    // UI: Androidx presentation views
-    implementation(Dependencies.MATERIAL)
-    implementation(Dependencies.CONSTRAIN_LAYOUT)
+    addAllUIDependencies()
 
     // UI: Images
     addGlideDependencies()
-
-    // UI: ViewPager2
-    implementation(Dependencies.VIEW_PAGER2)
 
     // Navigation Component
     implementation(Dependencies.NAVIGATION_FRAGMENT)

@@ -3,7 +3,9 @@ package com.levit.book_me.core.ui.custom_view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.defaultGlideOptions
 import com.levit.book_me.core.utill.RemoteImageLoader
@@ -22,6 +24,12 @@ class BigBookItemView @JvmOverloads constructor(
     get() = LayoutInflater.from(context)
 
     private val imageLoader: RemoteImageLoader
+
+    var isCheckable: Boolean = true
+    set(value) {
+        binding.checkbox.isVisible = value
+        field = value
+    }
 
     init {
         binding = SearchBookItemLayoutBinding.inflate(inflater, this, true)

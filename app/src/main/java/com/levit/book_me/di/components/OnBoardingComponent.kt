@@ -4,6 +4,7 @@ import com.levit.book_me.di.modules.onboarding.OnBoardingInteractorsModule
 import com.levit.book_me.di.modules.onboarding.OnBoardingViewModelsModule
 import com.levit.book_me.core_base.di.OnBoardingScope
 import com.levit.book_me.core_presentation.utils.ViewModelFactory
+import com.levit.book_me.di.modules.DataSourceModule
 import com.levit.book_me.ui.activities.onboarding.OnBoardingActivity
 import dagger.Subcomponent
 
@@ -12,6 +13,7 @@ import dagger.Subcomponent
     OnBoardingViewModelsModule::class,
     OnBoardingInteractorsModule::class,
     OnBoardingInteractorsModule::class,
+    DataSourceModule::class,
 ])
 interface OnBoardingComponent {
 

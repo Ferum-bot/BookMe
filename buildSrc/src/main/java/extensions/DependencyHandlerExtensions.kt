@@ -36,6 +36,8 @@ fun DependencyHandler.addAllUIDependencies() {
     implementation(Dependencies.NAVIGATION_FRAGMENT)
     implementation(Dependencies.PIN_VIEW)
     implementation(Dependencies.PAGE_INDICATOR)
+    implementation(Dependencies.ADAPTER_DELEGATES_DSL)
+    implementation(Dependencies.ADAPTER_DELEGATES_VIEW_BINDING)
 }
 
 fun DependencyHandler.addAllNetworkDependencies() {
@@ -64,6 +66,7 @@ fun DependencyHandler.addAllFirebaseDependencies() {
     implementation(Dependencies.FIREBASE_STORAGE)
     implementation(Dependencies.FIREBASE_CRASHLYTICS)
     implementation(Dependencies.FIREBASE_ANALYTICS)
+    implementation(Dependencies.FIREBASE_UI_STORAGE)
 }
 
 fun DependencyHandler.addRoomDependencies() {

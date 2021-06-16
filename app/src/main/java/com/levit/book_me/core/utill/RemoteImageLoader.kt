@@ -6,6 +6,9 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import com.levit.book_me.network.models.google_books.ImageLinks
 
 class RemoteImageLoader(
@@ -31,6 +34,15 @@ class RemoteImageLoader(
         val link = imageLinks?.getBiggestAvailableLink()
 
         load(link)
+    }
+
+    fun load(ref: StorageReference?) {
+       Glide.with(imageView)
+           .applyDefaultRequestOptions(options)
+           .load(ref)
+           .override(DEFAULT_CACHE_SIZE, DEFAULT_CACHE_SIZE)
+           .transition(getDefaultCrossFade())
+           .into(imageView)
     }
 
     private fun getDefaultCrossFade(): DrawableTransitionOptions

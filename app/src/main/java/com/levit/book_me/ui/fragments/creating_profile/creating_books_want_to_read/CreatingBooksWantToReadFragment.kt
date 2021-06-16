@@ -18,13 +18,13 @@ import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivityViewModel
 import com.levit.book_me.ui.activities.main_screen.MainScreenActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
-import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
-import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
+import com.levit.book_me.ui.fragments.utills.BaseBooksAdapter
+import com.levit.book_me.ui.fragments.utills.BaseBooksOffsetDecorator
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 
 class CreatingBooksWantToReadFragment:
     BaseCreatingProfileFragment<CreatingBooksWantToReadViewModel>(R.layout.fragment_creating_books_you_want_to_read),
-    CreatingBooksAdapter.CreatingBooksClickListener {
+    BaseBooksAdapter.BaseBooksClickListener {
 
     companion object {
         private const val FRAGMENT_POSITION = 6
@@ -34,7 +34,7 @@ class CreatingBooksWantToReadFragment:
 
     private val binding by viewBinding { FragmentCreatingBooksYouWantToReadBinding.bind(it) }
 
-    private val booksAdapter by lazy { CreatingBooksAdapter(this) }
+    private val booksAdapter by lazy { BaseBooksAdapter(this) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -152,16 +152,16 @@ class CreatingBooksWantToReadFragment:
         }
     }
 
-    override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
+    override fun onBookClicked(newState: BaseBooksAdapter.BaseBooksStates, book: GoogleBook) {
         when(newState) {
-            CreatingBooksAdapter.CreatingBooksStates.CHOSEN -> {
+            BaseBooksAdapter.BaseBooksStates.CHOSEN -> {
                 viewModel.addChosenBook(book)
                 sharedViewModel.addChosenBook(
                     type = SearchBooksTypes.BOOKS_YOU_WANT_TO_RED,
                     book = book
                 )
             }
-            CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN -> {
+            BaseBooksAdapter.BaseBooksStates.NOT_CHOSEN -> {
                 viewModel.removeChosenBook(book)
                 sharedViewModel.removeChosenBook(
                     type = SearchBooksTypes.BOOKS_YOU_WANT_TO_RED,
@@ -190,7 +190,7 @@ class CreatingBooksWantToReadFragment:
     }
 
     private fun configureLayout() {
-        val decorator = CreatingBooksOffsetDecorator()
+        val decorator = BaseBooksOffsetDecorator()
 
         with(binding.currentBooksRecycler) {
             adapter = booksAdapter
@@ -217,6 +217,7 @@ class CreatingBooksWantToReadFragment:
     private fun navigateToMainScreen() {
         val intent = Intent(requireContext(), MainScreenActivity::class.java)
         startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun navigateToSearchBooksScreen() {
