@@ -217,6 +217,7 @@ class CreatingBooksWantToReadFragment:
     private fun navigateToMainScreen() {
         val intent = Intent(requireContext(), MainScreenActivity::class.java)
         startActivity(intent)
+        requireActivity().finish()
     }
 
     private fun navigateToSearchBooksScreen() {
