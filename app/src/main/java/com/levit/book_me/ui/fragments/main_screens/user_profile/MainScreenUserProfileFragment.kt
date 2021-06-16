@@ -10,11 +10,14 @@ import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.defaultGlideOptions
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.ui.custom_view.SmallGenreView
+import com.levit.book_me.core.utill.FirebaseStorageReferences
+import com.levit.book_me.core.utill.RemoteImageLoader
 import com.levit.book_me.databinding.FragmentMainScreenProfileBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.base.BaseMainScreenFragment
@@ -36,6 +39,12 @@ class MainScreenUserProfileFragment
 
     private val wantToReadBooksAdapter by lazy {
         BaseBooksAdapter(isCheckable = false)
+    }
+
+    private val profilePhotoLoader by lazy {
+        val imageView = binding.profilePhoto
+        val options = imageView.defaultGlideOptions()
+        RemoteImageLoader(imageView, options)
     }
 
     override fun onAttach(context: Context) {
@@ -141,6 +150,7 @@ class MainScreenUserProfileFragment
         val name = profileModel.name
         val surname = profileModel.surname
         val wordsAboutPerson = profileModel.wordsAboutPerson
+        val profilePhotoUrl = FirebaseStorageReferences.getStorageProfileImageReference()
         val quote = profileModel.quote
 
         binding.nameSurnameTextView.text = "$name $surname"
@@ -149,6 +159,8 @@ class MainScreenUserProfileFragment
         binding.quote.hideAuthor(false)
         binding.quote.setChosen(true)
         binding.quote.setQuote(quote)
+
+        profilePhotoLoader.load(profilePhotoUrl)
     }
 
     private fun showAllViews(show: Boolean) {

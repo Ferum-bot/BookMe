@@ -63,6 +63,7 @@ object Versions {
     // Firebase
     const val FIREBASE = "26.7.0"
     const val FIREBASE_CRASHLYTICS = "2.7.0"
+    const val FIREBASE_UI_STORAGE = "6.4.0"
 
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES = "19.0.0"

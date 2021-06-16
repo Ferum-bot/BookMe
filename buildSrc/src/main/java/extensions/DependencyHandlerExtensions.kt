@@ -66,6 +66,7 @@ fun DependencyHandler.addAllFirebaseDependencies() {
     implementation(Dependencies.FIREBASE_STORAGE)
     implementation(Dependencies.FIREBASE_CRASHLYTICS)
     implementation(Dependencies.FIREBASE_ANALYTICS)
+    implementation(Dependencies.FIREBASE_UI_STORAGE)
 }
 
 fun DependencyHandler.addRoomDependencies() {

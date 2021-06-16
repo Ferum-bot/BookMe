@@ -63,7 +63,7 @@ class MainScreenActivity:
 
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.registerOnPageChangeCallback(onPageChangedCallback)
-        binding.viewPager.currentItem = MainScreenViewPagerAdapter.CURRENT_FRIEND_FRAGMENT_POSITION
+        binding.viewPager.currentItem = MainScreenViewPagerAdapter.PROFILE_FRAGMENT_POSITION
 
         binding.checkedChatsActionButton.rippleColor = Color.GRAY
         binding.notCheckedChatsActionButton.rippleColor = Color.GRAY
