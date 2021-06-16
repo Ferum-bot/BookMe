@@ -36,6 +36,8 @@ fun DependencyHandler.addAllUIDependencies() {
     implementation(Dependencies.NAVIGATION_FRAGMENT)
     implementation(Dependencies.PIN_VIEW)
     implementation(Dependencies.PAGE_INDICATOR)
+    implementation(Dependencies.ADAPTER_DELEGATES_DSL)
+    implementation(Dependencies.ADAPTER_DELEGATES_VIEW_BINDING)
 }
 
 fun DependencyHandler.addAllNetworkDependencies() {

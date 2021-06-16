@@ -21,7 +21,7 @@ android {
         minSdkVersion(Config.MIN_SDK_VERSION)
         targetSdkVersion(Config.TARGET_SDK_VERSION)
         versionCode = 1
-        versionName = "1.0.0"
+        versionName = "1.0.1"
         multiDexEnabled = Config.MULTIDEX_ENABLED
 
         testInstrumentationRunner = Config.TEST_INSTRUMENTATION_RUNNER
@@ -100,15 +100,10 @@ dependencies {
     // Network: https (REST API)
     addAllNetworkDependencies()
 
-    // UI: Androidx presentation views
-    implementation(Dependencies.MATERIAL)
-    implementation(Dependencies.CONSTRAIN_LAYOUT)
+    addAllUIDependencies()
 
     // UI: Images
     addGlideDependencies()
-
-    // UI: ViewPager2
-    implementation(Dependencies.VIEW_PAGER2)
 
     // Navigation Component
     implementation(Dependencies.NAVIGATION_FRAGMENT)

@@ -2,7 +2,7 @@ package dependencies
 
 object Versions {
     // Kotlin
-    const val KOTLIN = "1.4.30"
+    const val KOTLIN = "1.5.10"
     const val COROUTINES = "1.4.3"
 
     // Gradle
@@ -42,6 +42,9 @@ object Versions {
 
     // UI: Page indicator for view pager
     const val PAGE_INDICATOR = "1.0.3"
+
+    // UI: Adapter delegates
+    const val DELEGATE_ADAPTER = "4.3.0"
 
     // Navigation Component
     const val NAVIGATION = "2.2.2"

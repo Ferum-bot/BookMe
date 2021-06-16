@@ -13,4 +13,5 @@
     <dimen name="creating_profile_description_label_text_size">17sp</dimen>
     <dimen name="search_book_item_layout_width">175dp</dimen>
     <dimen name="search_book_item_layout_height">290dp</dimen>
+    <dimen name="main_screens_top_margin">52dp</dimen>
 </resources>
