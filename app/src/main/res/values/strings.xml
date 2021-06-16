@@ -116,5 +116,9 @@
     <string name="chats">Chats</string>
     <string name="profile">Profile</string>
     <string name="friend_profile">Friend profile</string>
+    <string name="profile_image_view">Profile image view</string>
+    <string name="profile_not_available">Profile not available</string>
+    <string name="favorite_books">Favorite books</string>
+    <string name="want_to_read_books">Want to read books</string>
 
 </resources>

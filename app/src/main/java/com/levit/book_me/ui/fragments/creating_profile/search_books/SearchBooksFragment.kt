@@ -15,12 +15,12 @@ import com.levit.book_me.databinding.FragmentSearchBooksBinding
 import com.levit.book_me.di.components.SearchBooksComponent
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
-import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksAdapter
-import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingBooksOffsetDecorator
+import com.levit.book_me.ui.fragments.utills.BaseBooksAdapter
+import com.levit.book_me.ui.fragments.utills.BaseBooksOffsetDecorator
 
 class SearchBooksFragment:
     BaseCreatingProfileFragment<SearchBooksViewModel>(R.layout.fragment_search_books),
-    CreatingBooksAdapter.CreatingBooksClickListener {
+    BaseBooksAdapter.BaseBooksClickListener {
 
     private lateinit var searchBooksComponent: SearchBooksComponent
 
@@ -28,7 +28,7 @@ class SearchBooksFragment:
 
     private val binding by viewBinding { FragmentSearchBooksBinding.bind(it) }
 
-    private val booksAdapter by lazy { CreatingBooksAdapter(this) }
+    private val booksAdapter by lazy { BaseBooksAdapter(this) }
 
     private val args by navArgs<SearchBooksFragmentArgs>()
 
@@ -95,13 +95,13 @@ class SearchBooksFragment:
         })
     }
 
-    override fun onBookClicked(newState: CreatingBooksAdapter.CreatingBooksStates, book: GoogleBook) {
+    override fun onBookClicked(newState: BaseBooksAdapter.BaseBooksStates, book: GoogleBook) {
         when(newState) {
-            CreatingBooksAdapter.CreatingBooksStates.CHOSEN -> {
+            BaseBooksAdapter.BaseBooksStates.CHOSEN -> {
                 viewModel.addChosenBook(book)
                 sharedViewModel.addChosenBook(args.searchType, book)
             }
-            CreatingBooksAdapter.CreatingBooksStates.NOT_CHOSEN -> {
+            BaseBooksAdapter.BaseBooksStates.NOT_CHOSEN -> {
                 viewModel.removeChosenBook(book)
                 sharedViewModel.removeChosenBook(args.searchType, book)
             }
@@ -129,7 +129,7 @@ class SearchBooksFragment:
             }
         })
 
-        val decorator = CreatingBooksOffsetDecorator()
+        val decorator = BaseBooksOffsetDecorator()
         with(binding.recyclerView) {
             adapter = booksAdapter
             addItemDecoration(decorator)

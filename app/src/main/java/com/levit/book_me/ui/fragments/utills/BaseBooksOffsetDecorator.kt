@@ -1,10 +1,10 @@
-package com.levit.book_me.ui.fragments.creating_profile.utills
+package com.levit.book_me.ui.fragments.utills
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class CreatingBooksOffsetDecorator: RecyclerView.ItemDecoration() {
+class BaseBooksOffsetDecorator: RecyclerView.ItemDecoration() {
 
     companion object {
         private const val MARGIN = 16

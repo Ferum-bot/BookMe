@@ -12,7 +12,7 @@
 
             style="@style/MainScreenBigTextViewStyle"
 
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/main_screens_top_margin"
             android:layout_marginStart="16dp"
 
             app:layout_constraintStart_toStartOf="parent"

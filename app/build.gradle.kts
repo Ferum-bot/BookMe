@@ -84,6 +84,7 @@ dependencies {
 
     implementation(project(CustomView.ROUND_CLOUDS_VIEW.path))
     implementation(project(CustomView.BOX_PROGRESS_BAR.path))
+    implementation(project(CustomView.NESTED_SCROLLABLE_HOST.path))
 
     // Kotlin
     implementation(Dependencies.KOTLIN)

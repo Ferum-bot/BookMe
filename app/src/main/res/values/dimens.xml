@@ -14,4 +14,6 @@
     <dimen name="search_book_item_layout_width">175dp</dimen>
     <dimen name="search_book_item_layout_height">290dp</dimen>
     <dimen name="main_screens_top_margin">52dp</dimen>
+    <dimen name="main_screen_profile_height">300dp</dimen>
+    <dimen name="main_screen_info_top_margin">150dp</dimen>
 </resources>
