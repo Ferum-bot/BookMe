@@ -205,8 +205,10 @@
     </style>
 
     <style name="MainScreenFABStyle">
-        <item name="fabSize">mini</item>
+        <item name="fabCustomSize">30dp</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:backgroundTint">@color/dark_white</item>
+        <item name="android:scaleType">center</item>
+        <item name="maxImageSize">17dp</item>
     </style>
 </resources>
