@@ -113,6 +113,9 @@
     <string name="profile_not_available">Profile not available</string>
     <string name="favorite_books">Favorite books</string>
     <string name="want_to_read_books">Want to read books</string>
+    <string name="edit_profile_photo">Edit profile photo</string>
+    <string name="new_photo_uploaded">New photo uploaded</string>
+    <string name="new_photo_not_uploaded">New photo upload failed</string>
 
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>

@@ -27,6 +27,13 @@ class CreatingProfileImageViewModel @Inject constructor(
     private val _isPhotoUpLoaded: MutableLiveData<Boolean> = MutableLiveData(false)
     val isPhotoUpLoaded: LiveData<Boolean> = _isPhotoUpLoaded
 
+    init {
+        viewModelScope.launch {
+            uploadProfileImageInteractor.uploadPhotoResult
+                .collectLatest(this@CreatingProfileImageViewModel::handleUploadProfileResult)
+        }
+    }
+
     fun photoIsChosen(imageUri: Uri) {
         _isPhotoChosen.value = true
         _imageUri.value = imageUri
@@ -44,18 +51,13 @@ class CreatingProfileImageViewModel @Inject constructor(
         viewModelScope.launch {
             uploadProfileImageInteractor.uploadProfileImageToStorage(imageUri)
         }
-
-        viewModelScope.launch {
-            uploadProfileImageInteractor.uploadResult
-                .collectLatest(this@CreatingProfileImageViewModel::handleUploadProfileResult)
-        }
     }
 
     fun photoUploadHasShown() {
         _isPhotoUpLoaded.value = false
     }
 
-    private suspend fun handleUploadProfileResult(result: FirebaseStorageUploadResult) =
+    private fun handleUploadProfileResult(result: FirebaseStorageUploadResult) =
         when (result) {
             is FirebaseStorageUploadResult.Error ->
                 handleErrorResult(result.exception)

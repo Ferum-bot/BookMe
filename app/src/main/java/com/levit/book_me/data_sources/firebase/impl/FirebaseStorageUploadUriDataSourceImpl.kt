@@ -24,12 +24,12 @@ class FirebaseStorageUploadUriDataSourceImpl @Inject constructor(): FirebaseStor
     private fun onSuccess(snapshot: UploadTask.TaskSnapshot) =
     runBlocking {
         val successResult = FirebaseStorageUploadResult.Success(snapshot)
-        val result = _loadToFirebaseStorageResult.emit(successResult)
+        _loadToFirebaseStorageResult.emit(successResult)
     }
 
     private fun onFailure(ex: Exception) =
     runBlocking {
         val errorResult = FirebaseStorageUploadResult.Error(ex)
-        val result = _loadToFirebaseStorageResult.emit(errorResult)
+        _loadToFirebaseStorageResult.emit(errorResult)
     }
 }

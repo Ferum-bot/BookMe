@@ -19,6 +19,7 @@ import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.ui.custom_view.SimpleAuthorView
 import com.levit.book_me.core.ui.custom_view.SmallGenreView
 import com.levit.book_me.core.utill.FirebaseStorageReferences
+import com.levit.book_me.core.utill.ProfileImagePicker
 import com.levit.book_me.core.utill.RemoteImageLoader
 import com.levit.book_me.databinding.FragmentMainScreenProfileBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -49,6 +50,10 @@ class MainScreenUserProfileFragment
         RemoteImageLoader(imageView, options)
     }
 
+    private val photoPicker by lazy {
+        ProfileImagePicker(activityResultRegistry, this, this::onImagePicked)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -60,6 +65,7 @@ class MainScreenUserProfileFragment
 
         setAllObservers()
         configureLayout()
+        initImagePicker()
         setAllClickListeners()
     }
 
@@ -116,8 +122,14 @@ class MainScreenUserProfileFragment
         }
     }
 
-    private fun setAllClickListeners() {
+    private fun initImagePicker() {
+        photoPicker
+    }
 
+    private fun setAllClickListeners() {
+        binding.changePhotoButton.setOnClickListener {
+            photoPicker.pickPicture()
+        }
     }
 
     private fun setUpGenres(genres: List<Genre>) {
@@ -169,5 +181,10 @@ class MainScreenUserProfileFragment
         binding.constraintLayout.forEach { view ->
             view.isVisible = show
         }
+    }
+
+    private fun onImagePicked(uri: Uri?) {
+        uri ?: return
+        viewModel.uploadNewProfilePhoto(uri)
     }
 }
