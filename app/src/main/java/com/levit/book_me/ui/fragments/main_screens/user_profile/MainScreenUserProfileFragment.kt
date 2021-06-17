@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -15,6 +16,7 @@ import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.ui.custom_view.SimpleAuthorView
 import com.levit.book_me.core.ui.custom_view.SmallGenreView
 import com.levit.book_me.core.utill.FirebaseStorageReferences
 import com.levit.book_me.core.utill.RemoteImageLoader
@@ -94,7 +96,8 @@ class MainScreenUserProfileFragment
                     binding.errorLabel.visibility = View.GONE
                 }
                 MainScreenUserProfileViewModel.Status.NOTHING_TO_SHOW, null -> {
-
+                    showAllViews(false)
+                    binding.progressBar.visibility = View.VISIBLE
                 }
             }
         }
@@ -119,15 +122,8 @@ class MainScreenUserProfileFragment
 
     private fun setUpGenres(genres: List<Genre>) {
         genres.forEach { genre ->
-            val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
-            )
-            val view = SmallGenreView(requireContext()).apply {
-                this.layoutParams = layoutParams
-                id = View.generateViewId()
-                setGenre(genre)
-            }
+            val view = SmallGenreView.getWithBaseParams(this::requireContext)
+            view.setGenre(genre)
 
             binding.constraintLayout.addView(view)
             binding.genresFlow.addView(view)
@@ -135,7 +131,13 @@ class MainScreenUserProfileFragment
     }
 
     private fun setUpAuthors(authors: List<Author>) {
+        authors.forEach { author ->
+            val authorView = SimpleAuthorView.getWithBaseParams(this::requireContext)
+            authorView.setAuthor(author)
 
+            binding.constraintLayout.addView(authorView)
+            binding.authorFlow.addView(authorView)
+        }
     }
 
     private fun setUpFavoriteBooks(books: List<GoogleBook>) {

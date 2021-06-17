@@ -42,9 +42,9 @@ class MainScreenUserProfileViewModel @Inject constructor(
     }
 
     fun updateAllData() {
+        _currentStatus.postValue(Status.LOADING)
         profileModelJob?.cancel()
         profileModelJob = viewModelScope.launch {
-            _currentStatus.postValue(Status.LOADING)
             interactor.getProfile()
         }
     }

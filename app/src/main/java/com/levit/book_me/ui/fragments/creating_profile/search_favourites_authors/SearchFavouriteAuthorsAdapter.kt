@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.levit.book_me.R
 import com.levit.book_me.core.models.Author
-import com.levit.book_me.databinding.SearchFavouriteAuthorsItemLayoutBinding
+import com.levit.book_me.databinding.SimpleAuthorsItemLayoutBinding
 
 class SearchFavouriteAuthorsAdapter(
    private val stateListener: AuthorStateListener
@@ -37,7 +37,7 @@ class SearchFavouriteAuthorsAdapter(
     }
 
     class SearchFavouriteAuthorsViewHolder private constructor(
-        private val binding: SearchFavouriteAuthorsItemLayoutBinding,
+        private val binding: SimpleAuthorsItemLayoutBinding,
         private val stateListener: AuthorStateListener,
         private val adapter: SearchFavouriteAuthorsAdapter,
     ): RecyclerView.ViewHolder(binding.root) {
@@ -47,7 +47,7 @@ class SearchFavouriteAuthorsAdapter(
             fun getFrom(parent: ViewGroup, stateListener: AuthorStateListener, adapter: SearchFavouriteAuthorsAdapter)
                     : SearchFavouriteAuthorsViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
-                val binding = SearchFavouriteAuthorsItemLayoutBinding.inflate(inflater, parent, false)
+                val binding = SimpleAuthorsItemLayoutBinding.inflate(inflater, parent, false)
                 return SearchFavouriteAuthorsViewHolder(binding, stateListener, adapter)
             }
         }

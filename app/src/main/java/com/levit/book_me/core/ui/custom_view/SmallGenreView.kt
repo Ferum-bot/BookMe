@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
 import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.dpToPx
@@ -21,6 +23,17 @@ class SmallGenreView @JvmOverloads constructor(
 
         private const val TEXT_SIZE_SP = 14f
         private const val TEXT_PADDING_DP = 4
+
+        fun getWithBaseParams(requireContext: () -> Context): SmallGenreView {
+            val layoutParams = ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT
+            )
+            return SmallGenreView(requireContext()).apply {
+                this.layoutParams = layoutParams
+                id = View.generateViewId()
+            }
+        }
     }
 
     init {
