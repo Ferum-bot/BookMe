@@ -103,13 +103,6 @@
     <string name="now_let_the_magic_do_the_work">Now let the magic \ndo the work</string>
     <string name="we_will_introduce_you_to_one_bookish_person_to_have_the_booktalk_with">We will introduce you to one bookish person to have the BookTalk with.</string>
     <string name="searching_for_person_may_take_a_time_keep_it_working">Searching for person may take a time. \nKeep it working.</string>
-
-    <!--  Google Play Services  -->
-    <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
-
-    <!--  Facebook  -->
-    <string name="facebook_app_id">341735473936192</string>
-    <string name="fb_login_protocol_scheme">fb341735473936192</string>
     <string name="profile_action_button">profile_action_button</string>
     <string name="current_friend_profile_action_button">Current friend profile action button</string>
     <string name="chats_action_button">Chats action button</string>
@@ -120,5 +113,16 @@
     <string name="profile_not_available">Profile not available</string>
     <string name="favorite_books">Favorite books</string>
     <string name="want_to_read_books">Want to read books</string>
+    <string name="edit_profile_photo">Edit profile photo</string>
+    <string name="new_photo_uploaded">New photo uploaded</string>
+    <string name="new_photo_not_uploaded">New photo upload failed</string>
+    <string name="profile_updated">Profile updated</string>
+
+    <!--  Google Play Services  -->
+    <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
+
+    <!--  Facebook  -->
+    <string name="facebook_app_id">341735473936192</string>
+    <string name="fb_login_protocol_scheme">fb341735473936192</string>
 
 </resources>

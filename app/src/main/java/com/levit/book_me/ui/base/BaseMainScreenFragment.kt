@@ -36,5 +36,21 @@ abstract class BaseMainScreenFragment<VM: BaseViewModel>(
                 viewModel.errorMessageHasShown()
             }
         }
+
+        viewModel.successMessage.observe(viewLifecycleOwner) { message ->
+            if (message == null) {
+                return@observe
+            }
+            showSuccessMessage(message)
+            viewModel.successMessageHasShown()
+        }
+
+        viewModel.successMessageId.observe(viewLifecycleOwner) { messageId ->
+            if (messageId == null) {
+                return@observe
+            }
+            showSuccessMessage(messageId)
+            viewModel.successMessageHasShown()
+        }
     }
 }

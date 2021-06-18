@@ -1,25 +1,29 @@
-package com.levit.book_me.interactors.main_screen
+package com.levit.book_me.repositories.profile
 
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
-import com.levit.book_me.interactors.creating_profile.UploadProfileImageInteractor
 import com.levit.book_me.network.models.google_books.GoogleBook
+import com.levit.book_me.repositories.firebase.FirebaseStorageUploadUriRepository
 import com.levit.book_me.repositories.result_models.BaseRepositoryResult
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharedFlow
 
-interface UserProfileInteractor: UploadProfileImageInteractor {
+interface ProfileRepository
+    : FirebaseStorageUploadUriRepository{
 
-    val profileModel: Flow<BaseRepositoryResult<ProfileModel>>
+    val resultProfile: SharedFlow<BaseRepositoryResult<ProfileModel>>
 
     suspend fun getProfile()
 
-    suspend fun updateName(newName: String)
+    suspend fun deleteProfile()
 
-    suspend fun updateSurname(surname: String)
-
-    suspend fun updateWordsAboutPerson(wordsAboutPerson: String)
+    /**
+     * If property is null, data source will not update this property.
+     */
+    suspend fun updateBaseInformation(
+        name: String? = null, surname: String? = null, wordsAboutPerson: String? = null
+    )
 
     suspend fun updateQuote(quote: GoQuote)
 

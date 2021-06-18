@@ -14,9 +14,20 @@ abstract class BaseViewModel: ViewModel() {
     protected val _errorMessageId: MutableLiveData<Int?> = MutableLiveData(null)
     val errorMessageId: LiveData<Int?> = _errorMessageId
 
+    protected val _successMessage: MutableLiveData<String?> = MutableLiveData(null)
+    val successMessage: LiveData<String?> = _successMessage
+
+    protected val _successMessageId: MutableLiveData<Int?> = MutableLiveData(null)
+    val successMessageId: LiveData<Int?> = _successMessageId
+
     open fun errorMessageHasShown() {
         _errorMessageId.postValue(null)
         _errorMessage.postValue(null)
+    }
+
+    open fun successMessageHasShown() {
+        _successMessage.postValue(null)
+        _successMessageId.postValue(null)
     }
 
     protected open fun handleErrorResult(error: RetrofitResult.Failure<*>) {

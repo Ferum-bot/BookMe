@@ -6,17 +6,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.defaultGlideOptions
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.ui.custom_view.SimpleAuthorView
 import com.levit.book_me.core.ui.custom_view.SmallGenreView
 import com.levit.book_me.core.utill.FirebaseStorageReferences
+import com.levit.book_me.core.utill.ProfileImagePicker
 import com.levit.book_me.core.utill.RemoteImageLoader
 import com.levit.book_me.databinding.FragmentMainScreenProfileBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -47,6 +51,10 @@ class MainScreenUserProfileFragment
         RemoteImageLoader(imageView, options)
     }
 
+    private val photoPicker by lazy {
+        ProfileImagePicker(activityResultRegistry, this, this::onImagePicked)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -58,6 +66,7 @@ class MainScreenUserProfileFragment
 
         setAllObservers()
         configureLayout()
+        initImagePicker()
         setAllClickListeners()
     }
 
@@ -94,7 +103,8 @@ class MainScreenUserProfileFragment
                     binding.errorLabel.visibility = View.GONE
                 }
                 MainScreenUserProfileViewModel.Status.NOTHING_TO_SHOW, null -> {
-
+                    showAllViews(false)
+                    binding.progressBar.visibility = View.VISIBLE
                 }
             }
         }
@@ -111,23 +121,26 @@ class MainScreenUserProfileFragment
             addItemDecoration(baseBooksDecorator)
             adapter = wantToReadBooksAdapter
         }
+
+        binding.errorLabel.addClickableText(R.string.try_again) {
+            viewModel.getProfile()
+        }
+    }
+
+    private fun initImagePicker() {
+        photoPicker
     }
 
     private fun setAllClickListeners() {
-
+        binding.changePhotoButton.setOnClickListener {
+            photoPicker.pickPicture()
+        }
     }
 
     private fun setUpGenres(genres: List<Genre>) {
         genres.forEach { genre ->
-            val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT
-            )
-            val view = SmallGenreView(requireContext()).apply {
-                this.layoutParams = layoutParams
-                id = View.generateViewId()
-                setGenre(genre)
-            }
+            val view = SmallGenreView.getWithBaseParams(this::requireContext)
+            view.setGenre(genre)
 
             binding.constraintLayout.addView(view)
             binding.genresFlow.addView(view)
@@ -135,7 +148,13 @@ class MainScreenUserProfileFragment
     }
 
     private fun setUpAuthors(authors: List<Author>) {
+        authors.forEach { author ->
+            val authorView = SimpleAuthorView.getWithBaseParams(this::requireContext)
+            authorView.setAuthor(author)
 
+            binding.constraintLayout.addView(authorView)
+            binding.authorFlow.addView(authorView)
+        }
     }
 
     private fun setUpFavoriteBooks(books: List<GoogleBook>) {
@@ -167,5 +186,10 @@ class MainScreenUserProfileFragment
         binding.constraintLayout.forEach { view ->
             view.isVisible = show
         }
+    }
+
+    private fun onImagePicked(uri: Uri?) {
+        uri ?: return
+        viewModel.uploadNewProfilePhoto(uri)
     }
 }

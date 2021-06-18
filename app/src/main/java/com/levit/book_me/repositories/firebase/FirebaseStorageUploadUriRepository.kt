@@ -9,6 +9,6 @@ interface FirebaseStorageUploadUriRepository {
 
     val uploadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult>
 
-    suspend fun upLoadUriToFirebaseStorage(uri: Uri, ref: StorageReference)
+    suspend fun upLoadUriToFirebaseStorage(uri: Uri)
 
 }
