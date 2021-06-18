@@ -6,14 +6,21 @@ import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.repositories.firebase.FirebaseStorageUploadUriRepository
-import com.levit.book_me.repositories.result_models.ProfileRepositoryResult
+import com.levit.book_me.repositories.result_models.BaseRepositoryResult
 import kotlinx.coroutines.flow.SharedFlow
 
 interface ProfileRepository
     : FirebaseStorageUploadUriRepository{
 
-    val resultProfile: SharedFlow<ProfileRepositoryResult<ProfileModel>>
+    val resultProfile: SharedFlow<BaseRepositoryResult<ProfileModel>>
 
+    suspend fun getProfile()
+
+    suspend fun deleteProfile()
+
+    /**
+     * If property is null, data source will not update this property.
+     */
     suspend fun updateBaseInformation(name: String?, surname: String?, wordsAboutPerson: String?)
 
     suspend fun updateQuote(quote: GoQuote)

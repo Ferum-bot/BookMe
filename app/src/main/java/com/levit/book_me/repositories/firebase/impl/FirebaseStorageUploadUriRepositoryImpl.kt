@@ -1,7 +1,7 @@
 package com.levit.book_me.repositories.firebase.impl
 
 import android.net.Uri
-import com.google.firebase.storage.StorageReference
+import com.levit.book_me.core.utill.FirebaseStorageReferences
 import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadUriDataSource
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
@@ -23,8 +23,9 @@ class FirebaseStorageUploadUriRepositoryImpl @Inject constructor(
     override val uploadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult>
         = dataSource.loadToFirebaseStorageResult
 
-    override suspend fun upLoadUriToFirebaseStorage(uri: Uri, ref: StorageReference)
+    override suspend fun upLoadUriToFirebaseStorage(uri: Uri)
     = withContext(launchContext) {
+        val ref = FirebaseStorageReferences.getStorageProfileImageReference(uri)
         dataSource.loadUriToFirebaseStorage(uri, ref)
     }
 }

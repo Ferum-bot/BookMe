@@ -18,7 +18,6 @@ class UploadProfileImageInteractorImpl @Inject constructor(
     = storageUriRepository.uploadToFirebaseStorageResult
 
     override suspend fun uploadProfileImageToStorage(imageUri: Uri) {
-        val profileImageRef = FirebaseStorageReferences.getStorageProfileImageReference(imageUri)
-        storageUriRepository.upLoadUriToFirebaseStorage(imageUri, profileImageRef)
+        storageUriRepository.upLoadUriToFirebaseStorage(imageUri)
     }
 }

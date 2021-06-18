@@ -2,7 +2,7 @@ package com.levit.book_me.repositories.result_models
 
 import com.levit.book_me.network.network_result_data.RetrofitResult
 
-sealed class ProfileRepositoryResult<out T> {
+sealed class BaseRepositoryResult<out T> {
 
     open val exception: Throwable? = null
 
@@ -12,7 +12,7 @@ sealed class ProfileRepositoryResult<out T> {
 
     open val statusCode: Int? = null
 
-    class RemoteResult<T>(val result: RetrofitResult<T>): ProfileRepositoryResult<T>() {
+    class RemoteResult<T>(val result: RetrofitResult<T>): BaseRepositoryResult<T>() {
 
         override val exception: Throwable?
         get() {
@@ -69,12 +69,22 @@ sealed class ProfileRepositoryResult<out T> {
     class CacheResult<T>(
         val result: T,
 
+        /**
+         * This properties provide base information about
+         * remote request error.
+         */
+        override val exception: Throwable? = null,
+        override val errorMessage: String? = null,
+        override val errorMessageId: Int? = null,
+        override val statusCode: Int? = null,
+    ): BaseRepositoryResult<T>()
+
+    class EmptyError(
         override val exception: Throwable?,
         override val errorMessage: String?,
         override val errorMessageId: Int?,
         override val statusCode: Int?,
+    ): BaseRepositoryResult<Nothing>()
 
-    ): ProfileRepositoryResult<T>()
-
-    object EmptyProfile: ProfileRepositoryResult<Nothing>()
+    object EmptySuccess: BaseRepositoryResult<Nothing>()
 }

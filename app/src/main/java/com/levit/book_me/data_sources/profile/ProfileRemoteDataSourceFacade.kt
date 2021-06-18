@@ -14,6 +14,10 @@ interface ProfileRemoteDataSourceFacade:
 
     val remoteProfile: SharedFlow<RetrofitResult<ProfileModel>>
 
+    suspend fun getProfile()
+
+    suspend fun deleteProfile()
+
     /**
      * If property is null, data source will not update this property.
      */

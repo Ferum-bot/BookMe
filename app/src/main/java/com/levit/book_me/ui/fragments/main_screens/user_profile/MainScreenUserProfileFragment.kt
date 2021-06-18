@@ -11,6 +11,7 @@ import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.defaultGlideOptions
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
@@ -119,6 +120,10 @@ class MainScreenUserProfileFragment
         binding.wantToReadBooksRecycler.apply {
             addItemDecoration(baseBooksDecorator)
             adapter = wantToReadBooksAdapter
+        }
+
+        binding.errorLabel.addClickableText(R.string.try_again) {
+            viewModel.getProfile()
         }
     }
 
