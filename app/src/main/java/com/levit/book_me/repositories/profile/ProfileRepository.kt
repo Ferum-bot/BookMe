@@ -21,7 +21,9 @@ interface ProfileRepository
     /**
      * If property is null, data source will not update this property.
      */
-    suspend fun updateBaseInformation(name: String?, surname: String?, wordsAboutPerson: String?)
+    suspend fun updateBaseInformation(
+        name: String? = null, surname: String? = null, wordsAboutPerson: String? = null
+    )
 
     suspend fun updateQuote(quote: GoQuote)
 

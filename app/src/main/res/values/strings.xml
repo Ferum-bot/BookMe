@@ -116,6 +116,7 @@
     <string name="edit_profile_photo">Edit profile photo</string>
     <string name="new_photo_uploaded">New photo uploaded</string>
     <string name="new_photo_not_uploaded">New photo upload failed</string>
+    <string name="profile_updated">Profile updated</string>
 
     <!--  Google Play Services  -->
     <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>

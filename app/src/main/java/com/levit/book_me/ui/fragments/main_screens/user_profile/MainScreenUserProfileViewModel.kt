@@ -36,6 +36,8 @@ class MainScreenUserProfileViewModel @Inject constructor(
     private val _currentStatus: MutableLiveData<Status> = MutableLiveData()
     val currentStatus: LiveData<Status> = _currentStatus
 
+    private var needToShowSuccessMessage: Boolean = false
+
     init {
         viewModelScope.launch {
             interactor.uploadPhotoResult.collect { result ->
@@ -62,6 +64,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateName(name: String) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateName(name)
         }
@@ -69,6 +72,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateSurname(surname: String) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateSurname(surname)
         }
@@ -76,6 +80,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateWordsAboutPerson(wordsAboutPerson: String) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateWordsAboutPerson(wordsAboutPerson)
         }
@@ -83,6 +88,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateQuote(quote: GoQuote) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateQuote(quote)
         }
@@ -90,6 +96,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateFavoriteGenres(genres: List<Genre>) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateFavoriteGenres(genres)
         }
@@ -97,6 +104,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateFavoriteAuthors(authors: List<Author>) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateFavoriteAuthors(authors)
         }
@@ -104,6 +112,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateFavoriteBooks(books: List<GoogleBook>) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateFavoriteBooks(books)
         }
@@ -111,6 +120,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun updateWantToReadBooks(books: List<GoogleBook>) {
         _currentStatus.value = Status.LOADING
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.updateWantToReadBooks(books)
         }
@@ -118,6 +128,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     fun uploadNewProfilePhoto(uri: Uri) {
         _currentStatus.postValue(Status.LOADING)
+        needToShowSuccessMessage = true
         viewModelScope.launch {
             interactor.uploadProfileImageToStorage(uri)
         }
@@ -159,12 +170,17 @@ class MainScreenUserProfileViewModel @Inject constructor(
         if (result !is RetrofitResult.Success) {
             return
         }
+        if (needToShowSuccessMessage) {
+            _successMessageId.postValue(R.string.profile_updated)
+            needToShowSuccessMessage = false
+        }
         val profile = result.data
         _profileModel.postValue(profile)
         _currentStatus.postValue(Status.PROFILE_MODEL_FROM_REMOTE)
     }
 
     private fun handleCacheResult(result: BaseRepositoryResult.CacheResult<ProfileModel>) {
+        needToShowSuccessMessage = false
         val profile = result.result
         _profileModel.postValue(profile)
         _currentStatus.postValue(Status.PROFILE_MODEL_FROM_CACHE)

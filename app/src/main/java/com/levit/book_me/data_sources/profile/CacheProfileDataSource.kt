@@ -8,7 +8,7 @@ interface CacheProfileDataSource {
 
     val profile: SharedFlow<ProfileModel>
 
-    suspend fun getProfile()
+    suspend fun getProfile(): ProfileModel
 
     suspend fun safeProfile(profile: ProfileModel)
 

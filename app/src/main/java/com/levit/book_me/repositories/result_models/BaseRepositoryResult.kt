@@ -79,7 +79,7 @@ sealed class BaseRepositoryResult<out T> {
         override val statusCode: Int? = null,
     ): BaseRepositoryResult<T>()
 
-    class EmptyError(
+    class Error(
         override val exception: Throwable?,
         override val errorMessage: String?,
         override val errorMessageId: Int?,

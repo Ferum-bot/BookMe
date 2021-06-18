@@ -51,7 +51,7 @@ class SharedPrefProfileDataSource @Inject constructor(
 
     private val gson = Gson()
 
-    override suspend fun getProfile() {
+    override suspend fun getProfile(): ProfileModel {
         val name = getName()
         val surname = getSurname()
         val wordsAboutPerson = getWordsAboutPerson()
@@ -67,6 +67,7 @@ class SharedPrefProfileDataSource @Inject constructor(
             favoriteAuthors, favoriteBooks, wantToReadBooks, quote
         )
         _profile.emit(profileModel)
+        return profileModel
     }
 
     override suspend fun safeProfile(profile: ProfileModel) {
