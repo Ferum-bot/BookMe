@@ -6,6 +6,12 @@ import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userBaseInfoRef
+import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userFavoriteAuthorsCollectionRef
+import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userFavoriteBooksCollectionRef
+import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userFavoriteGenresCollectionRef
+import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userQuoteDocument
+import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userWantToReadBooksCollectionRef
 import com.levit.book_me.data_sources.profile.RegisterNewUserDataSource
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.RetrofitResult
@@ -17,6 +23,11 @@ import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicInteger
 import javax.inject.Inject
 
+/**
+ * I know that this is awful code, but firebase does not have
+ * comfortable API to connect with, so lately we will migrate to
+ * ovn backend server.
+ */
 class FirestoreRegisterNewUserDataSource @Inject constructor(
     private val remote:  FirebaseFirestore,
     private val auth: FirebaseAuth,
@@ -26,20 +37,6 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
 
         private const val REPLAY_COUNT = 1
         private const val EXTRA_CAPACITY_COUNT = 0
-
-        private const val USERS = "users"
-        private const val BASE_COLLECTIONS = "baseInformation"
-
-        private const val FAVORITE_AUTHORS_DOCUMENT = "FavoriteAuthors"
-        private const val FAVORITE_BOOKS_DOCUMENT = "FavoriteBooks"
-        private const val WANT_TO_READ_BOOKS_DOCUMENT = "WantToReadBooks"
-        private const val GENRES_DOCUMENT = "GENRES"
-        private const val QUOTE_DOCUMENT = "Quote"
-
-        private const val FAVORITE_AUTHOR_COLLECTION = "ChosenAuthors"
-        private const val FAVORITE_BOOKS_COLLECTION = "ChosenBooks"
-        private const val WANT_TO_READ_BOOKS_COLLECTION = "ChosenBooks"
-        private const val GENRES_COLLECTION = "ChosenGenres"
 
         private const val AUTHOR_PREF_NAME = "author"
         private const val BOOK_PREF_NAME = "book"
@@ -54,22 +51,6 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
     override val resultStatus: SharedFlow<RetrofitResult<UserResponseModel>> = _resultStatus
-
-    private val userId = auth.currentUser?.uid ?: ""
-
-    private val userBaseInfoRef = remote.collection(USERS).document(userId)
-    private val userCollectionsRef = userBaseInfoRef.collection(BASE_COLLECTIONS)
-
-    private val userFavoriteAuthorsCollectionRef = userCollectionsRef
-        .document(FAVORITE_AUTHORS_DOCUMENT).collection(FAVORITE_AUTHOR_COLLECTION)
-    private val userFavoriteBooksCollectionRef = userCollectionsRef
-        .document(FAVORITE_BOOKS_DOCUMENT).collection(FAVORITE_BOOKS_COLLECTION)
-    private val userWantToReadBooksCollectionRef = userCollectionsRef
-        .document(WANT_TO_READ_BOOKS_DOCUMENT).collection(WANT_TO_READ_BOOKS_COLLECTION)
-    private val userFavoriteGenresCollectionRef = userCollectionsRef
-        .document(GENRES_DOCUMENT).collection(GENRES_COLLECTION)
-
-    private val userQuoteDocument = userCollectionsRef.document(QUOTE_DOCUMENT)
 
     private var numberOfUploadedData: AtomicInteger = AtomicInteger(0)
     private var isErrorAlreadyGot = false
