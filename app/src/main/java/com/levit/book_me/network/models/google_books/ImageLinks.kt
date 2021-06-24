@@ -7,22 +7,22 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ImageLinks(
     @Json(name = "smallThumbnail")
-    val smallThumbnailImageLink: String?,
+    val smallThumbnailImageLink: String? = null,
 
     @Json(name = "thumbnail")
-    val defaultThumbnailImageLink: String?,
+    val defaultThumbnailImageLink: String? = null,
 
     @Json(name = "small")
-    val smallImageLink: String?,
+    val smallImageLink: String? = null,
 
     @Json(name = "medium")
-    val mediumImageLink: String?,
+    val mediumImageLink: String? = null,
 
     @Json(name = "large")
-    val largeImageLink: String?,
+    val largeImageLink: String? = null,
 
     @Json(name = "extraLarge")
-    val extraLargeImageLink: String?
+    val extraLargeImageLink: String? = null,
 ): Parcelable {
 
     fun getBiggestAvailableLink(): String? {

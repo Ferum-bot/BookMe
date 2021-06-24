@@ -2,10 +2,16 @@ package com.levit.book_me.data_sources.profile.impl
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.levit.book_me.core.extensions.getBaseInfoMap
+import com.levit.book_me.core.extensions.toMap
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.utill.FirebaseConstants
+import com.levit.book_me.core.utill.FirebaseConstants.AUTHOR_PREF_NAME
+import com.levit.book_me.core.utill.FirebaseConstants.BOOK_PREF_NAME
+import com.levit.book_me.core.utill.FirebaseConstants.GENRE_PREF_NAME
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userBaseInfoRef
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userFavoriteAuthorsCollectionRef
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userFavoriteBooksCollectionRef
@@ -26,7 +32,7 @@ import javax.inject.Inject
 /**
  * I know that this is awful code, but firebase does not have
  * comfortable API to connect with, so lately we will migrate to
- * ovn backend server.
+ * own backend server.
  */
 class FirestoreRegisterNewUserDataSource @Inject constructor(
     private val remote:  FirebaseFirestore,
@@ -37,10 +43,6 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
 
         private const val REPLAY_COUNT = 1
         private const val EXTRA_CAPACITY_COUNT = 0
-
-        private const val AUTHOR_PREF_NAME = "author"
-        private const val BOOK_PREF_NAME = "book"
-        private const val GENRE_PREF_NAME = "genre"
 
         private const val UPLOAD_DATA_COUNT = 6
     }
@@ -78,7 +80,7 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
         val authors = profile.favouriteAuthors
         authors.forEachIndexed { index, author ->
             userFavoriteAuthorsCollectionRef
-                .document("$AUTHOR_PREF_NAME$index")
+                .document(FirebaseConstants.getAuthorDocumentPath(index))
                 .set(author.toMap())
                 .addOnSuccessListener { onSuccessLoaded() }
                 .addOnFailureListener { onFailureLoaded(it) }
@@ -89,7 +91,7 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
         val books = profile.favouriteBooks
         books.forEachIndexed { index, book ->
             userFavoriteBooksCollectionRef
-                .document("$BOOK_PREF_NAME$index")
+                .document(FirebaseConstants.getBookDocumentPath(index))
                 .set(book.toMap())
                 .addOnSuccessListener { onSuccessLoaded() }
                 .addOnFailureListener { onFailureLoaded(it) }
@@ -100,7 +102,7 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
         val books = profile.wantToReadBooks
         books.forEachIndexed { index, book ->
             userWantToReadBooksCollectionRef
-                .document("$BOOK_PREF_NAME$index")
+                .document(FirebaseConstants.getBookDocumentPath(index))
                 .set(book.toMap())
                 .addOnSuccessListener { onSuccessLoaded() }
                 .addOnFailureListener { onFailureLoaded(it) }
@@ -111,7 +113,7 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
         val genres = profile.favouriteGenres
         genres.forEachIndexed { index, genre ->
             userFavoriteGenresCollectionRef
-                .document("$GENRE_PREF_NAME$index")
+                .document(FirebaseConstants.getGenreDocumentPath(index))
                 .set(genre.toMap())
                 .addOnSuccessListener { onSuccessLoaded() }
                 .addOnFailureListener { onFailureLoaded(it) }
@@ -153,37 +155,4 @@ class FirestoreRegisterNewUserDataSource @Inject constructor(
         val result = RetrofitResult.Success.Value(response)
         _resultStatus.emit(result)
     }
-
-    private fun ProfileModel.getBaseInfoMap(): Map<String, String>
-    = mapOf(
-        "name" to name,
-        "surname" to surname,
-        "wordsAboutPerson" to wordsAboutPerson,
-        "profileImageUrl" to profilePhotoUrl,
-    )
-
-    private fun GoQuote.toMap(): Map<String, String>
-    = mapOf(
-        "text" to text,
-        "authorFullName" to authorFullName,
-        "tag" to tag,
-    )
-
-    private fun Author.toMap(): Map<String, String>
-    = mapOf(
-        "fullName" to fullName,
-    )
-
-    private fun GoogleBook.toMap(): Map<String, String>
-    = mapOf(
-        "title" to (title ?: ""),
-        "authors" to (listOfAuthors?.joinToString() ?: ""),
-        "imageLink" to (imageLinks?.getBiggestAvailableLink() ?: "")
-    )
-
-    private fun Genre.toMap(): Map<String, String>
-    = mapOf(
-        "string" to string,
-        "isBig" to isBig.toString(),
-    )
 }

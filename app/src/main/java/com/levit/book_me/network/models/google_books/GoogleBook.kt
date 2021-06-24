@@ -8,25 +8,25 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class GoogleBook(
     @Json(name = "title")
-    val title: String?,
+    val title: String? = "",
 
     @Json(name = "authors")
-    val listOfAuthors: List<String>?,
+    val listOfAuthors: List<String>? = emptyList(),
 
     @Json(name = "printType")
-    val printType: String,
+    val printType: String = "",
 
     @Json(name = "categories")
-    val bookCategories: List<String>?,
+    val bookCategories: List<String>? = emptyList(),
 
     @Json(name = "imageLinks")
-    val imageLinks: ImageLinks?,
+    val imageLinks: ImageLinks? = null,
 
     @Json(name = "language")
-    val bookLanguage: String?,
+    val bookLanguage: String? = "",
 
     @Json(name = "previewLink")
-    val previewLink: String,
+    val previewLink: String = "",
 ): Parcelable {
 
     @IgnoredOnParcel
