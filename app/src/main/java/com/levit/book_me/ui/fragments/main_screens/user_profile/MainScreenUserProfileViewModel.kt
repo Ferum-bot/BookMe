@@ -18,6 +18,7 @@ import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.result_models.BaseRepositoryResult
 import com.levit.book_me.ui.base.BaseMainScreenViewModel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.subscribe
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Named
@@ -40,6 +41,8 @@ class MainScreenUserProfileViewModel @Inject constructor(
     val currentStatus: LiveData<Status> = _currentStatus
 
     private var needToShowSuccessMessage: Boolean = false
+
+    private val flowImage = interactor.uploadPhotoResult
 
     init {
         viewModelScope.launch {
@@ -187,5 +190,11 @@ class MainScreenUserProfileViewModel @Inject constructor(
         val profile = result.result
         _profileModel.postValue(profile)
         _currentStatus.postValue(Status.PROFILE_MODEL_FROM_CACHE)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        val f = 3
     }
 }

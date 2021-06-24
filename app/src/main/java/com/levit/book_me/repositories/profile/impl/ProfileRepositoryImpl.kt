@@ -52,7 +52,7 @@ class ProfileRepositoryImpl @Inject constructor(
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
     override val resultProfile: SharedFlow<BaseRepositoryResult<ProfileModel>>
-    get() = _resultProfile
+    = _resultProfile
 
     override val uploadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult>
     = remoteDataSource.uploadToFirebaseStorageResult

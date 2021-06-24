@@ -15,8 +15,12 @@ object Dependencies {
     // Lifecycle
     const val LIFECYCLE_LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LIFECYCLE}"
     const val LIFECYCLE_VIEW_MODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
-    const val LIFECYCLE_RUNTIME = "androidx.lifecycle:lifecycle-runtime:${Versions.LIFECYCLE}"
-    const val LIFECYCLE_EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:${Versions.LIFECYCLE}"
+    const val LIFECYCLE_RUNTIME = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.LIFECYCLE}"
+    const val LIFECYCLE_SAVED_STATE = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.LIFECYCLE}"
+    const val LIFECYCLE_SERVICE = "androidx.lifecycle:lifecycle-service:${Versions.LIFECYCLE}"
+    const val LIFECYCLE_APPLICATION = "androidx.lifecycle:lifecycle-process:${Versions.LIFECYCLE}"
+    const val LIFECYCLE_REACTIVE_STREAMS = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.LIFECYCLE}"
+
 
     // Storage: database
     const val ROOM = "androidx.room:room-runtime:${Versions.ROOM}"

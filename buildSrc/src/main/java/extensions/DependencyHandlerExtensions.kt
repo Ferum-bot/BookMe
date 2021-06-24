@@ -77,9 +77,12 @@ fun DependencyHandler.addRoomDependencies() {
 
 fun DependencyHandler.addLifecycleDependencies() {
     implementation(Dependencies.LIFECYCLE_RUNTIME)
-    implementation(Dependencies.LIFECYCLE_EXTENSIONS)
     implementation(Dependencies.LIFECYCLE_LIVEDATA_KTX)
     implementation(Dependencies.LIFECYCLE_VIEW_MODEL)
+    implementation(Dependencies.LIFECYCLE_APPLICATION)
+    implementation(Dependencies.LIFECYCLE_REACTIVE_STREAMS)
+    implementation(Dependencies.LIFECYCLE_SAVED_STATE)
+    implementation(Dependencies.LIFECYCLE_SERVICE)
     kapt(KaptDependencies.LIFECYCLE_COMPILER)
 }
 
