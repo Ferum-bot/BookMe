@@ -17,6 +17,9 @@ import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.result_models.BaseRepositoryResult
 import com.levit.book_me.ui.base.BaseMainScreenViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.subscribe
 import kotlinx.coroutines.launch
@@ -34,6 +37,23 @@ class MainScreenUserProfileViewModel @Inject constructor(
         PROFILE_MODEL_FROM_REMOTE, NOTHING_TO_SHOW
     }
 
+    /**
+     * @Important
+     * I found strange enough behavior with ViewModel class and viewModelScope.
+     * What I mean: when user peaks photo or another file through ActivityResult API,
+     * Google lifecycle library called @onCleared method on this viewModel, but after that
+     * new instance of viewModel doesn't created.
+     *
+     * So, @onCleared method cancels all collecting jobs and @init block not called again.
+     * That's why viewModel just doesn't collect data from interactor after the application
+     * received @Uri of new profile photo.
+     *
+     * That's why I created own viewModelScope. This scope is controlled from Fragment through
+     * @onResume method.
+     * May be the reason of this strange behavior is badly tuned dagger's scopes.
+     */
+    private var customViewModelScope: CoroutineScope? = null
+
     private val _profileModel: MutableLiveData<ProfileModel> = MutableLiveData()
     val profileModel: LiveData<ProfileModel> = _profileModel
 
@@ -42,22 +62,8 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     private var needToShowSuccessMessage: Boolean = false
 
-    private val flowImage = interactor.uploadPhotoResult
-
     init {
-        viewModelScope.launch {
-            interactor.uploadPhotoResult.collect { result ->
-                handleUploadPhotoResult(result)
-            }
-        }
-
-        viewModelScope.launch {
-            interactor.profileModel.collect { result ->
-                handleErrorRepositoryResult(result)
-                handleRepositoryResult(result)
-            }
-        }
-
+        initCollectors()
         getProfile()
     }
 
@@ -140,6 +146,27 @@ class MainScreenUserProfileViewModel @Inject constructor(
         }
     }
 
+    fun initCollectors() {
+        if (customViewModelScope == null) {
+            customViewModelScope = CoroutineScope(Dispatchers.Main.immediate)
+        } else {
+            return
+        }
+
+        customViewModelScope?.launch {
+            interactor.uploadPhotoResult.collect { result ->
+                handleUploadPhotoResult(result)
+            }
+        }
+
+        customViewModelScope?.launch {
+            interactor.profileModel.collect { result ->
+                handleErrorRepositoryResult(result)
+                handleRepositoryResult(result)
+            }
+        }
+    }
+
     private fun handleUploadPhotoResult(result: FirebaseStorageUploadResult) {
         when (result) {
             is FirebaseStorageUploadResult.Success ->
@@ -195,6 +222,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
 
-        val f = 3
+        customViewModelScope?.cancel()
+        customViewModelScope = null
     }
 }
