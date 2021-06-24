@@ -10,6 +10,7 @@ import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core_base.di.MainScreenScope
+import com.levit.book_me.di.DIConstants
 import com.levit.book_me.interactors.main_screen.UserProfileInteractor
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
@@ -19,9 +20,11 @@ import com.levit.book_me.ui.base.BaseMainScreenViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Named
 
 @MainScreenScope
 class MainScreenUserProfileViewModel @Inject constructor(
+    @Named(DIConstants.MAIN_SCREEN_BASE_PROFILE_INTERACTOR)
     private val interactor: UserProfileInteractor,
 ): BaseMainScreenViewModel() {
 

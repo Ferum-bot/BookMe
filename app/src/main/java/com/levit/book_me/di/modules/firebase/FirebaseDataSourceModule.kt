@@ -4,6 +4,8 @@ import com.levit.book_me.data_sources.firebase.impl.FirebaseStorageUploadStreamD
 import com.levit.book_me.data_sources.firebase.impl.FirebaseStorageUploadUriDataSourceImpl
 import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadStreamDataSource
 import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadUriDataSource
+import com.levit.book_me.data_sources.profile.impl.BaseProfileRemoteDataSource
+import com.levit.book_me.data_sources.profile.impl.FirestoreProfileRemoteDataSource
 import dagger.Module
 import dagger.Provides
 
@@ -18,5 +20,10 @@ open class FirebaseDataSourceModule {
     @Provides
     fun provideStorageUploadUriDataSource(): FirebaseStorageUploadUriDataSource {
         return FirebaseStorageUploadUriDataSourceImpl()
+    }
+
+    @Provides
+    fun provideFirebaseBaseDataSource(): BaseProfileRemoteDataSource {
+        return FirestoreProfileRemoteDataSource()
     }
 }

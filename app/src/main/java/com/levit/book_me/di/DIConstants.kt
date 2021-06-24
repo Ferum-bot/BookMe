@@ -14,4 +14,7 @@ object DIConstants {
     const val MAIN_DISPATCHER_CONTEXT = "MainDispatcherContext"
     const val UNCONFINED_DISPATCHER_CONTEXT = "UnconfinedCoroutineContext"
     const val DEFAULT_DISPATCHER_CONTEXT = "DefaultCoroutineContext"
+
+    const val MAIN_SCREEN_TEST_PROFILE_INTERACTOR = "MainScreenTestProfileInteractor"
+    const val MAIN_SCREEN_BASE_PROFILE_INTERACTOR = "MainScreenBaseProfileInterator"
 }

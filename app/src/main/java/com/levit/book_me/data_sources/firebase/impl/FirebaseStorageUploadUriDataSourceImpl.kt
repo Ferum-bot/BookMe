@@ -5,6 +5,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadUriDataSource
 import com.levit.book_me.network.network_result_data.FirebaseStorageUploadResult
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.runBlocking
@@ -12,7 +13,17 @@ import javax.inject.Inject
 
 class FirebaseStorageUploadUriDataSourceImpl @Inject constructor(): FirebaseStorageUploadUriDataSource {
 
-    private val _loadToFirebaseStorageResult = MutableSharedFlow<FirebaseStorageUploadResult>()
+    companion object {
+
+        private const val REPLAY_COUNT = 1
+        private const val EXTRA_CAPACITY = 0
+    }
+
+    private val _loadToFirebaseStorageResult = MutableSharedFlow<FirebaseStorageUploadResult>(
+        replay = REPLAY_COUNT,
+        extraBufferCapacity = EXTRA_CAPACITY,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+    )
     override val loadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult> = _loadToFirebaseStorageResult
 
     override suspend fun loadUriToFirebaseStorage(uri: Uri, ref: StorageReference) {

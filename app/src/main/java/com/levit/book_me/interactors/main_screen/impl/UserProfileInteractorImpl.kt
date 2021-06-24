@@ -20,10 +20,10 @@ class UserProfileInteractorImpl @Inject constructor(
 ): UserProfileInteractor {
 
     override val profileModel: Flow<BaseRepositoryResult<ProfileModel>>
-        get() = repository.resultProfile
+        = repository.resultProfile
 
     override val uploadPhotoResult: Flow<FirebaseStorageUploadResult>
-        get() = repository.uploadToFirebaseStorageResult
+        = repository.uploadToFirebaseStorageResult
 
     override suspend fun getProfile() {
         repository.getProfile()
