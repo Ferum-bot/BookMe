@@ -70,6 +70,12 @@ class MainScreenUserProfileFragment
         setAllClickListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.initCollectors()
+    }
+
     override fun setAllObservers() {
         super.setAllObservers()
 

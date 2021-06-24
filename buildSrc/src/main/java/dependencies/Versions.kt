@@ -2,8 +2,8 @@ package dependencies
 
 object Versions {
     // Kotlin
-    const val KOTLIN = "1.5.10"
-    const val COROUTINES = "1.4.3"
+    const val KOTLIN = "1.5.20"
+    const val COROUTINES = "1.5.0"
 
     // Gradle
     const val TOOLS_GRADLE = "4.0.1"
@@ -15,7 +15,7 @@ object Versions {
     const val FRAGMENT_KTX = "1.3.0"
 
     // Lifecycle
-    const val LIFECYCLE = "2.2.0"
+    const val LIFECYCLE = "2.3.1"
 
     // Storage: database
     const val ROOM = "2.1.0-alpha06"

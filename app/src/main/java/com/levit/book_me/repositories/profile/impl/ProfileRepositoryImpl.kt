@@ -52,7 +52,7 @@ class ProfileRepositoryImpl @Inject constructor(
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
     override val resultProfile: SharedFlow<BaseRepositoryResult<ProfileModel>>
-    get() = _resultProfile
+    = _resultProfile
 
     override val uploadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult>
     = remoteDataSource.uploadToFirebaseStorageResult
@@ -133,21 +133,21 @@ class ProfileRepositoryImpl @Inject constructor(
     }
 
     private suspend fun handleProfileCacheResult(result: ProfileModel) {
-
+        val cacheResult = BaseRepositoryResult.CacheResult(result)
+        _resultProfile.emit(cacheResult)
     }
 
-    private suspend fun handleErrorRemoteResult(result: RetrofitResult.Failure<*>): BaseRepositoryResult<ProfileModel> {
-        return when(currentAction) {
-            Actions.GET_PROFILE -> handleGetProfileRemoteError(result)
-            Actions.UPDATE_PROFILE -> handleUpdateProfileRemoteError(result)
-            Actions.DELETE_PROFILE -> handleDeleteProfileRemoteError(result)
-            Actions.WAITING -> handleWaiting()
-        }.also {
-            currentAction = Actions.WAITING
-        }
+    private suspend fun handleErrorRemoteResult(result: RetrofitResult.Failure<*>)
+    = when(currentAction) {
+        Actions.GET_PROFILE -> handleGetProfileRemoteError(result)
+        Actions.UPDATE_PROFILE -> handleUpdateProfileRemoteError(result)
+        Actions.DELETE_PROFILE -> handleDeleteProfileRemoteError(result)
+        Actions.WAITING -> handleWaiting()
+    }.also {
+        currentAction = Actions.WAITING
     }
 
-    private suspend fun handleGetProfileRemoteError(result: RetrofitResult.Failure<*>): BaseRepositoryResult<ProfileModel> {
+    private suspend fun handleGetProfileRemoteError(result: RetrofitResult.Failure<*>) {
         var throwable: Throwable? = result.error
         var message: String? = null
         var messageId: Int? = null
@@ -167,24 +167,25 @@ class ProfileRepositoryImpl @Inject constructor(
         }
 
         val cacheProfile = localDataSource.getProfile()
-        return BaseRepositoryResult.CacheResult(
+        val cacheResult =  BaseRepositoryResult.CacheResult(
             result = cacheProfile,
             exception = throwable,
             errorMessage = message,
             errorMessageId = messageId,
             statusCode = statusCode,
         )
+        _resultProfile.emit(cacheResult)
     }
 
-    private suspend fun handleUpdateProfileRemoteError(result: RetrofitResult.Failure<*>): BaseRepositoryResult<ProfileModel> {
-§
+    private suspend fun handleUpdateProfileRemoteError(result: RetrofitResult.Failure<*>) {
+        handleGetProfileRemoteError(result)
     }
 
-    private suspend fun handleDeleteProfileRemoteError(result: RetrofitResult.Failure<*>): BaseRepositoryResult<ProfileModel> {
-
+    private suspend fun handleDeleteProfileRemoteError(result: RetrofitResult.Failure<*>) {
+        handleGetProfileRemoteError(result)
     }
 
-    private suspend fun handleWaiting(): BaseRepositoryResult<ProfileModel> {
+    private suspend fun handleWaiting() {
 
     }
 }
