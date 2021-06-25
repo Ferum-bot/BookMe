@@ -28,14 +28,14 @@ class FirestoreProfileRemoteDataSource @Inject constructor(
 
     companion object {
 
-        private const val REPLAY_COUNT = 1
+        private const val REPLAY_COUNT = 0
         private const val EXTRA_CAPACITY_COUNT = 0
     }
 
     private val _remoteProfile: MutableSharedFlow<RetrofitResult<ProfileModel>> = MutableSharedFlow(
         replay = REPLAY_COUNT,
         extraBufferCapacity = EXTRA_CAPACITY_COUNT,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        onBufferOverflow = BufferOverflow.SUSPEND,
     )
     override val remoteProfile: SharedFlow<RetrofitResult<ProfileModel>> = _remoteProfile
 
