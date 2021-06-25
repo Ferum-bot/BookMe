@@ -4,15 +4,12 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
-import com.levit.book_me.core.extensions.defaultGlideOptions
+import com.levit.book_me.core.extensions.noCacheGlideOptions
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
@@ -47,13 +44,16 @@ class MainScreenUserProfileFragment
 
     private val profilePhotoLoader by lazy {
         val imageView = binding.profilePhoto
-        val options = imageView.defaultGlideOptions()
+        val options = imageView.noCacheGlideOptions()
         RemoteImageLoader(imageView, options)
     }
 
     private val photoPicker by lazy {
         ProfileImagePicker(activityResultRegistry, this, this::onImagePicked)
     }
+
+    private val currentGenreViews = mutableListOf<SmallGenreView>()
+    private val currentAuthorViews = mutableListOf<SimpleAuthorView>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -108,7 +108,7 @@ class MainScreenUserProfileFragment
                     binding.progressBar.visibility = View.GONE
                     binding.errorLabel.visibility = View.GONE
                 }
-                MainScreenUserProfileViewModel.Status.NOTHING_TO_SHOW, null -> {
+                MainScreenUserProfileViewModel.Status.NO_AVAILABLE_DATA, null -> {
                     showAllViews(false)
                     binding.progressBar.visibility = View.VISIBLE
                 }
@@ -141,25 +141,41 @@ class MainScreenUserProfileFragment
         binding.changePhotoButton.setOnClickListener {
             photoPicker.pickPicture()
         }
+
+        binding.quote.setOnClickListener {
+
+        }
     }
 
     private fun setUpGenres(genres: List<Genre>) {
+        currentGenreViews.forEach { view ->
+            binding.genresFlow.removeView(view)
+            binding.constraintLayout.removeView(view)
+        }.also { currentGenreViews.clear() }
+
         genres.forEach { genre ->
             val view = SmallGenreView.getWithBaseParams(this::requireContext)
             view.setGenre(genre)
 
             binding.constraintLayout.addView(view)
             binding.genresFlow.addView(view)
+            currentGenreViews.add(view)
         }
     }
 
     private fun setUpAuthors(authors: List<Author>) {
+        currentAuthorViews.forEach { view ->
+            binding.authorFlow.removeView(view)
+            binding.constraintLayout.removeView(view)
+        }.also { currentAuthorViews.clear() }
+
         authors.forEach { author ->
             val authorView = SimpleAuthorView.getWithBaseParams(this::requireContext)
             authorView.setAuthor(author)
 
             binding.constraintLayout.addView(authorView)
             binding.authorFlow.addView(authorView)
+            currentAuthorViews.add(authorView)
         }
     }
 

@@ -8,4 +8,9 @@ import javax.inject.Inject
 class MainScreenActivityViewModel @Inject constructor(
 
 ): BaseViewModel() {
+
+    fun searchNewFriend() {
+
+    }
+
 }

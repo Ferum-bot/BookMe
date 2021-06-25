@@ -34,7 +34,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
 
     enum class Status {
         LOADING, PROFILE_MODEL_FROM_CACHE,
-        PROFILE_MODEL_FROM_REMOTE, NOTHING_TO_SHOW
+        PROFILE_MODEL_FROM_REMOTE, NO_AVAILABLE_DATA
     }
 
     /**

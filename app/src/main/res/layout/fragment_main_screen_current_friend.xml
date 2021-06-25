@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/friend_profile"
+            android:text="@string/your_current_bookish_firend"
 
             style="@style/MainScreenBigTextViewStyle"
 
@@ -17,4 +22,46 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/time_left_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_left"
+
+            style="@style/MainScreenLabelStyle"
+
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label"/>
+
+        <TextView
+            android:id="@+id/time_left_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/_14_32_17"
+
+            style="@style/MainScreenLabelStyle"
+
+            android:layout_marginStart="4dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/time_left_label"
+            app:layout_constraintBottom_toBottomOf="@id/time_left_label"
+            app:layout_constraintStart_toEndOf="@id/time_left_label"/>
+
+        <include
+            android:id="@+id/base_information"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            layout="@layout/main_screen_base_profile_layout"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_left_label"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

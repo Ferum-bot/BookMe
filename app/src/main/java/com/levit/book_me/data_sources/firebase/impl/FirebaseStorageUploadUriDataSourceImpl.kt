@@ -17,14 +17,14 @@ class FirebaseStorageUploadUriDataSourceImpl @Inject constructor(): FirebaseStor
 
     companion object {
 
-        private const val REPLAY_COUNT = 1
+        private const val REPLAY_COUNT = 0
         private const val EXTRA_CAPACITY = 0
     }
 
     private val _loadToFirebaseStorageResult = MutableSharedFlow<FirebaseStorageUploadResult>(
         replay = REPLAY_COUNT,
         extraBufferCapacity = EXTRA_CAPACITY,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST,
+        onBufferOverflow = BufferOverflow.SUSPEND,
     )
     override val loadToFirebaseStorageResult: SharedFlow<FirebaseStorageUploadResult> = _loadToFirebaseStorageResult
 

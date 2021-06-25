@@ -124,5 +124,10 @@
     <!--  Facebook  -->
     <string name="facebook_app_id">341735473936192</string>
     <string name="fb_login_protocol_scheme">fb341735473936192</string>
+    <string name="your_current_bookish_firend">Your current \nbookish firend</string>
+    <string name="time_left">Time left:</string>
+    <string name="_14_32_17">14:32:17</string>
+    <string name="you_have_no_available_bookish_friends">You have no available Bookish friends</string>
+    <string name="search_new_bookish_friend">Search new Bookish friend</string>
 
 </resources>
