@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DefaultMessageTextStyle">
+
+    </style>
+
+    <style name="DefaultMessageTimeTextStyle">
+
+    </style>
+
+    <style name="DefaultMessageAuthorTextStyle">
+
+    </style>
+</resources>

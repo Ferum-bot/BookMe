@@ -1,7 +1,5 @@
 package com.levit.book_me.core.utill
 
-import android.icu.util.Calendar
-import android.icu.util.TimeZone
 import android.os.CountDownTimer
 import android.widget.TextView
 import java.util.*
@@ -54,7 +52,8 @@ class FriendTimeLeftAdapter(
     }
 
     private fun getCurrentDate(): Date {
-        val calendar = java.util.Calendar.getInstance(LocaleHelper.DEFAULT_LOCALE)
-       return calendar.time
+        val zones = TimeZone.getAvailableIDs()
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/London"))
+        return calendar.time
     }
 }
