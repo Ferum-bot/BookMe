@@ -102,17 +102,21 @@ class MainScreenFriendProfileFragment:
                 }
                 MainScreenFriendProfileViewModel.Statuses.PROFILE_FROM_CACHE -> {
                     hideAllViews(false)
+                    showNoAvailableFriendsLabels(false)
+                    showNoDataLabels(false)
                 }
                 MainScreenFriendProfileViewModel.Statuses.PROFILE_FROM_REMOTE -> {
                     hideAllViews(false)
+                    showNoAvailableFriendsLabels(false)
+                    showNoDataLabels(false)
                 }
                 MainScreenFriendProfileViewModel.Statuses.USER_HAS_NO_FRIENDS -> {
                     hideAllViews(true)
-                    showNoAvailableFriendsLabels()
+                    showNoAvailableFriendsLabels(true)
                 }
                 MainScreenFriendProfileViewModel.Statuses.NO_AVAILABLE_DATA, null -> {
                     hideAllViews(true)
-                    showNoDataLabels()
+                    showNoDataLabels(true)
                 }
             }
         }
@@ -158,15 +162,15 @@ class MainScreenFriendProfileFragment:
         binding.baseInformation.quote.isClickable = false
     }
 
-    private fun showNoAvailableFriendsLabels() {
+    private fun showNoAvailableFriendsLabels(show: Boolean) {
         with(binding.baseInformation) {
-            searchNewBookishFriend.isVisible = true
-            haveNotFriendsLabel.isVisible = true
+            searchNewBookishFriend.isVisible = show
+            haveNotFriendsLabel.isVisible = show
         }
     }
 
-    private fun showNoDataLabels() {
-        binding.baseInformation.errorLabel.isVisible = true
+    private fun showNoDataLabels(show: Boolean) {
+        binding.baseInformation.errorLabel.isVisible = show
     }
 
     private fun hideAllViews(hide: Boolean) {

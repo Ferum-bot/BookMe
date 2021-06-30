@@ -68,6 +68,7 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+        unitTests.isIncludeAndroidResources = true
     }
 }
 
@@ -85,6 +86,9 @@ dependencies {
     implementation(project(CustomView.ROUND_CLOUDS_VIEW.path))
     implementation(project(CustomView.BOX_PROGRESS_BAR.path))
     implementation(project(CustomView.NESTED_SCROLLABLE_HOST.path))
+
+    implementation(project(Kits.CHAT_KIT.path))
+    implementation(project(Kits.UI_KIT.path))
 
     // Kotlin
     implementation(Dependencies.KOTLIN)

@@ -13,10 +13,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentEmailSignUpBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
+import com.levit.bookme.uikit.utills.ParcelableTextWatcher
 
 class EmailSignUpFragment: BaseAuthorizationFragment(R.layout.fragment_email_sign_up) {
 

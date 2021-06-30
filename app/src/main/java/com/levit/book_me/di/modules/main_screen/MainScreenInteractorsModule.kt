@@ -35,8 +35,8 @@ open class MainScreenInteractorsModule {
 
     @Provides
     fun provideCurrentFriendInteractor(
-
+        repository: ProfileRepository
     ): CurrentFriendInteractor {
-        return TestCurrentFriendInterator()
+        return TestCurrentFriendInterator(repository)
     }
 }

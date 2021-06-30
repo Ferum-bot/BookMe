@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.levit.book_me.core.models.FriendProfileModel
 import com.levit.book_me.core_base.di.MainScreenScope
 import com.levit.book_me.interactors.main_screen.CurrentFriendInteractor
+import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.result_models.BaseRepositoryResult
 import com.levit.book_me.ui.base.BaseMainScreenViewModel
 import com.levit.book_me.ui.base.BaseViewModel
@@ -36,6 +37,8 @@ class MainScreenFriendProfileViewModel @Inject constructor(
                 handleFriendModelResult(result)
             }
         }
+
+        loadCurrentFriend(100)
     }
 
     fun loadCurrentFriend(id: Long) {
@@ -47,9 +50,39 @@ class MainScreenFriendProfileViewModel @Inject constructor(
         }
     }
 
-    private fun handleFriendModelResult(result: BaseRepositoryResult<FriendProfileModel>) {
-        when (result) {
+    private fun handleFriendModelResult(result: BaseRepositoryResult<FriendProfileModel>) =
+    when (result) {
+        is BaseRepositoryResult.RemoteResult ->
+            handleFriendRemoteResult(result)
+        is BaseRepositoryResult.CacheResult ->
+            handleFriendCacheResult(result)
+        is BaseRepositoryResult.Error ->
+            handleFriendErrorResult(result)
+        is BaseRepositoryResult.EmptySuccess ->
+            handleEmptySuccess()
+    }
 
+    private fun handleFriendCacheResult(result: BaseRepositoryResult.CacheResult<FriendProfileModel>) {
+        _currentStatus.postValue(Statuses.PROFILE_FROM_CACHE)
+        val friendProfile = result.result
+        _currentFriend.postValue(friendProfile)
+    }
+
+    private fun handleFriendRemoteResult(result: BaseRepositoryResult.RemoteResult<FriendProfileModel>) {
+        _currentStatus.postValue(Statuses.PROFILE_FROM_REMOTE)
+        val retrofitResult = result.result
+        if (retrofitResult !is RetrofitResult.Success) {
+            return
         }
+        val friendProfile = retrofitResult.data
+        _currentFriend.postValue(friendProfile)
+    }
+
+    private fun handleFriendErrorResult(result: BaseRepositoryResult.Error) {
+        _currentStatus.postValue(Statuses.NO_AVAILABLE_DATA)
+    }
+
+    private fun handleEmptySuccess() {
+        _currentStatus.postValue(Statuses.USER_HAS_NO_FRIENDS)
     }
 }

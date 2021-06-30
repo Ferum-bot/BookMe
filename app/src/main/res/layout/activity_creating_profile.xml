@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.levit.book_me.core.ui.custom_view.CreatingProfilePageIndicator
+    <com.levit.bookme.uikit.ui.PageIndicator
         android:id="@+id/page_indicator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

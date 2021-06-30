@@ -1,4 +1,4 @@
-package com.levit.book_me.core.ui.custom_view
+package com.levit.bookme.uikit.ui
 
 import android.content.Context
 import android.graphics.Color
@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.levit.book_me.databinding.CreatingProfilePageIndicatorLayoutBinding
+import com.levit.bookme.uikit.databinding.PageIndicatorLayoutBinding
 
-class CreatingProfilePageIndicator @JvmOverloads constructor(
+class PageIndicator @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -19,7 +19,7 @@ class CreatingProfilePageIndicator @JvmOverloads constructor(
         fun activePrefixChanged(activePrefixNumber: Int)
     }
 
-    private val binding: CreatingProfilePageIndicatorLayoutBinding
+    private val binding: PageIndicatorLayoutBinding
 
     private var activeColor: Int = Color.BLACK
     private var inactiveColor: Int = Color.rgb(220, 220, 220)
@@ -28,7 +28,7 @@ class CreatingProfilePageIndicator @JvmOverloads constructor(
 
     init {
         val inflater = LayoutInflater.from(context)
-        binding = CreatingProfilePageIndicatorLayoutBinding
+        binding = PageIndicatorLayoutBinding
             .inflate(inflater, this, true)
 
         configureLayout()

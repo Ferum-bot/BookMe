@@ -10,13 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.hideKeyboard
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentSearchBooksBinding
 import com.levit.book_me.di.components.SearchBooksComponent
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.utills.BaseBooksAdapter
 import com.levit.book_me.ui.fragments.utills.BaseBooksOffsetDecorator
+import com.levit.bookme.uikit.utills.ParcelableTextWatcher
 
 class SearchBooksFragment:
     BaseCreatingProfileFragment<SearchBooksViewModel>(R.layout.fragment_search_books),

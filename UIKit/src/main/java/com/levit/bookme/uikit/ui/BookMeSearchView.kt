@@ -1,4 +1,4 @@
-package com.levit.book_me.core.ui.custom_view
+package com.levit.bookme.uikit.ui
 
 import android.content.Context
 import android.graphics.Color

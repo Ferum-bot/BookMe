@@ -11,11 +11,10 @@ import com.levit.book_me.R
 import com.levit.book_me.core.extensions.hideKeyboard
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
-import com.levit.book_me.core.ui.ParcelableTextWatcher
-import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.databinding.FragmentSearchFavouriteAuthorsBinding
 import com.levit.book_me.di.components.SearchFavouriteAuthorsComponent
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
+import com.levit.bookme.uikit.utills.ParcelableTextWatcher
 
 class SearchFavouriteAuthorsFragment:
     BaseCreatingProfileFragment<SearchFavouriteAuthorsViewModel>(R.layout.fragment_search_favourite_authors),
