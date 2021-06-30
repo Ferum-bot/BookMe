@@ -1,11 +1,11 @@
-package com.levit.book_me.core.ui.custom_view
+package com.levit.bookme.uikit.ui
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.levit.book_me.databinding.SearchViewPlaceholderLayoutBinding
+import com.levit.bookme.uikit.databinding.SearchViewPlaceholderLayoutBinding
 
 class SearchPlaceholderView @JvmOverloads constructor(
     context: Context,

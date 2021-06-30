@@ -20,13 +20,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.ui.ParcelableClickableSpan
-import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentEmailPhoneAuthorizationContainerBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneViewPagerAdapter.Companion.FIRST_POSITION
 import com.levit.book_me.ui.fragments.authorization.email_phone_authorization.EmailPhoneViewPagerAdapter.Companion.SECOND_POSITION
+import com.levit.bookme.uikit.utills.ParcelableClickableSpan
+import com.levit.bookme.uikit.utills.ParcelableTextWatcher
 import java.util.concurrent.TimeUnit
 
 class EmailPhoneAuthorizationContainerFragment: BaseAuthorizationFragment(R.layout.fragment_email_phone_authorization_container) {

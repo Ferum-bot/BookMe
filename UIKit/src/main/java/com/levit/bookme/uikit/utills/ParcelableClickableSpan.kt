@@ -1,4 +1,4 @@
-package com.levit.book_me.core.ui
+package com.levit.bookme.uikit.utills
 
 import android.os.Parcelable
 import android.text.TextPaint

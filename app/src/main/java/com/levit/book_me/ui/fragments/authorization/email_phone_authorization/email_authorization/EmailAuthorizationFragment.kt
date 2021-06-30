@@ -8,10 +8,10 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.ui.ParcelableClickableSpan
-import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core_presentation.base.BaseFragment
 import com.levit.book_me.databinding.FragmentEmailAuthorizationBinding
+import com.levit.bookme.uikit.utills.ParcelableClickableSpan
+import com.levit.bookme.uikit.utills.ParcelableTextWatcher
 
 class EmailAuthorizationFragment: BaseFragment(R.layout.fragment_email_authorization) {
 
@@ -25,9 +25,9 @@ class EmailAuthorizationFragment: BaseFragment(R.layout.fragment_email_authoriza
         private const val END_CLICKABLE_SPAN_POSITION = 36
 
         fun newInstance(
-                emailTextWatcher: ParcelableTextWatcher,
-                passwordTextWatcher: ParcelableTextWatcher,
-                emailSignUpClickableSpan: ParcelableClickableSpan,
+            emailTextWatcher: ParcelableTextWatcher,
+            passwordTextWatcher: ParcelableTextWatcher,
+            emailSignUpClickableSpan: ParcelableClickableSpan,
         ): EmailAuthorizationFragment {
             val fragment = EmailAuthorizationFragment()
             val bundle = Bundle()

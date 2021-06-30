@@ -87,6 +87,9 @@ dependencies {
     implementation(project(CustomView.BOX_PROGRESS_BAR.path))
     implementation(project(CustomView.NESTED_SCROLLABLE_HOST.path))
 
+    implementation(project(Kits.CHAT_KIT.path))
+    implementation(project(Kits.UI_KIT.path))
+
     // Kotlin
     implementation(Dependencies.KOTLIN)
 

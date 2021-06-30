@@ -1,16 +1,13 @@
 package com.levit.book_me.ui.activities.creating_profile
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import com.levit.book_me.R
-import com.levit.book_me.core.ui.custom_view.CreatingProfilePageIndicator
 import com.levit.book_me.databinding.ActivityCreatingProfileBinding
 import com.levit.book_me.di.components.CreatingProfileComponent
-import com.levit.book_me.ui.activities.main_screen.MainScreenActivity
 import com.levit.book_me.ui.base.BaseActivity
+import com.levit.bookme.uikit.ui.PageIndicator
 
 class CreatingProfileActivity: BaseActivity(), TitleViewController {
 
@@ -22,10 +19,10 @@ class CreatingProfileActivity: BaseActivity(), TitleViewController {
 
     lateinit var creatingProfileComponent: CreatingProfileComponent
 
-    val pageIndicatorController = object: CreatingProfilePageIndicator.OnActivePrefixNumberChangeListener {
+    val pageIndicatorController = object: PageIndicator.OnActivePrefixNumberChangeListener {
 
         override fun activePrefixChanged(activePrefixNumber: Int) {
-            val pageIndicator: CreatingProfilePageIndicator = findViewById(R.id.page_indicator)
+            val pageIndicator: PageIndicator = findViewById(R.id.page_indicator)
             pageIndicator.setActivePrefixNumber(activePrefixNumber)
         }
 

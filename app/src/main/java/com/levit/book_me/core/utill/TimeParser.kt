@@ -23,10 +23,19 @@ object TimeParser {
         val calendar = Calendar.getInstance(Locale.ENGLISH)
         calendar.timeInMillis = time
 
-        val hours = calendar.get(Calendar.HOUR_OF_DAY)
-        val minutes = calendar.get(Calendar.MINUTE)
-        val seconds = calendar.get(Calendar.SECOND)
+        val hours = calendar.get(Calendar.HOUR_OF_DAY).adaptTime()
+        val minutes = calendar.get(Calendar.MINUTE).adaptTime()
+        val seconds = calendar.get(Calendar.SECOND).adaptTime()
 
         return "$hours:$minutes:$seconds"
+    }
+
+    private fun Int.adaptTime(): String {
+        val currentTime = toString()
+        return if (currentTime.length == 1) {
+            "0$currentTime"
+        } else {
+            currentTime
+        }
     }
 }

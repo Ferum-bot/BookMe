@@ -17,11 +17,11 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.MobileTelephone
-import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.core.utill.TelephoneNumberFormatter
 import com.levit.book_me.databinding.FragmentConfirmPhoneCodeBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseAuthorizationFragment
+import com.levit.bookme.uikit.utills.ParcelableTextWatcher
 import java.lang.Exception
 
 class ConfirmPhoneCodeFragment: BaseAuthorizationFragment(R.layout.fragment_confirm_phone_code) {

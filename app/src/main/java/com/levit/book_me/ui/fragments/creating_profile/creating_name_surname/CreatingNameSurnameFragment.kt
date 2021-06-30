@@ -5,16 +5,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.ui.ParcelableTextWatcher
 import com.levit.book_me.databinding.FragmentCreatingNameSurnameBinding
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity
 import com.levit.book_me.ui.base.BaseCreatingProfileFragment
 import com.levit.book_me.ui.fragments.creating_profile.utills.CreatingProfileConstants
 import com.levit.book_me.ui.fragments.quotes.utill.ProfileQuoteStorage
+import com.levit.bookme.uikit.utills.ParcelableTextWatcher
 
 class CreatingNameSurnameFragment:
     BaseCreatingProfileFragment<CreatingNameSurnameViewModel>(R.layout.fragment_creating_name_surname) {

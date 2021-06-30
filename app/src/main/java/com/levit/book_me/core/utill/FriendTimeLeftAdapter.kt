@@ -54,6 +54,7 @@ class FriendTimeLeftAdapter(
     }
 
     private fun getCurrentDate(): Date {
-       return Date()
+        val calendar = java.util.Calendar.getInstance(LocaleHelper.DEFAULT_LOCALE)
+       return calendar.time
     }
 }
