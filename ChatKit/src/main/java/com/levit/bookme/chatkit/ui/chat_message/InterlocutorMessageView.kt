@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.viewbinding.ViewBinding
 import com.levit.book_me.chat_kit.databinding.InterlocutorChatMessageLayoutBinding
+import com.levit.bookme.chatkit.models.MessageStyleOptions
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 
 class InterlocutorMessageView @JvmOverloads constructor(
@@ -12,9 +13,13 @@ class InterlocutorMessageView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): MessageView(context, attrs, defStyleAttr) {
 
-    override val binding: ViewBinding
+    override val binding: InterlocutorChatMessageLayoutBinding
 
     init {
         binding = InterlocutorChatMessageLayoutBinding.inflate(inflater, this, true)
+    }
+
+    override fun applyStyleOptions(options: MessageStyleOptions) {
+
     }
 }

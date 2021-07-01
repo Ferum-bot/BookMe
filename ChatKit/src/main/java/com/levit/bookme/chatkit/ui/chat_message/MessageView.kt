@@ -13,18 +13,16 @@ abstract class MessageView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
+    var styleOptions: MessageStyleOptions = MessageStyleOptions.provideDefaultStyleOptions()
+        set(value) {
+            field = value
+            applyStyleOptions(value)
+        }
+
     protected val inflater: LayoutInflater
     get() = LayoutInflater.from(context)
 
-    abstract val binding: ViewBinding
+    protected abstract val binding: ViewBinding
 
-    var styleOptions: MessageStyleOptions = MessageStyleOptions.provideDefaultStyleOptions()
-    set(value) {
-        field = value
-        applyStyleOptions(value)
-    }
-
-    private fun applyStyleOptions(options: MessageStyleOptions) {
-
-    }
+    protected abstract fun applyStyleOptions(options: MessageStyleOptions)
 }
