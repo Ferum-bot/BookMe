@@ -33,6 +33,7 @@ object Versions {
     // UI: Images
     const val GLIDE = "4.11.0"
     const val GLIDE_TRANSFORMATIONS = "4.0.0"
+    const val CIRCLE_IMAGE_VIEW = "3.1.0"
 
     // UI: ViewPager2
     const val VIEW_PAGER2 = "1.0.0"
