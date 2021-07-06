@@ -13,6 +13,11 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="InterlocutorMessageTextStyle" parent="DefaultMessageTextStyle">
+        <item name="android:background">@color/black</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="DefaultMessageDateTextStyle">
         <item name="android:textSize">@dimen/message_date_label_size</item>
         <item name="android:layout_marginEnd">@dimen/message_date_label_margin_horizontal</item>
@@ -21,6 +26,10 @@
     </style>
 
     <style name="YourMessageDateTextStyle" parent="DefaultMessageDateTextStyle">
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="InterlocutorMessageDateTextStyle" parent="DefaultMessageDateTextStyle">
         <item name="android:textColor">@color/grey</item>
     </style>
 
@@ -34,5 +43,9 @@
 
     <style name="YourMessageAuthorTextStyle" parent="DefaultMessageAuthorTextStyle">
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="InterlocutorMessageAuthorTextStyle" parent="DefaultMessageAuthorTextStyle">
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

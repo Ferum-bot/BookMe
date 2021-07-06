@@ -9,6 +9,8 @@
         android:layout_height="wrap_content"
 
         android:layout_marginEnd="8dp"
+
+        tools:background="@color/white"
         tools:layout_marginBottom="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

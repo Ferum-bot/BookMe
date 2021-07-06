@@ -20,5 +20,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            tools:listitem="@layout/your_chat_message_layout"/>
+            tools:listitem="@layout/interlocutor_chat_message_layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
