@@ -1,4 +1,5 @@
 import extensions.addAllUIDependencies
+import extensions.addGlideDependencies
 
 
 plugins {
@@ -15,5 +16,9 @@ android {
 }
 
 dependencies {
+    implementation(project(Kits.UI_KIT.path))
+
     addAllUIDependencies()
+
+    addGlideDependencies()
 }
