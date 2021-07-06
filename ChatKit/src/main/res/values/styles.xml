@@ -9,7 +9,7 @@
     </style>
 
     <style name="YourMessageTextStyle" parent="DefaultMessageTextStyle">
-        <item name="android:background">@color/dark_white</item>
+        <item name="android:background">@color/light_grey</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
