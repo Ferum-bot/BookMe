@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="message_text_min_width">100dp</dimen>
+    <dimen name="message_text_margin">8dp</dimen>
+    <dimen name="message_date_label_margin_bottom">4dp</dimen>
+    <dimen name="message_date_label_margin_horizontal">8dp</dimen>
+    <dimen name="message_author_label_margin_horizontal">8dp</dimen>
+    <dimen name="message_author_label_margin_vertical">4dp</dimen>
+    <dimen name="top_bg_message_radius">15dp</dimen>
+    <dimen name="bottom_bg_message_radius">10dp</dimen>
+    <dimen name="message_text_max_width">250dp</dimen>
+    <dimen name="message_text_size">12sp</dimen>
+    <dimen name="message_date_label_size">10sp</dimen>
+    <dimen name="message_author_label_size">12sp</dimen>
+</resources>

@@ -2,14 +2,37 @@
 <resources>
 
     <style name="DefaultMessageTextStyle">
-
+        <item name="android:minWidth">@dimen/message_text_min_width</item>
+        <item name="android:layout_margin">@dimen/message_text_margin</item>
+        <item name="android:textSize">@dimen/message_text_size</item>
+        <item name="android:maxWidth">@dimen/message_text_max_width</item>
     </style>
 
-    <style name="DefaultMessageTimeTextStyle">
+    <style name="YourMessageTextStyle" parent="DefaultMessageTextStyle">
+        <item name="android:background">@color/dark_white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
+    <style name="DefaultMessageDateTextStyle">
+        <item name="android:textSize">@dimen/message_date_label_size</item>
+        <item name="android:layout_marginEnd">@dimen/message_date_label_margin_horizontal</item>
+        <item name="android:layout_marginStart">@dimen/message_date_label_margin_horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/message_date_label_margin_bottom</item>
+    </style>
+
+    <style name="YourMessageDateTextStyle" parent="DefaultMessageDateTextStyle">
+        <item name="android:textColor">@color/grey</item>
     </style>
 
     <style name="DefaultMessageAuthorTextStyle">
+        <item name="android:textSize">@dimen/message_author_label_size</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:layout_marginStart">@dimen/message_author_label_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/message_author_label_margin_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/message_author_label_margin_vertical</item>
+    </style>
 
+    <style name="YourMessageAuthorTextStyle" parent="DefaultMessageAuthorTextStyle">
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>
