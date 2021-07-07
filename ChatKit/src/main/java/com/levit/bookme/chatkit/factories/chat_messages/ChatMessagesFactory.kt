@@ -5,7 +5,7 @@ import com.levit.bookme.chatkit.models.MessageStyleOptions
 import com.levit.bookme.chatkit.models.interfaces.MessageModel
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 
-abstract class ChatMessagesFactory(
+internal abstract class ChatMessagesFactory(
     protected val yourMessagesOptions: MessageStyleOptions,
     protected val interlocutorMessageOptions: MessageStyleOptions,
 ) {

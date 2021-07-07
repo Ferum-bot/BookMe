@@ -13,7 +13,7 @@ import com.levit.bookme.chatkit.models.MessageStyleOptions
 import com.levit.bookme.chatkit.models.interfaces.MessageModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
 
-abstract class MessageView @JvmOverloads constructor(
+internal abstract class MessageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -35,10 +35,10 @@ abstract class MessageView @JvmOverloads constructor(
 
     protected abstract val binding: ViewBinding
 
+    protected abstract val profileImageLoader: RemoteImageLoader
+
     protected val inflater: LayoutInflater
     get() = LayoutInflater.from(context)
-
-    protected abstract val profileImageLoader: RemoteImageLoader
 
     protected abstract fun applyStyleOptions(options: MessageStyleOptions)
     protected abstract fun applyMessageModel(model: MessageModel)

@@ -6,12 +6,16 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
 import com.levit.book_me.chat_kit.databinding.InterlocutorChatMessageLayoutBinding
+import com.levit.bookme.chatkit.extensions.dpToPx
 import com.levit.bookme.chatkit.models.MessageDateParser
 import com.levit.bookme.chatkit.models.MessageStyleOptions
 import com.levit.bookme.chatkit.models.interfaces.MessageModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
+import com.levit.bookme.chatkit.ui.chat_message.delegates.DefaultMessageViewFieldsDelegate
+import com.levit.bookme.chatkit.ui.chat_message.delegates.MessageViewFieldsDelegate
 
+@Suppress("JoinDeclarationAndAssignment")
 internal class InterlocutorMessageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -29,9 +33,14 @@ internal class InterlocutorMessageView @JvmOverloads constructor(
             showProfileIcon(value)
         }
 
+    private val fieldsDelegate: MessageViewFieldsDelegate
+
     init {
         binding = InterlocutorChatMessageLayoutBinding.inflate(inflater, this, true)
+
         profileImageLoader = RemoteImageLoader(binding.profileImage, defaultGlideOptions())
+
+        fieldsDelegate = DefaultMessageViewFieldsDelegate(this::dpToPx)
     }
 
     override fun applyStyleOptions(options: MessageStyleOptions) {
@@ -62,4 +71,44 @@ internal class InterlocutorMessageView @JvmOverloads constructor(
                 View.INVISIBLE
             }
     }
+
+    private fun configureAuthorLabel(options: MessageStyleOptions) = with(binding) {
+        fieldsDelegate.applyOptionsToAuthorLabel(
+            layout = messageLayout,
+            authorView = authorLabel,
+            options
+        )
+    }
+
+    private fun configureText(options: MessageStyleOptions) = with(binding) {
+        fieldsDelegate.applyOptionsToMessageText(
+            layout = messageLayout,
+            textView = text,
+            options
+        )
+    }
+
+    private fun configureDateLabel(options: MessageStyleOptions) = with(binding) {
+        fieldsDelegate.applyOptionsToDateLabel(
+            layout = messageLayout,
+            dateView = dateLabel,
+            options
+        )
+    }
+
+    private fun configureProfileIcon(options: MessageStyleOptions) = with(binding) {
+        fieldsDelegate.applyOptionsToProfileIcon(
+            layout = messageLayout,
+            profileView = profileImage,
+            options
+        )
+    }
+
+    private fun configureGeneralView(options: MessageStyleOptions) = with(binding) {
+        fieldsDelegate.applyOptionsToMessageLayout(
+            layout = messageLayout,
+            options
+        )
+    }
+
 }

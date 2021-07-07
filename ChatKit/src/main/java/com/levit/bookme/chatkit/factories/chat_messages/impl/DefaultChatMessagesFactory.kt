@@ -10,7 +10,7 @@ import com.levit.bookme.chatkit.ui.chat_message.InterlocutorMessageView
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import com.levit.bookme.chatkit.ui.chat_message.YourMessageView
 
-class DefaultChatMessagesFactory(
+internal class DefaultChatMessagesFactory(
     yourMessageOptions: MessageStyleOptions,
     interlocutorMessageOptions: MessageStyleOptions,
 ): ChatMessagesFactory(yourMessageOptions, interlocutorMessageOptions) {
