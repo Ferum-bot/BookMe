@@ -13,7 +13,7 @@ import com.levit.bookme.chatkit.models.MessageStyleOptions
 import com.levit.bookme.chatkit.models.interfaces.MessageModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
 
-internal abstract class MessageView @JvmOverloads constructor(
+abstract class MessageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

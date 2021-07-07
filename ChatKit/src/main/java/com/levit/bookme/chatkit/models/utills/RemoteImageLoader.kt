@@ -6,7 +6,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 
-internal class RemoteImageLoader(
+class RemoteImageLoader(
     private val imageView: ImageView,
     private val options: RequestOptions,
 ) {
