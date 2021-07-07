@@ -266,6 +266,6 @@ class MainScreenFriendProfileFragment:
     }
 
     private fun onFriendTimeLeft() {
-
+        
     }
 }

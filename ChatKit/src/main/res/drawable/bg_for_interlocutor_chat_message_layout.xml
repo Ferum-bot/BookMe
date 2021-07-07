@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<shape
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
 
-</selector>
+    <solid
+            android:color="@color/black"/>
+
+    <corners
+            android:topLeftRadius="@dimen/top_bg_message_radius"
+            android:topRightRadius="@dimen/top_bg_message_radius"
+            android:bottomLeftRadius="@dimen/bottom_bg_message_radius"
+            android:bottomRightRadius="@dimen/bottom_bg_message_radius"/>
+</shape>
