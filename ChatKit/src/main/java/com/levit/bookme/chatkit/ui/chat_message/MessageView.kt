@@ -9,7 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.levit.book_me.chat_kit.R
 import com.levit.bookme.chatkit.extensions.emptyMessageModel
-import com.levit.bookme.chatkit.models.MessageStyleOptions
+import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.interfaces.MessageModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
 

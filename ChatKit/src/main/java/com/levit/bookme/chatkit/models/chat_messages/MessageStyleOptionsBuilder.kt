@@ -1,4 +1,4 @@
-package com.levit.bookme.chatkit.models
+package com.levit.bookme.chatkit.models.chat_messages
 
 import android.graphics.Color
 import androidx.annotation.ColorInt

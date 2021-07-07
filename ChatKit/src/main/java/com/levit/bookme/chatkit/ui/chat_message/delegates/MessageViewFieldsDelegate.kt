@@ -2,7 +2,7 @@ package com.levit.bookme.chatkit.ui.chat_message.delegates
 
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.levit.bookme.chatkit.models.MessageStyleOptions
+import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import de.hdodenhof.circleimageview.CircleImageView
 
 /**

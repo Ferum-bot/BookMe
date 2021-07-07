@@ -6,7 +6,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import com.levit.bookme.chatkit.extensions.setMarginsDp
 import com.levit.bookme.chatkit.extensions.setTextSizeSp
-import com.levit.bookme.chatkit.models.MessageStyleOptions
+import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
 import com.levit.bookme.chatkit.ui.drawables.RoundedDrawable
 import de.hdodenhof.circleimageview.CircleImageView

@@ -3,7 +3,7 @@ package com.levit.bookme.chatkit.factories.chat_messages.impl
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.levit.bookme.chatkit.factories.chat_messages.ChatMessagesFactory
-import com.levit.bookme.chatkit.models.MessageStyleOptions
+import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.enums.MessageType
 import com.levit.bookme.chatkit.models.interfaces.MessageModel
 import com.levit.bookme.chatkit.ui.chat_message.InterlocutorMessageView

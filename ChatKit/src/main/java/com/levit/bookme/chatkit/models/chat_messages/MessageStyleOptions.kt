@@ -1,6 +1,5 @@
-package com.levit.bookme.chatkit.models
+package com.levit.bookme.chatkit.models.chat_messages
 
-import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
@@ -12,10 +11,8 @@ class MessageStyleOptions(
 
     companion object {
 
-        fun provideDefaultStyleOptions(): MessageStyleOptions {
-            return MessageStyleOptions {
-                return@MessageStyleOptions this
-            }
+        fun provideDefaultStyleOptions() = MessageStyleOptions {
+            return@MessageStyleOptions this
         }
     }
 
