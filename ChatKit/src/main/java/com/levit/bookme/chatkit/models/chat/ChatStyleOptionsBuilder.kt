@@ -3,6 +3,7 @@ package com.levit.bookme.chatkit.models.chat
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
+import com.levit.bookme.chatkit.models.enums.MessageDateFormat
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
 
 class ChatStyleOptionsBuilder {
@@ -57,9 +58,21 @@ class ChatStyleOptionsBuilder {
     @Dimension
     var lastMessageDateMarginBottomDp: Int = DEFAULT_SMALL_MARGIN_DP
 
+    @Dimension
+    var profileIconMarginStartDp: Int = DEFAULT_BIG_MARGIN_DP
+    @Dimension
+    var profileIconMarginEndDp: Int = DEFAULT_BIG_MARGIN_DP
+    @Dimension
+    var profileIconMarginTopDp: Int = DEFAULT_BIG_MARGIN_DP
+    @Dimension
+    var profileIconMarginBottomDp: Int = DEFAULT_BIG_MARGIN_DP
+
     var interlocutorNameAlignment: MessageTextAlignment = MessageTextAlignment.START
+    var lastMessageDateAlignment: MessageTextAlignment = MessageTextAlignment.END
 
     var showOnlineStatus: Boolean = true
     var showProfileIcon: Boolean = true
     var showLastMessageDate: Boolean = true
+
+    var lastMessageDateFormat: MessageDateFormat = MessageDateFormat.SHOW_ONLY_TIME
 }

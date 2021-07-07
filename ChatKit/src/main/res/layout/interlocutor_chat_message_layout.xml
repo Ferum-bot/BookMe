@@ -22,8 +22,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="@dimen/chat_message_profile_size"
+                android:layout_height="@dimen/chat_message_profile_size"
 
                 app:layout_constraintTop_toTopOf="@id/message_layout"
                 app:layout_constraintStart_toStartOf="parent"

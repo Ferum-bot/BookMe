@@ -2,6 +2,7 @@ package com.levit.bookme.chatkit.models.chat
 
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
+import com.levit.bookme.chatkit.models.enums.MessageDateFormat
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
 
 class ChatStyleOptions(
@@ -56,11 +57,23 @@ class ChatStyleOptions(
     @Dimension
     val lastMessageDateMarginBottomDp: Int
 
+    @Dimension
+    val profileIconMarginStartDp: Int
+    @Dimension
+    val profileIconMarginEndDp: Int
+    @Dimension
+    val profileIconMarginTopDp: Int
+    @Dimension
+    val profileIconMarginBottomDp: Int
+
     val interlocutorNameAlignment: MessageTextAlignment
+    val lastMessageDateAlignment: MessageTextAlignment
 
     val showOnlineStatus: Boolean
     val showProfileIcon: Boolean
     val showLastMessageDate: Boolean
+
+    val lastMessageDateFormat: MessageDateFormat
 
     init {
         val options = ChatStyleOptionsBuilder().build()
@@ -88,11 +101,19 @@ class ChatStyleOptions(
         this.lastMessageDateMarginTopDp = options.lastMessageDateMarginTopDp
         this.lastMessageDateMarginBottomDp = options.lastMessageDateMarginBottomDp
 
+        this.profileIconMarginStartDp = options.profileIconMarginStartDp
+        this.profileIconMarginEndDp = options.profileIconMarginEndDp
+        this.profileIconMarginTopDp = options.profileIconMarginTopDp
+        this.profileIconMarginBottomDp = options.profileIconMarginBottomDp
+
         this.interlocutorNameAlignment = options.interlocutorNameAlignment
+        this.lastMessageDateAlignment = options.lastMessageDateAlignment
 
         this.showOnlineStatus = options.showOnlineStatus
         this.showProfileIcon = options.showProfileIcon
         this.showLastMessageDate = options.showLastMessageDate
+
+        this.lastMessageDateFormat = options.lastMessageDateFormat
     }
 
 }
