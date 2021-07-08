@@ -1,4 +1,4 @@
-package com.levit.bookme.chatkit.models
+package com.levit.bookme.chatkit.models.chat_messages
 
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
 import java.text.SimpleDateFormat

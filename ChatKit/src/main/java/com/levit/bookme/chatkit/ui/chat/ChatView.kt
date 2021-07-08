@@ -14,7 +14,7 @@ import com.levit.bookme.chatkit.extensions.dpToPx
 import com.levit.bookme.chatkit.extensions.emptyChatModel
 import com.levit.bookme.chatkit.extensions.setMarginsDp
 import com.levit.bookme.chatkit.extensions.setTextSizeSp
-import com.levit.bookme.chatkit.models.ChatDateParser
+import com.levit.bookme.chatkit.models.chat.ChatDateParser
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment

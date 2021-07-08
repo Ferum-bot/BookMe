@@ -1,6 +1,7 @@
 package com.levit.bookme.chatkit.extensions
 
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.*
@@ -44,3 +45,6 @@ internal fun View.dpToPx(dp: Int?): Int? {
         metrics
     ).toInt()
 }
+
+internal val View.inflater: LayoutInflater
+    get() = LayoutInflater.from(context)

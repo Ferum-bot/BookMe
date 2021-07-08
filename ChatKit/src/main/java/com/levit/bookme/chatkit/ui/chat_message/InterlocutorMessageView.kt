@@ -6,7 +6,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.levit.book_me.chat_kit.databinding.InterlocutorChatMessageLayoutBinding
 import com.levit.bookme.chatkit.extensions.dpToPx
-import com.levit.bookme.chatkit.models.MessageDateParser
+import com.levit.bookme.chatkit.models.chat_messages.MessageDateParser
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.interfaces.MessageModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
