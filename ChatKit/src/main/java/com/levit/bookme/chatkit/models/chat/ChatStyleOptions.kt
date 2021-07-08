@@ -22,6 +22,22 @@ class ChatStyleOptions(
     val lastMessageTextColor: Int
     @ColorInt
     val lastMessageDateTextColor: Int
+    @ColorInt
+    val backgroundColor: Int
+    @ColorInt
+    val backgroundStrokeColor: Int
+
+    @Dimension
+    val backgroundStrokeWidthDp: Int
+
+    @Dimension
+    val backgroundTopLeftRadiusDp: Int
+    @Dimension
+    val backgroundTopRightRadiusDp: Int
+    @Dimension
+    val backgroundBottomLeftRadiusDp: Int
+    @Dimension
+    val backgroundBottomRightRadiusDp: Int
 
     @Dimension
     val interlocutorNameTextSizeSp: Int
@@ -81,6 +97,15 @@ class ChatStyleOptions(
         this.interlocutorNameTextColor = options.interlocutorNameTextColor
         this.lastMessageTextColor = options.lastMessageTextColor
         this.lastMessageDateTextColor = options.lastMessageDateTextColor
+        this.backgroundColor = options.backgroundColor
+        this.backgroundStrokeColor = options.backgroundStrokeColor
+
+        this.backgroundStrokeWidthDp = options.backgroundStrokeWidthDp
+
+        this.backgroundTopLeftRadiusDp = options.backgroundTopLeftRadiusDp
+        this.backgroundTopRightRadiusDp = options.backgroundTopRightRadiusDp
+        this.backgroundBottomLeftRadiusDp = options.backgroundBottomLeftRadiusDp
+        this.backgroundBottomRightRadiusDp = options.backgroundBottomRightRadiusDp
 
         this.interlocutorNameTextSizeSp = options.interlocutorNameTextSizeSp
         this.lastMessageTextSizeSp = options.lastMessageTextSizeSp

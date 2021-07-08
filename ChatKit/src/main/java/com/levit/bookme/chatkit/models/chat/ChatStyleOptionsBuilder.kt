@@ -15,6 +15,9 @@ class ChatStyleOptionsBuilder {
 
         private const val DEFAULT_BIG_MARGIN_DP = 8
         private const val DEFAULT_SMALL_MARGIN_DP = 4
+
+        private const val DEFAULT_BACKGROUND_RADIUS_DP = 0
+        private const val DEFAULT_STROKE_WIDTH_DP = 0
     }
 
     @ColorInt
@@ -23,6 +26,22 @@ class ChatStyleOptionsBuilder {
     var lastMessageTextColor: Int = Color.GRAY
     @ColorInt
     var lastMessageDateTextColor: Int = Color.LTGRAY
+    @ColorInt
+    var backgroundColor: Int = Color.WHITE
+    @ColorInt
+    var backgroundStrokeColor: Int = Color.WHITE
+
+    @Dimension
+    var backgroundStrokeWidthDp: Int = DEFAULT_STROKE_WIDTH_DP
+
+    @Dimension
+    var backgroundTopLeftRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
+    @Dimension
+    var backgroundTopRightRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
+    @Dimension
+    var backgroundBottomLeftRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
+    @Dimension
+    var backgroundBottomRightRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
 
     @Dimension
     var interlocutorNameTextSizeSp: Int = DEFAULT_BIG_TEXT_SIZE_SP

@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.models.chat_messages
 
+import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
@@ -25,6 +26,11 @@ class MessageStyleOptions(
 
     @ColorInt
     val messageBackgroundColor: Int
+    @ColorInt
+    val messageBackgroundStrokeColor: Int
+
+    @Dimension
+    val messageBackgroundStrokeWidthDP: Int
 
     @Dimension
     val messageBackgroundTopLeftCornerRadiusDP: Int
@@ -81,44 +87,47 @@ class MessageStyleOptions(
     init {
         val options = MessageStyleOptionsBuilder().build()
 
-        textColor = options.textColor
-        authorColor = options.authorColor
-        dateColor = options.dateColor
+        this.textColor = options.textColor
+        this.authorColor = options.authorColor
+        this.dateColor = options.dateColor
 
-        messageBackgroundColor = options.messageBackgroundColor
+        this.messageBackgroundColor = options.messageBackgroundColor
+        this.messageBackgroundStrokeColor = options.messageBackgroundStrokeColor
 
-        messageBackgroundTopLeftCornerRadiusDP = options.messageBackgroundTopLeftCornerRadiusDP
-        messageBackgroundTopRightCornerRadiusDP = options.messageBackgroundTopRightCornerRadiusDP
-        messageBackgroundBottomLeftCornerRadiusDP = options.messageBackgroundBottomLeftCornerRadiusDP
-        messageBackgroundBottomRightCornerRadiusDP = options.messageBackgroundBottomRightCornerRadiusDP
+        this.messageBackgroundStrokeWidthDP = options.messageBackgroundStrokeWidthDP
 
-        authorLabelAlignment = options.authorLabelAlignment
-        dateLabelAlignment = options.dateLabelAlignment
+        this.messageBackgroundTopLeftCornerRadiusDP = options.messageBackgroundTopLeftCornerRadiusDP
+        this.messageBackgroundTopRightCornerRadiusDP = options.messageBackgroundTopRightCornerRadiusDP
+        this.messageBackgroundBottomLeftCornerRadiusDP = options.messageBackgroundBottomLeftCornerRadiusDP
+        this.messageBackgroundBottomRightCornerRadiusDP = options.messageBackgroundBottomRightCornerRadiusDP
 
-        dateShowFormat = options.dateShowFormat
+        this.authorLabelAlignment = options.authorLabelAlignment
+        this.dateLabelAlignment = options.dateLabelAlignment
 
-        textSizeSP = options.textSizeSP
-        authorLabelSizeSP = options.authorLabelSizeSP
-        dateLabelSizeSP = options.dateLabelSizeSP
+        this.dateShowFormat = options.dateShowFormat
 
-        textMarginTopDP = options.textMarginTopDP
-        textMarginStartDP = options.textMarginStartDP
-        textMarginEndDP = options.textMarginEndDP
-        textMarginBottom = options.textMarginBottom
+        this.textSizeSP = options.textSizeSP
+        this.authorLabelSizeSP = options.authorLabelSizeSP
+        this.dateLabelSizeSP = options.dateLabelSizeSP
 
-        authorLabelMarginTop = options.authorLabelMarginTop
-        authorLabelMarginStart = options.authorLabelMarginStart
-        authorLabelMarginEnd = options.authorLabelMarginEnd
-        authorLabelMarginBottom = options.authorLabelMarginBottom
+        this.textMarginTopDP = options.textMarginTopDP
+        this.textMarginStartDP = options.textMarginStartDP
+        this.textMarginEndDP = options.textMarginEndDP
+        this.textMarginBottom = options.textMarginBottom
 
-        dateLabelMarginTop = options.dateLabelMarginTop
-        dateLabelMarginStart = options.dateLabelMarginStart
-        dateLabelMarginEnd = options.dateLabelMarginEnd
-        dateLabelMarginBottom = options.dateLabelMarginBottom
+        this.authorLabelMarginTop = options.authorLabelMarginTop
+        this.authorLabelMarginStart = options.authorLabelMarginStart
+        this.authorLabelMarginEnd = options.authorLabelMarginEnd
+        this.authorLabelMarginBottom = options.authorLabelMarginBottom
 
-        showAuthorLabel = options.showAuthorLabel
-        showDateLabel = options.showDateLabel
-        showProfileImage = options.showProfileImage
+        this.dateLabelMarginTop = options.dateLabelMarginTop
+        this.dateLabelMarginStart = options.dateLabelMarginStart
+        this.dateLabelMarginEnd = options.dateLabelMarginEnd
+        this.dateLabelMarginBottom = options.dateLabelMarginBottom
+
+        this.showAuthorLabel = options.showAuthorLabel
+        this.showDateLabel = options.showDateLabel
+        this.showProfileImage = options.showProfileImage
     }
 
 }

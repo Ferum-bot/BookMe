@@ -20,6 +20,8 @@ class MessageStyleOptionsBuilder {
 
         private const val DEFAULT_TOP_RADIUS_DP = 15
         private const val DEFAULT_BOTTOM_RADIUS_DP = 10
+
+        private const val DEFAULT_STROKE_WIDTH = 0
     }
 
     @ColorInt
@@ -31,6 +33,11 @@ class MessageStyleOptionsBuilder {
 
     @ColorInt
     var messageBackgroundColor: Int = Color.BLUE
+    @ColorInt
+    var messageBackgroundStrokeColor: Int = Color.BLUE
+
+    @Dimension
+    var messageBackgroundStrokeWidthDP: Int = DEFAULT_STROKE_WIDTH
 
     @Dimension
     var messageBackgroundTopLeftCornerRadiusDP: Int = DEFAULT_TOP_RADIUS_DP
