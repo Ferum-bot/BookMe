@@ -6,7 +6,7 @@ import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedStyleOptions
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatOptions
 import com.levit.bookme.chatkit.models.interfaces.*
-import com.levit.bookme.chatkit.models.message_input.MessageInputOptions
+import com.levit.bookme.chatkit.models.message_input.MessageInputStyleOptions
 import com.levit.bookme.chatkit.ui.chat.ChatView
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import com.levit.bookme.chatkit.ui.current_chat_feed.CurrentChatFeedView
@@ -29,7 +29,7 @@ internal abstract class ChatKitViewFactory(
 
     protected val generalChatOptions: GeneralChatOptions,
 
-    protected val messageInputOptions: MessageInputOptions,
+    protected val messageInputOptions: MessageInputStyleOptions,
 
     ) {
 
