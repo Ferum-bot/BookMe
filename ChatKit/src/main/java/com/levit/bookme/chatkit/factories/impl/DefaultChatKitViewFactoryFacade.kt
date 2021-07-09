@@ -1,10 +1,10 @@
-package com.levit.bookme.chatkit.factories.chat_messages.impl
+package com.levit.bookme.chatkit.factories.impl
 
 import android.content.Context
-import com.levit.bookme.chatkit.factories.chat_messages.ChatKitViewFactory
+import com.levit.bookme.chatkit.factories.ChatKitViewFactory
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
-import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedOptions
+import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedStyleOptions
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatOptions
 import com.levit.bookme.chatkit.models.interfaces.*
 import com.levit.bookme.chatkit.models.message_input.MessageInputOptions
@@ -21,47 +21,79 @@ internal class DefaultChatKitViewFactoryFacade(
 
     chatStyleOptions: ChatStyleOptions,
 
-    currentChatFeedOptions: CurrentChatFeedOptions,
+    currentChatFeedStyleOptions: CurrentChatFeedStyleOptions,
 
     generalChatOptions: GeneralChatOptions,
 
     messageInputOptions: MessageInputOptions,
-
-
-): ChatKitViewFactory(
+):
+ChatKitViewFactory(
     youChatMessageStyleOptions, interlocutorChatMessageStyleOptions,
-    chatStyleOptions, currentChatFeedOptions,
+    chatStyleOptions, currentChatFeedStyleOptions,
     generalChatOptions, messageInputOptions
 ) {
+
+    private val defaultChatMessagesFactoryDelegate by lazy {
+        DefaultChatMessagesFactory(
+            yourMessageOptions = youChatMessageStyleOptions,
+            interlocutorMessageOptions = interlocutorChatMessageStyleOptions,
+        )
+    }
+
+    private val defaultChatViewFactoryDelegate by lazy {
+        DefaultChatViewFactory(chatStyleOptions)
+    }
+
+    private val defaultCurrentChatFeedViewFactoryDelegate by lazy {
+        DefaultCurrentFeedViewFactory(currentChatFeedStyleOptions)
+    }
+
+    private val defaultGeneralChatViewFactoryDelegate by lazy {
+        DefaultGeneralChatViewFactory(generalChatOptions)
+    }
+
+    private val defaultMessageInputViewFactoryDelegate by lazy {
+        DefaultMessageInputViewFactory(messageInputOptions)
+    }
 
     override fun createMessageFrom(
         position: Int, allMessages: List<MessageModel>, requireContext: () -> Context
     ): MessageView {
-        TODO("Not yet implemented")
+        return defaultChatMessagesFactoryDelegate.createMessageFrom(
+            position, allMessages, requireContext
+        )
     }
 
     override fun createChatFrom(
         position: Int, allChats: List<ChatModel>, requireContext: () -> Context
     ): ChatView {
-        TODO("Not yet implemented")
+        return defaultChatViewFactoryDelegate.createChatFrom(
+            position, allChats, requireContext
+        )
     }
 
     override fun createCurrentChatFeed(
         model: CurrentChatFeedModel, requireContext: () -> Context
     ): CurrentChatFeedView {
-        TODO("Not yet implemented")
+        return defaultCurrentChatFeedViewFactoryDelegate.createCurrentChatFeed(
+            model, requireContext
+        )
     }
 
     override fun createGeneralChat(
         model: GeneralChatModel, requireContext: () -> Context
     ): GeneralChatView {
-        TODO("Not yet implemented")
+        return defaultGeneralChatViewFactoryDelegate.createGeneralChat(
+            model, requireContext
+        )
     }
 
     override fun createMessageInput(
         model: MessageInputModel, requireContext: () -> Context
     ): MessageInputView {
-        TODO("Not yet implemented")
+        return defaultMessageInputViewFactoryDelegate.createMessageInput(
+            model, requireContext
+        )
     }
 
 }

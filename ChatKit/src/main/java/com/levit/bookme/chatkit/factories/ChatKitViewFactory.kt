@@ -1,9 +1,9 @@
-package com.levit.bookme.chatkit.factories.chat_messages
+package com.levit.bookme.chatkit.factories
 
 import android.content.Context
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
-import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedOptions
+import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedStyleOptions
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatOptions
 import com.levit.bookme.chatkit.models.interfaces.*
 import com.levit.bookme.chatkit.models.message_input.MessageInputOptions
@@ -25,13 +25,13 @@ internal abstract class ChatKitViewFactory(
 
     protected val chatStyleOptions: ChatStyleOptions,
 
-    protected val currentChatFeedOptions: CurrentChatFeedOptions,
+    protected val currentChatFeedStyleOptions: CurrentChatFeedStyleOptions,
 
     protected val generalChatOptions: GeneralChatOptions,
 
     protected val messageInputOptions: MessageInputOptions,
 
-) {
+    ) {
 
     abstract fun createMessageFrom(
         position: Int, allMessages: List<MessageModel>, requireContext: () -> Context
