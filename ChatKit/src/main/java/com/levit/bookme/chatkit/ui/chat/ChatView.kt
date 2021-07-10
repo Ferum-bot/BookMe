@@ -18,9 +18,9 @@ import com.levit.bookme.chatkit.models.chat.ChatDateParser
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
-import com.levit.bookme.chatkit.models.interfaces.ChatModel
+import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
-import com.levit.bookme.chatkit.ui.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.drawables.RoundedDrawable
 
 class ChatView @JvmOverloads constructor(
     context: Context,

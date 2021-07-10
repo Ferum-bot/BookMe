@@ -1,4 +1,4 @@
-package com.levit.bookme.chatkit.models.interfaces
+package com.levit.bookme.chatkit.models.message_input
 
 interface MessageInputModel {
 

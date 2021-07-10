@@ -20,6 +20,8 @@ class MessageInputStyleOptions(
     @ColorInt
     val layoutBackgroundColor: Int
     @ColorInt
+    val layoutBackgroundStrokeColor: Int
+    @ColorInt
     val textInputBackgroundColor: Int
     @ColorInt
     val textInputBackgroundStrokeColor: Int
@@ -32,6 +34,8 @@ class MessageInputStyleOptions(
     val textInputTextSizeSp: Int
 
     @Dimension(unit = Dimension.DP)
+    val layoutBackgroundStrokeWidthDp: Int
+    @Dimension(unit = Dimension.DP)
     val textInputBackgroundStrokeWidthDp: Int
 
     @Dimension(unit = Dimension.DP)
@@ -42,6 +46,15 @@ class MessageInputStyleOptions(
     val textInputBackgroundBottomLeftRadiusDp: Int
     @Dimension(unit = Dimension.DP)
     val textInputBackgroundBottomRightRadiusDp: Int
+
+    @Dimension(unit = Dimension.DP)
+    val layoutBackgroundTopLeftRadiusDp: Int
+    @Dimension(unit = Dimension.DP)
+    val layoutBackgroundTopRightRadiusDp: Int
+    @Dimension(unit = Dimension.DP)
+    val layoutBackgroundBottomLeftRadiusDp: Int
+    @Dimension(unit = Dimension.DP)
+    val layoutBackgroundBottomRightRadiusDp: Int
 
     @Dimension(unit = Dimension.DP)
     val textInputMarginTopDp: Int
@@ -79,6 +92,7 @@ class MessageInputStyleOptions(
         val options = MessageInputStyleOptionsBuilder().build()
 
         this.layoutBackgroundColor = options.layoutBackgroundColor
+        this.layoutBackgroundStrokeColor = options.layoutBackgroundStrokeColor
         this.textInputBackgroundColor = options.textInputBackgroundColor
         this.textInputBackgroundStrokeColor = options.textInputBackgroundStrokeColor
         this.textInputColor = options.textInputColor
@@ -86,12 +100,18 @@ class MessageInputStyleOptions(
 
         this.textInputTextSizeSp = options.textInputTextSizeSp
 
+        this.layoutBackgroundStrokeWidthDp = options.layoutBackgroundStrokeWidthDp
         this.textInputBackgroundStrokeWidthDp = options.textInputBackgroundStrokeWidthDp
 
         this.textInputBackgroundTopLeftRadiusDp = options.textInputBackgroundTopLeftRadiusDp
         this.textInputBackgroundTopRightRadiusDp = options.textInputBackgroundTopRightRadiusDp
         this.textInputBackgroundBottomLeftRadiusDp = options.textInputBackgroundBottomLeftRadiusDp
         this.textInputBackgroundBottomRightRadiusDp = options.textInputBackgroundBottomRightRadiusDp
+
+        this.layoutBackgroundTopLeftRadiusDp = options.layoutBackgroundTopLeftRadiusDp
+        this.layoutBackgroundTopRightRadiusDp = options.layoutBackgroundTopRightRadiusDp
+        this.layoutBackgroundBottomLeftRadiusDp = options.layoutBackgroundBottomLeftRadiusDp
+        this.layoutBackgroundBottomRightRadiusDp = options.layoutBackgroundBottomRightRadiusDp
 
         this.textInputMarginTopDp = options.textInputMarginTopDp
         this.textInputMarginStartDp = options.textInputMarginStartDp

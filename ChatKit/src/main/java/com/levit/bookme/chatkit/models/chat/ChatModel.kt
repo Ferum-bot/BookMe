@@ -1,4 +1,4 @@
-package com.levit.bookme.chatkit.models.interfaces
+package com.levit.bookme.chatkit.models.chat
 
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import java.util.*

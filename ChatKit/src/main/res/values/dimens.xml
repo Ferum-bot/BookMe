@@ -18,4 +18,5 @@
     <dimen name="chat_last_message_text_size">14sp</dimen>
     <dimen name="chat_last_message_date_text_size">8sp</dimen>
     <dimen name="text_input_height">40dp</dimen>
+    <dimen name="current_chat_header_profile_icon_size">35dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.levit.bookme.chatkit.ui.drawables
+package com.levit.bookme.chatkit.drawables
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -9,6 +9,11 @@ internal class RoundedDrawable(
 
     @ColorInt
     private val backgroundColor: Int = Color.GRAY,
+    @ColorInt
+    private val strokeColor: Int = Color.GRAY,
+
+    @Dimension
+    private val strokeWidthPx: Int = 0,
 
     @Dimension
     private val radiusTopLeftPx: Int = 10,
@@ -20,9 +25,16 @@ internal class RoundedDrawable(
     private val radiusBottomRightPx: Int = 5,
 ): Drawable() {
 
-    private val paint = Paint().apply {
+    private val fillPaint = Paint().apply {
         color = backgroundColor
-        style = Paint.Style.FILL_AND_STROKE
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
+
+    private val strokePaint = Paint().apply {
+        color = strokeColor
+        strokeWidth = strokeWidthPx.toFloat()
+        style = Paint.Style.STROKE
         isAntiAlias = true
     }
 
@@ -33,15 +45,19 @@ internal class RoundedDrawable(
         val bottom = bounds.bottom
 
         val path = getRoundedCornersPath(left, top, right, bottom)
-        canvas.drawPath(path, paint)
+
+        canvas.drawPath(path, fillPaint)
+        canvas.drawPath(path, strokePaint)
     }
 
     override fun setAlpha(alpha: Int) {
-        paint.alpha = alpha
+        fillPaint.alpha = alpha
+        strokePaint.alpha = alpha
     }
 
     override fun setColorFilter(colorFilter: ColorFilter?) {
-        paint.colorFilter = colorFilter
+        fillPaint.colorFilter = colorFilter
+        strokePaint.colorFilter = colorFilter
     }
 
     override fun getOpacity(): Int = PixelFormat.TRANSLUCENT

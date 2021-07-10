@@ -1,7 +1,7 @@
 package com.levit.bookme.chatkit.extensions
 
 import com.levit.bookme.chatkit.models.enums.MessageType
-import com.levit.bookme.chatkit.models.interfaces.MessageModel
+import com.levit.bookme.chatkit.models.chat_messages.MessageModel
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import java.util.*
 

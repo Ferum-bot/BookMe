@@ -8,6 +8,9 @@ class MessageInputStyleOptionsBuilder {
 
     companion object {
 
+        private const val DEFAULT_BACKGROUND_STROKE_WIDTH_DP = 1
+        private const val DEFAULT_BACKGROUND_CORNER_RADIUS_DP = 0
+
         private const val DEFAULT_TEXT_INPUT_CORNER_RADIUS_DP = 0
         private const val DEFAULT_TEXT_INPUT_MARGIN_DP = 0
         private const val DEFAULT_TEXT_INPUT_BACKGROUND_STROKE_WIDTH_DP = 0
@@ -24,6 +27,8 @@ class MessageInputStyleOptionsBuilder {
     @ColorInt
     var layoutBackgroundColor: Int = Color.WHITE
     @ColorInt
+    var layoutBackgroundStrokeColor: Int = Color.GRAY
+    @ColorInt
     var textInputBackgroundColor: Int = Color.WHITE
     @ColorInt
     var textInputBackgroundStrokeColor: Int = Color.WHITE
@@ -36,6 +41,8 @@ class MessageInputStyleOptionsBuilder {
     var textInputTextSizeSp: Int = DEFAULT_TEXT_INPUT_TEXT_SIZE_SP
 
     @Dimension(unit = Dimension.DP)
+    var layoutBackgroundStrokeWidthDp: Int = DEFAULT_BACKGROUND_STROKE_WIDTH_DP
+    @Dimension(unit = Dimension.DP)
     var textInputBackgroundStrokeWidthDp: Int = DEFAULT_TEXT_INPUT_BACKGROUND_STROKE_WIDTH_DP
 
     @Dimension(unit = Dimension.DP)
@@ -46,6 +53,15 @@ class MessageInputStyleOptionsBuilder {
     var textInputBackgroundBottomLeftRadiusDp: Int = DEFAULT_TEXT_INPUT_CORNER_RADIUS_DP
     @Dimension(unit = Dimension.DP)
     var textInputBackgroundBottomRightRadiusDp: Int = DEFAULT_TEXT_INPUT_CORNER_RADIUS_DP
+
+    @Dimension(unit = Dimension.DP)
+    var layoutBackgroundTopLeftRadiusDp: Int = DEFAULT_BACKGROUND_CORNER_RADIUS_DP
+    @Dimension(unit = Dimension.DP)
+    var layoutBackgroundTopRightRadiusDp: Int = DEFAULT_BACKGROUND_CORNER_RADIUS_DP
+    @Dimension(unit = Dimension.DP)
+    var layoutBackgroundBottomLeftRadiusDp: Int = DEFAULT_BACKGROUND_CORNER_RADIUS_DP
+    @Dimension(unit = Dimension.DP)
+    var layoutBackgroundBottomRightRadiusDp: Int = DEFAULT_BACKGROUND_CORNER_RADIUS_DP
 
     @Dimension(unit = Dimension.DP)
     var textInputMarginTopDp: Int = DEFAULT_TEXT_INPUT_MARGIN_DP

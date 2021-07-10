@@ -1,7 +1,7 @@
 package com.levit.bookme.chatkit.extensions
 
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
-import com.levit.bookme.chatkit.models.interfaces.ChatModel
+import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.ui.chat.ChatView
 import java.util.*
 

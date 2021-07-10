@@ -9,14 +9,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
 
-        tools:background="@color/white">
+        android:background="@drawable/bg_for_text_input_layout">
 
 
     <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_edit_text"
             android:layout_width="0dp"
             android:layout_height="@dimen/text_input_height"
-            android:background="@drawable/bg_for_text_input_layout"
+            android:background="@color/white"
             android:hint="@string/enter_your_message"
             android:paddingStart="8dp"
             android:gravity="center|start"
