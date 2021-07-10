@@ -7,6 +7,7 @@ import java.util.*
 
 internal fun MessageView.emptyMessageModel(): MessageModel {
     return object : MessageModel {
+        override val id: Long = 0
         override val text: String = ""
         override val author: String = ""
         override val date: Date = Date()

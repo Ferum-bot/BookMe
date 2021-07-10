@@ -7,6 +7,7 @@ import java.util.*
 
 internal fun ChatView.emptyChatModel(): ChatModel {
     return object: ChatModel {
+        override val id: Long = 0
         override val interlocutorName: String = "Empty Name"
         override val interlocutorProfileImageUrl: String = ""
         override val lastMessage: String? = null

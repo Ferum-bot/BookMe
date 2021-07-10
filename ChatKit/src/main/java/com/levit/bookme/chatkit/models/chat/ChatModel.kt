@@ -6,6 +6,12 @@ import java.util.*
 interface ChatModel {
 
     /**
+     * The id needs to correct work of DiffUtil in
+     * delegates adapter.
+     */
+    val id: Long
+
+    /**
      * The name of interlocutor from current chat.
      */
     val interlocutorName: String
