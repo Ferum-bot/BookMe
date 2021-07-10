@@ -1,19 +1,18 @@
-package com.levit.bookme.chatkit.factories.chat_messages.impl
+package com.levit.bookme.chatkit.factories.impl
 
 import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.levit.bookme.chatkit.factories.chat_messages.ChatMessagesFactory
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.enums.MessageType
-import com.levit.bookme.chatkit.models.interfaces.MessageModel
+import com.levit.bookme.chatkit.models.chat_messages.MessageModel
 import com.levit.bookme.chatkit.ui.chat_message.InterlocutorMessageView
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import com.levit.bookme.chatkit.ui.chat_message.YourMessageView
 
 internal class DefaultChatMessagesFactory(
-    yourMessageOptions: MessageStyleOptions,
-    interlocutorMessageOptions: MessageStyleOptions,
-): ChatMessagesFactory(yourMessageOptions, interlocutorMessageOptions) {
+    private val yourMessageOptions: MessageStyleOptions,
+    private val interlocutorMessageOptions: MessageStyleOptions,
+) {
 
     companion object {
 
@@ -21,7 +20,7 @@ internal class DefaultChatMessagesFactory(
         private const val MESSAGE_VIEW_HEIGHT = ConstraintLayout.LayoutParams.WRAP_CONTENT
     }
 
-    override fun createMessageFrom(
+    fun createMessageFrom(
         position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
     ): MessageView {
         if (allMessages.notContainsPosition(position)) {
@@ -108,7 +107,7 @@ internal class DefaultChatMessagesFactory(
             this.layoutParams = params
             this.messageModel = messageModel
             this.isFirstMessage = true
-            this.styleOptions = yourMessagesOptions
+            this.styleOptions = yourMessageOptions
         }
     }
 
@@ -123,7 +122,7 @@ internal class DefaultChatMessagesFactory(
             this.layoutParams = params
             this.messageModel = messageModel
             this.isFirstMessage = false
-            this.styleOptions = yourMessagesOptions
+            this.styleOptions = yourMessageOptions
         }
     }
 

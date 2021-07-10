@@ -8,7 +8,7 @@ import com.levit.bookme.chatkit.extensions.setMarginsDp
 import com.levit.bookme.chatkit.extensions.setTextSizeSp
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
-import com.levit.bookme.chatkit.ui.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.drawables.RoundedDrawable
 import de.hdodenhof.circleimageview.CircleImageView
 
 /**
@@ -24,10 +24,10 @@ internal class DefaultMessageViewFieldsDelegate(
         authorView.setTextColor(options.authorColor)
         authorView.setTextSizeSp(options.authorLabelSizeSP)
         authorView.setMarginsDp(
-            left = options.authorLabelMarginStart,
-            top = options.authorLabelMarginTop,
-            right = options.authorLabelMarginEnd,
-            bottom = options.authorLabelMarginBottom,
+            left = options.authorLabelMarginStartDp,
+            top = options.authorLabelMarginTopDp,
+            right = options.authorLabelMarginEndDp,
+            bottom = options.authorLabelMarginBottomDp,
         )
         authorView.isVisible = options.showAuthorLabel
 
@@ -62,10 +62,10 @@ internal class DefaultMessageViewFieldsDelegate(
         dateView.setTextColor(options.dateColor)
         dateView.setTextSizeSp(options.dateLabelSizeSP)
         dateView.setMarginsDp(
-            left = options.dateLabelMarginStart,
-            top = options.dateLabelMarginTop,
-            right = options.dateLabelMarginEnd,
-            bottom = options.dateLabelMarginBottom,
+            left = options.dateLabelMarginStartDp,
+            top = options.dateLabelMarginTopDp,
+            right = options.dateLabelMarginEndDp,
+            bottom = options.dateLabelMarginBottomDp,
         )
         dateView.isVisible = options.showDateLabel
 

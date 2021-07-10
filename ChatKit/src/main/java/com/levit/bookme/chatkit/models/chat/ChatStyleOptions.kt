@@ -22,48 +22,64 @@ class ChatStyleOptions(
     val lastMessageTextColor: Int
     @ColorInt
     val lastMessageDateTextColor: Int
+    @ColorInt
+    val backgroundColor: Int
+    @ColorInt
+    val backgroundStrokeColor: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
+    val backgroundStrokeWidthDp: Int
+
+    @Dimension(unit = Dimension.DP)
+    val backgroundTopLeftRadiusDp: Int
+    @Dimension(unit = Dimension.DP)
+    val backgroundTopRightRadiusDp: Int
+    @Dimension(unit = Dimension.DP)
+    val backgroundBottomLeftRadiusDp: Int
+    @Dimension(unit = Dimension.DP)
+    val backgroundBottomRightRadiusDp: Int
+
+    @Dimension(unit = Dimension.SP)
     val interlocutorNameTextSizeSp: Int
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val lastMessageTextSizeSp: Int
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val lastMessageDateTextSizeSp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginBottomDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginEndDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginEndDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginBottomDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginEndDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginBottomDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginEndDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginBottomDp: Int
 
     val interlocutorNameAlignment: MessageTextAlignment
@@ -81,6 +97,15 @@ class ChatStyleOptions(
         this.interlocutorNameTextColor = options.interlocutorNameTextColor
         this.lastMessageTextColor = options.lastMessageTextColor
         this.lastMessageDateTextColor = options.lastMessageDateTextColor
+        this.backgroundColor = options.backgroundColor
+        this.backgroundStrokeColor = options.backgroundStrokeColor
+
+        this.backgroundStrokeWidthDp = options.backgroundStrokeWidthDp
+
+        this.backgroundTopLeftRadiusDp = options.backgroundTopLeftRadiusDp
+        this.backgroundTopRightRadiusDp = options.backgroundTopRightRadiusDp
+        this.backgroundBottomLeftRadiusDp = options.backgroundBottomLeftRadiusDp
+        this.backgroundBottomRightRadiusDp = options.backgroundBottomRightRadiusDp
 
         this.interlocutorNameTextSizeSp = options.interlocutorNameTextSizeSp
         this.lastMessageTextSizeSp = options.lastMessageTextSizeSp

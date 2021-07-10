@@ -1,9 +1,15 @@
-package com.levit.bookme.chatkit.models.interfaces
+package com.levit.bookme.chatkit.models.chat
 
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import java.util.*
 
 interface ChatModel {
+
+    /**
+     * The id needs to correct work of DiffUtil in
+     * delegates adapter.
+     */
+    val id: Long
 
     /**
      * The name of interlocutor from current chat.

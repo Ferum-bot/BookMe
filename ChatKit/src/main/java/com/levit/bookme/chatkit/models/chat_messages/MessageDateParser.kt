@@ -1,4 +1,4 @@
-package com.levit.bookme.chatkit.models
+package com.levit.bookme.chatkit.models.chat_messages
 
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
 import java.text.SimpleDateFormat
@@ -6,9 +6,9 @@ import java.util.*
 
 internal object MessageDateParser {
 
-    private const val onlyTimePattern = "HH:mm"
-    private const val onlyDatePattern = "dd.MM"
-    private const val fullDatePattern = "dd.MM HH:mm"
+    private const val ONLY_TIME_PATTERN = "HH:mm"
+    private const val ONLY_DATE_PATTERN = "dd.MM"
+    private const val FULL_PATTERN = "dd.MM HH:mm"
 
     /**
      * Remove lately!
@@ -16,9 +16,9 @@ internal object MessageDateParser {
      */
     private val currentLocale = Locale.ENGLISH
 
-    private val onlyTimeFormat = SimpleDateFormat(onlyTimePattern, currentLocale)
-    private val onlyDateFormat = SimpleDateFormat(onlyDatePattern, currentLocale)
-    private val fullDateFormat = SimpleDateFormat(fullDatePattern, currentLocale)
+    private val onlyTimeFormat = SimpleDateFormat(ONLY_TIME_PATTERN, currentLocale)
+    private val onlyDateFormat = SimpleDateFormat(ONLY_DATE_PATTERN, currentLocale)
+    private val fullDateFormat = SimpleDateFormat(FULL_PATTERN, currentLocale)
 
     fun parseDateWithFormat(date: Date, format: MessageDateFormat): String
     = when(format) {

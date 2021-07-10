@@ -1,9 +1,15 @@
-package com.levit.bookme.chatkit.models.interfaces
+package com.levit.bookme.chatkit.models.chat_messages
 
 import com.levit.bookme.chatkit.models.enums.MessageType
 import java.util.*
 
 interface MessageModel {
+
+    /**
+     * The id of message. Needed to correct work of
+     * DiffUtil in delegates adapter.
+     */
+    val id: Long
 
     /**
      * The Message text.
