@@ -5,6 +5,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
+import java.security.DigestException
 
 class MessageStyleOptionsBuilder {
 
@@ -39,13 +40,13 @@ class MessageStyleOptionsBuilder {
     @Dimension
     var messageBackgroundStrokeWidthDP: Int = DEFAULT_STROKE_WIDTH
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var messageBackgroundTopLeftCornerRadiusDP: Int = DEFAULT_TOP_RADIUS_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var messageBackgroundTopRightCornerRadiusDP: Int = DEFAULT_TOP_RADIUS_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var messageBackgroundBottomLeftCornerRadiusDP: Int = DEFAULT_BOTTOM_RADIUS_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var messageBackgroundBottomRightCornerRadiusDP: Int = DEFAULT_BOTTOM_RADIUS_DP
 
     var authorLabelAlignment: MessageTextAlignment = MessageTextAlignment.START
@@ -53,38 +54,38 @@ class MessageStyleOptionsBuilder {
 
     var dateShowFormat: MessageDateFormat = MessageDateFormat.SHOW_ONLY_TIME
 
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     var textSizeSP: Int = DEFAULT_BIG_TEXT_SIZE_SP
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     var authorLabelSizeSP: Int = DEFAULT_MEDIUM_TEXT_SIZE_SP
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     var dateLabelSizeSP: Int = DEFAULT_SMALL_TEXT_SIZE_SP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var textMarginTopDP: Int = DEFAULT_TEXT_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var textMarginStartDP: Int = DEFAULT_TEXT_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var textMarginEndDP: Int = DEFAULT_TEXT_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var textMarginBottom: Int = DEFAULT_TEXT_MARGIN_DP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var authorLabelMarginTop: Int = DEFAULT_AUTHOR_LABEL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var authorLabelMarginStart: Int = DEFAULT_AUTHOR_LABEL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var authorLabelMarginEnd: Int = DEFAULT_AUTHOR_LABEL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var authorLabelMarginBottom: Int = DEFAULT_AUTHOR_LABEL_MARGIN_DP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var dateLabelMarginTop: Int = DEFAULT_DATE_LABEL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var dateLabelMarginStart: Int = DEFAULT_DATE_LABEL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var dateLabelMarginEnd: Int = DEFAULT_DATE_LABEL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var dateLabelMarginBottom: Int = DEFAULT_DATE_LABEL_MARGIN_DP
 
     var showAuthorLabel: Boolean = true

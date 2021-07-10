@@ -27,59 +27,59 @@ class ChatStyleOptions(
     @ColorInt
     val backgroundStrokeColor: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val backgroundStrokeWidthDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val backgroundTopLeftRadiusDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val backgroundTopRightRadiusDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val backgroundBottomLeftRadiusDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val backgroundBottomRightRadiusDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val interlocutorNameTextSizeSp: Int
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val lastMessageTextSizeSp: Int
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val lastMessageDateTextSizeSp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginBottomDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginEndDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginEndDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageMarginBottomDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginEndDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val lastMessageDateMarginBottomDp: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginStartDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginEndDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginTopDp: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val profileIconMarginBottomDp: Int
 
     val interlocutorNameAlignment: MessageTextAlignment

@@ -28,6 +28,9 @@ class CurrentChatHeaderStyleOptions(
     val additionalTextColor: Int
 
     @Dimension(unit = Dimension.DP)
+    var layoutBackgroundStrokeWidthDp: Int
+
+    @Dimension(unit = Dimension.DP)
     val layoutBackgroundTopLeftRadiusDp: Int
     @Dimension(unit = Dimension.DP)
     val layoutBackgroundTopRightRadiusDp: Int
@@ -95,6 +98,8 @@ class CurrentChatHeaderStyleOptions(
         this.layoutBackgroundStrokeColor = options.layoutBackgroundStrokeColor
         this.interlocutorNameTextColor = options.interlocutorNameTextColor
         this.additionalTextColor = options.additionalTextColor
+
+        this.layoutBackgroundStrokeWidthDp = options.layoutBackgroundStrokeWidthDp
 
         this.layoutBackgroundTopLeftRadiusDp = options.layoutBackgroundTopLeftRadiusDp
         this.layoutBackgroundTopRightRadiusDp = options.layoutBackgroundTopRightRadiusDp

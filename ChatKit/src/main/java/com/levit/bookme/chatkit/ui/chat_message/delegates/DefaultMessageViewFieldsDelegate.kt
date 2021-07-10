@@ -24,10 +24,10 @@ internal class DefaultMessageViewFieldsDelegate(
         authorView.setTextColor(options.authorColor)
         authorView.setTextSizeSp(options.authorLabelSizeSP)
         authorView.setMarginsDp(
-            left = options.authorLabelMarginStart,
-            top = options.authorLabelMarginTop,
-            right = options.authorLabelMarginEnd,
-            bottom = options.authorLabelMarginBottom,
+            left = options.authorLabelMarginStartDp,
+            top = options.authorLabelMarginTopDp,
+            right = options.authorLabelMarginEndDp,
+            bottom = options.authorLabelMarginBottomDp,
         )
         authorView.isVisible = options.showAuthorLabel
 
@@ -62,10 +62,10 @@ internal class DefaultMessageViewFieldsDelegate(
         dateView.setTextColor(options.dateColor)
         dateView.setTextSizeSp(options.dateLabelSizeSP)
         dateView.setMarginsDp(
-            left = options.dateLabelMarginStart,
-            top = options.dateLabelMarginTop,
-            right = options.dateLabelMarginEnd,
-            bottom = options.dateLabelMarginBottom,
+            left = options.dateLabelMarginStartDp,
+            top = options.dateLabelMarginTopDp,
+            right = options.dateLabelMarginEndDp,
+            bottom = options.dateLabelMarginBottomDp,
         )
         dateView.isVisible = options.showDateLabel
 

@@ -10,6 +10,7 @@ class CurrentChatHeaderStyleOptionsBuilder {
     companion object {
 
         private const val DEFAULT_BACKGROUND_RADIUS_DP = 0
+        private const val DEFAULT_BACKGROUND_STROKE_WIDTH_DP = 1
 
         private const val DEFAULT_BACK_BUTTON_MARGIN_DP = 8
         private const val DEFAULT_BACK_BUTTON_SIZE_DP = 25
@@ -33,6 +34,9 @@ class CurrentChatHeaderStyleOptionsBuilder {
     var interlocutorNameTextColor: Int = Color.BLACK
     @ColorInt
     var additionalTextColor: Int = Color.LTGRAY
+
+    @Dimension(unit = Dimension.DP)
+    var layoutBackgroundStrokeWidthDp: Int = DEFAULT_BACKGROUND_STROKE_WIDTH_DP
 
     @Dimension(unit = Dimension.DP)
     var layoutBackgroundTopLeftRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP

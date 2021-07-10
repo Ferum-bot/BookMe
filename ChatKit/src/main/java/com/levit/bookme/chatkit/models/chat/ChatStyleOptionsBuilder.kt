@@ -31,59 +31,59 @@ class ChatStyleOptionsBuilder {
     @ColorInt
     var backgroundStrokeColor: Int = Color.WHITE
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var backgroundStrokeWidthDp: Int = DEFAULT_STROKE_WIDTH_DP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var backgroundTopLeftRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var backgroundTopRightRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var backgroundBottomLeftRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var backgroundBottomRightRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
 
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     var interlocutorNameTextSizeSp: Int = DEFAULT_BIG_TEXT_SIZE_SP
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     var lastMessageTextSizeSp: Int = DEFAULT_SMALL_TEXT_SIZE_SP
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     var lastMessageDateTextSizeSp: Int = DEFAULT_SMALL_TEXT_SIZE_SP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var interlocutorNameMarginTopDp: Int = DEFAULT_BIG_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var interlocutorNameMarginBottomDp: Int = DEFAULT_BIG_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var interlocutorNameMarginStartDp: Int = DEFAULT_BIG_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var interlocutorNameMarginEndDp: Int = DEFAULT_BIG_MARGIN_DP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageMarginStartDp: Int = DEFAULT_SMALL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageMarginEndDp: Int = DEFAULT_SMALL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageMarginTopDp: Int = DEFAULT_SMALL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageMarginBottomDp: Int = DEFAULT_SMALL_MARGIN_DP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageDateMarginStartDp: Int = DEFAULT_SMALL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageDateMarginEndDp: Int = DEFAULT_SMALL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageDateMarginTopDp: Int = DEFAULT_SMALL_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var lastMessageDateMarginBottomDp: Int = DEFAULT_SMALL_MARGIN_DP
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var profileIconMarginStartDp: Int = DEFAULT_BIG_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var profileIconMarginEndDp: Int = DEFAULT_BIG_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var profileIconMarginTopDp: Int = DEFAULT_BIG_MARGIN_DP
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var profileIconMarginBottomDp: Int = DEFAULT_BIG_MARGIN_DP
 
     var interlocutorNameAlignment: MessageTextAlignment = MessageTextAlignment.START

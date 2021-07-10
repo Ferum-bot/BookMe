@@ -1,6 +1,5 @@
 package com.levit.bookme.chatkit.models.chat_messages
 
-import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
@@ -29,16 +28,16 @@ class MessageStyleOptions(
     @ColorInt
     val messageBackgroundStrokeColor: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val messageBackgroundStrokeWidthDP: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val messageBackgroundTopLeftCornerRadiusDP: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val messageBackgroundTopRightCornerRadiusDP: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val messageBackgroundBottomLeftCornerRadiusDP: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val messageBackgroundBottomRightCornerRadiusDP: Int
 
     val authorLabelAlignment: MessageTextAlignment
@@ -46,39 +45,39 @@ class MessageStyleOptions(
 
     val dateShowFormat: MessageDateFormat
 
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val textSizeSP: Int
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val authorLabelSizeSP: Int
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     val dateLabelSizeSP: Int
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val textMarginTopDP: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val textMarginStartDP: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val textMarginEndDP: Int
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     val textMarginBottom: Int
 
-    @Dimension
-    val authorLabelMarginTop: Int
-    @Dimension
-    val authorLabelMarginStart: Int
-    @Dimension
-    val authorLabelMarginEnd: Int
-    @Dimension
-    val authorLabelMarginBottom: Int
+    @Dimension(unit = Dimension.DP)
+    val authorLabelMarginTopDp: Int
+    @Dimension(unit = Dimension.DP)
+    val authorLabelMarginStartDp: Int
+    @Dimension(unit = Dimension.DP)
+    val authorLabelMarginEndDp: Int
+    @Dimension(unit = Dimension.DP)
+    val authorLabelMarginBottomDp: Int
 
-    @Dimension
-    val dateLabelMarginTop: Int
-    @Dimension
-    val dateLabelMarginStart: Int
-    @Dimension
-    val dateLabelMarginEnd: Int
-    @Dimension
-    val dateLabelMarginBottom: Int
+    @Dimension(unit = Dimension.DP)
+    val dateLabelMarginTopDp: Int
+    @Dimension(unit = Dimension.DP)
+    val dateLabelMarginStartDp: Int
+    @Dimension(unit = Dimension.DP)
+    val dateLabelMarginEndDp: Int
+    @Dimension(unit = Dimension.DP)
+    val dateLabelMarginBottomDp: Int
 
     val showAuthorLabel: Boolean
     val showDateLabel: Boolean
@@ -115,15 +114,15 @@ class MessageStyleOptions(
         this.textMarginEndDP = options.textMarginEndDP
         this.textMarginBottom = options.textMarginBottom
 
-        this.authorLabelMarginTop = options.authorLabelMarginTop
-        this.authorLabelMarginStart = options.authorLabelMarginStart
-        this.authorLabelMarginEnd = options.authorLabelMarginEnd
-        this.authorLabelMarginBottom = options.authorLabelMarginBottom
+        this.authorLabelMarginTopDp = options.authorLabelMarginTop
+        this.authorLabelMarginStartDp = options.authorLabelMarginStart
+        this.authorLabelMarginEndDp = options.authorLabelMarginEnd
+        this.authorLabelMarginBottomDp = options.authorLabelMarginBottom
 
-        this.dateLabelMarginTop = options.dateLabelMarginTop
-        this.dateLabelMarginStart = options.dateLabelMarginStart
-        this.dateLabelMarginEnd = options.dateLabelMarginEnd
-        this.dateLabelMarginBottom = options.dateLabelMarginBottom
+        this.dateLabelMarginTopDp = options.dateLabelMarginTop
+        this.dateLabelMarginStartDp = options.dateLabelMarginStart
+        this.dateLabelMarginEndDp = options.dateLabelMarginEnd
+        this.dateLabelMarginBottomDp = options.dateLabelMarginBottom
 
         this.showAuthorLabel = options.showAuthorLabel
         this.showDateLabel = options.showDateLabel
