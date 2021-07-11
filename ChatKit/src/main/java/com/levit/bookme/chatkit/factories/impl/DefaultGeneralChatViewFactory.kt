@@ -9,10 +9,17 @@ import com.levit.bookme.chatkit.ui.general_chat.GeneralChatView
 internal class DefaultGeneralChatViewFactory {
 
     fun createGeneralChat(
-        model: GeneralChatModel, requireContext: () -> Context,
+        model: GeneralChatModel?, requireContext: () -> Context,
         generalStyleOptions: GeneralChatStyleOptions,
         chatStyleOptions: ChatStyleOptions,
     ): GeneralChatView {
+        if (model == null) {
+            return GeneralChatView(requireContext.invoke()).apply {
+                this.chatStyleOptions = chatStyleOptions
+                this.generalStyleOptions = generalStyleOptions
+            }
+        }
+
         return GeneralChatView(requireContext.invoke()).apply {
             this.chatStyleOptions = chatStyleOptions
             this.generalStyleOptions = generalStyleOptions

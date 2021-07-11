@@ -18,6 +18,11 @@ internal class DefaultChatMessagesFactory {
         private const val MESSAGE_VIEW_HEIGHT = ConstraintLayout.LayoutParams.WRAP_CONTENT
     }
 
+    private val layoutParams = ConstraintLayout.LayoutParams(
+        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+    )
+
     fun createMessageFrom(
         position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
         yourMessageOptions: MessageStyleOptions,
@@ -45,9 +50,16 @@ internal class DefaultChatMessagesFactory {
     }
 
     fun createYourMessageFrom(
-        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
+        position: Int?, allMessages: List<MessageModel>?, requireContext: () -> Context,
         yourMessageOptions: MessageStyleOptions,
     ): YourMessageView {
+        if (position == null || allMessages == null) {
+            return YourMessageView(requireContext.invoke()).apply {
+                layoutParams = this@DefaultChatMessagesFactory.layoutParams
+                styleOptions = yourMessageOptions
+            }
+        }
+
         if (allMessages.notContainsPosition(position)) {
             throwInvalidPosition(position, allMessages.size)
         }
@@ -65,9 +77,16 @@ internal class DefaultChatMessagesFactory {
     }
 
     fun createInterlocutorMessageFrom(
-        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
+        position: Int?, allMessages: List<MessageModel>?, requireContext: () -> Context,
         interlocutorMessageOptions: MessageStyleOptions
     ): InterlocutorMessageView {
+        if (position == null || allMessages == null) {
+            return InterlocutorMessageView(requireContext.invoke()).apply {
+                layoutParams = this@DefaultChatMessagesFactory.layoutParams
+                styleOptions = interlocutorMessageOptions
+            }
+        }
+
         if (allMessages.notContainsPosition(position)) {
             throwInvalidPosition(position, allMessages.size)
         }

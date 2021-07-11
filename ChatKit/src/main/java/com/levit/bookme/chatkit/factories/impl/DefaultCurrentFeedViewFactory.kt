@@ -8,9 +8,15 @@ import com.levit.bookme.chatkit.ui.current_chat_feed.CurrentChatFeedView
 internal class DefaultCurrentFeedViewFactory {
 
     fun createCurrentChatFeed(
-        model: CurrentChatFeedModel, requireContext: () -> Context,
+        model: CurrentChatFeedModel?, requireContext: () -> Context,
         styleOptions: CurrentChatFeedStyleOptions,
     ): CurrentChatFeedView {
+        if (model == null) {
+            return CurrentChatFeedView(requireContext.invoke()).apply {
+                this.styleOptions = styleOptions
+            }
+        }
+
         return CurrentChatFeedView(requireContext.invoke()).apply {
             this.styleOptions = styleOptions
             currentChatFeedModel = model

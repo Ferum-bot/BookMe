@@ -8,9 +8,15 @@ import com.levit.bookme.chatkit.ui.message_input.MessageInputView
 internal class DefaultMessageInputViewFactory {
 
     fun createMessageInput(
-        model: MessageInputModel, requireContext: () -> Context,
+        model: MessageInputModel?, requireContext: () -> Context,
         styleOptions: MessageInputStyleOptions
     ): MessageInputView {
+        if (model == null) {
+            return MessageInputView(requireContext.invoke()).apply {
+                this.styleOptions = styleOptions
+            }
+        }
+
         return MessageInputView(requireContext.invoke()).apply {
             this.styleOptions = styleOptions
             messageInputModel = model

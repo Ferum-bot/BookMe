@@ -55,12 +55,6 @@ ChatKitViewFactory() {
         position: Int?, allMessages: List<MessageModel>?,
         styleOptions: MessageStyleOptions, requireContext: () -> Context,
     ): YourMessageView {
-        if (position == null || allMessages == null) {
-            return YourMessageView(requireContext.invoke()).apply {
-                this.styleOptions = styleOptions
-            }
-        }
-
         return defaultChatMessagesFactoryDelegate.createYourMessageFrom(
             position, allMessages, requireContext, styleOptions
         )
@@ -70,12 +64,6 @@ ChatKitViewFactory() {
         position: Int?, allMessages: List<MessageModel>?,
         styleOptions: MessageStyleOptions, requireContext: () -> Context
     ): InterlocutorMessageView {
-        if (position == null || allMessages == null) {
-            return InterlocutorMessageView(requireContext.invoke()).apply {
-                this.styleOptions = styleOptions
-            }
-        }
-
         return defaultChatMessagesFactoryDelegate.createInterlocutorMessageFrom(
             position, allMessages, requireContext, styleOptions
         )
@@ -95,17 +83,6 @@ ChatKitViewFactory() {
         position: Int?, allChats: List<ChatModel>?,
         styleOptions: ChatStyleOptions, requireContext: () -> Context
     ): ChatView {
-        if (position == null || allChats == null) {
-            val layoutParams = ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT,
-                ConstraintLayout.LayoutParams.WRAP_CONTENT,
-            )
-            return ChatView(requireContext.invoke()).apply {
-                this.styleOptions = styleOptions
-                this.layoutParams = layoutParams
-            }
-        }
-
         return defaultChatViewFactoryDelegate.createChatFrom(
             position, allChats, requireContext, styleOptions
         )
@@ -124,12 +101,6 @@ ChatKitViewFactory() {
         model: CurrentChatHeaderModel?, requireContext: () -> Context,
         styleOptions: CurrentChatHeaderStyleOptions,
     ): CurrentChatHeaderVew {
-        if (model == null) {
-            return CurrentChatHeaderVew(requireContext.invoke()).apply {
-                this.styleOptions = styleOptions
-            }
-        }
-
         return defaultCurrentChatHeaderViewFactoryDelegate.createCurrentChatHeader(
             model, requireContext, styleOptions
         )
@@ -148,12 +119,6 @@ ChatKitViewFactory() {
         model: CurrentChatFeedModel?, requireContext: () -> Context,
         styleOptions: CurrentChatFeedStyleOptions,
     ): CurrentChatFeedView {
-        if (model == null) {
-            return CurrentChatFeedView(requireContext.invoke()).apply {
-                this.styleOptions = styleOptions
-            }
-        }
-
         return defaultCurrentChatFeedViewFactoryDelegate.createCurrentChatFeed(
             model, requireContext, styleOptions
         )
@@ -173,13 +138,6 @@ ChatKitViewFactory() {
         generalStyleOptions: GeneralChatStyleOptions,
         chatStyleOptions: ChatStyleOptions,
     ): GeneralChatView {
-        if (model == null) {
-            return GeneralChatView(requireContext.invoke()).apply {
-                this.chatStyleOptions = chatStyleOptions
-                this.generalStyleOptions = generalStyleOptions
-            }
-        }
-
         return defaultGeneralChatViewFactoryDelegate.createGeneralChat(
             model, requireContext, generalStyleOptions, chatStyleOptions
         )
@@ -199,12 +157,6 @@ ChatKitViewFactory() {
         model: MessageInputModel?, requireContext: () -> Context,
         styleOptions: MessageInputStyleOptions,
     ): MessageInputView {
-        if (model == null) {
-            return MessageInputView(requireContext.invoke()).apply {
-                this.styleOptions = styleOptions
-            }
-        }
-
         return defaultMessageInputViewFactoryDelegate.createMessageInput(
             model, requireContext, styleOptions
         )

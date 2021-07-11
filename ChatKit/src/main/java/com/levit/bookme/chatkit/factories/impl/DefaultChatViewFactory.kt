@@ -8,10 +8,22 @@ import com.levit.bookme.chatkit.ui.chat.ChatView
 
 internal class DefaultChatViewFactory {
 
+    private val layoutParams = ConstraintLayout.LayoutParams(
+        ConstraintLayout.LayoutParams.MATCH_PARENT,
+        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+    )
+
     fun createChatFrom(
-        position: Int, allChats: List<ChatModel>, requireContext: () -> Context,
+        position: Int?, allChats: List<ChatModel>?, requireContext: () -> Context,
         styleOptions: ChatStyleOptions
     ): ChatView {
+        if (position == null || allChats == null) {
+            return ChatView(requireContext.invoke()).apply {
+                this.layoutParams = this@DefaultChatViewFactory.layoutParams
+                this.styleOptions = styleOptions
+            }
+        }
+
         if (allChats.notContainsPosition(position)) {
             throwInvalidPosition(position, allChats.size)
         }
