@@ -10,10 +10,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.levit.book_me.chat_kit.R
 import com.levit.book_me.chat_kit.databinding.ChatLayoutBinding
-import com.levit.bookme.chatkit.extensions.dpToPx
-import com.levit.bookme.chatkit.extensions.emptyChatModel
-import com.levit.bookme.chatkit.extensions.setMarginsDp
-import com.levit.bookme.chatkit.extensions.setTextSizeSp
 import com.levit.bookme.chatkit.models.chat.ChatDateParser
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
@@ -21,6 +17,11 @@ import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
 import com.levit.bookme.chatkit.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.extensions.*
+import com.levit.bookme.chatkit.extensions.dpToPx
+import com.levit.bookme.chatkit.extensions.emptyChatModel
+import com.levit.bookme.chatkit.extensions.setMarginsDp
+import com.levit.bookme.chatkit.extensions.setTextSizeSp
 
 class ChatView @JvmOverloads constructor(
     context: Context,
@@ -81,27 +82,31 @@ class ChatView @JvmOverloads constructor(
     = with(binding) {
         interlocutorName.setTextColor(options.interlocutorNameTextColor)
         interlocutorName.setTextSizeSp(options.interlocutorNameTextSizeSp)
-//        interlocutorName.setMarginsDp(
-//            left = options.interlocutorNameMarginStartDp,
-//            top = options.interlocutorNameMarginTopDp,
-//            right = options.interlocutorNameMarginEndDp,
-//            bottom = options.interlocutorNameMarginBottomDp,
-//        )
-//
-//        when(options.interlocutorNameAlignment) {
-//            MessageTextAlignment.START -> alignInterlocutorNameToStart()
-//            MessageTextAlignment.END -> alignInterlocutorNameToEnd()
-//        }
+        interlocutorName.setMarginsDp(
+            left = options.interlocutorNameMarginStartDp,
+            top = options.interlocutorNameMarginTopDp,
+            right = options.interlocutorNameMarginEndDp,
+            bottom = options.interlocutorNameMarginBottomDp,
+        )
+
+        when(options.interlocutorNameAlignment) {
+            MessageTextAlignment.START -> alignInterlocutorNameToStart()
+            MessageTextAlignment.END -> alignInterlocutorNameToEnd()
+        }
     }
 
     private fun alignInterlocutorNameToStart() {
         val layout = binding.backgroundLayout
+        val profileLayout = binding.interlocutorProfileImage
         val nameView = binding.interlocutorName
         val layoutId = layout.id
+        val profileId = profileLayout.id
         val nameViewId = nameView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
-        constraintSet.connect(nameViewId, ConstraintSet.START, layoutId, ConstraintSet.START)
+        constraintSet.connect(nameViewId, ConstraintSet.START, profileId, ConstraintSet.END)
         constraintSet.connect(nameViewId, ConstraintSet.TOP, layoutId, ConstraintSet.TOP)
         constraintSet.applyTo(layout)
     }
@@ -111,7 +116,9 @@ class ChatView @JvmOverloads constructor(
         val nameView = binding.interlocutorName
         val layoutId = layout.id
         val nameViewId = nameView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
         constraintSet.connect(nameViewId, ConstraintSet.END, layoutId, ConstraintSet.END)
         constraintSet.connect(nameViewId, ConstraintSet.TOP, layoutId, ConstraintSet.TOP)
@@ -122,23 +129,23 @@ class ChatView @JvmOverloads constructor(
     = with(binding) {
         lastMessageText.setTextColor(options.lastMessageTextColor)
         lastMessageText.setTextSizeSp(options.lastMessageTextSizeSp)
-//        lastMessageText.setMarginsDp(
-//            left = options.lastMessageMarginStartDp,
-//            top = options.lastMessageMarginTopDp,
-//            right = options.lastMessageMarginEndDp,
-//            bottom = options.lastMessageMarginBottomDp,
-//        )
+        lastMessageText.setMarginsDp(
+            left = options.lastMessageMarginStartDp,
+            top = options.lastMessageMarginTopDp,
+            right = options.lastMessageMarginEndDp,
+            bottom = options.lastMessageMarginBottomDp,
+        )
     }
 
     private fun applyInterlocutorProfileIconOptions(options: ChatStyleOptions)
     = with(binding) {
         interlocutorProfileImage.isVisible = options.showProfileIcon
-//        interlocutorProfileImage.setMarginsDp(
-//            left = options.profileIconMarginStartDp,
-//            top = options.profileIconMarginTopDp,
-//            right = options.profileIconMarginEndDp,
-//            bottom = options.profileIconMarginBottomDp,
-//        )
+        interlocutorProfileImage.setMarginsDp(
+            left = options.profileIconMarginStartDp,
+            top = options.profileIconMarginTopDp,
+            right = options.profileIconMarginEndDp,
+            bottom = options.profileIconMarginBottomDp,
+        )
     }
 
     private fun applyLastMessageDateOptions(options: ChatStyleOptions)
@@ -146,17 +153,17 @@ class ChatView @JvmOverloads constructor(
         lastMessageDate.isVisible = options.showLastMessageDate
         lastMessageDate.setTextColor(options.lastMessageDateTextColor)
         lastMessageDate.setTextSizeSp(options.lastMessageDateTextSizeSp)
-//        lastMessageDate.setMarginsDp(
-//            left = options.lastMessageDateMarginStartDp,
-//            top = options.lastMessageDateMarginTopDp,
-//            right = options.lastMessageDateMarginEndDp,
-//            bottom = options.lastMessageDateMarginBottomDp,
-//        )
-//
-//        when(options.lastMessageDateAlignment) {
-//            MessageTextAlignment.START -> alignLastMessageDateToStart()
-//            MessageTextAlignment.END -> alignLastMessageDateToEnd()
-//        }
+        lastMessageDate.setMarginsDp(
+            left = options.lastMessageDateMarginStartDp,
+            top = options.lastMessageDateMarginTopDp,
+            right = options.lastMessageDateMarginEndDp,
+            bottom = options.lastMessageDateMarginBottomDp,
+        )
+
+        when(options.lastMessageDateAlignment) {
+            MessageTextAlignment.START -> alignLastMessageDateToStart()
+            MessageTextAlignment.END -> alignLastMessageDateToEnd()
+        }
     }
 
     private fun alignLastMessageDateToStart() {
@@ -164,7 +171,9 @@ class ChatView @JvmOverloads constructor(
         val dateView = binding.lastMessageDate
         val layoutId = layout.id
         val dateViewId = dateView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
         constraintSet.connect(dateViewId, ConstraintSet.START, layoutId, ConstraintSet.START)
         constraintSet.connect(dateViewId, ConstraintSet.BOTTOM, layoutId, ConstraintSet.BOTTOM)
@@ -176,7 +185,9 @@ class ChatView @JvmOverloads constructor(
         val dateView = binding.lastMessageDate
         val layoutId = layout.id
         val dateViewId = dateView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
         constraintSet.connect(dateViewId, ConstraintSet.END, layoutId, ConstraintSet.END)
         constraintSet.connect(dateViewId, ConstraintSet.BOTTOM, layoutId, ConstraintSet.BOTTOM)
@@ -192,12 +203,9 @@ class ChatView @JvmOverloads constructor(
             radiusBottomLeftPx = dpToPx(options.backgroundBottomLeftRadiusDp) ?: 0,
             radiusBottomRightPx = dpToPx(options.backgroundBottomRightRadiusDp) ?: 0,
         )
-    }
 
-    private fun defaultGlideOptions() = RequestOptions()
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .placeholder(R.drawable.default_image_placeholder)
-        .error(R.drawable.ic_default_error_placeholder)
+        binding.backgroundLayout.background = backgroundDrawable
+    }
 
     private fun adaptLastMessage(lastMessage: String?, from: ChatLastMessageFrom): String {
         lastMessage ?: return ""
