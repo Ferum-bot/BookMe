@@ -6,26 +6,27 @@ import com.levit.bookme.chatkit.models.general_chat.GeneralChatStyleOptions
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatModel
 import com.levit.bookme.chatkit.ui.general_chat.GeneralChatView
 
-internal class DefaultGeneralChatViewFactory(
-    private val styleOptions: GeneralChatStyleOptions,
-    private val chatStyleOptions: ChatStyleOptions,
-) {
+internal class DefaultGeneralChatViewFactory {
 
     fun createGeneralChat(
-        model: GeneralChatModel, requireContext: () -> Context
+        model: GeneralChatModel, requireContext: () -> Context,
+        generalStyleOptions: GeneralChatStyleOptions,
+        chatStyleOptions: ChatStyleOptions,
     ): GeneralChatView {
         return GeneralChatView(requireContext.invoke()).apply {
-            chatStyleOptions = this@DefaultGeneralChatViewFactory.chatStyleOptions
-            generalStyleOptions = this@DefaultGeneralChatViewFactory.styleOptions
+            this.chatStyleOptions = chatStyleOptions
+            this.generalStyleOptions = generalStyleOptions
             generalChatModel = model
         }
     }
 
     fun bindGeneralChat(
         view: GeneralChatView, model: GeneralChatModel,
+        generalStyleOptions: GeneralChatStyleOptions,
+        chatStyleOptions: ChatStyleOptions,
     ) {
         view.chatStyleOptions = chatStyleOptions
-        view.generalStyleOptions = styleOptions
+        view.generalStyleOptions = generalStyleOptions
         view.generalChatModel = model
     }
 }

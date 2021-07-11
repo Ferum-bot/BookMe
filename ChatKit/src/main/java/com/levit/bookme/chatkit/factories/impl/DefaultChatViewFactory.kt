@@ -5,12 +5,11 @@ import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.ui.chat.ChatView
 
-internal class DefaultChatViewFactory(
-    private val styleOptions: ChatStyleOptions
-) {
+internal class DefaultChatViewFactory {
 
     fun createChatFrom(
-        position: Int, allChats: List<ChatModel>, requireContext: () -> Context
+        position: Int, allChats: List<ChatModel>, requireContext: () -> Context,
+        styleOptions: ChatStyleOptions
     ): ChatView {
         if (allChats.notContainsPosition(position)) {
             throwInvalidPosition(position, allChats.size)
@@ -18,13 +17,14 @@ internal class DefaultChatViewFactory(
         val modelToCreate = allChats[position]
 
         return ChatView(requireContext.invoke()).apply {
-            styleOptions = this@DefaultChatViewFactory.styleOptions
+            this.styleOptions = styleOptions
             chatModel = modelToCreate
         }
     }
 
     fun bindChatFrom(
-        view: ChatView, position: Int, allChats: List<ChatModel>
+        view: ChatView, position: Int, allChats: List<ChatModel>,
+        styleOptions: ChatStyleOptions
     ) {
         if (allChats.notContainsPosition(position)) {
             throwInvalidPosition(position, allChats.size)

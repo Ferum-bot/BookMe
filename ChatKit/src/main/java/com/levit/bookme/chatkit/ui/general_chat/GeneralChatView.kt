@@ -10,6 +10,7 @@ import com.levit.bookme.chatkit.decorators.TopExtraSpaceDecorator
 import com.levit.bookme.chatkit.extensions.inflater
 import com.levit.bookme.chatkit.extensions.provideEmptyModel
 import com.levit.bookme.chatkit.extensions.setMarginsDp
+import com.levit.bookme.chatkit.factories.impl.DefaultChatKitViewFactoryFacade
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatModel
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatStyleOptions
@@ -43,6 +44,10 @@ class GeneralChatView @JvmOverloads constructor(
     var listener: GeneralChatListener? = null
 
     private val binding: GeneralChatLayoutBinding
+
+    private val chatKitFactory by lazy {
+        DefaultChatKitViewFactoryFacade()
+    }
 
     private val chatsAdapter = GeneralChatAdapter()
 

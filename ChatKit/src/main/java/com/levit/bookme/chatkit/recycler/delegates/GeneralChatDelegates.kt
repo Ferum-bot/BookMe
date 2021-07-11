@@ -5,11 +5,13 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegate
 import com.levit.book_me.chat_kit.R
 import com.levit.bookme.chatkit.factories.ChatKitViewFactory
 import com.levit.bookme.chatkit.models.chat.ChatModel
+import com.levit.bookme.chatkit.ui.chat.ChatView
 
 internal object GeneralChatDelegates {
 
     fun chatsDelegate(
-        factory: ChatKitViewFactory
+        factory: ChatKitViewFactory,
+
     ) = adapterDelegate<ChatModel, ChatModel>(
         R.layout.chat_layout,
         layoutInflater =
@@ -20,8 +22,18 @@ internal object GeneralChatDelegates {
             )
         }) {
 
-        bind {
+        val chatView = itemView as? ChatView
 
+        bind { currentList ->
+            chatView ?: return@bind
+            val allChats = currentList.mapNotNull { it as? ChatModel }
+            if (allChats.isEmpty()) {
+                return@bind
+            }
+
+            factory.bindChatFrom(
+                view = chatView, position = adapterPosition, allChats = allChats
+            )
         }
 
     }

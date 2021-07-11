@@ -5,21 +5,21 @@ import com.levit.bookme.chatkit.models.current_chat_header.CurrentChatHeaderMode
 import com.levit.bookme.chatkit.models.current_chat_header.CurrentChatHeaderStyleOptions
 import com.levit.bookme.chatkit.ui.current_chat_header.CurrentChatHeaderVew
 
-internal class DefaultCurrentChatHeaderViewFactory(
-    private val styleOptions: CurrentChatHeaderStyleOptions,
-) {
+internal class DefaultCurrentChatHeaderViewFactory {
 
     fun createCurrentChatHeader(
-        model: CurrentChatHeaderModel, requireContext: () -> Context
+        model: CurrentChatHeaderModel, requireContext: () -> Context,
+        styleOptions: CurrentChatHeaderStyleOptions,
     ): CurrentChatHeaderVew {
         return CurrentChatHeaderVew(requireContext.invoke()).apply {
-            styleOptions = this@DefaultCurrentChatHeaderViewFactory.styleOptions
+            this.styleOptions = styleOptions
             chatHeaderModel = model
         }
     }
 
     fun bindCurrentChatHeader(
-        view: CurrentChatHeaderVew, model: CurrentChatHeaderModel
+        view: CurrentChatHeaderVew, model: CurrentChatHeaderModel,
+        styleOptions: CurrentChatHeaderStyleOptions
     ) {
         view.styleOptions = styleOptions
         view.chatHeaderModel = model

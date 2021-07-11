@@ -10,10 +10,7 @@ import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import com.levit.bookme.chatkit.ui.chat_message.YourMessageView
 import java.util.*
 
-internal class DefaultChatMessagesFactory(
-    private val yourMessageOptions: MessageStyleOptions,
-    private val interlocutorMessageOptions: MessageStyleOptions,
-) {
+internal class DefaultChatMessagesFactory {
 
     companion object {
 
@@ -23,6 +20,8 @@ internal class DefaultChatMessagesFactory(
 
     fun createMessageFrom(
         position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
+        yourMessageOptions: MessageStyleOptions,
+        interlocutorMessageOptions: MessageStyleOptions
     ): MessageView {
         if (allMessages.notContainsPosition(position)) {
             throwInvalidPosition(position, allMessages.size)
@@ -34,19 +33,20 @@ internal class DefaultChatMessagesFactory(
                 createYourMessage(
                     messageModel = modelToCreate,
                     previousModel = allMessages.getOrNull(position - 1),
-                    requireContext,
+                    requireContext, yourMessageOptions
                 )
             MessageType.INTERLOCUTOR_MESSAGE ->
                 createInterlocutorMessage(
                     messageModel = modelToCreate,
                     previousModel = allMessages.getOrNull(position - 1),
-                    requireContext,
+                    requireContext, interlocutorMessageOptions
                 )
         }
     }
 
     fun createYourMessageFrom(
-        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context
+        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
+        yourMessageOptions: MessageStyleOptions,
     ): YourMessageView {
         if (allMessages.notContainsPosition(position)) {
             throwInvalidPosition(position, allMessages.size)
@@ -60,11 +60,13 @@ internal class DefaultChatMessagesFactory(
             messageModel = modelToCreate,
             previousModel = allMessages.getOrNull(position - 1),
             requireContext,
+            yourMessageOptions
         )
     }
 
     fun createInterlocutorMessageFrom(
-        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context
+        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
+        interlocutorMessageOptions: MessageStyleOptions
     ): InterlocutorMessageView {
         if (allMessages.notContainsPosition(position)) {
             throwInvalidPosition(position, allMessages.size)
@@ -78,11 +80,14 @@ internal class DefaultChatMessagesFactory(
             messageModel = modelToCreate,
             previousModel = allMessages.getOrNull(position - 1),
             requireContext,
+            interlocutorMessageOptions
         )
     }
 
     fun bindMessageFrom(
         view: MessageView, position: Int, allMessages: List<MessageModel>,
+        yourMessageOptions: MessageStyleOptions,
+        interlocutorMessageOptions: MessageStyleOptions
     ) {
         if (allMessages.notContainsPosition(position)) {
             throwInvalidPosition(position, allMessages.size)
@@ -98,29 +103,32 @@ internal class DefaultChatMessagesFactory(
     }
 
     private fun createInterlocutorMessage(
-        messageModel: MessageModel, previousModel: MessageModel?, requireContext: () -> Context
+        messageModel: MessageModel, previousModel: MessageModel?, requireContext: () -> Context,
+        interlocutorMessageOptions: MessageStyleOptions
     ): InterlocutorMessageView {
         val iconIsNeeded: Boolean = previousModel == null || previousModel.type == MessageType.YOUR_MESSAGE
         return if (iconIsNeeded) {
-            createInterlocutorMessageWithIcon(messageModel, requireContext)
+            createInterlocutorMessageWithIcon(messageModel, requireContext, interlocutorMessageOptions)
         } else {
-            createInterlocutorMessageWithoutIcon(messageModel, requireContext)
+            createInterlocutorMessageWithoutIcon(messageModel, requireContext, interlocutorMessageOptions)
         }
     }
 
     private fun createYourMessage(
-        messageModel: MessageModel, previousModel: MessageModel?, requireContext: () -> Context
+        messageModel: MessageModel, previousModel: MessageModel?, requireContext: () -> Context,
+        yourMessageOptions: MessageStyleOptions,
     ): YourMessageView {
         val iconIsNeeded: Boolean = previousModel == null || previousModel.type == MessageType.INTERLOCUTOR_MESSAGE
         return if (iconIsNeeded) {
-            createYourMessageWithIcon(messageModel, requireContext)
+            createYourMessageWithIcon(messageModel, requireContext, yourMessageOptions)
         } else {
-            createYourMessageWithoutIcon(messageModel, requireContext)
+            createYourMessageWithoutIcon(messageModel, requireContext, yourMessageOptions)
         }
     }
 
     private fun createInterlocutorMessageWithIcon(
-        messageModel: MessageModel, requireContext: () -> Context
+        messageModel: MessageModel, requireContext: () -> Context,
+        interlocutorMessageOptions: MessageStyleOptions
     ): InterlocutorMessageView {
         val params = ConstraintLayout.LayoutParams(
             MESSAGE_VIEW_WIDTH,
@@ -135,7 +143,8 @@ internal class DefaultChatMessagesFactory(
     }
 
     private fun createInterlocutorMessageWithoutIcon(
-        messageModel: MessageModel, requireContext: () -> Context
+        messageModel: MessageModel, requireContext: () -> Context,
+        interlocutorMessageOptions: MessageStyleOptions
     ): InterlocutorMessageView {
         val params = ConstraintLayout.LayoutParams(
             MESSAGE_VIEW_WIDTH,
@@ -150,7 +159,8 @@ internal class DefaultChatMessagesFactory(
     }
 
     private fun createYourMessageWithIcon(
-        messageModel: MessageModel, requireContext: () -> Context
+        messageModel: MessageModel, requireContext: () -> Context,
+        yourMessageOptions: MessageStyleOptions,
     ): YourMessageView {
         val params = ConstraintLayout.LayoutParams(
             MESSAGE_VIEW_WIDTH,
@@ -165,7 +175,8 @@ internal class DefaultChatMessagesFactory(
     }
 
     private fun createYourMessageWithoutIcon(
-        messageModel: MessageModel, requireContext: () -> Context
+        messageModel: MessageModel, requireContext: () -> Context,
+        yourMessageOptions: MessageStyleOptions,
     ): YourMessageView {
         val params = ConstraintLayout.LayoutParams(
             MESSAGE_VIEW_WIDTH,

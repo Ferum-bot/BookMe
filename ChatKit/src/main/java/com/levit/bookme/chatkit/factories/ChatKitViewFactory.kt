@@ -27,93 +27,95 @@ import com.levit.bookme.chatkit.ui.message_input.MessageInputView
  * Needed to have convenient access to different style options
  * and all views.
  */
-internal abstract class ChatKitViewFactory(
-
-    protected val youChatMessageStyleOptions: MessageStyleOptions,
-    protected val interlocutorChatMessageStyleOptions: MessageStyleOptions,
-
-    protected val chatStyleOptions: ChatStyleOptions,
-
-    protected val currentChatFeedStyleOptions: CurrentChatFeedStyleOptions,
-    protected val currentChatHeaderStyleOptions: CurrentChatHeaderStyleOptions,
-
-    protected val generalChatStyleOptions: GeneralChatStyleOptions,
-
-    protected val messageInputOptions: MessageInputStyleOptions,
-
-    ) {
+internal abstract class ChatKitViewFactory {
 
     /**
      * If properties is null, must return empty message view.
      */
     abstract fun createYourMessageFrom(
-        position: Int?, allMessages: List<MessageModel>?, requireContext: () -> Context
+        position: Int?, allMessages: List<MessageModel>?,
+        styleOptions: MessageStyleOptions, requireContext: () -> Context
     ): YourMessageView
 
     /**
      * If properties is null, must return empty message view.
      */
     abstract fun createInterlocutorMessageFrom(
-        position: Int?, allMessages: List<MessageModel>?, requireContext: () -> Context
+        position: Int?, allMessages: List<MessageModel>?,
+        styleOptions: MessageStyleOptions ,requireContext: () -> Context
     ): InterlocutorMessageView
 
     abstract fun bindMessageFrom(
         view: MessageView, position: Int, allMessages: List<MessageModel>,
+        yourStyleOptions: MessageStyleOptions,
+        interlocutorStyleOptions: MessageStyleOptions,
     )
 
     /**
      * If properties is null, must return empty chat view.
      */
     abstract fun createChatFrom(
-        position: Int?, allChats: List<ChatModel>?, requireContext: () -> Context
+        position: Int?, allChats: List<ChatModel>?,
+        styleOptions: ChatStyleOptions, requireContext: () -> Context
     ): ChatView
 
     abstract fun bindChatFrom(
         view: ChatView, position: Int, allChats: List<ChatModel>,
+        styleOptions: ChatStyleOptions,
     )
 
     /**
      * If model is null, must return empty current chat feed view.
      */
     abstract fun createCurrentChatFeed(
-        model: CurrentChatFeedModel?, requireContext: () -> Context
+        model: CurrentChatFeedModel?, requireContext: () -> Context,
+        styleOptions: CurrentChatFeedStyleOptions,
     ): CurrentChatFeedView
 
     abstract fun bindCurrentChatFeed(
         view: CurrentChatFeedView, model: CurrentChatFeedModel,
+        styleOptions: CurrentChatFeedStyleOptions,
     )
 
     /**
      * If model is null, must return empty current chat header view.
      */
     abstract fun createCurrentChatHeader(
-        model: CurrentChatHeaderModel?, requireContext: () -> Context
+        model: CurrentChatHeaderModel?, requireContext: () -> Context,
+        styleOptions: CurrentChatHeaderStyleOptions,
     ): CurrentChatHeaderVew
 
     abstract fun bindCurrentChatHeader(
         view: CurrentChatHeaderVew, model: CurrentChatHeaderModel,
+        styleOptions: CurrentChatHeaderStyleOptions,
     )
 
     /**
      * if model is null, must return empty general chat view.
      */
     abstract fun createGeneralChat(
-        model: GeneralChatModel?, requireContext: () -> Context
+        model: GeneralChatModel?, requireContext: () -> Context,
+        generalStyleOptions: GeneralChatStyleOptions,
+        chatStyleOptions: ChatStyleOptions,
     ): GeneralChatView
 
     abstract fun bindGeneralChat(
         view: GeneralChatView, model: GeneralChatModel,
+        generalStyleOptions: GeneralChatStyleOptions,
+        chatStyleOptions: ChatStyleOptions,
     )
 
     /**
      * If model is null, must return empty message input view.
      */
     abstract fun createMessageInput(
-        model: MessageInputModel?, requireContext: () -> Context
+        model: MessageInputModel?, requireContext: () -> Context,
+        styleOptions: MessageInputStyleOptions,
     ): MessageInputView
 
     abstract fun bindMessageInput(
         view: MessageInputView, model: MessageInputModel,
+        styleOptions: MessageInputStyleOptions,
     )
 
 }
