@@ -1,6 +1,7 @@
 package com.levit.bookme.chatkit.factories.impl
 
 import android.content.Context
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.ui.chat.ChatView
@@ -16,9 +17,14 @@ internal class DefaultChatViewFactory {
         }
         val modelToCreate = allChats[position]
 
+        val layoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.MATCH_PARENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+        )
         return ChatView(requireContext.invoke()).apply {
             this.styleOptions = styleOptions
-            chatModel = modelToCreate
+            this.chatModel = modelToCreate
+            this.layoutParams = layoutParams
         }
     }
 

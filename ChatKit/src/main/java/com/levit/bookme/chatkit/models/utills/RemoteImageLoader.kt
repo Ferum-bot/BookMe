@@ -12,8 +12,8 @@ class RemoteImageLoader(
 ) {
 
     companion object {
-        private const val CROSS_FADE_DURATION = 1000
-        private const val DEFAULT_CACHE_SIZE = 500
+        private const val CROSS_FADE_DURATION = 10
+        private const val DEFAULT_CACHE_SIZE = 100
     }
 
     fun load(url: String?) {

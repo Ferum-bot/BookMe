@@ -49,7 +49,7 @@ class GeneralChatView @JvmOverloads constructor(
         DefaultChatKitViewFactoryFacade()
     }
 
-    private val chatsAdapter = GeneralChatAdapter()
+    private var chatsAdapter = GeneralChatAdapter(chatKitFactory, chatStyleOptions)
 
     init {
         binding = GeneralChatLayoutBinding.inflate(inflater, this, true)
@@ -108,7 +108,9 @@ class GeneralChatView @JvmOverloads constructor(
     }
 
     private fun applyChatStyleOptions(options: ChatStyleOptions) {
-
+        chatsAdapter = GeneralChatAdapter(chatKitFactory, options)
+        chatsAdapter.items = generalChatModel.chats
+        binding.chatsRecycler.adapter = chatsAdapter
     }
 
 

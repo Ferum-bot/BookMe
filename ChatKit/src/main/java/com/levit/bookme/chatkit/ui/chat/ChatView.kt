@@ -81,17 +81,17 @@ class ChatView @JvmOverloads constructor(
     = with(binding) {
         interlocutorName.setTextColor(options.interlocutorNameTextColor)
         interlocutorName.setTextSizeSp(options.interlocutorNameTextSizeSp)
-        interlocutorName.setMarginsDp(
-            left = options.interlocutorNameMarginStartDp,
-            top = options.interlocutorNameMarginTopDp,
-            right = options.interlocutorNameMarginEndDp,
-            bottom = options.interlocutorNameMarginBottomDp,
-        )
-
-        when(options.interlocutorNameAlignment) {
-            MessageTextAlignment.START -> alignInterlocutorNameToStart()
-            MessageTextAlignment.END -> alignInterlocutorNameToEnd()
-        }
+//        interlocutorName.setMarginsDp(
+//            left = options.interlocutorNameMarginStartDp,
+//            top = options.interlocutorNameMarginTopDp,
+//            right = options.interlocutorNameMarginEndDp,
+//            bottom = options.interlocutorNameMarginBottomDp,
+//        )
+//
+//        when(options.interlocutorNameAlignment) {
+//            MessageTextAlignment.START -> alignInterlocutorNameToStart()
+//            MessageTextAlignment.END -> alignInterlocutorNameToEnd()
+//        }
     }
 
     private fun alignInterlocutorNameToStart() {
@@ -122,23 +122,23 @@ class ChatView @JvmOverloads constructor(
     = with(binding) {
         lastMessageText.setTextColor(options.lastMessageTextColor)
         lastMessageText.setTextSizeSp(options.lastMessageTextSizeSp)
-        lastMessageText.setMarginsDp(
-            left = options.lastMessageMarginStartDp,
-            top = options.lastMessageMarginTopDp,
-            right = options.lastMessageMarginEndDp,
-            bottom = options.lastMessageMarginBottomDp,
-        )
+//        lastMessageText.setMarginsDp(
+//            left = options.lastMessageMarginStartDp,
+//            top = options.lastMessageMarginTopDp,
+//            right = options.lastMessageMarginEndDp,
+//            bottom = options.lastMessageMarginBottomDp,
+//        )
     }
 
     private fun applyInterlocutorProfileIconOptions(options: ChatStyleOptions)
     = with(binding) {
         interlocutorProfileImage.isVisible = options.showProfileIcon
-        interlocutorProfileImage.setMarginsDp(
-            left = options.profileIconMarginStartDp,
-            top = options.profileIconMarginTopDp,
-            right = options.profileIconMarginEndDp,
-            bottom = options.profileIconMarginBottomDp,
-        )
+//        interlocutorProfileImage.setMarginsDp(
+//            left = options.profileIconMarginStartDp,
+//            top = options.profileIconMarginTopDp,
+//            right = options.profileIconMarginEndDp,
+//            bottom = options.profileIconMarginBottomDp,
+//        )
     }
 
     private fun applyLastMessageDateOptions(options: ChatStyleOptions)
@@ -146,17 +146,17 @@ class ChatView @JvmOverloads constructor(
         lastMessageDate.isVisible = options.showLastMessageDate
         lastMessageDate.setTextColor(options.lastMessageDateTextColor)
         lastMessageDate.setTextSizeSp(options.lastMessageDateTextSizeSp)
-        lastMessageDate.setMarginsDp(
-            left = options.lastMessageDateMarginStartDp,
-            top = options.lastMessageDateMarginTopDp,
-            right = options.lastMessageDateMarginEndDp,
-            bottom = options.lastMessageDateMarginBottomDp,
-        )
-
-        when(options.lastMessageDateAlignment) {
-            MessageTextAlignment.START -> alignLastMessageDateToStart()
-            MessageTextAlignment.END -> alignLastMessageDateToEnd()
-        }
+//        lastMessageDate.setMarginsDp(
+//            left = options.lastMessageDateMarginStartDp,
+//            top = options.lastMessageDateMarginTopDp,
+//            right = options.lastMessageDateMarginEndDp,
+//            bottom = options.lastMessageDateMarginBottomDp,
+//        )
+//
+//        when(options.lastMessageDateAlignment) {
+//            MessageTextAlignment.START -> alignLastMessageDateToStart()
+//            MessageTextAlignment.END -> alignLastMessageDateToEnd()
+//        }
     }
 
     private fun alignLastMessageDateToStart() {

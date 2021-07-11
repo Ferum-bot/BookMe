@@ -4,15 +4,17 @@ import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import com.levit.bookme.chatkit.factories.ChatKitViewFactory
 import com.levit.bookme.chatkit.models.chat.ChatModel
+import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.recycler.delegates.GeneralChatDelegates
 
 internal class GeneralChatAdapter(
-    private val chatKitFactory: ChatKitViewFactory
+    private val chatKitFactory: ChatKitViewFactory,
+    private val chatOptions: ChatStyleOptions,
 ): AsyncListDifferDelegationAdapter<ChatModel>(CALL_BACK) {
 
     init {
         delegatesManager
-            .addDelegate(GeneralChatDelegates.chatsDelegate(chatKitFactory))
+            .addDelegate(GeneralChatDelegates.chatsDelegate(chatKitFactory, chatOptions))
     }
 
     companion object {
