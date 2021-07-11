@@ -12,7 +12,16 @@ internal class DefaultCurrentFeedViewFactory(
     fun createCurrentChatFeed(
         model: CurrentChatFeedModel, requireContext: () -> Context
     ): CurrentChatFeedView {
-        return CurrentChatFeedView(requireContext.invoke())
+        return CurrentChatFeedView(requireContext.invoke()).apply {
+            styleOptions = this@DefaultCurrentFeedViewFactory.styleOptions
+            currentChatFeedModel = model
+        }
     }
 
+    fun bindCurrentChatFeed(
+        view: CurrentChatFeedView, model: CurrentChatFeedModel
+    ) {
+        view.styleOptions = styleOptions
+        view.currentChatFeedModel = model
+    }
 }

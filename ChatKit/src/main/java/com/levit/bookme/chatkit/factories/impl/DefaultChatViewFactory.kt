@@ -12,7 +12,33 @@ internal class DefaultChatViewFactory(
     fun createChatFrom(
         position: Int, allChats: List<ChatModel>, requireContext: () -> Context
     ): ChatView {
-        return ChatView(requireContext.invoke())
+        if (allChats.notContainsPosition(position)) {
+            throwInvalidPosition(position, allChats.size)
+        }
+        val modelToCreate = allChats[position]
+
+        return ChatView(requireContext.invoke()).apply {
+            styleOptions = this@DefaultChatViewFactory.styleOptions
+            chatModel = modelToCreate
+        }
     }
 
+    fun bindChatFrom(
+        view: ChatView, position: Int, allChats: List<ChatModel>
+    ) {
+        if (allChats.notContainsPosition(position)) {
+            throwInvalidPosition(position, allChats.size)
+        }
+        val modelToBind = allChats[position]
+        view.chatModel = modelToBind
+        view.styleOptions = styleOptions
+    }
+
+    private fun throwInvalidPosition(position: Int, size: Int): Nothing {
+        throw IndexOutOfBoundsException("Invalid position to create chat: position: $position, size: $size")
+    }
+
+    private fun List<ChatModel>.notContainsPosition(position: Int): Boolean {
+        return position < 0 || position >= size
+    }
 }

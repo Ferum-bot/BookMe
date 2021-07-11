@@ -12,7 +12,16 @@ internal class DefaultMessageInputViewFactory(
     fun createMessageInput(
         model: MessageInputModel, requireContext: () -> Context
     ): MessageInputView {
-        return MessageInputView(requireContext.invoke())
+        return MessageInputView(requireContext.invoke()).apply {
+            styleOptions = this@DefaultMessageInputViewFactory.styleOptions
+            messageInputModel = model
+        }
     }
 
+    fun bindMessageInput(
+        view: MessageInputView, model: MessageInputModel
+    ) {
+        view.styleOptions = styleOptions
+        view.messageInputModel = model
+    }
 }

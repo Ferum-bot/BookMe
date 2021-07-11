@@ -12,7 +12,16 @@ internal class DefaultCurrentChatHeaderViewFactory(
     fun createCurrentChatHeader(
         model: CurrentChatHeaderModel, requireContext: () -> Context
     ): CurrentChatHeaderVew {
-        return CurrentChatHeaderVew(requireContext.invoke())
+        return CurrentChatHeaderVew(requireContext.invoke()).apply {
+            styleOptions = this@DefaultCurrentChatHeaderViewFactory.styleOptions
+            chatHeaderModel = model
+        }
     }
 
+    fun bindCurrentChatHeader(
+        view: CurrentChatHeaderVew, model: CurrentChatHeaderModel
+    ) {
+        view.styleOptions = styleOptions
+        view.chatHeaderModel = model
+    }
 }

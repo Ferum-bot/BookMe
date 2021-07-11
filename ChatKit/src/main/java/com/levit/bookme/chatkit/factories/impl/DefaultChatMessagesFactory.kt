@@ -8,6 +8,7 @@ import com.levit.bookme.chatkit.models.chat_messages.MessageModel
 import com.levit.bookme.chatkit.ui.chat_message.InterlocutorMessageView
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import com.levit.bookme.chatkit.ui.chat_message.YourMessageView
+import java.util.*
 
 internal class DefaultChatMessagesFactory(
     private val yourMessageOptions: MessageStyleOptions,
@@ -24,7 +25,7 @@ internal class DefaultChatMessagesFactory(
         position: Int, allMessages: List<MessageModel>, requireContext: () -> Context,
     ): MessageView {
         if (allMessages.notContainsPosition(position)) {
-            throw IndexOutOfBoundsException("Invalid position to create view: $position. Size: ${allMessages.size}")
+            throwInvalidPosition(position, allMessages.size)
         }
 
         val modelToCreate = allMessages[position]
@@ -41,6 +42,58 @@ internal class DefaultChatMessagesFactory(
                     previousModel = allMessages.getOrNull(position - 1),
                     requireContext,
                 )
+        }
+    }
+
+    fun createYourMessageFrom(
+        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context
+    ): YourMessageView {
+        if (allMessages.notContainsPosition(position)) {
+            throwInvalidPosition(position, allMessages.size)
+        }
+        val modelToCreate = allMessages[position]
+        if (modelToCreate.type != MessageType.YOUR_MESSAGE) {
+            throwInvalidMessageType(modelToCreate.type, MessageType.YOUR_MESSAGE)
+        }
+
+        return createYourMessage(
+            messageModel = modelToCreate,
+            previousModel = allMessages.getOrNull(position - 1),
+            requireContext,
+        )
+    }
+
+    fun createInterlocutorMessageFrom(
+        position: Int, allMessages: List<MessageModel>, requireContext: () -> Context
+    ): InterlocutorMessageView {
+        if (allMessages.notContainsPosition(position)) {
+            throwInvalidPosition(position, allMessages.size)
+        }
+        val modelToCreate = allMessages[position]
+        if (modelToCreate.type != MessageType.INTERLOCUTOR_MESSAGE) {
+            throwInvalidMessageType(modelToCreate.type, MessageType.INTERLOCUTOR_MESSAGE)
+        }
+
+        return createInterlocutorMessage(
+            messageModel = modelToCreate,
+            previousModel = allMessages.getOrNull(position - 1),
+            requireContext,
+        )
+    }
+
+    fun bindMessageFrom(
+        view: MessageView, position: Int, allMessages: List<MessageModel>,
+    ) {
+        if (allMessages.notContainsPosition(position)) {
+            throwInvalidPosition(position, allMessages.size)
+        }
+        val modelToBind = allMessages[position]
+        checkTheMessageType(view, modelToBind.type)
+
+        view.messageModel = modelToBind
+        view.styleOptions = when(modelToBind.type) {
+            MessageType.YOUR_MESSAGE -> yourMessageOptions
+            MessageType.INTERLOCUTOR_MESSAGE -> interlocutorMessageOptions
         }
     }
 
@@ -126,6 +179,35 @@ internal class DefaultChatMessagesFactory(
         }
     }
 
+    private fun checkTheMessageType(view: MessageView, type: MessageType) = when(type) {
+        MessageType.YOUR_MESSAGE -> {
+            if (view.isNotYourMessage()) {
+                throwInvalidMessageToBind(view, type)
+            } else { Unit }
+        }
+        MessageType.INTERLOCUTOR_MESSAGE -> {
+            if (view.isNotInterlocutorMessage()) {
+                throwInvalidMessageToBind(view, type)
+            } else { Unit }
+        }
+    }
+
+    private fun throwInvalidPosition(position: Int, size: Int): Nothing {
+        throw IndexOutOfBoundsException("Invalid position to create view: $position. Size: $size")
+    }
+
+    private fun throwInvalidMessageType(actual: MessageType, expected: MessageType): Nothing {
+        throw InvalidPropertiesFormatException(
+            "Invalid message type to create view: expected: $expected, actual: $actual"
+        )
+    }
+
+    private fun throwInvalidMessageToBind(view: MessageView, bindType: MessageType): Nothing {
+        throw IllegalArgumentException(
+            "Invalid message type to bind: view: $view, bindType: $bindType"
+        )
+    }
+
     private fun List<MessageModel>.notContainsPosition(position: Int): Boolean {
         if (position < 0) {
             return true
@@ -134,5 +216,15 @@ internal class DefaultChatMessagesFactory(
             return true
         }
         return false
+    }
+
+    private fun MessageView.isNotYourMessage(): Boolean {
+        val yourMessage = this as? YourMessageView
+        return yourMessage == null
+    }
+
+    private fun MessageView.isNotInterlocutorMessage(): Boolean {
+        val interlocutorMessage = this as? InterlocutorMessageView
+        return interlocutorMessage == null
     }
 }
