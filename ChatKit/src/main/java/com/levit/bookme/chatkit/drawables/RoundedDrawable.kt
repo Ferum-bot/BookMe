@@ -10,7 +10,7 @@ internal class RoundedDrawable(
     @ColorInt
     private val backgroundColor: Int = Color.GRAY,
     @ColorInt
-    private val strokeColor: Int = Color.GRAY,
+    private val strokeColor: Int = backgroundColor,
 
     @Dimension
     private val strokeWidthPx: Int = 0,

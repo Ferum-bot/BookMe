@@ -13,6 +13,11 @@ import com.levit.book_me.ui.base.BaseActivity
 class MainScreenActivity:
     BaseActivity() {
 
+    companion object {
+
+        private const val CURRENT_VIEW_PAGER_PAGE_NAME = "current_view_pager_page"
+    }
+
     private lateinit var binding: ActivityMainScreenBinding
 
     private val viewModel: MainScreenActivityViewModel by viewModels {
@@ -42,15 +47,30 @@ class MainScreenActivity:
 
         super.onCreate(savedInstanceState)
 
+        if (savedInstanceState != null) {
+            onRestoreInstanceState(savedInstanceState)
+        }
+
         binding = ActivityMainScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
-    }
-
-    override fun onStart() {
-        super.onStart()
 
         configureLayout()
         setAllClickListeners()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(CURRENT_VIEW_PAGER_PAGE_NAME, binding.viewPager.currentItem)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        val currentViewPagerPage = savedInstanceState.getInt(
+            CURRENT_VIEW_PAGER_PAGE_NAME, MainScreenViewPagerAdapter.PROFILE_FRAGMENT_POSITION,
+        )
+
+        binding.viewPager.currentItem = currentViewPagerPage
     }
 
     private fun initComponent() {
@@ -63,7 +83,6 @@ class MainScreenActivity:
 
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.registerOnPageChangeCallback(onPageChangedCallback)
-        binding.viewPager.currentItem = MainScreenViewPagerAdapter.PROFILE_FRAGMENT_POSITION
 
         binding.checkedChatsActionButton.rippleColor = Color.GRAY
         binding.notCheckedChatsActionButton.rippleColor = Color.GRAY

@@ -8,6 +8,7 @@ import com.levit.book_me.chat_kit.databinding.CurrentChatFeedLayoutBinding
 import com.levit.bookme.chatkit.extensions.inflater
 import com.levit.bookme.chatkit.extensions.provideEmptyModel
 import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedModel
+import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedStyleOptions
 import com.levit.bookme.chatkit.models.current_chat_header.CurrentChatHeaderStyleOptions
 import com.levit.bookme.chatkit.ui.current_chat_header.CurrentChatHeaderListener
 import com.levit.bookme.chatkit.ui.message_input.MessageInputButtonListener
@@ -20,7 +21,7 @@ class CurrentChatFeedView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var styleOptions: CurrentChatHeaderStyleOptions = CurrentChatHeaderStyleOptions.provideDefaultOptions()
+    var styleOptions: CurrentChatFeedStyleOptions = CurrentChatFeedStyleOptions.provideDefaultOptions()
         set(value) {
             field = value
             applyCurrentChatFeedStyleOptions(value)
@@ -51,7 +52,7 @@ class CurrentChatFeedView @JvmOverloads constructor(
         binding.messagesRecycler.addItemDecoration(decorator, index)
     }
 
-    private fun applyCurrentChatFeedStyleOptions(options: CurrentChatHeaderStyleOptions) {
+    private fun applyCurrentChatFeedStyleOptions(options: CurrentChatFeedStyleOptions) {
 
     }
 

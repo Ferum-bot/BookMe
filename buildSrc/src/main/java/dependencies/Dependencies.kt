@@ -57,6 +57,9 @@ object Dependencies {
     const val ADAPTER_DELEGATES_DSL = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:${Versions.DELEGATE_ADAPTER}"
     const val ADAPTER_DELEGATES_VIEW_BINDING = "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:${Versions.DELEGATE_ADAPTER}"
 
+    // UI: Swipe Refresh layout
+    const val SWIPE_REFRESH_LAYOUT = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.SWIPE_REFRESH}"
+
     // Navigation Component
     const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
 

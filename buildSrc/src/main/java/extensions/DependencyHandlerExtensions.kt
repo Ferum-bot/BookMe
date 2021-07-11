@@ -39,6 +39,7 @@ fun DependencyHandler.addAllUIDependencies() {
     implementation(Dependencies.ADAPTER_DELEGATES_DSL)
     implementation(Dependencies.ADAPTER_DELEGATES_VIEW_BINDING)
     implementation(Dependencies.CIRCLE_IMAGE_VIEW)
+    implementation(Dependencies.SWIPE_REFRESH_LAYOUT)
 }
 
 fun DependencyHandler.addAllNetworkDependencies() {

@@ -8,6 +8,15 @@ class CurrentChatFeedStyleOptions(
     build: CurrentChatFeedStyleOptionsBuilder.() -> CurrentChatFeedStyleOptionsBuilder
 ) {
 
+    companion object {
+
+        fun provideDefaultOptions(): CurrentChatFeedStyleOptions {
+            return CurrentChatFeedStyleOptions {
+                return@CurrentChatFeedStyleOptions this
+            }
+        }
+    }
+
     @ColorInt
     val messagesLayoutBackgroundColor: Int
 

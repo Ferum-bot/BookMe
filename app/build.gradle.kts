@@ -20,8 +20,8 @@ android {
         applicationId  = Config.APPLICATION_ID
         minSdkVersion(Config.MIN_SDK_VERSION)
         targetSdkVersion(Config.TARGET_SDK_VERSION)
-        versionCode = 8
-        versionName = "1.0.1"
+        versionCode = 9
+        versionName = "1.0.2"
         multiDexEnabled = Config.MULTIDEX_ENABLED
 
         testInstrumentationRunner = Config.TEST_INSTRUMENTATION_RUNNER

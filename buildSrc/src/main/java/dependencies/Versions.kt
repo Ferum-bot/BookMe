@@ -47,6 +47,9 @@ object Versions {
     // UI: Adapter delegates
     const val DELEGATE_ADAPTER = "4.3.0"
 
+    // UI: Swipe Refresh Layout
+    const val SWIPE_REFRESH = "1.1.0"
+
     // Navigation Component
     const val NAVIGATION = "2.2.2"
 

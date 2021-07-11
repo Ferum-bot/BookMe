@@ -1,11 +1,16 @@
 package com.levit.bookme.chatkit.extensions
 
+import android.graphics.Color
+import android.graphics.Paint
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.core.view.*
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.levit.book_me.chat_kit.R
@@ -93,6 +98,14 @@ internal fun View.getString(@StringRes id: Int): String {
 }
 
 internal fun View.defaultGlideOptions() = RequestOptions()
-    .diskCacheStrategy(DiskCacheStrategy.ALL)
-    .placeholder(R.drawable.default_image_placeholder)
+    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+    .placeholder(defaultPlaceHolder())
     .error(R.drawable.ic_default_error_placeholder)
+
+internal fun View.defaultPlaceHolder() = CircularProgressDrawable(context).apply {
+    strokeWidth = 2f
+    centerRadius = 10f
+    colorFilter = BlendModeColorFilterCompat
+        .createBlendModeColorFilterCompat(R.color.black, BlendModeCompat.SRC_IN)
+    start()
+}

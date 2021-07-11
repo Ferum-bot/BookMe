@@ -10,6 +10,7 @@ import com.levit.bookme.chatkit.decorators.TopExtraSpaceDecorator
 import com.levit.bookme.chatkit.extensions.inflater
 import com.levit.bookme.chatkit.extensions.provideEmptyModel
 import com.levit.bookme.chatkit.extensions.setMarginsDp
+import com.levit.bookme.chatkit.factories.impl.DefaultChatKitViewFactoryFacade
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatModel
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatStyleOptions
@@ -44,7 +45,11 @@ class GeneralChatView @JvmOverloads constructor(
 
     private val binding: GeneralChatLayoutBinding
 
-    private val chatsAdapter = GeneralChatAdapter()
+    private val chatKitFactory by lazy {
+        DefaultChatKitViewFactoryFacade()
+    }
+
+    private var chatsAdapter = GeneralChatAdapter(chatKitFactory, chatStyleOptions)
 
     init {
         binding = GeneralChatLayoutBinding.inflate(inflater, this, true)
@@ -103,7 +108,9 @@ class GeneralChatView @JvmOverloads constructor(
     }
 
     private fun applyChatStyleOptions(options: ChatStyleOptions) {
-
+        chatsAdapter = GeneralChatAdapter(chatKitFactory, options)
+        chatsAdapter.items = generalChatModel.chats
+        binding.chatsRecycler.adapter = chatsAdapter
     }
 
 
