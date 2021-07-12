@@ -6,11 +6,13 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import androidx.annotation.RequiresPermission
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 object NetworkMonitor {
 
-    var isNetworkAvailable: Boolean = false
-    private set
+    private val _isNetworkAvailable: MutableLiveData<Boolean> = MutableLiveData()
+    val isNetworkAvailable: LiveData<Boolean> = _isNetworkAvailable
 
     @RequiresPermission(android.Manifest.permission.ACCESS_NETWORK_STATE)
     fun setNetworkMonitor(application: Application) {
@@ -23,12 +25,12 @@ object NetworkMonitor {
 
                     override fun onAvailable(network: Network) {
                         super.onAvailable(network)
-                        isNetworkAvailable = true
+                        _isNetworkAvailable.postValue(true)
                     }
 
                     override fun onLost(network: Network) {
                         super.onLost(network)
-                       isNetworkAvailable = false
+                        _isNetworkAvailable.postValue(false)
                     }
                 }
         )
