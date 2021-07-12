@@ -23,13 +23,13 @@ class MessageInputView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var styleOptions: MessageInputStyleOptions = MessageInputStyleOptions.provideDefaultStyleOptions()
+    var styleOptions = MessageInputStyleOptions.provideDefaultStyleOptions()
         set(value) {
             field = value
             applyStyleOptions(value)
         }
 
-    var messageInputModel: MessageInputModel = getEmptyMessageInputModel()
+    var messageInputModel = getEmptyMessageInputModel()
         set(value) {
             field = value
             applyMessageInputModel(value)

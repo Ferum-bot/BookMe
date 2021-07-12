@@ -39,6 +39,8 @@ internal class YourMessageView @JvmOverloads constructor(
         profileImageLoader = RemoteImageLoader(binding.profileImage, defaultGlideOptions())
 
         fieldsDelegate = DefaultMessageViewFieldsDelegate(this::dpToPx)
+
+        setAllClickListeners()
     }
 
     override fun applyStyleOptions(options: MessageStyleOptions) {
@@ -59,6 +61,36 @@ internal class YourMessageView @JvmOverloads constructor(
         binding.text.text = text
         binding.dateLabel.text = date
         profileImageLoader.load(profileUrl)
+    }
+
+    override fun setAllClickListeners() {
+        binding.text.setOnClickListener {
+            listener?.onMessageClicked(messageModel)
+        }
+
+        binding.text.setOnLongClickListener {
+            if (listener == null) {
+                return@setOnLongClickListener false
+            }
+            listener?.onMessageLongClicked(messageModel)
+            return@setOnLongClickListener true
+        }
+
+        binding.profileImage.setOnClickListener {
+            listener?.onMessageClicked(messageModel)
+        }
+
+        binding.profileImage.setOnLongClickListener {
+            if (listener == null) {
+                return@setOnLongClickListener false
+            }
+            listener?.onProfileIconLongClicked(messageModel)
+            return@setOnLongClickListener true
+        }
+
+        binding.authorLabel.setOnClickListener {
+            listener?.onAuthorNameClicked(messageModel)
+        }
     }
 
     private fun showAuthorLabel(show: Boolean) {

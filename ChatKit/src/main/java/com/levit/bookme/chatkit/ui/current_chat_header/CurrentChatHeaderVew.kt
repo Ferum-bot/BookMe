@@ -24,13 +24,13 @@ class CurrentChatHeaderVew @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var chatHeaderModel: CurrentChatHeaderModel = provideEmptyModel()
+    var chatHeaderModel = provideEmptyModel()
         set(value) {
             field = value
             applyCurrentChatHeaderModel(value)
         }
 
-    var styleOptions: CurrentChatHeaderStyleOptions = CurrentChatHeaderStyleOptions.provideDefaultOptions()
+    var styleOptions = CurrentChatHeaderStyleOptions.provideDefaultOptions()
         set(value) {
             field = value
             applyCurrentChatHeaderStyleOptions(value)

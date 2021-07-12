@@ -13,4 +13,12 @@ class MainScreenActivityViewModel @Inject constructor(
 
     }
 
+    fun openInterlocutorProfile(interlocutorId: Long) {
+
+    }
+
+    fun openChatWithInterlocutor(interlocutorId: Long) {
+
+    }
+
 }
