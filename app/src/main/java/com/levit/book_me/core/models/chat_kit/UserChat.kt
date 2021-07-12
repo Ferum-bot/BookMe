@@ -1,10 +1,13 @@
 package com.levit.book_me.core.models.chat_kit
 
+import android.os.Parcelable
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
+@Parcelize
 data class UserChat(
 
     @Json(name = "userChatId")
@@ -28,7 +31,7 @@ data class UserChat(
     @Json(name = "userChatIsLastMessageFromUser")
     val isLastMessageFromUser: Boolean
 
-): ChatModel {
+): ChatModel, Parcelable {
 
     override val id: Long
         get() = chatId
