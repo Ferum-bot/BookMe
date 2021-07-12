@@ -19,6 +19,10 @@ internal object GeneralChatDelegates {
         factory: ChatKitViewFactory,
         chatOptions: ChatStyleOptions,
     ) = adapterDelegate<ChatModel, ChatModel>(
+
+        /**
+         * Creating ChatView.
+         */
         R.layout.chat_layout,
         layoutInflater =
         { viewGroup: ViewGroup, i: Int ->
@@ -27,7 +31,9 @@ internal object GeneralChatDelegates {
                 position = null, allChats = null,
                 styleOptions = chatOptions, requireContext = { context }
             )
-        }) {
+        }
+
+    ) {
 
         val chatView = itemView as? ChatView
 
