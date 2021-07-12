@@ -10,7 +10,6 @@ import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.chat_messages.YourMessageModel
 import com.levit.bookme.chatkit.ui.chat_message.InterlocutorMessageView
 import com.levit.bookme.chatkit.ui.chat_message.MessageListener
-import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import com.levit.bookme.chatkit.ui.chat_message.YourMessageView
 
 internal object CurrentFeedMessagesDelegates {

@@ -77,7 +77,7 @@ internal class YourMessageView @JvmOverloads constructor(
         }
 
         binding.profileImage.setOnClickListener {
-            listener?.onMessageClicked(messageModel)
+            listener?.onProfileIconClicked(messageModel)
         }
 
         binding.profileImage.setOnLongClickListener {
