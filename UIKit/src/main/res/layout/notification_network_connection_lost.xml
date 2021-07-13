@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
 
         android:id="@+id/notification_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@drawable/bg_for_notification_connection_lost"
 
+        style="@style/DefaultNotificationStyle"
+
+        tools:visibility="visible">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/notification_text_view_width"
+            android:text="@string/connection_lost"
+
+            style="@style/DefaultNotificationTextStyle"
+
+            app:drawableStartCompat="@drawable/ic_no_wifi"/>
 </androidx.cardview.widget.CardView>

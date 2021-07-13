@@ -5,7 +5,10 @@
 
     <stroke
         android:color="@android:color/holo_green_dark"
-        android:width="2dp"/>
+        android:width="@dimen/network_notification_width"/>
+
+    <corners
+        android:radius="@dimen/network_notification_radius"/>
 
     <solid
         android:color="@color/white"/>
