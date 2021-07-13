@@ -21,6 +21,9 @@ class BookMeApplication : Application(), HasAndroidInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
+    @Inject
+    lateinit var networkMonitor: NetworkMonitor
+
     lateinit var appComponent: AppComponent
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
@@ -61,11 +64,13 @@ class BookMeApplication : Application(), HasAndroidInjector {
     }
 
     private fun registerNetworkMonitor() {
-        NetworkMonitor.setNetworkMonitor(this)
+        com.levit.book_me.network.utill.NetworkMonitor.startListening(this)
+        networkMonitor.startMonitoringNetwork()
     }
 
     private fun removeNetworkMonitor() {
-        NetworkMonitor.removeNetworkMonitor(this)
+        com.levit.book_me.network.utill.NetworkMonitor.stopListening(this)
+        networkMonitor.stopMonitoringNetwork()
     }
 
     private fun initTimber() {

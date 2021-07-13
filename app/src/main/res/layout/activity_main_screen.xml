@@ -110,4 +110,21 @@
 
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <include
+            android:id="@+id/notification_connection_lost"
+            layout="@layout/notification_network_connection_lost"/>
+        <include
+            android:id="@+id/notification_connection_restored"
+            layout="@layout/notification_network_connection_restored"/>
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

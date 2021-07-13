@@ -4,11 +4,16 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.levit.book_me.R
+import com.levit.book_me.core_network.model.enums.NetworkStatus
 import com.levit.book_me.databinding.ActivityMainScreenBinding
 import com.levit.book_me.di.components.MainScreenComponent
 import com.levit.book_me.ui.base.BaseActivity
+import com.levit.bookme.uikit.models.NotificationManager
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collect
 
 class MainScreenActivity:
     BaseActivity() {
@@ -42,6 +47,17 @@ class MainScreenActivity:
 
     lateinit var mainScreenComponent: MainScreenComponent
 
+    private val connectionLostManager by lazy {
+        NotificationManager(lifecycle, binding.notificationConnectionLost.root)
+    }
+
+    private val connectionRestoredManager by lazy {
+        NotificationManager(lifecycle, binding.notificationConnectionRestored.root)
+    }
+
+    private val networkStatus: SharedFlow<NetworkStatus>
+    get() = bookMeApp.networkMonitor.isNetworkAvailable
+
     override fun onCreate(savedInstanceState: Bundle?) {
         initComponent()
 
@@ -56,6 +72,7 @@ class MainScreenActivity:
 
         configureLayout()
         setAllClickListeners()
+        startListeningNetworkMonitor()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -115,6 +132,12 @@ class MainScreenActivity:
         }
     }
 
+    private fun startListeningNetworkMonitor() {
+        lifecycleScope.launchWhenStarted {
+            networkStatus.collect(this@MainScreenActivity::handleNewNetworkStatus)
+        }
+    }
+
     private fun profileButtonClicked() {
         setAllButtonsNotChecked()
 
@@ -152,4 +175,12 @@ class MainScreenActivity:
         binding.checkedChatsActionButton.visibility = View.INVISIBLE
     }
 
+    private fun handleNewNetworkStatus(newStatus: NetworkStatus) = when(newStatus) {
+        NetworkStatus.NETWORK_AVAILABLE -> {
+            connectionRestoredManager.showNotification()
+        }
+        NetworkStatus.NETWORK_LOST -> {
+            connectionLostManager.showNotification()
+        }
+    }
 }

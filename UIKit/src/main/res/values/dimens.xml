@@ -18,5 +18,5 @@
     <dimen name="main_screen_info_top_margin">150dp</dimen>
     <dimen name="notification_text_view_width">50dp</dimen>
     <dimen name="network_notification_radius">8dp</dimen>
-    <dimen name="network_notification_width">2dp</dimen>
+    <dimen name="network_notification_width">1dp</dimen>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,8 +7,8 @@
         android:id="@+id/notification_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:background="@drawable/bg_for_notification_connection_restored"
+        android:visibility="gone"
 
         style="@style/DefaultNotificationStyle"
 
@@ -23,4 +23,4 @@
                 style="@style/DefaultNotificationTextStyle"
 
                 app:drawableStartCompat="@drawable/ic_wifi"/>
-</androidx.cardview.widget.CardView>
+</FrameLayout>

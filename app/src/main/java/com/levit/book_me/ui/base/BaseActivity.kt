@@ -11,4 +11,7 @@ abstract class BaseActivity: AppCompatActivity() {
         return@lazy application.appComponent
     }
 
+    protected val bookMeApp: BookMeApplication
+    get() = application as BookMeApplication
+
 }

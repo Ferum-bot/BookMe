@@ -21,7 +21,7 @@ class NetworkMonitor(
     companion object {
 
         private const val REPLAY_COUNT = 0
-        private const val EXTRA_CAPACITY = 0
+        private const val EXTRA_CAPACITY = 1
     }
 
     private val _isNetworkAvailable: MutableSharedFlow<NetworkStatus> = MutableSharedFlow(
