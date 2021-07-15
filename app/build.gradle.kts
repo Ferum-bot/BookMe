@@ -20,7 +20,7 @@ android {
         applicationId  = Config.APPLICATION_ID
         minSdkVersion(Config.MIN_SDK_VERSION)
         targetSdkVersion(Config.TARGET_SDK_VERSION)
-        versionCode = 9
+        versionCode = 10
         versionName = "1.0.2"
         multiDexEnabled = Config.MULTIDEX_ENABLED
 
@@ -122,6 +122,9 @@ dependencies {
 
     // Firebase
     addAllFirebaseDependencies()
+
+    // Work Manager
+    addWorkManagerDependencies()
 
     // Google Play Services
     implementation(Dependencies.GOOGLE_PLAY_SERVICES_AUTH)

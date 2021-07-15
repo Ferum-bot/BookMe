@@ -81,8 +81,14 @@ object Dependencies {
     const val FIREBASE_FIRESTORE = "com.google.firebase:firebase-firestore-ktx"
     const val FIREBASE_CRASHLYTICS = "com.google.firebase:firebase-crashlytics"
     const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics"
+    const val FIREBASE_MESSAGING = "com.google.firebase:firebase-messaging-ktx"
     const val FIREBASE_UI_STORAGE = "com.firebaseui:firebase-ui-storage:${Versions.FIREBASE_UI_STORAGE}"
 
+    // WorkManager
+    const val WORK_MANAGER_KOTLIN = "androidx.work:work-runtime-ktx:${Versions.WORK_MANAGER}}"
+    const val WORK_MANAGER_GCM = "androidx.work:work-gcm:${Versions.WORK_MANAGER}"
+    const val WORK_MANAGER_TEST = "androidx.work:work-testing:${Versions.WORK_MANAGER}"
+    const val WORK_MANAGER_MULTIPROCESS = "androidx.work:work-multiprocess:${Versions.WORK_MANAGER}"
 
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES_AUTH = "com.google.android.gms:play-services-auth:${Versions.GOOGLE_PLAY_SERVICES}"
