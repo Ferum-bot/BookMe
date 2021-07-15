@@ -19,17 +19,19 @@ internal abstract class MessageView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var styleOptions: MessageStyleOptions = MessageStyleOptions.provideDefaultStyleOptions()
+    var styleOptions = MessageStyleOptions.provideDefaultStyleOptions()
         set(value) {
             field = value
             applyStyleOptions(value)
         }
 
-    var messageModel: MessageModel = emptyMessageModel()
+    var messageModel = emptyMessageModel()
         set(value) {
             field = value
             applyMessageModel(value)
         }
+
+    var listener: MessageListener? = null
 
     abstract var isFirstMessage: Boolean
 
@@ -41,7 +43,10 @@ internal abstract class MessageView @JvmOverloads constructor(
     get() = LayoutInflater.from(context)
 
     protected abstract fun applyStyleOptions(options: MessageStyleOptions)
+
     protected abstract fun applyMessageModel(model: MessageModel)
+
+    protected abstract fun setAllClickListeners()
 
     protected fun defaultGlideOptions() = RequestOptions()
         .diskCacheStrategy(DiskCacheStrategy.ALL)

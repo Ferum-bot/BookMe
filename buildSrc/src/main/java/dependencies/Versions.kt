@@ -69,6 +69,9 @@ object Versions {
     const val FIREBASE_CRASHLYTICS = "2.7.0"
     const val FIREBASE_UI_STORAGE = "6.4.0"
 
+    // Work Manager
+    const val WORK_MANAGER = "2.5.0"
+
     // Google Play Services
     const val GOOGLE_PLAY_SERVICES = "19.0.0"
     const val CLASSPATH_GOOGLE_PLAY_SERVICES = "4.3.8"

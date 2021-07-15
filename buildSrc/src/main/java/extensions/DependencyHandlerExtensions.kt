@@ -68,6 +68,7 @@ fun DependencyHandler.addAllFirebaseDependencies() {
     implementation(Dependencies.FIREBASE_STORAGE)
     implementation(Dependencies.FIREBASE_CRASHLYTICS)
     implementation(Dependencies.FIREBASE_ANALYTICS)
+    implementation(Dependencies.FIREBASE_MESSAGING)
     implementation(Dependencies.FIREBASE_UI_STORAGE)
 }
 
@@ -101,4 +102,11 @@ fun DependencyHandler.addGlideDependencies() {
     implementation(Dependencies.GLIDE)
     implementation(Dependencies.GLIDE_TRANSFORMATIONS)
     kapt(KaptDependencies.GLIDE_COMPILER)
+}
+
+fun DependencyHandler.addWorkManagerDependencies() {
+    implementation(Dependencies.WORK_MANAGER_KOTLIN)
+    implementation(Dependencies.WORK_MANAGER_GCM)
+    implementation(Dependencies.WORK_MANAGER_MULTIPROCESS)
+    testImplementation(Dependencies.WORK_MANAGER_TEST)
 }

@@ -7,15 +7,18 @@ import androidx.fragment.app.viewModels
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
+import com.levit.book_me.core.models.chat_kit.UserChat
 import com.levit.book_me.databinding.FragmentMainScreenChatsBinding
 import com.levit.book_me.ui.base.BaseMainScreenFragment
 import com.levit.book_me.ui.chat_kit_options.provideDefaultChatOptions
 import com.levit.book_me.ui.chat_kit_options.provideDefaultGeneralOptions
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatModel
+import com.levit.bookme.chatkit.ui.chat.ChatListener
 
 class MainScreenChatsFragment:
-    BaseMainScreenFragment<MainScreenChatsViewModel>(R.layout.fragment_main_screen_chats) {
+    BaseMainScreenFragment<MainScreenChatsViewModel>(R.layout.fragment_main_screen_chats),
+    ChatListener {
 
     override val viewModel: MainScreenChatsViewModel by viewModels {
         mainScreenComponent.viewModelFactory()
@@ -43,6 +46,7 @@ class MainScreenChatsFragment:
         setAllObservers()
         configureLayout()
         configureChatKit()
+        setAllClickListeners()
     }
 
     override fun setAllObservers() {
@@ -93,6 +97,35 @@ class MainScreenChatsFragment:
 
     }
 
+    override fun onProfileIconClicked(chatModel: ChatModel) {
+        val userChat = chatModel as? UserChat
+        userChat ?: return
+
+        sharedViewModel.openChatWithInterlocutor(userChat.interlocutorId)
+    }
+
+    override fun onProfileIconLongClicked(chatModel: ChatModel): Boolean {
+        val userChat = chatModel as? UserChat
+        userChat ?: return false
+
+        sharedViewModel.openInterlocutorProfile(userChat.interlocutorId)
+        return true
+    }
+
+    override fun onInterlocutorNameClicked(chatModel: ChatModel) {
+        val userChat = chatModel as? UserChat
+        userChat ?: return
+
+        sharedViewModel.openChatWithInterlocutor(userChat.interlocutorId)
+    }
+
+    override fun onLastMessageClicked(chatModel: ChatModel) {
+        val userChat = chatModel as? UserChat
+        userChat ?: return
+
+        sharedViewModel.openInterlocutorProfile(userChat.interlocutorId)
+    }
+
     private fun configureLayout() {
         binding.errorText.addClickableText(R.string.try_again) {
             viewModel.refreshChats()
@@ -104,5 +137,9 @@ class MainScreenChatsFragment:
             generalStyleOptions = generalChatOptions
             chatStyleOptions = chatOptions
         }
+    }
+
+    private fun setAllClickListeners() {
+        binding.chatsView.chatListener = this
     }
 }

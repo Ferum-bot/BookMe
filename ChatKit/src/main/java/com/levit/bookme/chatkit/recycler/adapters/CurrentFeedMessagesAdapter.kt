@@ -2,12 +2,25 @@ package com.levit.bookme.chatkit.recycler.adapters
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
+import com.levit.bookme.chatkit.factories.ChatKitViewFactory
 import com.levit.bookme.chatkit.models.chat_messages.MessageModel
+import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
+import com.levit.bookme.chatkit.recycler.delegates.CurrentFeedMessagesDelegates
 
-internal class CurrentFeedMessagesAdapter: AsyncListDifferDelegationAdapter<MessageModel>(CALL_BACK) {
+internal class CurrentFeedMessagesAdapter(
+    factory: ChatKitViewFactory,
+    yourMessageStyleOptions: MessageStyleOptions,
+    interlocutorMessageStyleOptions: MessageStyleOptions,
+): AsyncListDifferDelegationAdapter<MessageModel>(CALL_BACK) {
 
     init {
         delegatesManager
+            .addDelegate(CurrentFeedMessagesDelegates.interlocutorMessageDelegate(
+                factory, interlocutorMessageStyleOptions
+            ))
+            .addDelegate(CurrentFeedMessagesDelegates.yourMessageDelegate(
+                factory, yourMessageStyleOptions
+            ))
     }
 
     companion object {

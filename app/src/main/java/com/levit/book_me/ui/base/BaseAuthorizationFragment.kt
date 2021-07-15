@@ -2,8 +2,8 @@ package com.levit.book_me.ui.base
 
 import androidx.annotation.LayoutRes
 import com.levit.book_me.R
-import com.levit.book_me.core_network.model.NetworkMonitor
 import com.levit.book_me.core_presentation.base.BaseFragment
+import com.levit.book_me.network.utill.NetworkMonitor
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 
 abstract class BaseAuthorizationFragment(

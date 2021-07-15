@@ -97,7 +97,9 @@ internal class DefaultMessageViewFieldsDelegate(
     private fun alignAuthorLabelToStart(layout: ConstraintLayout, authorView: TextView) {
         val layoutId = layout.id
         val authorId = authorView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
         constraintSet.connect(authorId, ConstraintSet.START, layoutId, ConstraintSet.START)
         constraintSet.connect(authorId, ConstraintSet.TOP, layoutId, ConstraintSet.TOP)
@@ -107,7 +109,9 @@ internal class DefaultMessageViewFieldsDelegate(
     private fun alignAuthorLabelToEnd(layout: ConstraintLayout, authorView: TextView) {
         val layoutId = layout.id
         val authorId = authorView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
         constraintSet.connect(authorId, ConstraintSet.END, layoutId, ConstraintSet.END)
         constraintSet.connect(authorId, ConstraintSet.TOP, layoutId, ConstraintSet.TOP)
@@ -117,7 +121,9 @@ internal class DefaultMessageViewFieldsDelegate(
     private fun alignDateLabelToStart(layout: ConstraintLayout, dateView: TextView) {
         val layoutId = layout.id
         val dateId = dateView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
         constraintSet.connect(dateId, ConstraintSet.START, layoutId, ConstraintSet.START)
         constraintSet.connect(dateId, ConstraintSet.BOTTOM, layoutId, ConstraintSet.BOTTOM)
@@ -127,7 +133,9 @@ internal class DefaultMessageViewFieldsDelegate(
     private fun alignDateLabelToEnd(layout: ConstraintLayout, dateView: TextView) {
         val layoutId = layout.id
         val dateId = dateView.id
-        val constraintSet = ConstraintSet()
+        val constraintSet = ConstraintSet().apply {
+            clone(layout)
+        }
 
         constraintSet.connect(dateId, ConstraintSet.END, layoutId, ConstraintSet.END)
         constraintSet.connect(dateId, ConstraintSet.BOTTOM, layoutId, ConstraintSet.BOTTOM)

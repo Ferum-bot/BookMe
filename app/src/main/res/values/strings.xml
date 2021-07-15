@@ -117,13 +117,6 @@
     <string name="new_photo_uploaded">New photo uploaded</string>
     <string name="new_photo_not_uploaded">New photo upload failed</string>
     <string name="profile_updated">Profile updated</string>
-
-    <!--  Google Play Services  -->
-    <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
-
-    <!--  Facebook  -->
-    <string name="facebook_app_id">341735473936192</string>
-    <string name="fb_login_protocol_scheme">fb341735473936192</string>
     <string name="your_current_bookish_firend">Your current \nbookish firend</string>
     <string name="time_left">Time left:</string>
     <string name="_14_32_17">14:32:17</string>
@@ -132,4 +125,16 @@
     <string name="you_don_t_have_active_chats_not">You don\'t have active \nchats not!</string>
     <string name="no_available_data">No available data</string>
 
+    <!--  Google Play Services  -->
+    <string name="web_client_id">911942026157-f9i75gd5i2af3r5p07dcos5596nbbmno.apps.googleusercontent.com</string>
+
+    <!--  Facebook  -->
+    <string name="facebook_app_id">341735473936192</string>
+    <string name="fb_login_protocol_scheme">fb341735473936192</string>
+
+    <!--  Notifications  -->
+    <string name="message_notification_channel_name">Message notification channel</string>
+    <string name="info_notification_channel_name">Information notification channel</string>
+    <string name="message_notification_channel_description">This channel used to deliver pushes about new direct messages</string>
+    <string name="info_notification_channel_description">This channel used to deliver some information pushes about you and your interlocutors</string>
 </resources>

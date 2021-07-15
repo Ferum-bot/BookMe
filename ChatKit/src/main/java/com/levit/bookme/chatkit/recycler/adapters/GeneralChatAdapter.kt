@@ -6,10 +6,11 @@ import com.levit.bookme.chatkit.factories.ChatKitViewFactory
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.recycler.delegates.GeneralChatDelegates
+import com.levit.bookme.chatkit.ui.chat.ChatListener
 
 internal class GeneralChatAdapter(
-    private val chatKitFactory: ChatKitViewFactory,
-    private val chatOptions: ChatStyleOptions,
+    chatKitFactory: ChatKitViewFactory,
+    chatOptions: ChatStyleOptions,
 ): AsyncListDifferDelegationAdapter<ChatModel>(CALL_BACK) {
 
     init {

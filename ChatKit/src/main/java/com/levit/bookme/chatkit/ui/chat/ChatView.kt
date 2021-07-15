@@ -29,17 +29,19 @@ class ChatView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var styleOptions: ChatStyleOptions = ChatStyleOptions.provideDefaultStyleOptions()
+    var styleOptions = ChatStyleOptions.provideDefaultStyleOptions()
         set(value) {
             field = value
             applyStyleOptions(value)
         }
 
-    var chatModel: ChatModel = emptyChatModel()
+    var chatModel = emptyChatModel()
         set(value) {
             field = value
             applyChatModel(value)
         }
+
+    var listener: ChatListener? = null
 
     private val binding: ChatLayoutBinding
 
@@ -52,6 +54,26 @@ class ChatView @JvmOverloads constructor(
         binding = ChatLayoutBinding.inflate(inflater, this, true)
 
         imageLoader = RemoteImageLoader(binding.interlocutorProfileImage, defaultGlideOptions())
+
+        setUpAllClickListeners()
+    }
+
+    private fun setUpAllClickListeners() {
+        binding.interlocutorProfileImage.setOnClickListener {
+            listener?.onProfileIconClicked(chatModel)
+        }
+
+        binding.interlocutorProfileImage.setOnLongClickListener {
+            listener?.onProfileIconLongClicked(chatModel) ?: false
+        }
+
+        binding.interlocutorName.setOnClickListener {
+            listener?.onInterlocutorNameClicked(chatModel)
+        }
+
+        binding.lastMessageText.setOnClickListener {
+            listener?.onLastMessageClicked(chatModel)
+        }
     }
 
     private fun applyStyleOptions(options: ChatStyleOptions) {

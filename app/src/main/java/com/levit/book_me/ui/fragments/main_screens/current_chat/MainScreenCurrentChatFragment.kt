@@ -24,5 +24,15 @@ class MainScreenCurrentChatFragment:
         super.onViewCreated(view, savedInstanceState)
 
         setAllObservers()
+        configureLayout()
+        configureChatKit()
+    }
+
+    private fun configureChatKit() {
+
+    }
+
+    private fun configureLayout() {
+
     }
 }

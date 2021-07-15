@@ -12,9 +12,12 @@ import com.levit.bookme.chatkit.extensions.provideEmptyModel
 import com.levit.bookme.chatkit.extensions.setMarginsDp
 import com.levit.bookme.chatkit.factories.impl.DefaultChatKitViewFactoryFacade
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
+import com.levit.bookme.chatkit.models.enums.ScrollStates
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatModel
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatStyleOptions
 import com.levit.bookme.chatkit.recycler.adapters.GeneralChatAdapter
+import com.levit.bookme.chatkit.recycler.delegates.GeneralChatDelegates
+import com.levit.bookme.chatkit.ui.chat.ChatListener
 
 @Suppress("JoinDeclarationAndAssignment")
 class GeneralChatView @JvmOverloads constructor(
@@ -23,25 +26,45 @@ class GeneralChatView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ): ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var generalChatModel: GeneralChatModel = provideEmptyModel()
+
+    /**
+     * All view models.
+     */
+    var generalChatModel = provideEmptyModel()
         set(value) {
             field = value
             applyGeneralChatModel(value)
         }
 
-    var generalStyleOptions: GeneralChatStyleOptions = GeneralChatStyleOptions.provideDefaultStyleOptions()
+
+    /**
+     * All style options.
+     */
+    var generalStyleOptions = GeneralChatStyleOptions.provideDefaultStyleOptions()
         set(value) {
             field = value
             applyGeneralChatStyleOptions(value)
         }
 
-    var chatStyleOptions: ChatStyleOptions = ChatStyleOptions.provideDefaultStyleOptions()
+    var chatStyleOptions = ChatStyleOptions.provideDefaultStyleOptions()
         set(value) {
             field = value
             applyChatStyleOptions(value)
         }
 
-    var listener: GeneralChatListener? = null
+
+    /**
+     * All view listeners.
+     */
+    var chatListener: ChatListener? = null
+        set(value) {
+            field = value
+            GeneralChatDelegates.chatListener = value
+        }
+
+    var generalViewListener: GeneralChatListener? = null
+
+
 
     private val binding: GeneralChatLayoutBinding
 
@@ -83,11 +106,36 @@ class GeneralChatView @JvmOverloads constructor(
 
     private fun setUpRecyclerView() {
         binding.chatsRecycler.adapter = chatsAdapter
+
+        val scrollListener = object: RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                when(newState) {
+                    RecyclerView.SCROLL_STATE_DRAGGING ->
+                        generalViewListener?.onScrollStateChanged(ScrollStates.SCROLL_STATE_DRAGGING)
+                    RecyclerView.SCROLL_STATE_IDLE ->
+                        generalViewListener?.onScrollStateChanged(ScrollStates.SCROLL_STATE_IDLE)
+                    RecyclerView.SCROLL_STATE_SETTLING ->
+                        generalViewListener?.onScrollStateChanged(ScrollStates.SCROLL_STATE_SETTLING)
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                generalViewListener?.onScrolled(dx, dy)
+            }
+
+        }
+        binding.chatsRecycler.addOnScrollListener(scrollListener)
     }
 
     private fun applyGeneralChatModel(model: GeneralChatModel) {
         val chats = model.chats
         chatsAdapter.items = chats
+        GeneralChatDelegates.allChats = chats
     }
 
     private fun applyGeneralChatStyleOptions(options: GeneralChatStyleOptions) = with(binding) {

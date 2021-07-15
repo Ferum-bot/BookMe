@@ -1,6 +1,7 @@
 package com.levit.book_me.interactors.main_screen.impl
 
 import com.levit.book_me.core.models.chat_kit.UserChat
+import com.levit.book_me.core_base.di.MainScreenScope
 import com.levit.book_me.interactors.main_screen.ChatsInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.result_models.BaseRepositoryResult
@@ -8,6 +9,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
+@MainScreenScope
 class TestChatsInteractor: ChatsInteractor {
 
     private val imagesUrls = listOf(
