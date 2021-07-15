@@ -29,8 +29,10 @@ data class UserChat(
     val lastMessageDate: Long?,
 
     @Json(name = "userChatIsLastMessageFromUser")
-    val isLastMessageFromUser: Boolean
+    val isLastMessageFromUser: Boolean,
 
+    @Json(name = "userNumberOfUnReadMessages")
+    val numberOfUnReadMessages: Int,
 ): ChatModel, Parcelable {
 
     override val id: Long

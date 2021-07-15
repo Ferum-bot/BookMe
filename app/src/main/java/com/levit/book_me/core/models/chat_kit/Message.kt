@@ -16,6 +16,9 @@ data class Message(
     @Json(name = "messageAuthorId")
     val messageAuthorId: Long,
 
+    @Json(name = "messageChatId")
+    val messageChatId: Long,
+
     @Json(name = "messageAuthorName")
     val messageAuthorName: String,
 
