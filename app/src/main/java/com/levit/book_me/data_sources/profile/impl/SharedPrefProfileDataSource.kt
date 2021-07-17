@@ -2,12 +2,10 @@ package com.levit.book_me.data_sources.profile.impl
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.internal.LinkedTreeMap
 import com.levit.book_me.core.enums.CurrentUserStatus
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
-import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.models.profile.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.data_sources.profile.CacheProfileDataSource
 import com.levit.book_me.di.DIConstants

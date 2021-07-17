@@ -1,6 +1,6 @@
 package com.levit.book_me.interactors.creating_profile.impl
 
-import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.models.profile.ProfileModel
 import com.levit.book_me.data_sources.profile.CacheProfileDataSource
 import com.levit.book_me.interactors.creating_profile.CreatingProfileInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult

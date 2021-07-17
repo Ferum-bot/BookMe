@@ -2,12 +2,11 @@ package com.levit.book_me.ui.activities.creating_profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.levit.book_me.core.enums.SearchBooksTypes
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
-import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.models.profile.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.core_base.di.CreatingProfileScope

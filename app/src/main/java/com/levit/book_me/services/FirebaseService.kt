@@ -1,11 +1,15 @@
 package com.levit.book_me.services
 
 import android.content.Intent
+import androidx.work.OneTimeWorkRequest
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.levit.book_me.core.enums.FirebaseMessageType
+import com.levit.book_me.core.extensions.appComponent
 import com.levit.book_me.core.models.NotificationModel
 import com.levit.book_me.core.utill.NotificationsUtil
+import com.levit.book_me.work_managers.SafeFCMTokenWorker
+import com.levit.book_me.work_managers.UploadFCMTokenWorker
 import java.util.*
 
 class FirebaseService: FirebaseMessagingService() {
@@ -21,6 +25,15 @@ class FirebaseService: FirebaseMessagingService() {
         private const val INFO_MESSAGE = "info_message"
 
         private const val CHAT_MESSAGE = "chat_message"
+    }
+
+    private lateinit var safePushTokenWorker: SafeFCMTokenWorker
+    private lateinit var uploadPushTokenWorker: UploadFCMTokenWorker
+
+    override fun onCreate() {
+        super.onCreate()
+
+        initDI()
     }
 
     override fun onNewToken(token: String) {
@@ -40,6 +53,12 @@ class FirebaseService: FirebaseMessagingService() {
             FirebaseMessageType.CHAT_MESSAGE -> sendMessageNotification(model)
             FirebaseMessageType.UN_DEFINED -> sendDefaultNotification(message)
         }
+    }
+
+    private fun initDI() {
+        appComponent.inject(this)
+        safePushTokenWorker = appComponent.safePushTokenWorker
+        uploadPushTokenWorker = appComponent.uploadPushTokenWorker
     }
 
     private fun sendInfoNotification(model: NotificationModel) {
@@ -70,6 +89,7 @@ class FirebaseService: FirebaseMessagingService() {
     }
 
     private fun safeAndSendToServerToken(token: String) {
+        val request = OneTimeWorkRequest.Builder(SafeFCMTokenWorker::class.java)
 
     }
 

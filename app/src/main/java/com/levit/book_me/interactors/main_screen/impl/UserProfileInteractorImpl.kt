@@ -3,7 +3,7 @@ package com.levit.book_me.interactors.main_screen.impl
 import android.net.Uri
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
-import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.models.profile.ProfileModel
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.core_base.di.MainScreenScope
 import com.levit.book_me.interactors.main_screen.UserProfileInteractor

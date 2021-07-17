@@ -9,6 +9,7 @@ object DIConstants {
     const val GO_QUOTES_CLIENT_NAME = "go_quotes_client"
 
     const val PROFILE_SHARED_PREFERENCE_NAME = "profile_shared_preference"
+    const val AUTH_INFO_SHARED_PREFERENCE_NAME = "auth_info_shared_preference"
 
     const val IO_DISPATCHER_CONTEXT = "IODispatcherContext"
     const val MAIN_DISPATCHER_CONTEXT = "MainDispatcherContext"
@@ -17,4 +18,7 @@ object DIConstants {
 
     const val MAIN_SCREEN_TEST_PROFILE_INTERACTOR = "MainScreenTestProfileInteractor"
     const val MAIN_SCREEN_BASE_PROFILE_INTERACTOR = "MainScreenBaseProfileInterator"
+
+    const val SAFE_PUSH_TOKEN_WORK_PARAMS = "SafePushTokenWorkParams"
+    const val UPLOAD_PUSH_TOKEN_WORK_PARAMS = "UploadPushTokenWorkParams"
 }

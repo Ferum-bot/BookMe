@@ -1,6 +1,7 @@
-package com.levit.book_me.core.models
+package com.levit.book_me.core.models.profile
 
 import android.os.Parcelable
+import com.levit.book_me.core.models.profile.ProfileModel
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
@@ -13,4 +14,4 @@ data class UserModel(
     @Json(name = "")
     val profileModel: ProfileModel,
 
-): Parcelable
+    ): Parcelable

@@ -20,4 +20,13 @@ open class SharedPreferenceModule {
         )
     }
 
+    @Named(DIConstants.AUTH_INFO_SHARED_PREFERENCE_NAME)
+    @Provides
+    fun provideAuthInfoSharedPreferences(app: BookMeApplication): SharedPreferences {
+        val context = app.applicationContext
+        return context.getSharedPreferences(
+            DIConstants.AUTH_INFO_SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE,
+        )
+    }
+
 }

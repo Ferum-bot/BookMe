@@ -1,6 +1,8 @@
-package com.levit.book_me.core.models
+package com.levit.book_me.core.models.profile
 
 import android.os.Parcelable
+import com.levit.book_me.core.models.Author
+import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.quote.GoQuote
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.squareup.moshi.Json

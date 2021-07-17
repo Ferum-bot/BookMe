@@ -3,13 +3,12 @@ package com.levit.book_me.ui.fragments.main_screens.current_friend_profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.core.models.FriendProfileModel
+import com.levit.book_me.core.models.profile.FriendProfileModel
 import com.levit.book_me.core_base.di.MainScreenScope
 import com.levit.book_me.interactors.main_screen.CurrentFriendInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.repositories.result_models.BaseRepositoryResult
 import com.levit.book_me.ui.base.BaseMainScreenViewModel
-import com.levit.book_me.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
