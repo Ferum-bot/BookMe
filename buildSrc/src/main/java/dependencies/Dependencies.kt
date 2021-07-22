@@ -85,7 +85,7 @@ object Dependencies {
     const val FIREBASE_UI_STORAGE = "com.firebaseui:firebase-ui-storage:${Versions.FIREBASE_UI_STORAGE}"
 
     // WorkManager
-    const val WORK_MANAGER_KOTLIN = "androidx.work:work-runtime-ktx:${Versions.WORK_MANAGER}}"
+    const val WORK_MANAGER_KOTLIN = "androidx.work:work-runtime-ktx:${Versions.WORK_MANAGER}"
     const val WORK_MANAGER_GCM = "androidx.work:work-gcm:${Versions.WORK_MANAGER}"
     const val WORK_MANAGER_TEST = "androidx.work:work-testing:${Versions.WORK_MANAGER}"
     const val WORK_MANAGER_MULTIPROCESS = "androidx.work:work-multiprocess:${Versions.WORK_MANAGER}"

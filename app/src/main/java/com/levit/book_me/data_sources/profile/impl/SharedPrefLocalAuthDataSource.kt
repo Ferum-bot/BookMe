@@ -1,27 +1,24 @@
-package com.levit.book_me.repositories.profile.impl
+package com.levit.book_me.data_sources.profile.impl
 
 import android.content.SharedPreferences
 import com.levit.book_me.core.models.profile.AuthInfo
-import com.levit.book_me.di.DIConstants
-import com.levit.book_me.repositories.profile.AuthRepository
-import kotlinx.coroutines.CoroutineScope
+import com.levit.book_me.data_sources.profile.LocalAuthDataSource
 import kotlinx.coroutines.flow.SharedFlow
 import javax.inject.Inject
-import javax.inject.Named
-import kotlin.coroutines.CoroutineContext
 
-class SharedPrefAuthRepository @Inject constructor(
-    @Named(DIConstants.IO_DISPATCHER_CONTEXT)
-    private val coroutineScope: CoroutineContext,
-
-    @Named(DIConstants.AUTH_INFO_SHARED_PREFERENCE_NAME)
+class SharedPrefLocalAuthDataSource @Inject constructor(
     private val storage: SharedPreferences,
-): AuthRepository {
+): LocalAuthDataSource {
 
     override val authInfo: SharedFlow<AuthInfo>
         get() = TODO("Not yet implemented")
 
-    override suspend fun getAuth() {
+
+    override suspend fun updateAuthInfo(newAuthInfo: AuthInfo) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAuthInfo() {
         TODO("Not yet implemented")
     }
 
@@ -32,4 +29,5 @@ class SharedPrefAuthRepository @Inject constructor(
     override suspend fun updateUUID(newUUID: String) {
         TODO("Not yet implemented")
     }
+
 }

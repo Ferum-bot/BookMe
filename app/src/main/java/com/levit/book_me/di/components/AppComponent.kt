@@ -20,6 +20,8 @@ import javax.inject.Singleton
         DatabaseModule::class,
         AppSubComponents::class,
         SharedPreferenceModule::class,
+        RepositoryModule::class,
+        DataSourceModule::class,
     ]
 )
 interface AppComponent {

@@ -1,10 +1,7 @@
 package com.levit.book_me.di.modules
 
-import android.content.SharedPreferences
 import com.levit.book_me.data_sources.google.GoogleBooksVolumeDataSource
-import com.levit.book_me.data_sources.profile.CacheProfileDataSource
-import com.levit.book_me.data_sources.profile.ProfileRemoteDataSourceFacade
-import com.levit.book_me.data_sources.profile.RegisterNewUserDataSource
+import com.levit.book_me.data_sources.profile.*
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.repositories.profile.impl.GenresRepositoryMock
 import com.levit.book_me.repositories.google.impl.SearchAuthorsRepositoryImpl
@@ -17,9 +14,10 @@ import com.levit.book_me.repositories.profile.ProfileRepository
 import com.levit.book_me.repositories.profile.RegisterNewUserRepository
 import com.levit.book_me.repositories.profile.impl.ProfileRepositoryImpl
 import com.levit.book_me.repositories.profile.impl.RegisterNewUserRepositoryImpl
-import com.levit.book_me.repositories.profile.impl.SharedPrefAuthRepository
+import com.levit.book_me.repositories.profile.impl.AuthRepositoryImpl
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import javax.inject.Named
 import kotlin.coroutines.CoroutineContext
 
@@ -76,14 +74,15 @@ open class RepositoryModule {
         return ProfileRepositoryImpl(coroutineContext, localDataSource, remoteDataSourceFacade)
     }
 
+    @Reusable
     @Provides
     fun provideAuthRepository(
         @Named(DIConstants.IO_DISPATCHER_CONTEXT)
         coroutineContext: CoroutineContext,
 
-        @Named(DIConstants.AUTH_INFO_SHARED_PREFERENCE_NAME)
-        sharedPreferences: SharedPreferences,
+        localDataSource: LocalAuthDataSource,
+        remoteDataSource: RemoteAuthDataSource,
     ): AuthRepository {
-        return SharedPrefAuthRepository(coroutineContext, sharedPreferences)
+        return AuthRepositoryImpl(coroutineContext, remoteDataSource, localDataSource)
     }
 }

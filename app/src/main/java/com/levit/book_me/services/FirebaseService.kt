@@ -1,16 +1,18 @@
 package com.levit.book_me.services
 
 import android.content.Intent
-import androidx.work.OneTimeWorkRequest
+import androidx.work.*
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.levit.book_me.core.enums.FirebaseMessageType
 import com.levit.book_me.core.extensions.appComponent
 import com.levit.book_me.core.models.NotificationModel
 import com.levit.book_me.core.utill.NotificationsUtil
+import com.levit.book_me.core.utill.WorkManagerUtil
 import com.levit.book_me.work_managers.SafeFCMTokenWorker
 import com.levit.book_me.work_managers.UploadFCMTokenWorker
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class FirebaseService: FirebaseMessagingService() {
 
@@ -25,15 +27,6 @@ class FirebaseService: FirebaseMessagingService() {
         private const val INFO_MESSAGE = "info_message"
 
         private const val CHAT_MESSAGE = "chat_message"
-    }
-
-    private lateinit var safePushTokenWorker: SafeFCMTokenWorker
-    private lateinit var uploadPushTokenWorker: UploadFCMTokenWorker
-
-    override fun onCreate() {
-        super.onCreate()
-
-        initDI()
     }
 
     override fun onNewToken(token: String) {
@@ -53,12 +46,6 @@ class FirebaseService: FirebaseMessagingService() {
             FirebaseMessageType.CHAT_MESSAGE -> sendMessageNotification(model)
             FirebaseMessageType.UN_DEFINED -> sendDefaultNotification(message)
         }
-    }
-
-    private fun initDI() {
-        appComponent.inject(this)
-        safePushTokenWorker = appComponent.safePushTokenWorker
-        uploadPushTokenWorker = appComponent.uploadPushTokenWorker
     }
 
     private fun sendInfoNotification(model: NotificationModel) {
@@ -89,8 +76,27 @@ class FirebaseService: FirebaseMessagingService() {
     }
 
     private fun safeAndSendToServerToken(token: String) {
-        val request = OneTimeWorkRequest.Builder(SafeFCMTokenWorker::class.java)
+        val inputData = provideTokenData(token)
+        val remoteConstraints = remoteWorkerConstraints()
 
+        val localSafeRequest = OneTimeWorkRequest.Builder(SafeFCMTokenWorker::class.java)
+            .setInputData(inputData)
+            .build()
+
+        val remoteSafeRequest = OneTimeWorkRequest.Builder(UploadFCMTokenWorker::class.java)
+            .setInputData(inputData)
+            .setBackoffCriteria(
+                BackoffPolicy.LINEAR,
+                OneTimeWorkRequest.DEFAULT_BACKOFF_DELAY_MILLIS,
+                TimeUnit.MILLISECONDS,
+            )
+            .setConstraints(remoteConstraints)
+            .build()
+
+        WorkManager.getInstance(applicationContext)
+            .beginWith(localSafeRequest)
+            .then(remoteSafeRequest)
+            .enqueue()
     }
 
     private fun RemoteMessage.getNotificationModel(): NotificationModel {
@@ -109,5 +115,18 @@ class FirebaseService: FirebaseMessagingService() {
             CHAT_MESSAGE -> FirebaseMessageType.CHAT_MESSAGE
             else -> FirebaseMessageType.UN_DEFINED
         }
+    }
+
+    private fun provideTokenData(token: String): Data {
+        return Data.Builder()
+            .putString(WorkManagerUtil.NEW_PUSH_TOKEN_NAME, token)
+            .build()
+    }
+
+    private fun remoteWorkerConstraints(): Constraints {
+        return Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresBatteryNotLow(true)
+            .build()
     }
 }

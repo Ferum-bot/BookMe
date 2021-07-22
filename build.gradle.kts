@@ -26,6 +26,9 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            setUrl("https://maven.google.com")
+        }
     }
 }
 

@@ -7,17 +7,18 @@ import com.google.firebase.ktx.Firebase
 import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadUriDataSource
 import com.levit.book_me.data_sources.google.impl.GoogleBooksVolumeDataSourceImpl
 import com.levit.book_me.data_sources.google.GoogleBooksVolumeDataSource
+import com.levit.book_me.data_sources.profile.*
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.services.GoogleBooksService
-import com.levit.book_me.data_sources.profile.CacheProfileDataSource
-import com.levit.book_me.data_sources.profile.ProfileRemoteDataSourceFacade
-import com.levit.book_me.data_sources.profile.RegisterNewUserDataSource
 import com.levit.book_me.data_sources.profile.impl.*
+import com.levit.book_me.di.modules.network.CoroutineContextModule
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 
-@Module
+@Module(includes = [
+    CoroutineContextModule::class,
+])
 open class DataSourceModule {
 
     @Provides
@@ -47,5 +48,20 @@ open class DataSourceModule {
         uploadPhotoDataSource: FirebaseStorageUploadUriDataSource,
     ): ProfileRemoteDataSourceFacade {
         return FirestoreDataSourceFacade(baseDataSource, uploadPhotoDataSource)
+    }
+
+    @Provides
+    fun provideLocalAuthDataSource(
+        @Named(DIConstants.AUTH_INFO_SHARED_PREFERENCE_NAME)
+        preferences: SharedPreferences
+    ): LocalAuthDataSource {
+        return SharedPrefLocalAuthDataSource(preferences)
+    }
+
+    @Provides
+    fun provideRemoteAuthDataSource(
+
+    ): RemoteAuthDataSource {
+        return RemoteAuthDataSourceImpl()
     }
 }
