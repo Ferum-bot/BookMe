@@ -1,7 +1,7 @@
 package com.levit.book_me.data_sources.profile
 
 import com.levit.book_me.core.enums.CurrentUserStatus
-import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.models.profile.ProfileModel
 import kotlinx.coroutines.flow.SharedFlow
 
 interface CacheProfileDataSource {

@@ -15,6 +15,7 @@ import com.levit.book_me.R
 import com.levit.book_me.core.utill.NotificationsUtil
 import com.levit.book_me.di.components.AppComponent
 import com.levit.book_me.core_network.model.NetworkMonitor
+import com.levit.book_me.di.Injector
 import com.levit.book_me.di.components.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -37,16 +38,18 @@ class BookMeApplication : Application(), HasAndroidInjector {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent.builder()
-            .application(this)
-            .build()
-        appComponent.inject(this)
-
+        initDI()
         configureFacebookSdk()
         configureFirebase()
         registerNetworkMonitor()
         initTimber()
         createNotificationChannels()
+    }
+
+    private fun initDI() {
+        Injector.initAppComponent(this)
+        appComponent = Injector.appComponent
+        appComponent.inject(this)
     }
 
     override fun onTerminate() {

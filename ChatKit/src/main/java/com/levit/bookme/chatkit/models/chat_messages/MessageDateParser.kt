@@ -11,7 +11,7 @@ internal object MessageDateParser {
     private const val FULL_PATTERN = "dd.MM HH:mm"
 
     /**
-     * Remove lately!
+     * Remove lately! TODO
      * Use the locale from options or from method.
      */
     private val currentLocale = Locale.ENGLISH

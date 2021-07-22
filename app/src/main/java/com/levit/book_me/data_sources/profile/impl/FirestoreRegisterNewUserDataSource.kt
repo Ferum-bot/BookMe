@@ -4,14 +4,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.levit.book_me.core.extensions.getBaseInfoMap
 import com.levit.book_me.core.extensions.toMap
-import com.levit.book_me.core.models.Author
-import com.levit.book_me.core.models.Genre
-import com.levit.book_me.core.models.ProfileModel
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.profile.ProfileModel
 import com.levit.book_me.core.utill.FirebaseConstants
-import com.levit.book_me.core.utill.FirebaseConstants.AUTHOR_PREF_NAME
-import com.levit.book_me.core.utill.FirebaseConstants.BOOK_PREF_NAME
-import com.levit.book_me.core.utill.FirebaseConstants.GENRE_PREF_NAME
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userBaseInfoRef
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userFavoriteAuthorsCollectionRef
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userFavoriteBooksCollectionRef
@@ -19,7 +13,6 @@ import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.user
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userQuoteDocument
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences.userWantToReadBooksCollectionRef
 import com.levit.book_me.data_sources.profile.RegisterNewUserDataSource
-import com.levit.book_me.network.models.google_books.GoogleBook
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.network.response_models.user.UserResponseModel
 import kotlinx.coroutines.channels.BufferOverflow

@@ -13,7 +13,7 @@ import com.levit.book_me.core.extensions.noCacheGlideOptions
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
-import com.levit.book_me.core.models.ProfileModel
+import com.levit.book_me.core.models.profile.ProfileModel
 import com.levit.book_me.core.ui.custom_view.SimpleAuthorView
 import com.levit.book_me.core.ui.custom_view.SmallGenreView
 import com.levit.book_me.core.utill.FirebaseStorageReferences

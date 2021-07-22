@@ -1,6 +1,6 @@
 package com.levit.book_me.interactors.main_screen.impl
 
-import com.levit.book_me.core.models.FriendProfileModel
+import com.levit.book_me.core.models.profile.FriendProfileModel
 import com.levit.book_me.core.utill.LocaleHelper
 import com.levit.book_me.core_base.di.MainScreenScope
 import com.levit.book_me.interactors.main_screen.CurrentFriendInteractor

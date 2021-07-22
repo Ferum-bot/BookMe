@@ -20,7 +20,7 @@ android {
         applicationId  = Config.APPLICATION_ID
         minSdkVersion(Config.MIN_SDK_VERSION)
         targetSdkVersion(Config.TARGET_SDK_VERSION)
-        versionCode = 10
+        versionCode = 13
         versionName = "1.0.2"
         multiDexEnabled = Config.MULTIDEX_ENABLED
 
