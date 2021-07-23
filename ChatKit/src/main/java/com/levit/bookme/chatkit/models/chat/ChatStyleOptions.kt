@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.models.chat
 
+import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
@@ -23,12 +24,20 @@ class ChatStyleOptions(
     @ColorInt
     val lastMessageDateTextColor: Int
     @ColorInt
+    val unReadChatMessagesTextColor: Int
+    @ColorInt
+    val unReadChatMessagesBackgroundColor: Int
+    @ColorInt
+    val unReadChatMessagesStrokeColor: Int
+    @ColorInt
     val backgroundColor: Int
     @ColorInt
     val backgroundStrokeColor: Int
 
     @Dimension(unit = Dimension.DP)
     val backgroundStrokeWidthDp: Int
+    @Dimension(unit = Dimension.DP)
+    val unReadChatMessagesStrokeWidthDp: Int
 
     @Dimension(unit = Dimension.DP)
     val backgroundTopLeftRadiusDp: Int
@@ -45,6 +54,8 @@ class ChatStyleOptions(
     val lastMessageTextSizeSp: Int
     @Dimension(unit = Dimension.SP)
     val lastMessageDateTextSizeSp: Int
+    @Dimension(unit = Dimension.SP)
+    val unReadChatMessagesTextSizeSp: Int
 
     @Dimension(unit = Dimension.DP)
     val interlocutorNameMarginTopDp: Int
@@ -88,6 +99,7 @@ class ChatStyleOptions(
     val showOnlineStatus: Boolean
     val showProfileIcon: Boolean
     val showLastMessageDate: Boolean
+    val showNumberOfUnreadMessages: Boolean
 
     val lastMessageDateFormat: MessageDateFormat
 
@@ -97,10 +109,14 @@ class ChatStyleOptions(
         this.interlocutorNameTextColor = options.interlocutorNameTextColor
         this.lastMessageTextColor = options.lastMessageTextColor
         this.lastMessageDateTextColor = options.lastMessageDateTextColor
+        this.unReadChatMessagesTextColor = options.unReadChatMessagesTextColor
+        this.unReadChatMessagesBackgroundColor = options.unReadChatMessagesBackgroundColor
+        this.unReadChatMessagesStrokeColor = options.unReadChatMessagesStrokeColor
         this.backgroundColor = options.backgroundColor
         this.backgroundStrokeColor = options.backgroundStrokeColor
 
         this.backgroundStrokeWidthDp = options.backgroundStrokeWidthDp
+        this.unReadChatMessagesStrokeWidthDp = options.unReadChatMessagesStrokeWidthDp
 
         this.backgroundTopLeftRadiusDp = options.backgroundTopLeftRadiusDp
         this.backgroundTopRightRadiusDp = options.backgroundTopRightRadiusDp
@@ -109,7 +125,8 @@ class ChatStyleOptions(
 
         this.interlocutorNameTextSizeSp = options.interlocutorNameTextSizeSp
         this.lastMessageTextSizeSp = options.lastMessageTextSizeSp
-        this.lastMessageDateTextSizeSp = options.lastMessageTextSizeSp
+        this.lastMessageDateTextSizeSp = options.lastMessageDateTextSizeSp
+        this.unReadChatMessagesTextSizeSp = options.unReadChatMessagesTextSizeSp
 
         this.interlocutorNameMarginTopDp = options.interlocutorNameMarginTopDp
         this.interlocutorNameMarginBottomDp = options.interlocutorNameMarginBottomDp
@@ -137,6 +154,7 @@ class ChatStyleOptions(
         this.showOnlineStatus = options.showOnlineStatus
         this.showProfileIcon = options.showProfileIcon
         this.showLastMessageDate = options.showLastMessageDate
+        this.showNumberOfUnreadMessages = options.showNumberOfUnreadMessages
 
         this.lastMessageDateFormat = options.lastMessageDateFormat
     }

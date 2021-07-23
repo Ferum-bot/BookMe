@@ -32,6 +32,7 @@ internal class GeneralChatAdapter(
                         && oldItem.interlocutorProfileImageUrl == newItem.interlocutorProfileImageUrl
                         && oldItem.lastMessage == newItem.lastMessage
                         && oldItem.lastMessageFrom == newItem.lastMessageFrom
+                        && oldItem.numberOfUnreadMessaged == newItem.numberOfUnreadMessaged
             }
         }
     }

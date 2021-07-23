@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 
-internal class RoundedDrawable(
+internal class RoundedRectDrawable(
 
     @ColorInt
     private val backgroundColor: Int = Color.GRAY,

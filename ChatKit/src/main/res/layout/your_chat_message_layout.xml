@@ -95,7 +95,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
 
-                                tools:src="@drawable/ic_error_tick"/>
+                                tools:src="@drawable/ic_loading_tick"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

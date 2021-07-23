@@ -12,12 +12,14 @@ class ChatStyleOptionsBuilder {
 
         private const val DEFAULT_BIG_TEXT_SIZE_SP = 18
         private const val DEFAULT_SMALL_TEXT_SIZE_SP = 12
+        private const val DEFAULT_UN_READ_CHAT_MESSAGES_SIZE_SP = 15
 
         private const val DEFAULT_BIG_MARGIN_DP = 8
         private const val DEFAULT_SMALL_MARGIN_DP = 4
 
         private const val DEFAULT_BACKGROUND_RADIUS_DP = 0
         private const val DEFAULT_STROKE_WIDTH_DP = 0
+        private const val DEFAULT_SMALL_STROKE_WIDTH_DP = 2
     }
 
     @ColorInt
@@ -27,12 +29,20 @@ class ChatStyleOptionsBuilder {
     @ColorInt
     var lastMessageDateTextColor: Int = Color.LTGRAY
     @ColorInt
+    var unReadChatMessagesTextColor: Int = Color.BLACK
+    @ColorInt
+    var unReadChatMessagesBackgroundColor: Int = Color.WHITE
+    @ColorInt
+    var unReadChatMessagesStrokeColor: Int = Color.LTGRAY
+    @ColorInt
     var backgroundColor: Int = Color.WHITE
     @ColorInt
     var backgroundStrokeColor: Int = Color.WHITE
 
     @Dimension(unit = Dimension.DP)
     var backgroundStrokeWidthDp: Int = DEFAULT_STROKE_WIDTH_DP
+    @Dimension(unit = Dimension.DP)
+    var unReadChatMessagesStrokeWidthDp: Int = DEFAULT_SMALL_STROKE_WIDTH_DP
 
     @Dimension(unit = Dimension.DP)
     var backgroundTopLeftRadiusDp: Int = DEFAULT_BACKGROUND_RADIUS_DP
@@ -49,6 +59,8 @@ class ChatStyleOptionsBuilder {
     var lastMessageTextSizeSp: Int = DEFAULT_SMALL_TEXT_SIZE_SP
     @Dimension(unit = Dimension.SP)
     var lastMessageDateTextSizeSp: Int = DEFAULT_SMALL_TEXT_SIZE_SP
+    @Dimension(unit = Dimension.SP)
+    var unReadChatMessagesTextSizeSp: Int = DEFAULT_UN_READ_CHAT_MESSAGES_SIZE_SP
 
     @Dimension(unit = Dimension.DP)
     var interlocutorNameMarginTopDp: Int = DEFAULT_BIG_MARGIN_DP
@@ -92,6 +104,7 @@ class ChatStyleOptionsBuilder {
     var showOnlineStatus: Boolean = true
     var showProfileIcon: Boolean = true
     var showLastMessageDate: Boolean = true
+    var showNumberOfUnreadMessages: Boolean = true
 
     var lastMessageDateFormat: MessageDateFormat = MessageDateFormat.SHOW_ONLY_TIME
 }

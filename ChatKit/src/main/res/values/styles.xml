@@ -87,4 +87,10 @@
         <item name="android:singleLine">true</item>
         <item name="android:maxLines">1</item>
     </style>
+
+    <style name="DefaultUnReadChatMessagesCountStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">6dp</item>
+    </style>
 </resources>

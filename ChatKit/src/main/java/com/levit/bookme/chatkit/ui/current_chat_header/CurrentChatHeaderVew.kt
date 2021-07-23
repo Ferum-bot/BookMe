@@ -6,7 +6,7 @@ import android.view.Gravity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.levit.book_me.chat_kit.databinding.CurrentChatHeaderLayoutBinding
-import com.levit.bookme.chatkit.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.drawables.RoundedRectDrawable
 import com.levit.bookme.chatkit.extensions.*
 import com.levit.bookme.chatkit.extensions.defaultGlideOptions
 import com.levit.bookme.chatkit.extensions.inflater
@@ -154,7 +154,7 @@ class CurrentChatHeaderVew @JvmOverloads constructor(
     }
 
     private fun applyGeneralOptions(options: CurrentChatHeaderStyleOptions) = with(binding) {
-        val layoutDrawable = RoundedDrawable(
+        val layoutDrawable = RoundedRectDrawable(
             backgroundColor = options.layoutBackgroundColor,
             strokeColor = options.layoutBackgroundStrokeColor,
             strokeWidthPx = dpToPx(options.layoutBackgroundStrokeWidthDp) ?: 0,

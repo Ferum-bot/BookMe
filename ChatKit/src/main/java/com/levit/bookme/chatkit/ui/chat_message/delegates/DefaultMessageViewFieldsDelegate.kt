@@ -9,7 +9,7 @@ import com.levit.bookme.chatkit.extensions.setMarginsDp
 import com.levit.bookme.chatkit.extensions.setTextSizeSp
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
-import com.levit.bookme.chatkit.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.drawables.RoundedRectDrawable
 import de.hdodenhof.circleimageview.CircleImageView
 
 /**
@@ -84,7 +84,7 @@ internal class DefaultMessageViewFieldsDelegate(
         val topRightRadiusPx = dpToPx(options.messageBackgroundTopRightCornerRadiusDP) ?: 0
         val bottomRightRadiusPx = dpToPx(options.messageBackgroundBottomRightCornerRadiusDP) ?: 0
         val bottomLeftRadiusPx = dpToPx(options.messageBackgroundBottomLeftCornerRadiusDP) ?: 0
-        val roundedDrawable = RoundedDrawable(
+        val roundedDrawable = RoundedRectDrawable(
             backgroundColor = backgroundColor,
             radiusTopLeftPx = topLeftRadiusPx,
             radiusTopRightPx = topRightRadiusPx,

@@ -6,17 +6,15 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.levit.book_me.chat_kit.R
 import com.levit.book_me.chat_kit.databinding.ChatLayoutBinding
+import com.levit.bookme.chatkit.drawables.OvalDrawable
 import com.levit.bookme.chatkit.models.chat.ChatDateParser
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
-import com.levit.bookme.chatkit.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.drawables.RoundedRectDrawable
 import com.levit.bookme.chatkit.extensions.*
 import com.levit.bookme.chatkit.extensions.dpToPx
 import com.levit.bookme.chatkit.extensions.emptyChatModel
@@ -82,6 +80,7 @@ class ChatView @JvmOverloads constructor(
         applyInterlocutorProfileIconOptions(options)
         applyLastMessageDateOptions(options)
         applyLastMessageOptions(options)
+        applyNumberOfUnreadMessagesOptions(options)
     }
 
     private fun applyChatModel(model: ChatModel) {
@@ -90,6 +89,7 @@ class ChatView @JvmOverloads constructor(
         val lastMessageType = model.lastMessageFrom
         val dateOfLastMessage = model.dateOfLastMessage
         val profileUrl = model.interlocutorProfileImageUrl
+        val unReadMessagesCount = model.numberOfUnreadMessaged
 
         binding.interlocutorName.text = interlocutorName
         binding.lastMessageText.text = adaptLastMessage(lastMessage, lastMessageType)
@@ -98,6 +98,12 @@ class ChatView @JvmOverloads constructor(
             format = styleOptions.lastMessageDateFormat
         )
         imageLoader.load(profileUrl)
+        if (unReadMessagesCount <= 0) {
+            binding.unreadMessagesCount.isVisible = false
+        } else {
+            binding.unreadMessagesCount.isVisible = styleOptions.showNumberOfUnreadMessages
+            binding.unreadMessagesCount.text = unReadMessagesCount.toString()
+        }
     }
 
     private fun applyInterlocutorNameOptions(options: ChatStyleOptions)
@@ -218,7 +224,7 @@ class ChatView @JvmOverloads constructor(
 
     private fun applyGeneralOptions(options: ChatStyleOptions)
     = with(binding) {
-        val backgroundDrawable = RoundedDrawable(
+        val backgroundDrawable = RoundedRectDrawable(
             backgroundColor = options.backgroundColor,
             radiusTopLeftPx = dpToPx(options.backgroundTopLeftRadiusDp) ?: 0,
             radiusTopRightPx = dpToPx(options.backgroundTopRightRadiusDp) ?: 0,
@@ -227,6 +233,20 @@ class ChatView @JvmOverloads constructor(
         )
 
         binding.backgroundLayout.background = backgroundDrawable
+    }
+
+    private fun applyNumberOfUnreadMessagesOptions(options: ChatStyleOptions)
+    = with(binding) {
+        val ovalDrawable = OvalDrawable(
+            backgroundColor = options.unReadChatMessagesBackgroundColor,
+            strokeColor = options.unReadChatMessagesStrokeColor,
+            stokeWidthPx = dpToPx(options.unReadChatMessagesStrokeWidthDp) ?: 0
+        )
+
+        binding.unreadMessagesCount.setTextSizeSp(options.unReadChatMessagesTextSizeSp)
+        binding.unreadMessagesCount.setTextColor(options.unReadChatMessagesTextColor)
+        binding.unreadMessagesCount.isVisible = options.showNumberOfUnreadMessages
+        binding.unreadMessagesCount.background = ovalDrawable
     }
 
     private fun adaptLastMessage(lastMessage: String?, from: ChatLastMessageFrom): String {

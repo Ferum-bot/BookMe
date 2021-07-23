@@ -39,4 +39,9 @@ interface ChatModel {
      * The date of the last message.
      */
     val dateOfLastMessage: Date?
+
+    /**
+     * Indicates the count of unread messages in current chat.
+     */
+    val numberOfUnreadMessaged: Int
 }

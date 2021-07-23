@@ -1,13 +1,12 @@
 package com.levit.bookme.chatkit.ui.message_input
 
 import android.content.Context
-import android.graphics.drawable.ShapeDrawable
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import com.levit.book_me.chat_kit.R
 import com.levit.book_me.chat_kit.databinding.MessageInputLayoutBinding
-import com.levit.bookme.chatkit.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.drawables.RoundedRectDrawable
 import com.levit.bookme.chatkit.extensions.*
 import com.levit.bookme.chatkit.extensions.dpToPx
 import com.levit.bookme.chatkit.extensions.getEmptyMessageInputModel
@@ -84,7 +83,7 @@ class MessageInputView @JvmOverloads constructor(
     }
 
     private fun applyInputEditTextOptions(options: MessageInputStyleOptions) = with(binding) {
-        val backgroundDrawable = RoundedDrawable(
+        val backgroundDrawable = RoundedRectDrawable(
             backgroundColor = options.textInputBackgroundColor,
             strokeColor = options.textInputBackgroundStrokeColor,
             strokeWidthPx = dpToPx(options.textInputBackgroundStrokeWidthDp) ?: 0,
@@ -122,7 +121,7 @@ class MessageInputView @JvmOverloads constructor(
     }
 
     private fun appleGeneralOptions(options: MessageInputStyleOptions) = with(binding) {
-        val backgroundDrawable = RoundedDrawable(
+        val backgroundDrawable = RoundedRectDrawable(
             backgroundColor = options.layoutBackgroundColor,
             strokeColor = options.layoutBackgroundStrokeColor,
             strokeWidthPx = dpToPx(options.layoutBackgroundStrokeWidthDp) ?: 0,
