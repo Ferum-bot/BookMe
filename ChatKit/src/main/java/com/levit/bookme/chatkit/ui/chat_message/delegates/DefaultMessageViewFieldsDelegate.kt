@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.ui.chat_message.delegates
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -57,7 +58,7 @@ internal class DefaultMessageViewFieldsDelegate(
     }
 
     override fun applyOptionsToDateLabel(
-        layout: ConstraintLayout, dateView: TextView, options: MessageStyleOptions
+        layout: ConstraintLayout, dateView: TextView, statusView: ImageView?, options: MessageStyleOptions
     ) {
         dateView.setTextColor(options.dateColor)
         dateView.setTextSizeSp(options.dateLabelSizeSP)
@@ -71,7 +72,7 @@ internal class DefaultMessageViewFieldsDelegate(
 
         when(options.dateLabelAlignment) {
             MessageTextAlignment.START -> alignDateLabelToStart(layout, dateView)
-            MessageTextAlignment.END -> alignDateLabelToEnd(layout, dateView)
+            MessageTextAlignment.END -> alignDateLabelToEnd(layout, dateView, statusView)
         }
     }
 
@@ -130,14 +131,21 @@ internal class DefaultMessageViewFieldsDelegate(
         constraintSet.applyTo(layout)
     }
 
-    private fun alignDateLabelToEnd(layout: ConstraintLayout, dateView: TextView) {
+    private fun alignDateLabelToEnd(
+        layout: ConstraintLayout, dateView: TextView, statusView: ImageView?,
+    ) {
         val layoutId = layout.id
         val dateId = dateView.id
         val constraintSet = ConstraintSet().apply {
             clone(layout)
         }
 
-        constraintSet.connect(dateId, ConstraintSet.END, layoutId, ConstraintSet.END)
+        if (statusView == null) {
+            constraintSet.connect(dateId, ConstraintSet.END, layoutId, ConstraintSet.END)
+        } else {
+            val statusId = statusView.id
+            constraintSet.connect(dateId, ConstraintSet.END, statusId, ConstraintSet.START)
+        }
         constraintSet.connect(dateId, ConstraintSet.BOTTOM, layoutId, ConstraintSet.BOTTOM)
         constraintSet.applyTo(layout)
     }

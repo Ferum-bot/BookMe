@@ -77,10 +77,25 @@
                                 style="@style/YourMessageDateTextStyle"
 
                                 app:layout_constraintTop_toBottomOf="@id/text"
-                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/message_status"
                                 app:layout_constraintBottom_toBottomOf="parent"
 
                                 tools:text="11:24"/>
+
+                        <ImageView
+                                android:id="@+id/message_status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/message_status"
+                                android:src="@drawable/ic_tick"
+
+                                android:layout_marginEnd="4dp"
+                                android:layout_marginBottom="4dp"
+
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+
+                                tools:src="@drawable/ic_error_tick"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

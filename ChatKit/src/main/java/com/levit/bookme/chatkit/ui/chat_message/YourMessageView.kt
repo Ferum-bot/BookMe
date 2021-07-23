@@ -1,14 +1,18 @@
 package com.levit.bookme.chatkit.ui.chat_message
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.view.isVisible
+import com.levit.book_me.chat_kit.R
 import com.levit.book_me.chat_kit.databinding.YourChatMessageLayoutBinding
 import com.levit.bookme.chatkit.extensions.dpToPx
 import com.levit.bookme.chatkit.models.chat_messages.MessageDateParser
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.chat_messages.MessageModel
+import com.levit.bookme.chatkit.models.enums.MessageStatus
 import com.levit.bookme.chatkit.models.utills.RemoteImageLoader
 import com.levit.bookme.chatkit.ui.chat_message.delegates.DefaultMessageViewFieldsDelegate
 import com.levit.bookme.chatkit.ui.chat_message.delegates.MessageViewFieldsDelegate
@@ -33,6 +37,8 @@ internal class YourMessageView @JvmOverloads constructor(
 
     private val fieldsDelegate: MessageViewFieldsDelegate
 
+    private var statusAnimator: ObjectAnimator? = null
+
     init {
         binding = YourChatMessageLayoutBinding.inflate(inflater, this, true)
 
@@ -56,11 +62,13 @@ internal class YourMessageView @JvmOverloads constructor(
         val text = model.text
         val date = MessageDateParser.parseDateWithFormat(model.date, styleOptions.dateShowFormat)
         val profileUrl = model.authorImageUrlLink
+        val status = model.messageStatus
 
         binding.authorLabel.text = author
         binding.text.text = text
         binding.dateLabel.text = date
         profileImageLoader.load(profileUrl)
+        configureMessageStatus(status)
     }
 
     override fun setAllClickListeners() {
@@ -90,6 +98,29 @@ internal class YourMessageView @JvmOverloads constructor(
 
         binding.authorLabel.setOnClickListener {
             listener?.onAuthorNameClicked(messageModel)
+        }
+
+        binding.messageStatus.setOnClickListener {
+            listener?.onMessageStatusClicked(messageModel)
+        }
+    }
+
+    private fun configureMessageStatus(status: MessageStatus) = when(status) {
+        MessageStatus.SENDING -> {
+            binding.messageStatus.setImageResource(R.drawable.ic_loading_tick)
+            startAnimatingStatus()
+        }
+        MessageStatus.SENT -> {
+            stopAnimatingStatus()
+            binding.messageStatus.setImageResource(R.drawable.ic_tick)
+        }
+        MessageStatus.RECEIVED -> {
+            stopAnimatingStatus()
+            binding.messageStatus.setImageResource(R.drawable.ic_double_tick)
+        }
+        MessageStatus.ERROR -> {
+            stopAnimatingStatus()
+            binding.messageStatus.setImageResource(R.drawable.ic_error_tick)
         }
     }
 
@@ -132,6 +163,7 @@ internal class YourMessageView @JvmOverloads constructor(
         fieldsDelegate.applyOptionsToDateLabel(
             layout = messageLayout,
             dateView = dateLabel,
+            statusView = messageStatus,
             options
         )
     }
@@ -151,4 +183,18 @@ internal class YourMessageView @JvmOverloads constructor(
         )
     }
 
+    private fun startAnimatingStatus() {
+        val view = binding.messageStatus
+        statusAnimator = ObjectAnimator.ofFloat(view, "rotation", 180f, 0f)
+        statusAnimator?.apply {
+            duration = 500
+            repeatCount = ValueAnimator.INFINITE
+            setAutoCancel(true)
+            start()
+        }
+    }
+
+    private fun stopAnimatingStatus() {
+        statusAnimator?.pause()
+    }
 }
