@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.levit.book_me.R
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.databinding.QuoteLayoutItemBinding
 import kotlinx.android.synthetic.main.quote_layout_item.view.*
 
@@ -26,7 +26,7 @@ class QuoteItemView @JvmOverloads constructor(
         binding = QuoteLayoutItemBinding.inflate(inflater, this, true)
     }
 
-    fun setQuote(quote: GoQuote) = with(binding) {
+    fun setQuote(quote: QuoteModel) = with(binding) {
         text.text = quote.text
         author.text = quote.authorFullName
     }

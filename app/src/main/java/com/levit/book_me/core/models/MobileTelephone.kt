@@ -2,7 +2,8 @@ package com.levit.book_me.core.models
 
 import android.os.Parcelable
 import com.levit.book_me.core.enums.PhoneRegionCodes
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class MobileTelephone(

@@ -8,9 +8,5 @@ interface QuotesMainScreenInteractor {
 
     val screenModel: Flow<RetrofitResult<QuotesMainScreenModel>>
 
-    suspend fun getNumberOfTags()
-
-    suspend fun getNumberOfAuthors()
-
-    suspend fun getRandomQuotes()
+    suspend fun getMainScreenModel()
 }

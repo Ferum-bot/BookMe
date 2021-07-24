@@ -2,7 +2,8 @@ package com.levit.book_me.network.response_models.user
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 /**
  * This data class have temporary fields.

@@ -17,7 +17,7 @@ import extensions.kapt
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-android-extensions")
+    id("kotlin-parcelize")
     id("kotlin-kapt")
     //id("de.mannodermaus.android-junit5")
 }

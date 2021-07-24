@@ -4,7 +4,7 @@ import android.net.Uri
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.profile.ProfileModel
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.core.utill.FirebaseStorageReferences
 import com.levit.book_me.data_sources.firebase.FirebaseStorageUploadUriDataSource
 import com.levit.book_me.data_sources.profile.ProfileRemoteDataSourceFacade
@@ -42,7 +42,7 @@ class FirestoreDataSourceFacade @Inject constructor(
         baseDataSource.updateBaseInformation(name, surname, wordsAboutPerson)
     }
 
-    override suspend fun updateQuote(quote: GoQuote) {
+    override suspend fun updateQuote(quote: QuoteModel) {
         baseDataSource.updateQuote(quote)
     }
 

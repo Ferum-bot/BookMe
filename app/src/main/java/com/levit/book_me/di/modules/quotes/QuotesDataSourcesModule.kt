@@ -1,12 +1,12 @@
 package com.levit.book_me.di.modules.quotes
 
-import com.levit.book_me.data_sources.quotes.impl.GoQuotesAuthorDataSourceImpl
-import com.levit.book_me.data_sources.quotes.impl.GoQuotesQuoteDataSourceImpl
-import com.levit.book_me.data_sources.quotes.impl.GoQuotesTagDataSourceImpl
-import com.levit.book_me.data_sources.quotes.GoQuotesAuthorDataSource
-import com.levit.book_me.data_sources.quotes.GoQuotesQuoteDataSource
-import com.levit.book_me.data_sources.quotes.GoQuotesTagDataSource
-import com.levit.book_me.network.services.GoQuotesService
+import com.levit.book_me.data_sources.quotes.QuotesAuthorDataSource
+import com.levit.book_me.data_sources.quotes.QuotesQuoteDataSource
+import com.levit.book_me.data_sources.quotes.QuotesTagDataSource
+import com.levit.book_me.data_sources.quotes.impl.QuotesAuthorDataSourceImpl
+import com.levit.book_me.data_sources.quotes.impl.QuotesQuoteDataSourceImpl
+import com.levit.book_me.data_sources.quotes.impl.QuotesTagDataSourceImpl
+import com.levit.book_me.network.services.QuotesService
 import dagger.Module
 import dagger.Provides
 
@@ -14,17 +14,17 @@ import dagger.Provides
 class QuotesDataSourcesModule {
 
     @Provides
-    fun provideGoQuotesTagDataSource(service: GoQuotesService): GoQuotesTagDataSource {
-        return GoQuotesTagDataSourceImpl(service)
+    fun provideGoQuotesTagDataSource(service: QuotesService): QuotesTagDataSource {
+        return QuotesTagDataSourceImpl(service)
     }
 
     @Provides
-    fun provideGoQuotesAuthorDataSource(service: GoQuotesService): GoQuotesAuthorDataSource {
-        return GoQuotesAuthorDataSourceImpl(service)
+    fun provideGoQuotesAuthorDataSource(service: QuotesService): QuotesAuthorDataSource {
+        return QuotesAuthorDataSourceImpl(service)
     }
 
     @Provides
-    fun provideGoQuoteQuoteDataSource(service: GoQuotesService): GoQuotesQuoteDataSource {
-        return GoQuotesQuoteDataSourceImpl(service)
+    fun provideGoQuoteQuoteDataSource(service: QuotesService): QuotesQuoteDataSource {
+        return QuotesQuoteDataSourceImpl(service)
     }
 }

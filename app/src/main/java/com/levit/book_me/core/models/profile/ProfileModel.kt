@@ -3,10 +3,11 @@ package com.levit.book_me.core.models.profile
 import android.os.Parcelable
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.network.models.google_books.GoogleBook
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class ProfileModel(
@@ -36,13 +37,13 @@ data class ProfileModel(
     val wantToReadBooks: List<GoogleBook> = emptyList(),
 
     @Json(name = "")
-    val quote: GoQuote = GoQuote(),
+    val quote: QuoteModel = QuoteModel(),
 ): Parcelable {
 
     fun copyWithNew(
         name: String? = null, surname: String? = null, wordsAboutPerson: String? = null, profilePhotoUrl: String? = null,
         favouriteGenres: List<Genre>? = null, favouriteAuthors: List<Author>? = null, favouriteBooks: List<GoogleBook>? = null,
-        wantToReadBooks: List<GoogleBook>? = null, quote: GoQuote? = null,
+        wantToReadBooks: List<GoogleBook>? = null, quote: QuoteModel? = null,
     ): ProfileModel {
         val newName = name ?: this.name
         val newSurname = surname ?: this.surname

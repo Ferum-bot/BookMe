@@ -4,7 +4,8 @@ import android.os.Parcelable
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 import java.util.*
 
 @Parcelize

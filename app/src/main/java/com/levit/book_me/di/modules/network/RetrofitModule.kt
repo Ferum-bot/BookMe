@@ -40,7 +40,7 @@ open class RetrofitModule {
         .addCallAdapterFactory(callAdapterFactory)
         .addConverterFactory(converterFactory)
         .client(client)
-        .baseUrl(NetworkConstants.GO_QUOTES_API_BASE_URL)
+        .baseUrl(NetworkConstants.QUOTES_API_BASE_URL)
         .build()
 
 }

@@ -3,7 +3,7 @@ package com.levit.book_me.ui.fragments.quotes.authors_screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.core.models.quote.GoQuotesAuthor
+import com.levit.book_me.core.models.quote.QuoteAuthorModel
 import com.levit.book_me.interactors.quotes.QuotesAuthorsScreenInteractor
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
@@ -22,10 +22,10 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
     private val _currentStatus: MutableLiveData<Statuses> = MutableLiveData()
     val currentStatus: LiveData<Statuses> = _currentStatus
 
-    private val _authors: MutableLiveData<List<GoQuotesAuthor>> = MutableLiveData()
-    val authors: LiveData<List<GoQuotesAuthor>> = _authors
+    private val _authors: MutableLiveData<List<QuoteAuthorModel>> = MutableLiveData()
+    val authors: LiveData<List<QuoteAuthorModel>> = _authors
 
-    private val allAuthors: MutableList<GoQuotesAuthor> = mutableListOf()
+    private val allAuthors: MutableList<QuoteAuthorModel> = mutableListOf()
 
     init {
         viewModelScope.launch {
@@ -55,7 +55,7 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
         _authors.postValue(resultAuthors)
     }
 
-    private fun handleAuthorsResult(result: RetrofitResult<List<GoQuotesAuthor>>) = when(result) {
+    private fun handleAuthorsResult(result: RetrofitResult<List<QuoteAuthorModel>>) = when(result) {
         is RetrofitResult.Success -> {
             handleSuccessResult(result)
         }
@@ -64,7 +64,7 @@ class QuotesAuthorsScreenViewModel @Inject constructor(
         }
     }
 
-    private fun handleSuccessResult(result: RetrofitResult.Success<List<GoQuotesAuthor>>) {
+    private fun handleSuccessResult(result: RetrofitResult.Success<List<QuoteAuthorModel>>) {
         _currentStatus.postValue(Statuses.LOADED)
         val authorsList = result.data
         _authors.postValue(authorsList)

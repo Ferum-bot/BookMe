@@ -6,7 +6,7 @@ import com.levit.book_me.core.enums.CurrentUserStatus
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.profile.ProfileModel
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.data_sources.profile.CacheProfileDataSource
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -217,18 +217,18 @@ class SharedPrefProfileDataSource @Inject constructor(
         }
     }
 
-    private fun getQuote(): GoQuote {
+    private fun getQuote(): QuoteModel {
         val rawString = storage.getString(QUOTE_FIELD, null)
-            ?: return GoQuote()
+            ?: return QuoteModel()
         return try {
-            val result = gson.fromJson(rawString, GoQuote::class.java)
+            val result = gson.fromJson(rawString, QuoteModel::class.java)
             result
         } catch (ex: Exception) {
-            GoQuote()
+            QuoteModel()
         }
     }
 
-    private fun safeQuote(quote: GoQuote) {
+    private fun safeQuote(quote: QuoteModel) {
         val rawString = gson.toJson(quote).toString()
         with(storage.edit()) {
             putString(QUOTE_FIELD, rawString)

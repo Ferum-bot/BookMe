@@ -5,7 +5,8 @@ import com.levit.bookme.chatkit.models.chat_messages.MessageModel
 import com.levit.bookme.chatkit.models.enums.MessageStatus
 import com.levit.bookme.chatkit.models.enums.MessageType
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 import java.util.*
 
 @Parcelize

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.databinding.FragmentQuotesScreenBinding
 import com.levit.book_me.ui.base.QuotesBaseFragment
 import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator
@@ -51,7 +51,7 @@ class QuotesScreenFragment:
         searchQuotes()
     }
 
-    override fun onQuoteStatusChanged(status: QuotesAdapter.QuoteStatuses, quote: GoQuote) {
+    override fun onQuoteStatusChanged(status: QuotesAdapter.QuoteStatuses, quote: QuoteModel) {
         when(status) {
             QuotesAdapter.QuoteStatuses.CHOSEN -> {
                 binding.chooseButton.visibility = View.VISIBLE
@@ -146,7 +146,7 @@ class QuotesScreenFragment:
         findNavController().popBackStack()
     }
 
-    private fun safeQuoteToProfile(quote: GoQuote) {
+    private fun safeQuoteToProfile(quote: QuoteModel) {
         ProfileQuoteStorage.setQuote(quote)
     }
 

@@ -8,7 +8,7 @@ import com.levit.book_me.R
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.profile.ProfileModel
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.core_base.di.MainScreenScope
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.interactors.main_screen.UserProfileInteractor
@@ -97,7 +97,7 @@ class MainScreenUserProfileViewModel @Inject constructor(
         }
     }
 
-    fun updateQuote(quote: GoQuote) {
+    fun updateQuote(quote: QuoteModel) {
         _currentStatus.value = Status.LOADING
         needToShowSuccessMessage = true
         viewModelScope.launch {

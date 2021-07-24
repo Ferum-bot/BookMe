@@ -6,22 +6,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.levit.book_me.core.models.quote.GoQuotesTag
+import com.levit.book_me.core.models.quote.QuoteTagModel
 import com.levit.book_me.core.ui.custom_view.QuoteAuthorTagItemView
 
 class QuotesTagAdapter(
     private val listener: TagClickListener,
-): ListAdapter<GoQuotesTag, QuotesTagAdapter.TagViewHolder>(CALL_BACK) {
+): ListAdapter<QuoteTagModel, QuotesTagAdapter.TagViewHolder>(CALL_BACK) {
 
     companion object {
-        private val CALL_BACK = object: DiffUtil.ItemCallback<GoQuotesTag>() {
+        private val CALL_BACK = object: DiffUtil.ItemCallback<QuoteTagModel>() {
 
-            override fun areItemsTheSame(oldItem: GoQuotesTag, newItem: GoQuotesTag): Boolean {
+            override fun areItemsTheSame(oldItem: QuoteTagModel, newItem: QuoteTagModel): Boolean {
                 return oldItem.name.hashCode() == newItem.name.hashCode() &&
                         oldItem.numberOfQuotes == newItem.numberOfQuotes
             }
 
-            override fun areContentsTheSame(oldItem: GoQuotesTag, newItem: GoQuotesTag): Boolean {
+            override fun areContentsTheSame(oldItem: QuoteTagModel, newItem: QuoteTagModel): Boolean {
                 return oldItem == newItem
             }
         }
@@ -29,7 +29,7 @@ class QuotesTagAdapter(
 
     interface TagClickListener {
 
-        fun onTagClicked(tag: GoQuotesTag)
+        fun onTagClicked(tag: QuoteTagModel)
     }
 
     class TagViewHolder private constructor(
@@ -57,9 +57,9 @@ class QuotesTagAdapter(
             })
         }
 
-        private lateinit var currentTag: GoQuotesTag
+        private lateinit var currentTag: QuoteTagModel
 
-        fun bind(tag: GoQuotesTag) {
+        fun bind(tag: QuoteTagModel) {
             currentTag = tag
             view.setTag(tag)
         }

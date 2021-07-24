@@ -2,14 +2,19 @@ package com.levit.book_me.core.models.quote
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
-data class GoQuote(
+data class QuoteModel(
+
+    @Json(name = "id")
+    val id: Long = 0,
+
     @Json(name = "text")
     val text: String = "",
 
-    @Json(name = "author")
+    @Json(name = "authorFullName")
     val authorFullName: String = "",
 
     @Json(name = "tag")

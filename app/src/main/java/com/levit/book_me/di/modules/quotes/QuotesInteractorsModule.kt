@@ -8,9 +8,7 @@ import com.levit.book_me.interactors.quotes.QuotesAuthorsScreenInteractor
 import com.levit.book_me.interactors.quotes.QuotesMainScreenInteractor
 import com.levit.book_me.interactors.quotes.QuotesScreenInteractor
 import com.levit.book_me.interactors.quotes.QuotesTagsScreenInterator
-import com.levit.book_me.repositories.guotes.GoQuotesAuthorRepository
-import com.levit.book_me.repositories.guotes.GoQuotesQuoteRepository
-import com.levit.book_me.repositories.guotes.GoQuotesTagRepository
+import com.levit.book_me.repositories.guotes.QuotesRepository
 import dagger.Module
 import dagger.Provides
 
@@ -19,30 +17,28 @@ open class QuotesInteractorsModule {
 
     @Provides
     fun provideQuotesMainScreenInteractor(
-        tagsRepository: GoQuotesTagRepository,
-        authorsRepository: GoQuotesAuthorRepository,
-        quotesRepository: GoQuotesQuoteRepository
+        repository: QuotesRepository
     ): QuotesMainScreenInteractor {
-        return QuotesMainScreenInteractorImpl(tagsRepository, authorsRepository, quotesRepository)
+        return QuotesMainScreenInteractorImpl(repository)
     }
 
     @Provides
     fun provideQuotesScreenInteractor(
-        repository: GoQuotesQuoteRepository,
+        repository: QuotesRepository
     ): QuotesScreenInteractor {
         return QuotesScreenInteractorImpl(repository)
     }
 
     @Provides
     fun provideQuotesAuthorsScreenInterator(
-        repository: GoQuotesAuthorRepository,
+        repository: QuotesRepository
     ): QuotesAuthorsScreenInteractor {
         return QuotesAuthorsScreenInteractorImpl(repository)
     }
 
     @Provides
     fun provideQuotesTagsScreenInteractor(
-        repository: GoQuotesTagRepository,
+        repository: QuotesRepository
     ): QuotesTagsScreenInterator {
         return QuotesTagsScreenInteratorImpl(repository)
     }
