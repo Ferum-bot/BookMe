@@ -240,7 +240,7 @@ class ChatView @JvmOverloads constructor(
         val ovalDrawable = OvalDrawable(
             backgroundColor = options.unReadChatMessagesBackgroundColor,
             strokeColor = options.unReadChatMessagesStrokeColor,
-            stokeWidthPx = dpToPx(options.unReadChatMessagesStrokeWidthDp) ?: 0
+            strokeWidthPx = dpToPx(options.unReadChatMessagesStrokeWidthDp) ?: 0
         )
 
         binding.unreadMessagesCount.setTextSizeSp(options.unReadChatMessagesTextSizeSp)

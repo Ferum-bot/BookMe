@@ -61,5 +61,8 @@ data class UserChat(
         } else {
             ChatLastMessageFrom.MESSAGE_FROM_INTERLOCUTOR
         }
+
+    override val numberOfUnreadMessaged: Int
+        get() = numberOfUnReadMessages
 }
 

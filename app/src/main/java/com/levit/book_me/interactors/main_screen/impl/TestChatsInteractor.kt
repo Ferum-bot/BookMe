@@ -25,7 +25,7 @@ class TestChatsInteractor: ChatsInteractor {
     = flow {
         delay(3000L)
         val resultList = listOf(
-            UserChat(0, 0, "Matvey Popov", imagesUrls[0], "Hello!", 1626032030284L, true, 0),
+            UserChat(0, 0, "Matvey Popov", imagesUrls[0], "Hello!", 1626032030284L, true, 6),
             UserChat(1, 1, "Bob Martin", imagesUrls[1], "WHO ARE YOU??", 1626022030284L, false, 0),
             UserChat(2, 2, "Bill Gates", imagesUrls[2], "It is really you?", 1626021030284L, true, 0),
             UserChat(3, 3, "Robert Junior", imagesUrls[3], "good bye", 1626021000284L, false, 0),

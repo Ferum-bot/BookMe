@@ -13,5 +13,6 @@ internal fun ChatView.emptyChatModel(): ChatModel {
         override val lastMessage: String? = null
         override val lastMessageFrom: ChatLastMessageFrom = ChatLastMessageFrom.MESSAGE_FROM_YOU
         override val dateOfLastMessage: Date? = null
+        override val numberOfUnreadMessaged: Int = 0
     }
 }

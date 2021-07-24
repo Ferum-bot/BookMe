@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.models.chat_messages
 
+import com.levit.bookme.chatkit.models.enums.MessageStatus
 import com.levit.bookme.chatkit.models.enums.MessageType
 import java.util.*
 
@@ -25,6 +26,8 @@ internal data class YourMessageModel(
     override val type: MessageType
     get() = messageModel.type
 
+    override val messageStatus: MessageStatus
+    get() = messageModel.messageStatus
 }
 
 internal data class InterlocutorMessageModel(
@@ -49,4 +52,6 @@ internal data class InterlocutorMessageModel(
     override val type: MessageType
     get() = messageModel.type
 
+    override val messageStatus: MessageStatus
+    get() = messageModel.messageStatus
 }
