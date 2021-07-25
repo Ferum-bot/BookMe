@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.levit.book_me.R
 import com.levit.book_me.core.utill.AssetsImageLoader
-import com.levit.book_me.core.enums.ImageFormats
+import com.levit.book_me.core.enums.util.ImageFormats
 import com.levit.book_me.databinding.FragmentOnboardingBinding
 
 class OnBoardingViewPagerAdapter: RecyclerView.Adapter<OnBoardingViewPagerAdapter.OnBoardingViewPagerVH>(){

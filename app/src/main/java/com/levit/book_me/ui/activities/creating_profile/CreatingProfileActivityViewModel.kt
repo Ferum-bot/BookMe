@@ -3,7 +3,7 @@ package com.levit.book_me.ui.activities.creating_profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.core.enums.SearchBooksTypes
+import com.levit.book_me.core.enums.books.SearchBooksTypes
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.profile.ProfileModel

@@ -36,6 +36,8 @@ data class Message(
     @Json(name = "messageDateMillis")
     val messageDate: Long,
 
+    @Json(name = "messageStatus")
+    val currentStatus: String,
 ): MessageModel, Parcelable {
 
     override val id: Long

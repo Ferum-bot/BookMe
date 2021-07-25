@@ -3,14 +3,10 @@ package com.levit.book_me.ui.activities.onboarding
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.levit.book_me.R
 import com.levit.book_me.databinding.ActivitySplashOnboardingBinding
-import com.levit.book_me.application.BookMeApplication
-import com.levit.book_me.core.enums.CurrentUserStatus
+import com.levit.book_me.core.enums.profile.CurrentUserStatus
 import com.levit.book_me.di.components.OnBoardingComponent
 import com.levit.book_me.ui.activities.authorization.AuthorizationActivity
 import com.levit.book_me.ui.activities.creating_profile.CreatingProfileActivity

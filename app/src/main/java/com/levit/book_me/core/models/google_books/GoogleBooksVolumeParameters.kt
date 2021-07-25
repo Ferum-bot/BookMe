@@ -1,8 +1,8 @@
 package com.levit.book_me.core.models.google_books
 
-import com.levit.book_me.core.enums.GoogleBooksPrintTypes
-import com.levit.book_me.core.enums.GoogleBooksSearchTypes
-import com.levit.book_me.core.enums.GoogleBooksSortTypes
+import com.levit.book_me.core.enums.books.GoogleBooksPrintTypes
+import com.levit.book_me.core.enums.books.GoogleBooksSearchTypes
+import com.levit.book_me.core.enums.books.GoogleBooksSortTypes
 import com.levit.book_me.network.utill.NetworkConstants
 
 data class GoogleBooksVolumeParameters(

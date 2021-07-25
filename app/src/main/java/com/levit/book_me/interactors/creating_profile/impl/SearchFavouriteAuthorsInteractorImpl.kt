@@ -1,6 +1,6 @@
 package com.levit.book_me.interactors.creating_profile.impl
 
-import com.levit.book_me.core.enums.GoogleBooksSearchTypes
+import com.levit.book_me.core.enums.books.GoogleBooksSearchTypes
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.google_books.GoogleBooksVolumeParameters
 import com.levit.book_me.core_base.di.SearchFavouriteAuthorsScope

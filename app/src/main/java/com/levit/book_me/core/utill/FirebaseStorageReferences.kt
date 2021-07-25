@@ -5,7 +5,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import com.levit.book_me.core.enums.ImageFormats
+import com.levit.book_me.core.enums.util.ImageFormats
 import java.io.File
 
 object FirebaseStorageReferences {

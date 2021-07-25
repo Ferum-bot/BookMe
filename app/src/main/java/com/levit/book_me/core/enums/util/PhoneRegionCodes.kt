@@ -1,4 +1,4 @@
-package com.levit.book_me.core.enums
+package com.levit.book_me.core.enums.util
 
 enum class PhoneRegionCodes(val designation: String, val code: String) {
     RUSSIA("RU", "+7"),

@@ -1,4 +1,4 @@
-package com.levit.book_me.core.enums
+package com.levit.book_me.core.enums.books
 
 enum class GoogleBooksSearchTypes(val queryName: String) {
     SEARCH_IN_TITLE("intitle:"),

@@ -2,7 +2,7 @@ package com.levit.book_me.data_sources.profile.impl
 
 import android.content.SharedPreferences
 import com.google.gson.Gson
-import com.levit.book_me.core.enums.CurrentUserStatus
+import com.levit.book_me.core.enums.profile.CurrentUserStatus
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.profile.ProfileModel

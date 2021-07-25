@@ -1,4 +1,4 @@
-package com.levit.book_me.core.enums
+package com.levit.book_me.core.enums.profile
 
 /**
  * This enum class shows current app status.
