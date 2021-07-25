@@ -243,10 +243,14 @@ class ChatView @JvmOverloads constructor(
             strokeWidthPx = dpToPx(options.unReadChatMessagesStrokeWidthDp) ?: 0
         )
 
-        binding.unreadMessagesCount.setTextSizeSp(options.unReadChatMessagesTextSizeSp)
-        binding.unreadMessagesCount.setTextColor(options.unReadChatMessagesTextColor)
-        binding.unreadMessagesCount.isVisible = options.showNumberOfUnreadMessages
-        binding.unreadMessagesCount.background = ovalDrawable
+        unreadMessagesCount.setTextSizeSp(options.unReadChatMessagesTextSizeSp)
+        unreadMessagesCount.setTextColor(options.unReadChatMessagesTextColor)
+        unreadMessagesCount.isVisible = options.showNumberOfUnreadMessages
+        unreadMessagesCount.background = ovalDrawable
+
+        if (chatModel.numberOfUnreadMessaged <= 0) {
+            unreadMessagesCount.isVisible = false
+        }
     }
 
     private fun adaptLastMessage(lastMessage: String?, from: ChatLastMessageFrom): String {

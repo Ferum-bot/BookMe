@@ -14,7 +14,12 @@ internal class OvalDrawable(
     private val strokeColor: Int = Color.GRAY,
 
     @Dimension(unit = Dimension.PX)
-    private val strokeWidthPx: Int = 0
+    private val strokeWidthPx: Int = 0,
+
+    @Dimension(unit = Dimension.PX)
+    private val horizontalMarginPx: Int = 5,
+    @Dimension(unit = Dimension.PX)
+    private val verticalMarginPx: Int = 0,
 ): Drawable() {
 
     private val fillPaint = Paint().apply {
@@ -31,10 +36,10 @@ internal class OvalDrawable(
     }
 
     override fun draw(canvas: Canvas) {
-        val left = bounds.left
-        val top = bounds.top
-        val right = bounds.right
-        val bottom = bounds.bottom
+        val left = bounds.left + horizontalMarginPx
+        val top = bounds.top + verticalMarginPx
+        val right = bounds.right - horizontalMarginPx
+        val bottom = bounds.bottom - verticalMarginPx
 
         val path = getOvalPath(left, top, right, bottom)
 
