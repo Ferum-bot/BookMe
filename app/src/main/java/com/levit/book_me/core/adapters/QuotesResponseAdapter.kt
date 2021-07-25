@@ -1,8 +1,9 @@
 package com.levit.book_me.core.adapters
 
+import android.os.Parcelable
 import com.levit.book_me.network.network_result_data.RetrofitResult
-import com.levit.book_me.network.response_models.go_quotes.QuotesErrorResponse
-import com.levit.book_me.network.response_models.go_quotes.QuotesResponse
+import com.levit.book_me.network.response_models.quotes.QuotesErrorResponse
+import com.levit.book_me.network.response_models.quotes.QuotesResponse
 import kotlinx.coroutines.flow.FlowCollector
 
 object QuotesResponseAdapter {
@@ -18,13 +19,13 @@ object QuotesResponseAdapter {
         val response = rawResponse.data
 
         if (response.data != null) {
-            val adaptedResult = adaptData(response.data)
+            val adaptedResult = adaptData(response.data!!)
             collector.emit(adaptedResult)
             return
         }
 
         if (response.error != null) {
-            val adaptedResult = adaptError(response.error)
+            val adaptedResult = adaptError(response.error!!)
             collector.emit(adaptedResult)
             return
         }

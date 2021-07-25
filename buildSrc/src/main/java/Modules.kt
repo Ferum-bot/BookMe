@@ -3,6 +3,7 @@ enum class Application(val path: String) {
 }
 
 enum class Feature(val path: String) {
+    KAPT_FREE(":KaptFree")
 }
 
 enum class Domain(val path: String) {

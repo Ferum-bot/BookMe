@@ -8,12 +8,12 @@ class QuotesInterceptor: Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        request.newBuilder()
+        val newRequest = request.newBuilder()
             .addHeader(NetworkConstants.QUOTES_SECRET_KEY_NAME, NetworkConstants.QUOTES_SECRET_KEY_VALUE)
             .addHeader(NetworkConstants.PLATFORM_HEADER_NAME, NetworkConstants.PLATFORM_HEADER_VALUE)
             .build()
 
-        return chain.proceed(request)
+        return chain.proceed(newRequest)
     }
 
 }

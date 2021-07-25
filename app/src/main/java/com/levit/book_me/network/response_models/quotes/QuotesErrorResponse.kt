@@ -1,4 +1,4 @@
-package com.levit.book_me.network.response_models.go_quotes
+package com.levit.book_me.network.response_models.quotes
 
 import android.os.Parcelable
 import com.squareup.moshi.Json
