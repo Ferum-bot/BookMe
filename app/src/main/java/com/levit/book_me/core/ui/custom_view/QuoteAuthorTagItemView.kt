@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.levit.book_me.core.models.quote.GoQuotesAuthor
-import com.levit.book_me.core.models.quote.GoQuotesTag
+import com.levit.book_me.core.models.quote.QuoteAuthorModel
+import com.levit.book_me.core.models.quote.QuoteTagModel
 import com.levit.book_me.databinding.QuoteAuthorTagItemLayoutBinding
 
 class QuoteAuthorTagItemView @JvmOverloads constructor(
@@ -23,13 +23,13 @@ class QuoteAuthorTagItemView @JvmOverloads constructor(
         binding = QuoteAuthorTagItemLayoutBinding.inflate(inflater, this, true)
     }
 
-    fun setAuthor(author: GoQuotesAuthor) {
+    fun setAuthor(author: QuoteAuthorModel) {
         val count = author.numberOfQuotes
         val resultString = "${author.fullName} ($count)"
         binding.authorTagLabel.text = resultString
     }
 
-    fun setTag(tag: GoQuotesTag) {
+    fun setTag(tag: QuoteTagModel) {
         val count = tag.numberOfQuotes
         val resultString = "${tag.name} ($count)"
         binding.authorTagLabel.text = resultString

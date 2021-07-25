@@ -4,7 +4,7 @@ import android.os.Parcelable
 import com.levit.book_me.roundcloudsview.core.enums.RoundCloudSize
 import com.levit.book_me.roundcloudsview.core.models.RoundCloud
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Genre(

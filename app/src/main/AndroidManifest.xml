@@ -17,7 +17,6 @@
 
         <activity
             android:name=".ui.activities.onboarding.OnBoardingActivity"
-            android:exported="false"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:screenOrientation="portrait"
             android:theme="@style/DefaultAppTheme.Launcher">

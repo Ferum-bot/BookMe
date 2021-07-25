@@ -2,9 +2,11 @@ package com.levit.book_me.core.models.chat_kit
 
 import android.os.Parcelable
 import com.levit.bookme.chatkit.models.chat_messages.MessageModel
+import com.levit.bookme.chatkit.models.enums.MessageStatus
 import com.levit.bookme.chatkit.models.enums.MessageType
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 import java.util.*
 
 @Parcelize
@@ -34,6 +36,8 @@ data class Message(
     @Json(name = "messageDateMillis")
     val messageDate: Long,
 
+    @Json(name = "messageStatus")
+    val currentStatus: String,
 ): MessageModel, Parcelable {
 
     override val id: Long
@@ -58,4 +62,6 @@ data class Message(
             MessageType.INTERLOCUTOR_MESSAGE
         }
 
+    override val messageStatus: MessageStatus
+        get() = MessageStatus.SENDING
 }

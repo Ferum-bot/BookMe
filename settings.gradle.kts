@@ -11,5 +11,6 @@ include(":BoxProgressBar")
 include(":NestedScrollableHost")
 include(":ChatKit")
 include(":UIKit")
+include(":KaptFree")
 rootProject.name = "BookMe"
 rootProject.buildFileName = "build.gradle.kts"

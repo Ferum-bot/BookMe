@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.ui.chat_message.delegates
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
@@ -14,14 +15,24 @@ import de.hdodenhof.circleimageview.CircleImageView
  */
 internal interface MessageViewFieldsDelegate {
 
-    fun applyOptionsToAuthorLabel(layout: ConstraintLayout, authorView: TextView, options: MessageStyleOptions)
+    fun applyOptionsToAuthorLabel(
+        layout: ConstraintLayout, authorView: TextView, options: MessageStyleOptions
+    )
 
-    fun applyOptionsToMessageText(layout: ConstraintLayout, textView: TextView, options: MessageStyleOptions)
+    fun applyOptionsToMessageText(
+        layout: ConstraintLayout, textView: TextView, options: MessageStyleOptions
+    )
 
-    fun applyOptionsToDateLabel(layout: ConstraintLayout, dateView: TextView, options: MessageStyleOptions)
+    fun applyOptionsToDateLabel(
+        layout: ConstraintLayout, dateView: TextView, statusView: ImageView?, options: MessageStyleOptions
+    )
 
-    fun applyOptionsToProfileIcon(layout: ConstraintLayout, profileView: CircleImageView, options: MessageStyleOptions)
+    fun applyOptionsToProfileIcon(
+        layout: ConstraintLayout, profileView: CircleImageView, options: MessageStyleOptions
+    )
 
-    fun applyOptionsToMessageLayout(layout: ConstraintLayout, options: MessageStyleOptions)
+    fun applyOptionsToMessageLayout(
+        layout: ConstraintLayout, options: MessageStyleOptions
+    )
 
 }

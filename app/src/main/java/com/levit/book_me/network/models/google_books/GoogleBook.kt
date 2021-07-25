@@ -3,7 +3,8 @@ package com.levit.book_me.network.models.google_books
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.IgnoredOnParcel
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 
 @Parcelize
 data class GoogleBook(

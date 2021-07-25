@@ -5,24 +5,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.core.ui.custom_view.QuoteItemView
 import timber.log.Timber
 
 class QuotesAdapter(
     private val listener: QuoteStatusListener?
-): ListAdapter<GoQuote, QuotesAdapter.QuoteViewHolder>(CALL_BACK) {
+): ListAdapter<QuoteModel, QuotesAdapter.QuoteViewHolder>(CALL_BACK) {
 
     companion object {
-        private val CALL_BACK = object: DiffUtil.ItemCallback<GoQuote>() {
+        private val CALL_BACK = object: DiffUtil.ItemCallback<QuoteModel>() {
 
-            override fun areItemsTheSame(oldItem: GoQuote, newItem: GoQuote): Boolean {
-                return oldItem.authorFullName.hashCode() == newItem.authorFullName.hashCode()
-                        && oldItem.tag.hashCode() == newItem.tag.hashCode()
-                        && oldItem.text.hashCode() == newItem.text.hashCode()
+            override fun areItemsTheSame(oldItem: QuoteModel, newItem: QuoteModel): Boolean {
+                return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: GoQuote, newItem: GoQuote): Boolean {
+            override fun areContentsTheSame(oldItem: QuoteModel, newItem: QuoteModel): Boolean {
                 return oldItem == newItem
             }
         }
@@ -43,7 +41,7 @@ class QuotesAdapter(
 
     interface QuoteStatusListener {
 
-        fun onQuoteStatusChanged(status: QuoteStatuses, quote: GoQuote)
+        fun onQuoteStatusChanged(status: QuoteStatuses, quote: QuoteModel)
     }
 
     class QuoteViewHolder private constructor(
@@ -69,7 +67,7 @@ class QuotesAdapter(
 
         private var currentStatus = QuoteStatuses.NOT_CHOSEN
 
-        private lateinit var quote: GoQuote
+        private lateinit var quote: QuoteModel
 
         init {
             view.setOnClickListener {
@@ -92,7 +90,7 @@ class QuotesAdapter(
             }
         }
 
-        fun bind(quote: GoQuote) {
+        fun bind(quote: QuoteModel) {
             this.quote = quote
             view.setQuote(quote)
             view.setChosen(quote.isChosen)

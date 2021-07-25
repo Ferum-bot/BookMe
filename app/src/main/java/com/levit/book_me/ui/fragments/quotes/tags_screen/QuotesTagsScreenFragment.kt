@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.models.quote.GoQuotesTag
-import com.levit.book_me.core.models.GoQuotesTypes
+import com.levit.book_me.core.models.quote.QuoteTagModel
+import com.levit.book_me.core.models.quote.QuotesTypes
 import com.levit.book_me.databinding.FragmentQuotesTagsScreenBinding
 import com.levit.book_me.ui.base.QuotesBaseFragment
 import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator
@@ -46,7 +46,7 @@ class QuotesTagsScreenFragment:
         setAllObservers()
     }
 
-    override fun onTagClicked(tag: GoQuotesTag) {
+    override fun onTagClicked(tag: QuoteTagModel) {
         navigateToQuotesScreen(tag)
     }
 
@@ -109,10 +109,10 @@ class QuotesTagsScreenFragment:
         })
     }
 
-    private fun navigateToQuotesScreen(tag: GoQuotesTag) {
+    private fun navigateToQuotesScreen(tag: QuoteTagModel) {
         val action = QuotesTagsScreenFragmentDirections
             .actionQuotesTagsScreenFragmentToQuotesScreenFragment(
-                type = GoQuotesTypes.TAG,
+                type = QuotesTypes.TAG,
                 querySearch = tag.name,
             )
         findNavController().navigate(action)

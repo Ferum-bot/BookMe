@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.work.*
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.levit.book_me.core.enums.FirebaseMessageType
-import com.levit.book_me.core.extensions.appComponent
+import com.levit.book_me.core.enums.firebase.FirebaseMessageType
 import com.levit.book_me.core.models.NotificationModel
 import com.levit.book_me.core.utill.NotificationsUtil
 import com.levit.book_me.core.utill.WorkManagerUtil

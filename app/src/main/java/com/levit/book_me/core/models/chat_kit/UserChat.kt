@@ -4,7 +4,8 @@ import android.os.Parcelable
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.enums.ChatLastMessageFrom
 import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+
 import java.util.*
 
 @Parcelize
@@ -61,5 +62,8 @@ data class UserChat(
         } else {
             ChatLastMessageFrom.MESSAGE_FROM_INTERLOCUTOR
         }
+
+    override val numberOfUnreadMessaged: Int
+        get() = numberOfUnReadMessages
 }
 

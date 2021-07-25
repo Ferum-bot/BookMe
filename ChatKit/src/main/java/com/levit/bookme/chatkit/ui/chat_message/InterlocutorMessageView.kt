@@ -44,7 +44,11 @@ internal class InterlocutorMessageView @JvmOverloads constructor(
     }
 
     override fun applyStyleOptions(options: MessageStyleOptions) {
-
+        configureAuthorLabel(options)
+        configureDateLabel(options)
+        configureGeneralView(options)
+        configureProfileIcon(options)
+        configureText(options)
     }
 
     override fun applyMessageModel(model: MessageModel) {
@@ -122,7 +126,7 @@ internal class InterlocutorMessageView @JvmOverloads constructor(
         fieldsDelegate.applyOptionsToDateLabel(
             layout = messageLayout,
             dateView = dateLabel,
-            options
+            null, options,
         )
     }
 

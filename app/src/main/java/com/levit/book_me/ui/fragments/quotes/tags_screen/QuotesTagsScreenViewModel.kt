@@ -3,7 +3,7 @@ package com.levit.book_me.ui.fragments.quotes.tags_screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.core.models.quote.GoQuotesTag
+import com.levit.book_me.core.models.quote.QuoteTagModel
 import com.levit.book_me.interactors.quotes.QuotesTagsScreenInterator
 import com.levit.book_me.network.network_result_data.RetrofitResult
 import com.levit.book_me.ui.base.BaseViewModel
@@ -22,8 +22,8 @@ class QuotesTagsScreenViewModel @Inject constructor(
     private val _currentStatus: MutableLiveData<Statuses> = MutableLiveData()
     val currentStatus: LiveData<Statuses> = _currentStatus
 
-    private val _tags: MutableLiveData<List<GoQuotesTag>> = MutableLiveData()
-    val tags: LiveData<List<GoQuotesTag>> = _tags
+    private val _tags: MutableLiveData<List<QuoteTagModel>> = MutableLiveData()
+    val tags: LiveData<List<QuoteTagModel>> = _tags
 
     init {
         _currentStatus.postValue(Statuses.LOADING)
@@ -43,7 +43,7 @@ class QuotesTagsScreenViewModel @Inject constructor(
         }
     }
 
-    private fun handleTagsResult(result: RetrofitResult<List<GoQuotesTag>>) = when (result) {
+    private fun handleTagsResult(result: RetrofitResult<List<QuoteTagModel>>) = when (result) {
         is RetrofitResult.Success -> {
             handleSuccessResult(result)
         }
@@ -57,7 +57,7 @@ class QuotesTagsScreenViewModel @Inject constructor(
         super.handleErrorResult(error)
     }
 
-    private fun handleSuccessResult(result: RetrofitResult.Success<List<GoQuotesTag>>) {
+    private fun handleSuccessResult(result: RetrofitResult.Success<List<QuoteTagModel>>) {
         _currentStatus.postValue(Statuses.LOADED)
         val tagsList = result.data
         _tags.postValue(tagsList)

@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.core.ui.custom_view.QuoteTypeChooseView
 import com.levit.book_me.databinding.FragmentQuotesMainScreenBinding
 import com.levit.book_me.ui.base.QuotesBaseFragment
@@ -51,7 +51,7 @@ class QuotesMainScreenFragment:
         quotesComponent.inject(this)
     }
 
-    override fun onQuoteStatusChanged(status: QuotesAdapter.QuoteStatuses, quote: GoQuote) {
+    override fun onQuoteStatusChanged(status: QuotesAdapter.QuoteStatuses, quote: QuoteModel) {
         when(status) {
             QuotesAdapter.QuoteStatuses.CHOSEN -> {
                 binding.chooseButton.visibility = View.VISIBLE
@@ -177,7 +177,7 @@ class QuotesMainScreenFragment:
         findNavController().popBackStack()
     }
 
-    private fun safeQuoteToProfile(quote: GoQuote) {
+    private fun safeQuoteToProfile(quote: QuoteModel) {
         ProfileQuoteStorage.setQuote(quote)
     }
 

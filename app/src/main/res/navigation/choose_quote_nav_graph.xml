@@ -60,7 +60,7 @@
         android:label="QuotesScreenFragment" >
         <argument
             android:name="type"
-            app:argType="com.levit.book_me.core.models.GoQuotesTypes"
+            app:argType="com.levit.book_me.core.models.quote.QuotesTypes"
             android:defaultValue="TAG" />
         <argument
             android:name="querySearch"

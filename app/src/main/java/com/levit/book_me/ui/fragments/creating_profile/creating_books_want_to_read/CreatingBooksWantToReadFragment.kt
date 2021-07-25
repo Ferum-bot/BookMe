@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
-import com.levit.book_me.core.enums.SearchBooksTypes
+import com.levit.book_me.core.enums.books.SearchBooksTypes
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.databinding.FragmentCreatingBooksYouWantToReadBinding

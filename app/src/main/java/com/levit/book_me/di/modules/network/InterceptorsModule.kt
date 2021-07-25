@@ -3,6 +3,7 @@ package com.levit.book_me.di.modules.network
 import com.levit.book_me.BuildConfig
 import com.levit.book_me.network.interceptors.ErrorConnectionInterceptor
 import com.levit.book_me.network.interceptors.HeadersInterceptor
+import com.levit.book_me.network.interceptors.QuotesInterceptor
 import com.levit.book_me.network.utill.TimberHttpLogger
 import dagger.Module
 import dagger.Provides
@@ -26,4 +27,7 @@ class InterceptorsModule {
 
     @Provides
     fun provideHeaderInterceptor() = HeadersInterceptor()
+
+    @Provides
+    fun provideQuotesInterceptor() = QuotesInterceptor()
 }

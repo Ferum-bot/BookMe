@@ -5,15 +5,15 @@ import android.content.res.AssetManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.ImageView
-import com.levit.book_me.core.enums.ImageFormats
+import com.levit.book_me.core.enums.util.ImageFormats
 import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
 
 class AssetsImageLoader private constructor(
-        private val folderLink: String,
-        private val imageFormat: ImageFormats,
-        private val imageViewToLoad: ImageView,
+    private val folderLink: String,
+    private val imageFormat: ImageFormats,
+    private val imageViewToLoad: ImageView,
 ){
 
     private val context: Context

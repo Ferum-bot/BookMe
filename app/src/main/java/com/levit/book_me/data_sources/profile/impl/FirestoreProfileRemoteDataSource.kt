@@ -5,7 +5,7 @@ import com.levit.book_me.core.extensions.toMap
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.profile.ProfileModel
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.core.utill.FirebaseConstants
 import com.levit.book_me.data_sources.firebase.FirebaseDataSourceReferences
 import com.levit.book_me.network.models.google_books.GoogleBook
@@ -91,7 +91,7 @@ class FirestoreProfileRemoteDataSource @Inject constructor(
         handleFieldSetter()
     }
 
-    private var quote: GoQuote = GoQuote()
+    private var quote: QuoteModel = QuoteModel()
     set(value) {
         field = value
         handleFieldSetter()
@@ -169,7 +169,7 @@ class FirestoreProfileRemoteDataSource @Inject constructor(
         }
     }
 
-    override suspend fun updateQuote(quote: GoQuote) {
+    override suspend fun updateQuote(quote: QuoteModel) {
         isErrorGet = false
 
         val ref = FirebaseDataSourceReferences.userQuoteDocument
@@ -357,7 +357,7 @@ class FirestoreProfileRemoteDataSource @Inject constructor(
                 val author = document.get(FirebaseConstants.QUOTE_AUTHOR_FIELD) as? String
                 val tag = document.get(FirebaseConstants.QUOTE_TAG_FIELD) as? String
 
-                val quote = GoQuote(
+                val quote = QuoteModel(
                     text = text ?: "",
                     authorFullName = author ?: "",
                     tag = tag ?: ""

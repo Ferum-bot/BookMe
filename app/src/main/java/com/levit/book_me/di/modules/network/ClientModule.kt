@@ -2,6 +2,7 @@ package com.levit.book_me.di.modules.network
 
 import com.levit.book_me.di.DIConstants
 import com.levit.book_me.network.interceptors.ErrorConnectionInterceptor
+import com.levit.book_me.network.interceptors.QuotesInterceptor
 import com.levit.book_me.network.utill.NetworkConstants
 import dagger.Module
 import dagger.Provides
@@ -31,10 +32,12 @@ open class ClientModule {
     @Provides
     fun provideQuotesClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        connectionInterceptor: ErrorConnectionInterceptor
+        connectionInterceptor: ErrorConnectionInterceptor,
+        quoteInterceptor: QuotesInterceptor,
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .addInterceptor(connectionInterceptor)
+        .addInterceptor(quoteInterceptor)
         .connectTimeout(NetworkConstants.QUOTES_NETWORK_CONNECTION_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .callTimeout(NetworkConstants.QUOTES_NETWORK_CALL_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(NetworkConstants.QUOTES_NETWORK_READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)

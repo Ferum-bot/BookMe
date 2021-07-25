@@ -6,22 +6,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.levit.book_me.core.models.quote.GoQuotesAuthor
+import com.levit.book_me.core.models.quote.QuoteAuthorModel
 import com.levit.book_me.core.ui.custom_view.QuoteAuthorTagItemView
 
 class QuotesAuthorAdapter(
     private val listener: AuthorClickListener
-): ListAdapter<GoQuotesAuthor, QuotesAuthorAdapter.AuthorViewHolder>(CALL_BACK) {
+): ListAdapter<QuoteAuthorModel, QuotesAuthorAdapter.AuthorViewHolder>(CALL_BACK) {
 
     companion object {
-        private val CALL_BACK = object: DiffUtil.ItemCallback<GoQuotesAuthor>() {
+        private val CALL_BACK = object: DiffUtil.ItemCallback<QuoteAuthorModel>() {
 
-            override fun areItemsTheSame(oldItem: GoQuotesAuthor, newItem: GoQuotesAuthor): Boolean {
+            override fun areItemsTheSame(oldItem: QuoteAuthorModel, newItem: QuoteAuthorModel): Boolean {
                 return oldItem.fullName.hashCode() == newItem.fullName.hashCode() &&
                         oldItem.numberOfQuotes == newItem.numberOfQuotes
             }
 
-            override fun areContentsTheSame(oldItem: GoQuotesAuthor, newItem: GoQuotesAuthor): Boolean {
+            override fun areContentsTheSame(oldItem: QuoteAuthorModel, newItem: QuoteAuthorModel): Boolean {
                 return oldItem == newItem
             }
         }
@@ -29,7 +29,7 @@ class QuotesAuthorAdapter(
 
     interface AuthorClickListener {
 
-        fun onAuthorClicked(author: GoQuotesAuthor)
+        fun onAuthorClicked(author: QuoteAuthorModel)
     }
 
     class AuthorViewHolder private constructor(
@@ -50,7 +50,7 @@ class QuotesAuthorAdapter(
             }
         }
 
-        private lateinit var currentAuthor: GoQuotesAuthor
+        private lateinit var currentAuthor: QuoteAuthorModel
 
         init {
             view.setNextClickListener(View.OnClickListener {
@@ -58,7 +58,7 @@ class QuotesAuthorAdapter(
             })
         }
 
-        fun bind(author: GoQuotesAuthor) {
+        fun bind(author: QuoteAuthorModel) {
             currentAuthor = author
             view.setAuthor(author)
         }

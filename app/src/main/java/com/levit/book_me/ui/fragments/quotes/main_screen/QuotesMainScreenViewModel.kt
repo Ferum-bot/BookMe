@@ -39,15 +39,7 @@ class QuotesMainScreenViewModel @Inject constructor(
         _currentStatus.postValue(QuotesMainScreenStatuses.LOADING)
 
         viewModelScope.launch {
-            interactor.getRandomQuotes()
-        }
-
-        viewModelScope.launch {
-            interactor.getNumberOfAuthors()
-        }
-
-        viewModelScope.launch {
-            interactor.getNumberOfTags()
+            interactor.getMainScreenModel()
         }
     }
 

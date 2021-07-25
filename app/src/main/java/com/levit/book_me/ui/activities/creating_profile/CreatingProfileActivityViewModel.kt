@@ -3,11 +3,11 @@ package com.levit.book_me.ui.activities.creating_profile
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.levit.book_me.core.enums.SearchBooksTypes
+import com.levit.book_me.core.enums.books.SearchBooksTypes
 import com.levit.book_me.core.models.Author
 import com.levit.book_me.core.models.Genre
 import com.levit.book_me.core.models.profile.ProfileModel
-import com.levit.book_me.core.models.quote.GoQuote
+import com.levit.book_me.core.models.quote.QuoteModel
 import com.levit.book_me.core.ui.custom_view.CreatingProfileAuthorChooser
 import com.levit.book_me.core_base.di.CreatingProfileScope
 import com.levit.book_me.interactors.creating_profile.CreatingProfileInteractor
@@ -54,8 +54,8 @@ class CreatingProfileActivityViewModel @Inject constructor(
     private val _wordsAboutProfile: MutableLiveData<String> = MutableLiveData()
     val wordsAboutProfile: LiveData<String> = _wordsAboutProfile
 
-    private val _quote: MutableLiveData<GoQuote> = MutableLiveData()
-    val quote: LiveData<GoQuote> = _quote
+    private val _quote: MutableLiveData<QuoteModel> = MutableLiveData()
+    val quote: LiveData<QuoteModel> = _quote
 
     private val _profilePhotoUrl: MutableLiveData<String> = MutableLiveData()
     val profilePhotoUrl: LiveData<String> = _profilePhotoUrl
@@ -75,7 +75,7 @@ class CreatingProfileActivityViewModel @Inject constructor(
 
     fun safeBaseProfileInformation(
         name: String, surname: String,
-        wordsAboutYou: String, quote: GoQuote
+        wordsAboutYou: String, quote: QuoteModel
     ) {
         _name.postValue(name)
         _surname.postValue(surname)
@@ -132,7 +132,7 @@ class CreatingProfileActivityViewModel @Inject constructor(
             favouriteAuthors = chosenFavouriteAuthors.getFavoriteAuthors(),
             favouriteBooks = chosenFavouriteBooks.value ?: emptyList(),
             wantToReadBooks = chosenWantToReadBooks.value ?: emptyList(),
-            quote = quote.value ?: GoQuote(),
+            quote = quote.value ?: QuoteModel(),
         )
 
         creatingProfileJob?.cancel()

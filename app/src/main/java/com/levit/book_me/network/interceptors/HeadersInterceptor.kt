@@ -9,7 +9,7 @@ class HeadersInterceptor: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val newRequest = request.newBuilder()
-            .addHeader(NetworkConstants.PLATFORM_HEADER_KEY, NetworkConstants.PLATFORM_HEADER_VALUE)
+            .addHeader(NetworkConstants.PLATFORM_HEADER_NAME, NetworkConstants.PLATFORM_HEADER_VALUE)
             .build()
 
         return chain.proceed(newRequest)

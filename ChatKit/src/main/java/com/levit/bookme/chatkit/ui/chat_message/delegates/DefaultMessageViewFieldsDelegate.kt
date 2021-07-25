@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.ui.chat_message.delegates
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -8,7 +9,7 @@ import com.levit.bookme.chatkit.extensions.setMarginsDp
 import com.levit.bookme.chatkit.extensions.setTextSizeSp
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
 import com.levit.bookme.chatkit.models.enums.MessageTextAlignment
-import com.levit.bookme.chatkit.drawables.RoundedDrawable
+import com.levit.bookme.chatkit.drawables.RoundedRectDrawable
 import de.hdodenhof.circleimageview.CircleImageView
 
 /**
@@ -57,7 +58,7 @@ internal class DefaultMessageViewFieldsDelegate(
     }
 
     override fun applyOptionsToDateLabel(
-        layout: ConstraintLayout, dateView: TextView, options: MessageStyleOptions
+        layout: ConstraintLayout, dateView: TextView, statusView: ImageView?, options: MessageStyleOptions
     ) {
         dateView.setTextColor(options.dateColor)
         dateView.setTextSizeSp(options.dateLabelSizeSP)
@@ -71,7 +72,7 @@ internal class DefaultMessageViewFieldsDelegate(
 
         when(options.dateLabelAlignment) {
             MessageTextAlignment.START -> alignDateLabelToStart(layout, dateView)
-            MessageTextAlignment.END -> alignDateLabelToEnd(layout, dateView)
+            MessageTextAlignment.END -> alignDateLabelToEnd(layout, dateView, statusView)
         }
     }
 
@@ -83,7 +84,7 @@ internal class DefaultMessageViewFieldsDelegate(
         val topRightRadiusPx = dpToPx(options.messageBackgroundTopRightCornerRadiusDP) ?: 0
         val bottomRightRadiusPx = dpToPx(options.messageBackgroundBottomRightCornerRadiusDP) ?: 0
         val bottomLeftRadiusPx = dpToPx(options.messageBackgroundBottomLeftCornerRadiusDP) ?: 0
-        val roundedDrawable = RoundedDrawable(
+        val roundedDrawable = RoundedRectDrawable(
             backgroundColor = backgroundColor,
             radiusTopLeftPx = topLeftRadiusPx,
             radiusTopRightPx = topRightRadiusPx,
@@ -130,14 +131,21 @@ internal class DefaultMessageViewFieldsDelegate(
         constraintSet.applyTo(layout)
     }
 
-    private fun alignDateLabelToEnd(layout: ConstraintLayout, dateView: TextView) {
+    private fun alignDateLabelToEnd(
+        layout: ConstraintLayout, dateView: TextView, statusView: ImageView?,
+    ) {
         val layoutId = layout.id
         val dateId = dateView.id
         val constraintSet = ConstraintSet().apply {
             clone(layout)
         }
 
-        constraintSet.connect(dateId, ConstraintSet.END, layoutId, ConstraintSet.END)
+        if (statusView == null) {
+            constraintSet.connect(dateId, ConstraintSet.END, layoutId, ConstraintSet.END)
+        } else {
+            val statusId = statusView.id
+            constraintSet.connect(dateId, ConstraintSet.END, statusId, ConstraintSet.START)
+        }
         constraintSet.connect(dateId, ConstraintSet.BOTTOM, layoutId, ConstraintSet.BOTTOM)
         constraintSet.applyTo(layout)
     }

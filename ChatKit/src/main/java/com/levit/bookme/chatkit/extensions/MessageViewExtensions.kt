@@ -2,6 +2,7 @@ package com.levit.bookme.chatkit.extensions
 
 import com.levit.bookme.chatkit.models.enums.MessageType
 import com.levit.bookme.chatkit.models.chat_messages.MessageModel
+import com.levit.bookme.chatkit.models.enums.MessageStatus
 import com.levit.bookme.chatkit.ui.chat_message.MessageView
 import java.util.*
 
@@ -13,5 +14,6 @@ internal fun MessageView.emptyMessageModel(): MessageModel {
         override val date: Date = Date()
         override val authorImageUrlLink: String? = null
         override val type: MessageType = MessageType.YOUR_MESSAGE
+        override val messageStatus: MessageStatus = MessageStatus.RECEIVED
     }
 }

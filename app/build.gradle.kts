@@ -5,8 +5,8 @@ import org.gradle.kotlin.dsl.implementation
 plugins{
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
-    id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
     id(Plugins.KOTLIN_KAPT)
+    id(Plugins.KOTLIN_PARCELIZE)
     id(Plugins.KOTLIN_ALLOPEN)
     id(Plugins.GOOGLE_SERVICES)
     id(Plugins.NAVIGATION_SAFE_ARGS)
@@ -56,10 +56,6 @@ android {
 
     kotlinOptions.apply {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-
-    androidExtensions {
-        isExperimental = true
     }
 
     sourceSets.forEach {

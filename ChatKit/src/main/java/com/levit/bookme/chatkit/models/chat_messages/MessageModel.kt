@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.models.chat_messages
 
+import com.levit.bookme.chatkit.models.enums.MessageStatus
 import com.levit.bookme.chatkit.models.enums.MessageType
 import java.util.*
 
@@ -37,4 +38,9 @@ interface MessageModel {
      */
     val type: MessageType
 
+    /**
+     * The Message status.
+     * @See MessageStatus
+     */
+    val messageStatus: MessageStatus
 }

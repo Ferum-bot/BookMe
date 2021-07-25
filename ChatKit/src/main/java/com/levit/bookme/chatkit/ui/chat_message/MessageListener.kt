@@ -13,4 +13,6 @@ interface MessageListener {
     fun onProfileIconLongClicked(model: MessageModel)
 
     fun onAuthorNameClicked(model: MessageModel)
+
+    fun onMessageStatusClicked(model: MessageModel)
 }
