@@ -55,6 +55,10 @@ class MainScreenActivity:
         NotificationManager(lifecycle, binding.notificationConnectionRestored.root)
     }
 
+    private val pagerAdapter by lazy {
+        MainScreenViewPagerAdapter(this)
+    }
+
     private val networkStatus: SharedFlow<NetworkStatus>
     get() = bookMeApp.networkMonitor.isNetworkAvailable
 
@@ -72,6 +76,7 @@ class MainScreenActivity:
 
         configureLayout()
         setAllClickListeners()
+        setAllObservers()
         startListeningNetworkMonitor()
     }
 
@@ -96,7 +101,7 @@ class MainScreenActivity:
     }
 
     private fun configureLayout() {
-        val viewPagerAdapter = MainScreenViewPagerAdapter(this)
+        val viewPagerAdapter = pagerAdapter
 
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.registerOnPageChangeCallback(onPageChangedCallback)
@@ -129,6 +134,30 @@ class MainScreenActivity:
         }
         binding.notCheckedCurrentFriendProfileActionButton.setOnClickListener {
             currentFriendButtonClicked()
+        }
+    }
+
+    private fun setAllObservers() {
+        viewModel.currentInterlocutorId.observe(this) { interlocutorId ->
+            if (interlocutorId == null) {
+                return@observe
+            }
+            pagerAdapter.openInterlocutorProfile(interlocutorId)
+            viewModel.interlocutorProfileOpened()
+        }
+
+        viewModel.currentChatId.observe(this) { chatId ->
+            if (chatId == null) {
+                return@observe
+            }
+            pagerAdapter.openCurrentChat(chatId)
+            viewModel.currentChatOpened()
+        }
+
+        viewModel.openGeneralChat.observe(this) { openChats ->
+            if (openChats) {
+                pagerAdapter.openGeneralChats()
+            }
         }
     }
 

@@ -19,6 +19,7 @@ import com.levit.book_me.core.utill.FriendTimeLeftAdapter
 import com.levit.book_me.core.utill.RemoteImageLoader
 import com.levit.book_me.databinding.FragmentMainScreenCurrentFriendBinding
 import com.levit.book_me.network.models.google_books.GoogleBook
+import com.levit.book_me.ui.BundleConstants
 import com.levit.book_me.ui.base.BaseMainScreenFragment
 import com.levit.book_me.ui.fragments.utills.BaseBooksAdapter
 import com.levit.book_me.ui.fragments.utills.BaseBooksOffsetDecorator
@@ -48,16 +49,14 @@ class MainScreenFriendProfileFragment:
         RemoteImageLoader(view, options)
     }
 
+    private val currentFriendId: Long by lazy {
+        val args = requireArguments()
+        args.getLong(BundleConstants.CURRENT_INTERLOCUTOR_ID_NAME, -1)
+    }
     private val currentAuthorViews = mutableListOf<SimpleAuthorView>()
     private val currentGenreViews = mutableListOf<SmallGenreView>()
 
     private var friendLeftTimer: FriendTimeLeftAdapter? = null
-
-    var currentFriendId: Long = -1
-    set(value) {
-        field = value
-        viewModel.loadCurrentFriend(field)
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
