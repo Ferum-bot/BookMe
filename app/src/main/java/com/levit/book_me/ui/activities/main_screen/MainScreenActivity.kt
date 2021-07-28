@@ -6,7 +6,6 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.levit.book_me.R
 import com.levit.book_me.core_network.model.enums.NetworkStatus
 import com.levit.book_me.databinding.ActivityMainScreenBinding
 import com.levit.book_me.di.components.MainScreenComponent
@@ -146,11 +145,13 @@ class MainScreenActivity:
             viewModel.interlocutorProfileOpened()
         }
 
-        viewModel.currentChatId.observe(this) { chatId ->
-            if (chatId == null) {
+        viewModel.chatAndInterlocutorId.observe(this) { pair ->
+            if (pair == null) {
                 return@observe
             }
-            pagerAdapter.openCurrentChat(chatId)
+            val chatId = pair.first
+            val interlocutorId = pair.second
+            pagerAdapter.openCurrentChat(chatId, interlocutorId)
             viewModel.currentChatOpened()
         }
 
@@ -158,7 +159,9 @@ class MainScreenActivity:
             if (openChats) {
                 pagerAdapter.openGeneralChats()
             }
+            viewModel.generalChatHasOpened()
         }
+
     }
 
     private fun startListeningNetworkMonitor() {

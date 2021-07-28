@@ -3,6 +3,7 @@ package com.levit.bookme.chatkit.models.current_chat_feed
 import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
+import com.levit.bookme.chatkit.models.enums.ChatFeedEmptyMessageFormat
 
 class CurrentChatFeedStyleOptions(
     build: CurrentChatFeedStyleOptionsBuilder.() -> CurrentChatFeedStyleOptionsBuilder
@@ -19,6 +20,13 @@ class CurrentChatFeedStyleOptions(
 
     @ColorInt
     val messagesLayoutBackgroundColor: Int
+    @ColorInt
+    val emptyChatFeedTextMessageColor: Int
+
+    val emptyChatFeedFormat: ChatFeedEmptyMessageFormat
+
+    @Dimension(unit = Dimension.SP)
+    val emptyChatFeedTextMessageSizeSp: Int
 
     @Dimension(unit = Dimension.DP)
     val messagesLayoutExtraSpaceTopDp: Int
@@ -33,6 +41,11 @@ class CurrentChatFeedStyleOptions(
         val options = CurrentChatFeedStyleOptionsBuilder().build()
 
         this.messagesLayoutBackgroundColor = options.messagesLayoutBackgroundColor
+        this.emptyChatFeedTextMessageColor = options.emptyChatFeedTextMessageColor
+
+        this.emptyChatFeedFormat = options.emptyChatFeedFormat
+
+        this.emptyChatFeedTextMessageSizeSp = options.emptyChatFeedTextMessageSizeSp
 
         this.messagesLayoutExtraSpaceTopDp = options.messagesLayoutExtraSpaceTopDp
         this.messagesLayoutExtraSpaceStartDp = options.messagesLayoutExtraSpaceStartDp

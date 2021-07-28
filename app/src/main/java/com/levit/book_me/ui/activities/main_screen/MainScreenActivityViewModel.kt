@@ -17,8 +17,8 @@ class MainScreenActivityViewModel @Inject constructor(
     private val _currentInterlocutorId: MutableLiveData<Long?> = MutableLiveData(null)
     val currentInterlocutorId: LiveData<Long?> = _currentInterlocutorId
 
-    private val _currentChatId: MutableLiveData<Long?> = MutableLiveData(null)
-    val currentChatId: LiveData<Long?> = _currentChatId
+    private val _chatAndInterlocutorId: MutableLiveData<Pair<Long, Long>?> = MutableLiveData(null)
+    val chatAndInterlocutorId: LiveData<Pair<Long, Long>?> = _chatAndInterlocutorId
 
     private val _openGeneralChat: MutableLiveData<Boolean> = MutableLiveData(true)
     val openGeneralChat: LiveData<Boolean> = _openGeneralChat
@@ -42,8 +42,8 @@ class MainScreenActivityViewModel @Inject constructor(
         _currentInterlocutorId.postValue(interlocutorId)
     }
 
-    fun openChatWithInterlocutor(chatId: Long) {
-        _currentChatId.postValue(chatId)
+    fun openChatWithInterlocutor(chatId: Long, interlocutorId: Long) {
+        _chatAndInterlocutorId.postValue(chatId to interlocutorId)
     }
 
     fun interlocutorProfileOpened() {
@@ -51,7 +51,7 @@ class MainScreenActivityViewModel @Inject constructor(
     }
 
     fun currentChatOpened() {
-        _currentChatId.postValue(null)
+        _chatAndInterlocutorId.postValue(null)
     }
 
     fun generalChatHasOpened() {

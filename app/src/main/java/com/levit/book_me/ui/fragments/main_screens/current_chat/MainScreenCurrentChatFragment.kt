@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.levit.book_me.R
+import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.chat_kit.Message
 import com.levit.book_me.databinding.FragmentMainScreenCurrentChatBinding
@@ -18,9 +19,10 @@ import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedStyleOpt
 import com.levit.bookme.chatkit.models.current_chat_header.CurrentChatHeaderModel
 import com.levit.bookme.chatkit.models.current_chat_header.CurrentChatHeaderStyleOptions
 import com.levit.bookme.chatkit.models.enums.MessageStatus
+import com.levit.bookme.chatkit.models.enums.MessageType
+import com.levit.bookme.chatkit.models.message_input.MessageInputModel
 import com.levit.bookme.chatkit.models.message_input.MessageInputStyleOptions
 import com.levit.bookme.chatkit.ui.chat_message.MessageListener
-import com.levit.bookme.chatkit.ui.current_chat_feed.CurrentChatFeedListener
 import com.levit.bookme.chatkit.ui.current_chat_header.CurrentChatHeaderListener
 import com.levit.bookme.chatkit.ui.message_input.MessageInputButtonListener
 import com.levit.bookme.chatkit.ui.message_input.MessageInputTextChangeListener
@@ -33,6 +35,11 @@ class MainScreenCurrentChatFragment:
     private val chatId: Long by lazy {
         val args = requireArguments()
         args.getLong(BundleConstants.CURRENT_CHAT_ID_NAME, -1)
+    }
+
+    private val interlocutorId: Long by lazy {
+        val args = requireArguments()
+        args.getLong(BundleConstants.CURRENT_INTERLOCUTOR_ID_NAME, -1)
     }
 
     private val binding: FragmentMainScreenCurrentChatBinding by viewBinding {
@@ -61,6 +68,43 @@ class MainScreenCurrentChatFragment:
     override fun setAllObservers() {
         super.setAllObservers()
 
+        viewModel.currentStatus.observe(viewLifecycleOwner) { status ->
+            when(status) {
+                MainScreenCurrentChatViewModel.Status.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.currentChat.visibility = View.GONE
+                    binding.errorText.visibility = View.GONE
+                }
+                MainScreenCurrentChatViewModel.Status.LOADED_FROM_CACHE -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.currentChat.visibility = View.VISIBLE
+                    binding.errorText.visibility = View.GONE
+                }
+                MainScreenCurrentChatViewModel.Status.LOADED_FROM_REMOTE -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.currentChat.visibility = View.VISIBLE
+                    binding.errorText.visibility = View.GONE
+                }
+                MainScreenCurrentChatViewModel.Status.ERROR -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.currentChat.visibility = View.GONE
+                    binding.errorText.visibility = View.VISIBLE
+                }
+                MainScreenCurrentChatViewModel.Status.CONNECTION_ESTABLISHED -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.currentChat.visibility = View.VISIBLE
+                    binding.errorText.visibility = View.GONE
+                    showConnectionEstablished()
+                }
+                MainScreenCurrentChatViewModel.Status.CONNECTION_LOST -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.currentChat.visibility = View.VISIBLE
+                    binding.errorText.visibility = View.GONE
+                    showConnectionLost()
+                }
+            }
+        }
+
         viewModel.messages.observe(viewLifecycleOwner) { messages ->
             val model = object: CurrentChatFeedModel {
                 override val allMessages: List<MessageModel> = messages
@@ -78,7 +122,7 @@ class MainScreenCurrentChatFragment:
         }
 
         viewModel.isInterlocutorOnline.observe(viewLifecycleOwner) { isOnline ->
-
+            binding.currentChat.isInterlocutorOnline = isOnline
         }
 
         viewModel.isInterlocutorTyping.observe(viewLifecycleOwner) { isTyping ->
@@ -91,19 +135,19 @@ class MainScreenCurrentChatFragment:
     }
 
     override fun onAdditionalTextClicked(model: CurrentChatHeaderModel) {
-
+        sharedViewModel.openInterlocutorProfile(interlocutorId)
     }
 
     override fun onAuthorNameClicked(model: MessageModel) {
-
+        sharedViewModel.openInterlocutorProfile(interlocutorId)
     }
 
     override fun onBackButtonClicked(model: CurrentChatHeaderModel) {
-
+        sharedViewModel.openGeneralChat()
     }
 
     override fun onInterlocutorNameClicked(model: CurrentChatHeaderModel) {
-
+        sharedViewModel.openInterlocutorProfile(interlocutorId)
     }
 
     override fun onMessageClicked(model: MessageModel) {
@@ -121,11 +165,13 @@ class MainScreenCurrentChatFragment:
     }
 
     override fun onProfileIconClicked(model: CurrentChatHeaderModel) {
-
+        sharedViewModel.openInterlocutorProfile(interlocutorId)
     }
 
     override fun onProfileIconClicked(model: MessageModel) {
-
+        if (model.type == MessageType.INTERLOCUTOR_MESSAGE) {
+            sharedViewModel.openInterlocutorProfile(interlocutorId)
+        }
     }
 
     override fun onProfileIconLongClicked(model: MessageModel) {
@@ -153,13 +199,28 @@ class MainScreenCurrentChatFragment:
         binding.currentChat.messageInputTextChangeListener = this
         binding.currentChat.messageListener = this
         binding.currentChat.chatFeedHeaderListener = this
+
+        binding.currentChat.messageInputModel = object: MessageInputModel {
+            override val initialMessage: String? = null
+            override val hintString: String? = getString(R.string.hint_input_message)
+        }
     }
 
     private fun configureLayout() {
-
+        binding.errorText.addClickableText(R.string.try_again) {
+            viewModel.getChatConnection(chatId)
+        }
     }
 
     private fun setUpChat() {
         viewModel.getChatConnection(chatId)
+    }
+
+    private fun showConnectionEstablished() {
+        showSuccessMessage(R.string.connection_restored)
+    }
+
+    private fun showConnectionLost() {
+        showError(R.string.connection_lost)
     }
 }

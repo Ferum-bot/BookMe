@@ -56,11 +56,12 @@ class MainScreenViewPagerAdapter(
         }
     }
 
-    fun openCurrentChat(chatId: Long) {
+    fun openCurrentChat(chatId: Long, interlocutorId: Long) {
         openGeneralChats = false
         currentChatFragment = MainScreenCurrentChatFragment()
         currentChatFragment?.arguments = bundleOf(
-            BundleConstants.CURRENT_CHAT_ID_NAME to chatId
+            BundleConstants.CURRENT_CHAT_ID_NAME to chatId,
+            BundleConstants.CURRENT_INTERLOCUTOR_ID_NAME to interlocutorId,
         )
         notifyItemChanged(CHATS_FRAGMENT_POSITION)
     }

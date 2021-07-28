@@ -101,7 +101,7 @@ class MainScreenChatsFragment:
         val userChat = chatModel as? UserChat
         userChat ?: return
 
-        sharedViewModel.openChatWithInterlocutor(userChat.interlocutorId)
+        sharedViewModel.openChatWithInterlocutor(userChat.chatId, userChat.interlocutorId)
     }
 
     override fun onProfileIconLongClicked(chatModel: ChatModel): Boolean {
@@ -116,7 +116,9 @@ class MainScreenChatsFragment:
         val userChat = chatModel as? UserChat
         userChat ?: return
 
-        sharedViewModel.openChatWithInterlocutor(userChat.interlocutorId)
+        sharedViewModel.openChatWithInterlocutor(
+            userChat.chatId, chatModel.interlocutorId,
+        )
     }
 
     override fun onLastMessageClicked(chatModel: ChatModel) {
