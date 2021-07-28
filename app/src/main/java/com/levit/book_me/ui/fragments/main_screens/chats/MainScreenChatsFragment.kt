@@ -4,14 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.chat_kit.UserChat
 import com.levit.book_me.databinding.FragmentMainScreenChatsBinding
 import com.levit.book_me.ui.base.BaseMainScreenFragment
-import com.levit.book_me.ui.chat_kit_options.provideDefaultChatOptions
-import com.levit.book_me.ui.chat_kit_options.provideDefaultGeneralOptions
+import com.levit.book_me.ui.chat_kit.provideDefaultChatOptions
+import com.levit.book_me.ui.chat_kit.provideDefaultGeneralOptions
 import com.levit.bookme.chatkit.models.chat.ChatModel
 import com.levit.bookme.chatkit.models.general_chat.GeneralChatModel
 import com.levit.bookme.chatkit.ui.chat.ChatListener
@@ -101,7 +102,7 @@ class MainScreenChatsFragment:
         val userChat = chatModel as? UserChat
         userChat ?: return
 
-        sharedViewModel.openChatWithInterlocutor(userChat.interlocutorId)
+        navigateToCurrentChat(chatModel.chatId, chatModel.interlocutorId)
     }
 
     override fun onProfileIconLongClicked(chatModel: ChatModel): Boolean {
@@ -116,14 +117,14 @@ class MainScreenChatsFragment:
         val userChat = chatModel as? UserChat
         userChat ?: return
 
-        sharedViewModel.openChatWithInterlocutor(userChat.interlocutorId)
+        navigateToCurrentChat(chatModel.chatId, chatModel.interlocutorId)
     }
 
     override fun onLastMessageClicked(chatModel: ChatModel) {
         val userChat = chatModel as? UserChat
         userChat ?: return
 
-        sharedViewModel.openInterlocutorProfile(userChat.interlocutorId)
+        navigateToCurrentChat(chatModel.chatId, chatModel.interlocutorId)
     }
 
     private fun configureLayout() {
@@ -141,5 +142,11 @@ class MainScreenChatsFragment:
 
     private fun setAllClickListeners() {
         binding.chatsView.chatListener = this
+    }
+
+    private fun navigateToCurrentChat(chatId: Long, interlocutorId: Long) {
+        val action = MainScreenChatsFragmentDirections
+            .actionMainScreenChatsFragmentToMainScreenCurrentChatFragment(chatId, interlocutorId)
+        findNavController().navigate(action)
     }
 }

@@ -4,4 +4,6 @@
     <string name="send_button">Send button</string>
     <string name="back_button">Back button</string>
     <string name="message_status">Message status</string>
+    <string name="empty_chat_image">Empty chat image</string>
+    <string name="empty_chat_text_message">Write first message!</string>
 </resources>

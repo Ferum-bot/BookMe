@@ -38,6 +38,12 @@ class CurrentChatHeaderVew @JvmOverloads constructor(
 
     var listener: CurrentChatHeaderListener? = null
 
+    var isOnline: Boolean = false
+        set(value) {
+            field = value
+            applyOnlineStatus(isOnline)
+        }
+
     private val binding: CurrentChatHeaderLayoutBinding
 
     private val imageLoader: RemoteImageLoader
@@ -165,5 +171,9 @@ class CurrentChatHeaderVew @JvmOverloads constructor(
         )
 
         layoutBackground.background = layoutDrawable
+    }
+
+    private fun applyOnlineStatus(isOnline: Boolean) {
+        binding.isOnline.isVisible = isOnline
     }
 }

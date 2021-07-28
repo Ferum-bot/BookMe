@@ -1,12 +1,18 @@
 package com.levit.bookme.chatkit.ui.current_chat_feed
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.levit.book_me.chat_kit.R
 import com.levit.book_me.chat_kit.databinding.CurrentChatFeedLayoutBinding
 import com.levit.bookme.chatkit.decorators.BottomExtraSpaceDecorator
 import com.levit.bookme.chatkit.decorators.TopExtraSpaceDecorator
+import com.levit.bookme.chatkit.extensions.*
+import com.levit.bookme.chatkit.extensions.getString
 import com.levit.bookme.chatkit.extensions.inflater
 import com.levit.bookme.chatkit.extensions.provideEmptyModel
 import com.levit.bookme.chatkit.extensions.setMarginsDp
@@ -19,6 +25,7 @@ import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedModel
 import com.levit.bookme.chatkit.models.current_chat_feed.CurrentChatFeedStyleOptions
 import com.levit.bookme.chatkit.models.current_chat_header.CurrentChatHeaderModel
 import com.levit.bookme.chatkit.models.current_chat_header.CurrentChatHeaderStyleOptions
+import com.levit.bookme.chatkit.models.enums.ChatFeedEmptyMessageFormat
 import com.levit.bookme.chatkit.models.enums.MessageType
 import com.levit.bookme.chatkit.models.enums.ScrollStates
 import com.levit.bookme.chatkit.models.message_input.MessageInputModel
@@ -46,6 +53,7 @@ class CurrentChatFeedView @JvmOverloads constructor(
         set(value) {
             field = value
             applyCurrentChatFeedStyleOptions(value)
+            applyEmptyMessageStyleOptions(value)
         }
 
     var headerStyleOptions = CurrentChatHeaderStyleOptions.provideDefaultOptions()
@@ -123,6 +131,23 @@ class CurrentChatFeedView @JvmOverloads constructor(
 
     var feedListener: CurrentChatFeedListener? = null
 
+    var isInterlocutorOnline: Boolean = false
+        set(value) {
+            field = value
+            applyOnlineStatus(value)
+        }
+
+    var emptyChatTextMessage: String = getString(R.string.empty_chat_text_message)
+        set(value) {
+            field = value
+            applyEmptyChatTextMessage(value)
+        }
+
+    var emptyChatImageMessage: Drawable? = null
+        set(value) {
+            field = value
+            applyEmptyChatImageMessage(value)
+        }
 
     private val binding: CurrentChatFeedLayoutBinding
 
@@ -233,10 +258,39 @@ class CurrentChatFeedView @JvmOverloads constructor(
         binding.messagesRecycler.adapter = messagesAdapter
     }
 
+    private fun applyEmptyMessageStyleOptions(options: CurrentChatFeedStyleOptions)
+    = with(binding) {
+        emptyChatText.setTextColor(options.emptyChatFeedTextMessageColor)
+        emptyChatText.setTextSizeSp(options.emptyChatFeedTextMessageSizeSp)
+
+        when(options.emptyChatFeedFormat) {
+            ChatFeedEmptyMessageFormat.SHOW_ONLY_TEXT -> {
+                emptyChatImage.visibility = View.INVISIBLE
+                emptyChatText.visibility = View.VISIBLE
+            }
+            ChatFeedEmptyMessageFormat.SHOW_ONLY_IMAGE -> {
+                emptyChatImage.visibility = View.VISIBLE
+                emptyChatText.visibility = View.GONE
+            }
+            ChatFeedEmptyMessageFormat.SHOW_TEXT_AND_IMAGE -> {
+                emptyChatImage.visibility = View.VISIBLE
+                emptyChatText.visibility = View.VISIBLE
+            }
+            ChatFeedEmptyMessageFormat.SHOW_NOTHING -> {
+                emptyChatImage.visibility = View.GONE
+                emptyChatText.visibility = View.GONE
+            }
+        }
+    }
+
     private fun applyCurrentChatFeedModel(model: CurrentChatFeedModel) {
         val messages = model.allMessages
         messagesAdapter.items = messages.parseForAdapter()
         CurrentFeedMessagesDelegates.allMessages = messages
+        binding.messagesRecycler.scrollToPosition(messages.size - 1)
+
+        messages.ifEmpty { showEmptyChat(true) }
+        messages.ifNotEmpty { showEmptyChat(false) }
     }
 
     private fun applyProfileHeaderModel(model: CurrentChatHeaderModel?) {
@@ -254,5 +308,24 @@ class CurrentChatFeedView @JvmOverloads constructor(
             MessageType.YOUR_MESSAGE -> YourMessageModel(currentModel)
             MessageType.INTERLOCUTOR_MESSAGE -> InterlocutorMessageModel(currentModel)
         }
+    }
+
+    private fun applyOnlineStatus(isOnline: Boolean) {
+        binding.interlocutorHeader.isOnline = isOnline
+    }
+
+    private fun applyEmptyChatTextMessage(message: String) {
+        binding.emptyChatText.text = message
+    }
+
+    private fun applyEmptyChatImageMessage(drawable: Drawable?) {
+        binding.emptyChatImage.background = drawable
+    }
+
+    private fun showEmptyChat(show: Boolean) {
+        binding.messagesRecycler.isVisible = !show
+        binding.emptyChatText.isVisible = show
+        binding.emptyChatImage.isVisible = show
+        applyEmptyMessageStyleOptions(currentChatFeedStyleOptions)
     }
 }

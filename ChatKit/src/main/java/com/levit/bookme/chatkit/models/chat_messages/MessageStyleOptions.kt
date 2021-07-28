@@ -1,5 +1,6 @@
 package com.levit.bookme.chatkit.models.chat_messages
 
+import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import com.levit.bookme.chatkit.models.enums.MessageDateFormat
@@ -18,6 +19,8 @@ class MessageStyleOptions(
 
     @ColorInt
     val textColor: Int
+    @ColorInt
+    val backgroundTextColor: Int
     @ColorInt
     val authorColor: Int
     @ColorInt
@@ -87,6 +90,7 @@ class MessageStyleOptions(
         val options = MessageStyleOptionsBuilder().build()
 
         this.textColor = options.textColor
+        this.backgroundTextColor = options.backgroundTextColor
         this.authorColor = options.authorColor
         this.dateColor = options.dateColor
 

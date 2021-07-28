@@ -4,9 +4,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.levit.book_me.R
 import com.levit.book_me.core_network.model.enums.NetworkStatus
 import com.levit.book_me.databinding.ActivityMainScreenBinding
 import com.levit.book_me.di.components.MainScreenComponent
@@ -55,6 +55,10 @@ class MainScreenActivity:
         NotificationManager(lifecycle, binding.notificationConnectionRestored.root)
     }
 
+    private val pagerAdapter by lazy {
+        MainScreenViewPagerAdapter(supportFragmentManager, lifecycle)
+    }
+
     private val networkStatus: SharedFlow<NetworkStatus>
     get() = bookMeApp.networkMonitor.isNetworkAvailable
 
@@ -72,6 +76,7 @@ class MainScreenActivity:
 
         configureLayout()
         setAllClickListeners()
+        setAllObservers()
         startListeningNetworkMonitor()
     }
 
@@ -96,7 +101,7 @@ class MainScreenActivity:
     }
 
     private fun configureLayout() {
-        val viewPagerAdapter = MainScreenViewPagerAdapter(this)
+        val viewPagerAdapter = pagerAdapter
 
         binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.registerOnPageChangeCallback(onPageChangedCallback)
@@ -129,6 +134,42 @@ class MainScreenActivity:
         }
         binding.notCheckedCurrentFriendProfileActionButton.setOnClickListener {
             currentFriendButtonClicked()
+        }
+    }
+
+    private fun setAllObservers() {
+        viewModel.currentInterlocutorId.observe(this) { interlocutorId ->
+            if (interlocutorId == null) {
+                return@observe
+            }
+            pagerAdapter.openInterlocutorProfile(interlocutorId)
+            viewModel.interlocutorProfileOpened()
+        }
+
+        viewModel.chatAndInterlocutorId.observe(this) { pair ->
+            if (pair == null) {
+                return@observe
+            }
+            val chatId = pair.first
+            val interlocutorId = pair.second
+            pagerAdapter.openCurrentChat(chatId, interlocutorId)
+            viewModel.currentChatOpened()
+        }
+
+        viewModel.openGeneralChat.observe(this) { openChats ->
+            if (openChats) {
+                pagerAdapter.openGeneralChats()
+            }
+            viewModel.generalChatHasOpened()
+        }
+
+        viewModel.showTopButtons.observe(this) { showTopButtons ->
+            binding.checkedChatsActionButton.isVisible = showTopButtons
+            binding.notCheckedChatsActionButton.isVisible = showTopButtons
+            binding.checkedCurrentFriendProfileActionButton.isVisible = showTopButtons
+            binding.notCheckedCurrentFriendProfileActionButton.isVisible = showTopButtons
+            binding.checkedProfileActionButton.isVisible = showTopButtons
+            binding.notCheckedProfileActionButton.isVisible = showTopButtons
         }
     }
 
