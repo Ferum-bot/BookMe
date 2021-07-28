@@ -23,6 +23,9 @@ class MainScreenActivityViewModel @Inject constructor(
     private val _openGeneralChat: MutableLiveData<Boolean> = MutableLiveData(true)
     val openGeneralChat: LiveData<Boolean> = _openGeneralChat
 
+    private val _showTopButtons: MutableLiveData<Boolean> = MutableLiveData(true)
+    val showTopButtons: LiveData<Boolean> = _showTopButtons
+
     init {
 
         viewModelScope.launch {
@@ -56,6 +59,10 @@ class MainScreenActivityViewModel @Inject constructor(
 
     fun generalChatHasOpened() {
         _openGeneralChat.postValue(false)
+    }
+
+    fun showTopButtons(show: Boolean) {
+        _showTopButtons.value = show
     }
 
     override fun onCleared() {

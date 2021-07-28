@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/chat_nav_graph" app:startDestination="@id/mainScreenChatsFragment">
+
+    <fragment android:id="@+id/mainScreenChatsFragment"
+              android:name="com.levit.book_me.ui.fragments.main_screens.chats.MainScreenChatsFragment"
+              android:label="MainScreenChatsFragment"
+                tools:layout="@layout/fragment_main_screen_chats">
+        <action android:id="@+id/action_mainScreenChatsFragment_to_mainScreenCurrentChatFragment"
+                app:enterAnim="@anim/slide_left_enter_anim"
+                app:exitAnim="@anim/slide_left_exit_anim"
+                app:launchSingleTop="true"
+                app:popEnterAnim="@anim/slide_right_enter_anim"
+                app:popExitAnim="@anim/slide_right_exit_anim"
+                app:destination="@id/mainScreenCurrentChatFragment"/>
+    </fragment>
+    <fragment android:id="@+id/mainScreenCurrentChatFragment"
+              android:name="com.levit.book_me.ui.fragments.main_screens.current_chat.MainScreenCurrentChatFragment"
+              android:label="MainScreenCurrentChatFragment"
+            tools:layout="@layout/fragment_main_screen_current_chat">
+        <argument android:name="chatId" app:argType="long" android:defaultValue="-1L"/>
+        <argument android:name="interlocutorId" app:argType="long" android:defaultValue="-1L"/>
+    </fragment>
+</navigation>

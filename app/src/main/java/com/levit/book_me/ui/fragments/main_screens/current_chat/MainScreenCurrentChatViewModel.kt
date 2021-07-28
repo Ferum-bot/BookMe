@@ -3,6 +3,7 @@ package com.levit.book_me.ui.fragments.main_screens.current_chat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.levit.book_me.core.enums.sockets.SocketConnectionStatus
 import com.levit.book_me.core.models.chat_kit.Message
 import com.levit.book_me.core.models.profile.ProfileModel
 import com.levit.book_me.core.models.profile.UserModel
@@ -27,7 +28,7 @@ class MainScreenCurrentChatViewModel @Inject constructor(
         LOADED_FROM_REMOTE, LOADED_FROM_CACHE;
     }
 
-    private val _currentStatus: MutableLiveData<Status> = MutableLiveData()
+    private val _currentStatus: MutableLiveData<Status> = MutableLiveData(Status.LOADING)
     val currentStatus: LiveData<Status> = _currentStatus
 
     private val _messages: MutableLiveData<List<Message>> = MutableLiveData()
@@ -70,7 +71,7 @@ class MainScreenCurrentChatViewModel @Inject constructor(
 
         viewModelScope.launch {
             interactor.currentConnectionStatus.collect { connectionStatus ->
-
+                handleConnectionStatus(connectionStatus)
             }
         }
     }
@@ -124,6 +125,7 @@ class MainScreenCurrentChatViewModel @Inject constructor(
         if (remoteResult is RetrofitResult.Success) {
             val messages = remoteResult.data
             _messages.postValue(messages)
+            _currentStatus.postValue(Status.LOADED_FROM_REMOTE)
         }
     }
 
@@ -132,6 +134,7 @@ class MainScreenCurrentChatViewModel @Inject constructor(
         if (remoteResult is RetrofitResult.Success) {
             val profile = remoteResult.data
             _interlocutor.postValue(profile)
+            _currentStatus.postValue(Status.LOADED_FROM_REMOTE)
         }
     }
 
@@ -141,5 +144,14 @@ class MainScreenCurrentChatViewModel @Inject constructor(
 
     private fun handleOnlineEvent(isOnline: Boolean) {
         _isInterlocutorOnline.postValue(isOnline)
+    }
+
+    private fun handleConnectionStatus(status: SocketConnectionStatus) {
+        when(status) {
+            SocketConnectionStatus.CONNECTING ->
+                _currentStatus.postValue(Status.LOADING)
+            SocketConnectionStatus.CONNECTED ->
+                _currentStatus.postValue(Status.LOADED_FROM_REMOTE)
+        }
     }
 }

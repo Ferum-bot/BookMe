@@ -22,6 +22,12 @@ abstract class BaseMainScreenFragment<VM: BaseViewModel>(
         return@lazy activity.mainScreenComponent
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        showTopButtons()
+    }
+
     protected open fun setAllObservers() {
         viewModel.errorMessageId.observe(viewLifecycleOwner) { messageId ->
             if (messageId != null) {
@@ -52,5 +58,13 @@ abstract class BaseMainScreenFragment<VM: BaseViewModel>(
             showSuccessMessage(messageId)
             viewModel.successMessageHasShown()
         }
+    }
+
+    protected fun showTopButtons() {
+        sharedViewModel.showTopButtons(true)
+    }
+
+    protected fun hideTopButtons() {
+        sharedViewModel.showTopButtons(false)
     }
 }

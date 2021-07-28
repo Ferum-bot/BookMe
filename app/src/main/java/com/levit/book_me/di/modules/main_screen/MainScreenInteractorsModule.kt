@@ -2,13 +2,8 @@ package com.levit.book_me.di.modules.main_screen
 
 import com.levit.book_me.data_sources.profile.CacheProfileDataSource
 import com.levit.book_me.di.DIConstants
-import com.levit.book_me.interactors.main_screen.ChatsInteractor
-import com.levit.book_me.interactors.main_screen.CurrentFriendInteractor
-import com.levit.book_me.interactors.main_screen.UserProfileInteractor
-import com.levit.book_me.interactors.main_screen.impl.TestChatsInteractor
-import com.levit.book_me.interactors.main_screen.impl.TestCurrentFriendInterator
-import com.levit.book_me.interactors.main_screen.impl.TestUserProfileInteractor
-import com.levit.book_me.interactors.main_screen.impl.UserProfileInteractorImpl
+import com.levit.book_me.interactors.main_screen.*
+import com.levit.book_me.interactors.main_screen.impl.*
 import com.levit.book_me.repositories.firebase.FirebaseStorageUploadUriRepository
 import com.levit.book_me.repositories.profile.ProfileRepository
 import dagger.Module
@@ -45,5 +40,15 @@ open class MainScreenInteractorsModule {
     @Provides
     fun provideChatsInteractor(): ChatsInteractor {
         return TestChatsInteractor()
+    }
+
+    @Provides
+    fun provideCurrentChatInteractor(): CurrentChatInteractor {
+        return TestCurrentChatInteractor()
+    }
+
+    @Provides
+    fun provideMainScreenInteractor(): MainScreenInteractor {
+        return TestMainScreenInteractor()
     }
 }

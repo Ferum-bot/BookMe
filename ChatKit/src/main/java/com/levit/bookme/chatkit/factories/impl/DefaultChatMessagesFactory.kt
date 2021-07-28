@@ -19,7 +19,7 @@ internal class DefaultChatMessagesFactory {
     }
 
     private val layoutParams = ConstraintLayout.LayoutParams(
-        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+        ConstraintLayout.LayoutParams.MATCH_PARENT,
         ConstraintLayout.LayoutParams.WRAP_CONTENT,
     )
 
@@ -119,6 +119,13 @@ internal class DefaultChatMessagesFactory {
             MessageType.YOUR_MESSAGE -> yourMessageOptions
             MessageType.INTERLOCUTOR_MESSAGE -> interlocutorMessageOptions
         }
+
+        when(modelToBind.type) {
+            MessageType.YOUR_MESSAGE ->
+                handleYourMessageProfileIcon(view, position, allMessages, yourMessageOptions)
+            MessageType.INTERLOCUTOR_MESSAGE ->
+                handleInterlocutorMessageProfileIcon(view, position, allMessages, interlocutorMessageOptions)
+        }
     }
 
     private fun createInterlocutorMessage(
@@ -207,6 +214,38 @@ internal class DefaultChatMessagesFactory {
             this.isFirstMessage = false
             this.styleOptions = yourMessageOptions
         }
+    }
+
+    private fun handleYourMessageProfileIcon(
+        view: MessageView, position: Int, allMessages: List<MessageModel>, styleOptions: MessageStyleOptions
+    ) {
+        if (view !is YourMessageView) {
+            return
+        }
+        if (styleOptions.showProfileImage.not()) {
+            return
+        }
+
+        val previousModel = allMessages.getOrNull(position - 1)
+        val iconIsNeeded = previousModel != null && previousModel.type == MessageType.YOUR_MESSAGE
+
+        view.isFirstMessage = !iconIsNeeded
+    }
+
+    private fun handleInterlocutorMessageProfileIcon(
+        view: MessageView, position: Int, allMessages: List<MessageModel>, styleOptions: MessageStyleOptions
+    ) {
+        if (view !is InterlocutorMessageView) {
+            return
+        }
+        if (styleOptions.showProfileImage.not()) {
+            return
+        }
+
+        val previousModel = allMessages.getOrNull(position - 1)
+        val iconIsNeeded = previousModel != null && previousModel.type == MessageType.INTERLOCUTOR_MESSAGE
+
+        view.isFirstMessage = !iconIsNeeded
     }
 
     private fun checkTheMessageType(view: MessageView, type: MessageType) = when(type) {

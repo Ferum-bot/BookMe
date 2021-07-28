@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.levit.book_me.core_network.model.enums.NetworkStatus
@@ -55,7 +56,7 @@ class MainScreenActivity:
     }
 
     private val pagerAdapter by lazy {
-        MainScreenViewPagerAdapter(this)
+        MainScreenViewPagerAdapter(supportFragmentManager, lifecycle)
     }
 
     private val networkStatus: SharedFlow<NetworkStatus>
@@ -162,6 +163,14 @@ class MainScreenActivity:
             viewModel.generalChatHasOpened()
         }
 
+        viewModel.showTopButtons.observe(this) { showTopButtons ->
+            binding.checkedChatsActionButton.isVisible = showTopButtons
+            binding.notCheckedChatsActionButton.isVisible = showTopButtons
+            binding.checkedCurrentFriendProfileActionButton.isVisible = showTopButtons
+            binding.notCheckedCurrentFriendProfileActionButton.isVisible = showTopButtons
+            binding.checkedProfileActionButton.isVisible = showTopButtons
+            binding.notCheckedProfileActionButton.isVisible = showTopButtons
+        }
     }
 
     private fun startListeningNetworkMonitor() {

@@ -287,6 +287,7 @@ class CurrentChatFeedView @JvmOverloads constructor(
         val messages = model.allMessages
         messagesAdapter.items = messages.parseForAdapter()
         CurrentFeedMessagesDelegates.allMessages = messages
+        binding.messagesRecycler.scrollToPosition(messages.size - 1)
 
         messages.ifEmpty { showEmptyChat(true) }
         messages.ifNotEmpty { showEmptyChat(false) }

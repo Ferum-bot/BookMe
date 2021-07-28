@@ -15,6 +15,9 @@ data class Message(
     @Json(name = "messageId")
     val messageId: Long,
 
+    /**
+     * -1 if author is current user.
+     */
     @Json(name = "messageAuthorId")
     val messageAuthorId: Long,
 
@@ -63,5 +66,5 @@ data class Message(
         }
 
     override val messageStatus: MessageStatus
-        get() = MessageStatus.SENDING
+        get() = MessageStatus.SENT
 }

@@ -28,6 +28,8 @@ class MessageStyleOptionsBuilder {
     @ColorInt
     var textColor: Int = Color.BLACK
     @ColorInt
+    var backgroundTextColor: Int = Color.BLACK
+    @ColorInt
     var authorColor: Int = Color.GRAY
     @ColorInt
     var dateColor: Int = Color.LTGRAY

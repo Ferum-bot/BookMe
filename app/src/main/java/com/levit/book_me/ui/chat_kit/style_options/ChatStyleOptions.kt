@@ -1,4 +1,4 @@
-package com.levit.book_me.ui.chat_kit_options
+package com.levit.book_me.ui.chat_kit
 
 import com.levit.bookme.chatkit.models.chat.ChatStyleOptions
 

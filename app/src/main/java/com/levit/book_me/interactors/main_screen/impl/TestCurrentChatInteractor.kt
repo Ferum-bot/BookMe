@@ -14,18 +14,33 @@ import java.util.*
 class TestCurrentChatInteractor : CurrentChatInteractor {
 
     override val currentConnectionStatus: Flow<SocketConnectionStatus>
-        get() = flow { emit(SocketConnectionStatus.CONNECTED) }
+        get() = flow {
+            delay(6000L)
+            emit(SocketConnectionStatus.CONNECTED)
+        }
 
     override val interlocutor: Flow<BaseRepositoryResult<ProfileModel>>
         get() = flow {
+            val profile = ProfileModel(
+                name = "Matvey",
+                surname = "Popov",
+                profilePhotoUrl = "https://images.unsplash.com/photo-1623413487006-54669f337144?crop=entropy\\u0026cs=srgb\\u0026fm=jpg\\u0026ixid=MnwyMTkyMTJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjYwMzE4MTI\\u0026ixlib=rb-1.2.1\\u0026q=85",
+            )
 
+            val remoteResult = RetrofitResult.Success.Value(profile)
+            val result = BaseRepositoryResult.RemoteResult(remoteResult)
+            delay(2000L)
+            emit(result)
         }
 
     override val isInterlocutorOnline: Flow<Boolean>
         get() = flow { emit(true) }
 
     override val isInterlocutorTyping: Flow<Boolean>
-        get() = flow { emit(true) }
+        get() = flow {
+            delay(6000L)
+            emit(true)
+        }
 
     override val messages: Flow<BaseRepositoryResult<List<Message>>> = flow {
         val messagesList = listOf(
@@ -33,38 +48,66 @@ class TestCurrentChatInteractor : CurrentChatInteractor {
                 "https://images.unsplash.com/photo-1623413487006-54669f337144?crop=entropy\\u0026cs=srgb\\u0026fm=jpg\\u0026ixid=MnwyMTkyMTJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjYwMzE4MTI\\u0026ixlib=rb-1.2.1\\u0026q=85",
                 false,
                 "Hello bro! My name is Matvey",
-                Date().time,
+                Date().time - 60000,
                 ""
-            )
+            ),
+            Message(1, -1, 0, "You",
+                "https://images.unsplash.com/photo-1623512335584-a7d391d8bf82?crop=entropy\\u0026cs=srgb\\u0026fm=jpg\\u0026ixid=MnwyMTkyMTJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjYwMzE4MTI\\u0026ixlib=rb-1.2.1\\u0026q=85",
+                true,
+                "Hello! How are you",
+                Date().time - 50000,
+                ""
+            ),
+            Message(2, 0, 0, "Matvey Popov",
+                "https://images.unsplash.com/photo-1623413487006-54669f337144?crop=entropy\\u0026cs=srgb\\u0026fm=jpg\\u0026ixid=MnwyMTkyMTJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjYwMzE4MTI\\u0026ixlib=rb-1.2.1\\u0026q=85",
+                false,
+                "I am fine thanks and you?",
+                Date().time - 40000,
+                ""
+            ),
+            Message(3, 0, 0, "Matvey Popov",
+                "https://images.unsplash.com/photo-1623413487006-54669f337144?crop=entropy\\u0026cs=srgb\\u0026fm=jpg\\u0026ixid=MnwyMTkyMTJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjYwMzE4MTI\\u0026ixlib=rb-1.2.1\\u0026q=85",
+                false,
+                "Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.Long message test test test long message.",
+                Date().time - 30000,
+                ""
+            ),
+            Message(4, 0, 0, "You",
+                "https://images.unsplash.com/photo-1623512335584-a7d391d8bf82?crop=entropy\\u0026cs=srgb\\u0026fm=jpg\\u0026ixid=MnwyMTkyMTJ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjYwMzE4MTI\\u0026ixlib=rb-1.2.1\\u0026q=85",
+                true,
+                "Year, sounds greate! Let's meet at 23:53 AM!",
+                Date().time - 20000,
+                ""
+            ),
         )
 
         val remoteResult = RetrofitResult.Success.Value(messagesList)
         val result = BaseRepositoryResult.RemoteResult(remoteResult)
-        delay(2000L)
+        delay(4000L)
         emit(result)
     }
 
     override suspend fun getAllMessages() {
-        TODO("Not yet implemented")
+
     }
 
     override suspend fun reconnectToSocket() {
-        TODO("Not yet implemented")
+
     }
 
     override suspend fun retrySendingMessage(message: Message) {
-        TODO("Not yet implemented")
+
     }
 
     override suspend fun sendMessage(text: String) {
-        TODO("Not yet implemented")
+
     }
 
     override suspend fun startListeningSocket(chatId: Long) {
-        TODO("Not yet implemented")
+
     }
 
     override fun stopListeningSocket() {
-        TODO("Not yet implemented")
+        
     }
 }
