@@ -6,6 +6,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.auth.ktx.auth
@@ -44,6 +46,7 @@ class BookMeApplication : Application(), HasAndroidInjector {
         registerNetworkMonitor()
         initTimber()
         createNotificationChannels()
+        disableNightMode()
     }
 
     private fun initDI() {
@@ -94,6 +97,10 @@ class BookMeApplication : Application(), HasAndroidInjector {
             createInfoChannel()
             createMessagesChannel()
         }
+    }
+
+    private fun disableNightMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

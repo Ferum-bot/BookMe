@@ -68,14 +68,12 @@ class MainScreenViewPagerAdapter(
 
     fun openGeneralChats() {
         openGeneralChats = true
-        notifyDataSetChanged()
     }
 
     fun openInterlocutorProfile(interlocutorId: Long) {
-        interlocutorFragment = MainScreenFriendProfileFragment()
+        interlocutorFragment?.initInterlocutor(interlocutorId)
         interlocutorFragment?.arguments = bundleOf(
             BundleConstants.CURRENT_INTERLOCUTOR_ID_NAME to interlocutorId
         )
-        notifyDataSetChanged()
     }
 }

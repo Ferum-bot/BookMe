@@ -19,6 +19,7 @@ import com.levit.book_me.ui.chat_kit.provideDefaultInterlocutorStyleOptions
 import com.levit.book_me.ui.chat_kit.provideDefaultYourStyleOptions
 import com.levit.book_me.ui.chat_kit.provideMessageInputStyleOptions
 import com.levit.book_me.ui.fragments.quotes.recycler.OffsetQuotesItemDecorator
+import com.levit.book_me.ui.fragments.utills.BackPressedOwner
 import com.levit.bookme.chatkit.extensions.changeProperties
 import com.levit.bookme.chatkit.models.chat_messages.MessageModel
 import com.levit.bookme.chatkit.models.chat_messages.MessageStyleOptions
@@ -38,7 +39,7 @@ import com.levit.bookme.chatkit.ui.message_input.MessageInputTextChangeListener
 class MainScreenCurrentChatFragment:
     BaseMainScreenFragment<MainScreenCurrentChatViewModel>(R.layout.fragment_main_screen_current_chat),
     CurrentChatHeaderListener, MessageInputButtonListener, MessageInputTextChangeListener,
-    MessageListener {
+    MessageListener, BackPressedOwner {
 
     private val args by navArgs<MainScreenCurrentChatFragmentArgs>()
 
@@ -73,6 +74,11 @@ class MainScreenCurrentChatFragment:
         super.onStart()
 
         hideTopButtons()
+    }
+
+    override fun onBackPressed(): Boolean {
+        findNavController().popBackStack()
+        return true
     }
 
     override fun setAllObservers() {
