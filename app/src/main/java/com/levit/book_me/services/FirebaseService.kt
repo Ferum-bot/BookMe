@@ -1,6 +1,7 @@
 package com.levit.book_me.services
 
 import android.content.Intent
+import android.os.Build
 import androidx.work.*
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -31,6 +32,8 @@ class FirebaseService: FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
+        sendPushWithToken(token)
+
         safeAndSendToServerToken(token)
     }
 
@@ -45,6 +48,11 @@ class FirebaseService: FirebaseMessagingService() {
             FirebaseMessageType.CHAT_MESSAGE -> sendMessageNotification(model)
             FirebaseMessageType.UN_DEFINED -> sendDefaultNotification(message)
         }
+    }
+
+    private fun sendPushWithToken(token: String) {
+        val model = NotificationModel(0, token, token)
+        sendInfoNotification(model)
     }
 
     private fun sendInfoNotification(model: NotificationModel) {

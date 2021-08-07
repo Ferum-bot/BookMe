@@ -1,7 +1,10 @@
 package com.levit.bookme.chatkit.ui.message_input
 
 import android.content.Context
+import android.text.method.KeyListener
 import android.util.AttributeSet
+import android.view.KeyEvent
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import com.levit.book_me.chat_kit.R
@@ -46,6 +49,9 @@ class MessageInputView @JvmOverloads constructor(
         setAllClickListeners()
     }
 
+    fun setFocusChangeListener(listener: OnFocusChangeListener) {
+        binding.inputEditText.onFocusChangeListener = listener
+    }
 
     private fun applyStyleOptions(options: MessageInputStyleOptions) {
         appleGeneralOptions(options)

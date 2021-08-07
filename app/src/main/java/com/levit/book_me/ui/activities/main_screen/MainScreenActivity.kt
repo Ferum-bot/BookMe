@@ -142,6 +142,7 @@ class MainScreenActivity:
             if (interlocutorId == null) {
                 return@observe
             }
+            binding.viewPager.currentItem = MainScreenViewPagerAdapter.CURRENT_FRIEND_FRAGMENT_POSITION
             pagerAdapter.openInterlocutorProfile(interlocutorId)
             viewModel.interlocutorProfileOpened()
         }

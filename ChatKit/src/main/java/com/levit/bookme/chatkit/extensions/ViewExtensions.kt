@@ -98,7 +98,7 @@ internal fun View.getString(@StringRes id: Int): String {
 }
 
 internal fun View.defaultGlideOptions() = RequestOptions()
-    .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+    .diskCacheStrategy(DiskCacheStrategy.ALL)
     .placeholder(defaultPlaceHolder())
     .error(R.drawable.ic_default_error_placeholder)
 

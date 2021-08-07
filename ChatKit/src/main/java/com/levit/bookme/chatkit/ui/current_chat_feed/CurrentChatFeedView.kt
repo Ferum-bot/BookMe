@@ -2,10 +2,15 @@ package com.levit.bookme.chatkit.ui.current_chat_feed
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.Editable
+import android.text.method.KeyListener
 import android.util.AttributeSet
+import android.view.KeyEvent
 import android.view.View
+import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.levit.book_me.chat_kit.R
 import com.levit.book_me.chat_kit.databinding.CurrentChatFeedLayoutBinding
@@ -34,7 +39,6 @@ import com.levit.bookme.chatkit.recycler.adapters.CurrentFeedMessagesAdapter
 import com.levit.bookme.chatkit.recycler.delegates.CurrentFeedMessagesDelegates
 import com.levit.bookme.chatkit.ui.chat_message.MessageListener
 import com.levit.bookme.chatkit.ui.current_chat_header.CurrentChatHeaderListener
-import com.levit.bookme.chatkit.ui.current_chat_header.CurrentChatHeaderVew
 import com.levit.bookme.chatkit.ui.message_input.MessageInputButtonListener
 import com.levit.bookme.chatkit.ui.message_input.MessageInputTextChangeListener
 
@@ -215,6 +219,10 @@ class CurrentChatFeedView @JvmOverloads constructor(
             }
         }
         binding.messagesRecycler.addOnScrollListener(scrollListener)
+
+        val layoutManager = binding.messagesRecycler.layoutManager
+            as? LinearLayoutManager ?: return
+        layoutManager.stackFromEnd = true
     }
 
     private fun applyCurrentChatFeedStyleOptions(options: CurrentChatFeedStyleOptions) = with(binding) {
@@ -287,7 +295,7 @@ class CurrentChatFeedView @JvmOverloads constructor(
         val messages = model.allMessages
         messagesAdapter.items = messages.parseForAdapter()
         CurrentFeedMessagesDelegates.allMessages = messages
-        binding.messagesRecycler.scrollToPosition(messages.size - 1)
+        scrollToBottom(messages.size - 1)
 
         messages.ifEmpty { showEmptyChat(true) }
         messages.ifNotEmpty { showEmptyChat(false) }
@@ -327,5 +335,11 @@ class CurrentChatFeedView @JvmOverloads constructor(
         binding.emptyChatText.isVisible = show
         binding.emptyChatImage.isVisible = show
         applyEmptyMessageStyleOptions(currentChatFeedStyleOptions)
+    }
+
+    private fun scrollToBottom(pos: Int) {
+        binding.messagesRecycler.postDelayed({
+            binding.messagesRecycler.smoothScrollToPosition(pos)
+        }, 150L)
     }
 }

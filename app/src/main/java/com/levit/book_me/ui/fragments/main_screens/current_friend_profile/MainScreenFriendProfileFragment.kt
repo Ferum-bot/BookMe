@@ -50,9 +50,10 @@ class MainScreenFriendProfileFragment:
     }
 
     private val currentFriendId: Long by lazy {
-        val args = requireArguments()
+        val args = arguments ?: return@lazy -1
         args.getLong(BundleConstants.CURRENT_INTERLOCUTOR_ID_NAME, -1)
     }
+
     private val currentAuthorViews = mutableListOf<SimpleAuthorView>()
     private val currentGenreViews = mutableListOf<SmallGenreView>()
 
@@ -71,6 +72,7 @@ class MainScreenFriendProfileFragment:
         initImagePicker()
         setAllClickListeners()
         configureLayout()
+        initInterlocutor(null)
     }
 
     override fun setAllObservers() {
@@ -124,6 +126,10 @@ class MainScreenFriendProfileFragment:
         super.onDestroyView()
 
         friendLeftTimer?.cancel()
+    }
+
+    fun initInterlocutor(id: Long?) {
+        viewModel.loadCurrentFriend(id ?: currentFriendId)
     }
 
     private fun setAllClickListeners() {
