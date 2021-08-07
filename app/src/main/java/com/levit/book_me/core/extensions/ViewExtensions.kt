@@ -23,7 +23,7 @@ fun View.defaultGlideOptions() = RequestOptions()
         .fallback(R.drawable.ic_book_me_icon)
 
 fun View.noCacheGlideOptions() = RequestOptions()
-    .diskCacheStrategy(DiskCacheStrategy.NONE)
+    .diskCacheStrategy(DiskCacheStrategy.ALL)
     .placeholder(R.drawable.default_image_placeholder)
     .error(R.drawable.ic_default_error_placeholder)
     .fallback(R.drawable.ic_book_me_icon)
