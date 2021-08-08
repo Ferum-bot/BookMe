@@ -5,6 +5,8 @@ import android.os.Build
 import androidx.work.*
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.levit.book_me.broadcast_receivers.InfoNotificationBroadcastReceiver
+import com.levit.book_me.broadcast_receivers.MessageNotificationBroadcastReceiver
 import com.levit.book_me.core.enums.firebase.FirebaseMessageType
 import com.levit.book_me.core.models.NotificationModel
 import com.levit.book_me.core.utill.NotificationsUtil
@@ -13,6 +15,7 @@ import com.levit.book_me.work_managers.SafeFCMTokenWorker
 import com.levit.book_me.work_managers.UploadFCMTokenWorker
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 class FirebaseService: FirebaseMessagingService() {
 
@@ -32,8 +35,6 @@ class FirebaseService: FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
-        sendPushWithToken(token)
-
         safeAndSendToServerToken(token)
     }
 
@@ -50,22 +51,15 @@ class FirebaseService: FirebaseMessagingService() {
         }
     }
 
-    private fun sendPushWithToken(token: String) {
-        val model = NotificationModel(0, token, token)
-        sendInfoNotification(model)
-    }
-
     private fun sendInfoNotification(model: NotificationModel) {
-        val intent = Intent().apply {
-            action = ".broadcast_receivers.InfoNotificationBroadcastReceiver"
+        val intent = Intent(applicationContext, InfoNotificationBroadcastReceiver::class.java).apply {
             putExtra(MODEL_NAME, model)
         }
         sendBroadcast(intent)
     }
 
     private fun sendMessageNotification(model: NotificationModel) {
-        val intent = Intent().apply {
-            action = ".broadcast_receivers.MessageNotificationBroadcastReceiver"
+        val intent = Intent(applicationContext, MessageNotificationBroadcastReceiver::class.java).apply {
             putExtra(MODEL_NAME, model)
         }
         sendBroadcast(intent)
@@ -110,7 +104,7 @@ class FirebaseService: FirebaseMessagingService() {
         val text = data[TEXT_NAME].orEmpty()
         val title = data[TITLE_NAME].orEmpty()
         return NotificationModel(
-            id = UUID.randomUUID().clockSequence(),
+            id = Random.nextInt(),
             title, text,
         )
     }

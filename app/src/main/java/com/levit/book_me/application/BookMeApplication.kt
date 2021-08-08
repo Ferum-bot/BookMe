@@ -4,6 +4,8 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.graphics.Color
+import android.media.AudioAttributes
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -113,6 +115,11 @@ class BookMeApplication : Application(), HasAndroidInjector {
 
         val channel = NotificationChannel(id, name, importance).apply {
             this.description = description
+            this.lightColor = Color.BLUE
+            this.vibrationPattern = longArrayOf(100, 200, 300, 400, 500)
+            this.setShowBadge(true)
+            this.enableVibration(true)
+            this.enableLights(true)
         }
         notificationManager.createNotificationChannel(channel)
     }
@@ -127,6 +134,11 @@ class BookMeApplication : Application(), HasAndroidInjector {
 
         val channel = NotificationChannel(id, name, importance).apply {
             this.description = description
+            this.lightColor = Color.BLUE
+            this.vibrationPattern = longArrayOf(100, 200, 300, 400, 500)
+            this.setShowBadge(true)
+            this.enableVibration(true)
+            this.enableLights(true)
         }
         notificationManager.createNotificationChannel(channel)
     }

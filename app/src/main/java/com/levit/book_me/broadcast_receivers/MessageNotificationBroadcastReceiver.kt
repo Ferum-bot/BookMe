@@ -5,6 +5,8 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.levit.book_me.R
@@ -38,6 +40,7 @@ class MessageNotificationBroadcastReceiver: BroadcastReceiver() {
 
     private fun getNotificationBuilder(model: NotificationModel, context: Context): NotificationCompat.Builder {
         val intent = getMessageIntent(context)
+        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         return NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_book_me_icon)
             .setContentTitle(model.title)
@@ -46,6 +49,9 @@ class MessageNotificationBroadcastReceiver: BroadcastReceiver() {
             .setContentIntent(intent)
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
             .setAutoCancel(true)
+            .setLights(Color.RED, 1000, 1000)
+            .setVibrate(longArrayOf(500, 500, 500, 500))
+            .setSound(soundUri)
     }
 
     private fun getMessageIntent(context: Context): PendingIntent {
