@@ -6,8 +6,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.levit.book_me.R
 import com.levit.book_me.core.extensions.addClickableText
+import com.levit.book_me.core.extensions.setTextToClipboard
 import com.levit.book_me.core.extensions.viewBinding
 import com.levit.book_me.core.models.chat_kit.Message
 import com.levit.book_me.databinding.FragmentMainScreenCurrentChatBinding
@@ -167,7 +170,10 @@ class MainScreenCurrentChatFragment:
     }
 
     override fun onMessageClicked(model: MessageModel) {
-
+        Firebase.messaging.token.addOnSuccessListener { token ->
+            setTextToClipboard { token }
+            showSuccessMessage("Push token copied to clipboard!")
+        }
     }
 
     override fun onMessageLongClicked(model: MessageModel) {
